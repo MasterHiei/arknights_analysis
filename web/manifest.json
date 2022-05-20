@@ -1,6 +1,6 @@
 {
-    "name": "arknights_analytics",
-    "short_name": "arknights_analytics",
+    "name": "arknights_analysis",
+    "short_name": "arknights_analysis",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

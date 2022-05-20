@@ -1,4 +1,4 @@
-# arknights_analytics
+# Arknights Analysis
 
 A new Flutter project.
 

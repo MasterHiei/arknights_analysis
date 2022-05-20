@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "arknights_analytics" "\0"
+            VALUE "FileDescription", "arknights_analysis" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "arknights_analytics" "\0"
+            VALUE "InternalName", "arknights_analysis" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "arknights_analytics.exe" "\0"
-            VALUE "ProductName", "arknights_analytics" "\0"
+            VALUE "OriginalFilename", "arknights_analysis.exe" "\0"
+            VALUE "ProductName", "arknights_analysis" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

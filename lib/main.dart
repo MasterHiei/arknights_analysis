@@ -5,11 +5,11 @@ import 'initializer.dart';
 
 void main() {
   initializeApp();
-  runApp(const MyApp());
+  runApp(const ArknightsAnalysis());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ArknightsAnalysis extends StatelessWidget {
+  const ArknightsAnalysis({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

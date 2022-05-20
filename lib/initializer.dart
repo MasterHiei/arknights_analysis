@@ -13,7 +13,7 @@ Future<void> initializeApp() async {
       center: true,
       minimumSize: const Size(1280, 720),
       skipTaskbar: false,
-      title: 'Arknights Analytics',
+      title: 'Arknights Analysis',
     );
     windowManager.waitUntilReadyToShow(options, () async {
       await windowManager.show();
