@@ -4,7 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   isar_flutter_libs
-  url_launcher_windows
+  webview_windows
   window_manager
 )
 
