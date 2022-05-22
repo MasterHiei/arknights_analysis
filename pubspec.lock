@@ -162,6 +162,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  dartz:
+    dependency: "direct main"
+    description:
+      name: dartz
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.10.1"
   dio:
     dependency: "direct main"
     description:
@@ -190,6 +197,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.2"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.5.1"
   fixnum:
     dependency: transitive
     description:
@@ -209,6 +223,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.6"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -261,6 +282,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.2"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
   graphs:
     dependency: transitive
     description:
@@ -338,6 +366,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:
