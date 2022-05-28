@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 
-Future<void> initializeApp() async {
-  WidgetsFlutterBinding.ensureInitialized();
+import 'core/providers.dart';
+import 'presentation/arknights_analysis.dart';
 
+Future<Widget> initializeApp() async {
   if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
     await windowManager.ensureInitialized();
     final options = WindowOptions(
@@ -20,4 +22,9 @@ Future<void> initializeApp() async {
       await windowManager.focus();
     });
   }
+
+  return ProviderScope(
+    overrides: await generateOverrides(),
+    child: const ArknightsAnalysis(),
+  );
 }
