@@ -3,16 +3,16 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  bot_toast: 4.0.2
   dartz: 0.10.1
   dio: 4.0.6
   file_picker: 4.6.0
+  fluent_ui: 3.12.0
   flutter:
     sdk: flutter
   flutter_riverpod: 1.0.4
@@ -37,6 +37,24 @@ dev_dependencies:
   freezed: 2.0.3+1
   isar_generator: 2.5.0
   json_serializable: 6.2.0
+  msix: 3.6.2
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: NotoSansSC
+      fonts:
+        - asset: fonts/NotoSansSC-Regular.otf
+        - asset: fonts/NotoSansSC-Bold.otf
+          weight: 700
+
+  assets:
+    - assets/icons/
+    - assets/images/
+
+msix_config:
+  display_name: Arknights Analysis
+  publisher_display_name: MasterHiei
+  identity_name: group.kimomiya.arknights-analysis
+  capabilities: internetClient

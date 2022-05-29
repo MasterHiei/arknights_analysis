@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../core/constants/constants.dart';
 import '../core/utils/logger.dart';
+import 'core/routing/router.dart';
 
 class ArknightsAnalysis extends StatelessWidget {
   const ArknightsAnalysis({Key? key}) : super(key: key);
@@ -11,12 +12,19 @@ class ArknightsAnalysis extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (_, __) => MaterialApp(
-        title: appName,
+      builder: (_, __) => FluentApp.router(
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          brightness: Brightness.light,
+          fontFamily: 'NotoSansSC',
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: 'NotoSansSC',
+        ),
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
+        title: appName,
+        color: Colors.red,
         debugShowCheckedModeBanner: false,
       ),
       designSize: const Size(1920, 1080),
@@ -56,16 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Center(
+    return ScaffoldPage(
+      content: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (_controller.value.isInitialized)
               Expanded(child: Webview(_controller)),
             if (!_controller.value.isInitialized)
-              const Center(child: CircularProgressIndicator()),
+              const Center(child: ProgressRing()),
           ],
         ),
       ),
