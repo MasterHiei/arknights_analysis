@@ -47,4 +47,5 @@ app.*.map.json
 /android/app/release
 
 # Development related
+.fvm/flutter_sdk
 *.http
