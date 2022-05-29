@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../arknights_analysis.dart';
+import '../../ak_login/ak_login_page.dart';
 import '../../splash/splash_page.dart';
 
 enum Routes {
   splash(name: 'splash', path: '/'),
-  login(name: 'login', path: '/login');
+  akLogin(name: 'akLogin', path: '/akLogin');
 
   const Routes({
     required this.name,
@@ -22,14 +22,13 @@ enum Routes {
     Map<String, String> params = const <String, String>{},
     Map<String, String> queryParams = const <String, String>{},
     Object? extra,
-  }) {
-    context.goNamed(
-      name,
-      params: params,
-      queryParams: queryParams,
-      extra: extra,
-    );
-  }
+  }) =>
+      context.goNamed(
+        name,
+        params: params,
+        queryParams: queryParams,
+        extra: extra,
+      );
 }
 
 final router = GoRouter(
@@ -43,11 +42,11 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      name: Routes.login.name,
-      path: Routes.login.path,
+      name: Routes.akLogin.name,
+      path: Routes.akLogin.path,
       pageBuilder: (_, state) => CustomTransitionPage(
         key: state.pageKey,
-        child: const MyHomePage(title: 'Flutter Demo Home Page'),
+        child: const AkLoginPage(),
         transitionsBuilder: (_, animation, __, child) => FadeTransition(
           opacity: animation,
           child: child,

@@ -15,7 +15,7 @@ class SplashNotifier extends ChangeNotifier {
   var _opacity = 0.0;
   double get opacity => _opacity;
 
-  void go(BuildContext context) => Routes.login.go(context);
+  void go(BuildContext context) => Routes.akLogin.go(context);
 
   Future<void> _startAnimation() =>
       Future.delayed(const Duration(milliseconds: 200), () {
