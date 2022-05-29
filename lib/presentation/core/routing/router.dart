@@ -4,10 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../ak_login/ak_login_page.dart';
 import '../../splash/splash_page.dart';
+import '../../user/user_page.dart';
+import 'route_params.dart';
 
 enum Routes {
   splash(name: 'splash', path: '/'),
-  akLogin(name: 'akLogin', path: '/akLogin');
+  akLogin(name: 'akLogin', path: '/akLogin'),
+  user(name: 'user', path: '/user');
 
   const Routes({
     required this.name,
@@ -47,6 +50,18 @@ final router = GoRouter(
       pageBuilder: (_, state) => CustomTransitionPage(
         key: state.pageKey,
         child: const AkLoginPage(),
+        transitionsBuilder: (_, animation, __, child) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+      ),
+    ),
+    GoRoute(
+      name: Routes.user.name,
+      path: Routes.user.path,
+      pageBuilder: (_, state) => CustomTransitionPage(
+        key: state.pageKey,
+        child: UserPage(state.extra as UserParams),
         transitionsBuilder: (_, animation, __, child) => FadeTransition(
           opacity: animation,
           child: child,

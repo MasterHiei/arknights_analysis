@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../application/ak_login/ak_login_provider.dart';
+import '../../application/ak_login/states/ak_login_state.dart';
 import '../../core/constants/constants.dart';
 import '../../core/utils/logger.dart';
+import '../core/routing/route_params.dart';
+import '../core/routing/router.dart';
 
 class AkLoginPage extends ConsumerStatefulWidget {
   const AkLoginPage({Key? key}) : super(key: key);
@@ -36,6 +39,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _listenState();
+
     return ScaffoldPage(
       content: Stack(
         children: [
@@ -65,4 +70,15 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> {
     if (!mounted) return;
     setState(() {});
   }
+
+  void _listenState() => ref.listen<AkLoginState>(
+        akLoginProvider,
+        (_, next) => next.maybeWhen(
+          shouldGo: (token) => Routes.user.go(
+            context,
+            extra: RouteParams.user(token: token),
+          ),
+          orElse: () => null,
+        ),
+      );
 }

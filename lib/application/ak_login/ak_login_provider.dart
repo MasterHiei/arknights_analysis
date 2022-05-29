@@ -1,29 +1,29 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../core/constants/constants.dart';
+import '../../domain/user/value_objects/token.dart';
+import 'states/ak_login_state.dart';
 
-final akLoginProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => AkLoginNotifier(),
+final akLoginProvider =
+    StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
+  (_) => AkLoginNotifier(),
 );
 
-class AkLoginNotifier extends ChangeNotifier {
-  var _currentState = LoadingState.none;
+class AkLoginNotifier extends StateNotifier<AkLoginState> {
+  AkLoginNotifier() : super(const AkLoginState.init());
 
-  var _hasToken = false;
+  var _currentState = LoadingState.none;
 
   void startListening(WebviewController controller) {
     controller.url.listen((url) async {
-      if (_hasToken) {
-        return;
-      }
-
       final isHomePage = url == akHomePage;
-      final isCompleted = _currentState == LoadingState.navigationCompleted;
-      if (isCompleted && isHomePage) {
+      if (isHomePage) {
         await controller.loadUrl(asGetToken);
       }
+
+      final isCompleted = _currentState == LoadingState.navigationCompleted;
       final isTokenPage = url == asGetToken;
       if (isCompleted && isTokenPage) {
         await _postToken(controller);
@@ -34,20 +34,17 @@ class AkLoginNotifier extends ChangeNotifier {
   }
 
   Future<void> _postToken(WebviewController controller) async {
+    await EasyLoading.show(maskType: EasyLoadingMaskType.black);
     const data = 'document.getElementsByTagName("pre")[0].innerHTML';
     const script = 'window.chrome.webview.postMessage(JSON.parse($data))';
     await controller.executeScript(script);
   }
 
-  void _onTokenRecieved(Map<dynamic, dynamic> data) {
-    if (_hasToken) {
-      return;
-    }
-
+  Future<void> _onTokenRecieved(Map<dynamic, dynamic> data) async {
     final token = data['data']?['token'] as String? ?? '';
-    print(token);
     if (token.isNotEmpty) {
-      _hasToken = true;
+      await EasyLoading.dismiss();
+      state = AkLoginState.shouldGo(Token(token));
     }
   }
 }
