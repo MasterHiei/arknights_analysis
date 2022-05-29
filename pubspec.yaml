@@ -57,5 +57,5 @@ flutter:
 msix_config:
   display_name: Arknights Analysis
   publisher_display_name: MasterHiei
-  identity_name: group.kimomiya.arknights-analysis
+  identity_name: club.kimomiya.arknights-analysis
   capabilities: internetClient
