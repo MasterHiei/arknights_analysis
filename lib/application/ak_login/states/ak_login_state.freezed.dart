@@ -19,38 +19,19 @@ mixin _$AkLoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(Token token) shouldGo,
+    required TResult Function() shouldGo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
+    TResult Function()? shouldGo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShouldGo value) shouldGo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
+    TResult Function()? shouldGo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,7 +92,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(Token token) shouldGo,
+    required TResult Function() shouldGo,
   }) {
     return init();
   }
@@ -120,7 +101,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
+    TResult Function()? shouldGo,
   }) {
     return init?.call();
   }
@@ -129,42 +110,11 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
+    TResult Function()? shouldGo,
     required TResult orElse(),
   }) {
     if (init != null) {
       return init();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShouldGo value) shouldGo,
-  }) {
-    return init(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
-  }) {
-    return init?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init(this);
     }
     return orElse();
   }
@@ -179,7 +129,6 @@ abstract class _$$_ShouldGoCopyWith<$Res> {
   factory _$$_ShouldGoCopyWith(
           _$_ShouldGo value, $Res Function(_$_ShouldGo) then) =
       __$$_ShouldGoCopyWithImpl<$Res>;
-  $Res call({Token token});
 }
 
 /// @nodoc
@@ -191,118 +140,59 @@ class __$$_ShouldGoCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res>
 
   @override
   _$_ShouldGo get _value => super._value as _$_ShouldGo;
-
-  @override
-  $Res call({
-    Object? token = freezed,
-  }) {
-    return _then(_$_ShouldGo(
-      token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as Token,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_ShouldGo implements _ShouldGo {
-  const _$_ShouldGo(this.token);
-
-  @override
-  final Token token;
+  const _$_ShouldGo();
 
   @override
   String toString() {
-    return 'AkLoginState.shouldGo(token: $token)';
+    return 'AkLoginState.shouldGo()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ShouldGo &&
-            const DeepCollectionEquality().equals(other.token, token));
+        (other.runtimeType == runtimeType && other is _$_ShouldGo);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(token));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_ShouldGoCopyWith<_$_ShouldGo> get copyWith =>
-      __$$_ShouldGoCopyWithImpl<_$_ShouldGo>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(Token token) shouldGo,
+    required TResult Function() shouldGo,
   }) {
-    return shouldGo(token);
+    return shouldGo();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
+    TResult Function()? shouldGo,
   }) {
-    return shouldGo?.call(token);
+    return shouldGo?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(Token token)? shouldGo,
+    TResult Function()? shouldGo,
     required TResult orElse(),
   }) {
     if (shouldGo != null) {
-      return shouldGo(token);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShouldGo value) shouldGo,
-  }) {
-    return shouldGo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
-  }) {
-    return shouldGo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_ShouldGo value)? shouldGo,
-    required TResult orElse(),
-  }) {
-    if (shouldGo != null) {
-      return shouldGo(this);
+      return shouldGo();
     }
     return orElse();
   }
 }
 
 abstract class _ShouldGo implements AkLoginState {
-  const factory _ShouldGo(final Token token) = _$_ShouldGo;
-
-  Token get token => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$_ShouldGoCopyWith<_$_ShouldGo> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _ShouldGo() = _$_ShouldGo;
 }
