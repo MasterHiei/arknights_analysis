@@ -21,22 +21,22 @@ mixin _$RouteParams {
 
 /// @nodoc
 
-class _$UserParams implements UserParams {
-  const _$UserParams({required this.token});
+class _$PortalParams implements PortalParams {
+  const _$PortalParams({required this.token});
 
   @override
   final Token token;
 
   @override
   String toString() {
-    return 'RouteParams.user(token: $token)';
+    return 'RouteParams.portal(token: $token)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserParams &&
+            other is _$PortalParams &&
             const DeepCollectionEquality().equals(other.token, token));
   }
 
@@ -45,8 +45,8 @@ class _$UserParams implements UserParams {
       Object.hash(runtimeType, const DeepCollectionEquality().hash(token));
 }
 
-abstract class UserParams implements RouteParams {
-  const factory UserParams({required final Token token}) = _$UserParams;
+abstract class PortalParams implements RouteParams {
+  const factory PortalParams({required final Token token}) = _$PortalParams;
 
   @override
   Token get token => throw _privateConstructorUsedError;

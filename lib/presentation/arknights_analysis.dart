@@ -1,5 +1,5 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/constants/constants.dart';
@@ -22,7 +22,7 @@ class ArknightsAnalysis extends StatelessWidget {
         ),
         routeInformationParser: router.routeInformationParser,
         routerDelegate: router.routerDelegate,
-        builder: EasyLoading.init(),
+        builder: BotToastInit(),
         title: appName,
         color: Colors.red,
         debugShowCheckedModeBanner: false,

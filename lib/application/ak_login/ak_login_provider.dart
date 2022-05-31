@@ -1,5 +1,5 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
 
@@ -31,6 +31,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       final isCompleted = _currentState == LoadingState.navigationCompleted;
       final isTokenPage = url == asGetToken;
       if (isCompleted && isTokenPage) {
+        BotToast.showLoading();
         await _postToken(controller);
       }
     });
@@ -40,11 +41,10 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
 
   void go(BuildContext context) => Routes.user.go(
         context,
-        extra: RouteParams.user(token: _token),
+        extra: RouteParams.portal(token: _token),
       );
 
   Future<void> _postToken(WebviewController controller) async {
-    await EasyLoading.show(maskType: EasyLoadingMaskType.black);
     const data = 'document.getElementsByTagName("pre")[0].innerHTML';
     const script = 'window.chrome.webview.postMessage(JSON.parse($data))';
     await controller.executeScript(script);
@@ -53,9 +53,9 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
   Future<void> _onTokenRecieved(Map<dynamic, dynamic> data) async {
     final token = data['data']?['token'] as String? ?? '';
     if (token.isNotEmpty) {
-      await EasyLoading.dismiss();
       _token = Token(token);
       state = const AkLoginState.shouldGo();
+      BotToast.closeAllLoading();
     }
   }
 }

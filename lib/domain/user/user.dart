@@ -6,7 +6,7 @@ part 'user.freezed.dart';
 
 @freezed
 class User with _$User {
-  factory User({
+  const factory User({
     required String uid,
     required String nickName,
     required Token token,

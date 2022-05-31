@@ -76,11 +76,16 @@ mixin _$AppFailure {
 
 /// @nodoc
 
-class _$_UnexpectedError implements _UnexpectedError {
-  const _$_UnexpectedError(this.e);
+class _$_UnexpectedError extends _UnexpectedError {
+  const _$_UnexpectedError(this.e) : super._();
 
   @override
   final Object e;
+
+  @override
+  String toString() {
+    return 'AppFailure.unexpectedError(e: $e)';
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -175,16 +180,22 @@ class _$_UnexpectedError implements _UnexpectedError {
   }
 }
 
-abstract class _UnexpectedError implements AppFailure {
+abstract class _UnexpectedError extends AppFailure {
   const factory _UnexpectedError(final Object e) = _$_UnexpectedError;
+  const _UnexpectedError._() : super._();
 
   Object get e => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 
-class _$_NetworkUnreachable implements _NetworkUnreachable {
-  const _$_NetworkUnreachable();
+class _$_NetworkUnreachable extends _NetworkUnreachable {
+  const _$_NetworkUnreachable() : super._();
+
+  @override
+  String toString() {
+    return 'AppFailure.networkUnreachable()';
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -276,19 +287,25 @@ class _$_NetworkUnreachable implements _NetworkUnreachable {
   }
 }
 
-abstract class _NetworkUnreachable implements AppFailure {
+abstract class _NetworkUnreachable extends AppFailure {
   const factory _NetworkUnreachable() = _$_NetworkUnreachable;
+  const _NetworkUnreachable._() : super._();
 }
 
 /// @nodoc
 
-class _$_RemoteServerError implements _RemoteServerError {
-  const _$_RemoteServerError({this.message, this.code});
+class _$_RemoteServerError extends _RemoteServerError {
+  const _$_RemoteServerError({this.message, this.code}) : super._();
 
   @override
   final String? message;
   @override
   final int? code;
+
+  @override
+  String toString() {
+    return 'AppFailure.remoteServerError(message: $message, code: $code)';
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -386,9 +403,10 @@ class _$_RemoteServerError implements _RemoteServerError {
   }
 }
 
-abstract class _RemoteServerError implements AppFailure {
+abstract class _RemoteServerError extends AppFailure {
   const factory _RemoteServerError({final String? message, final int? code}) =
       _$_RemoteServerError;
+  const _RemoteServerError._() : super._();
 
   String? get message => throw _privateConstructorUsedError;
   int? get code => throw _privateConstructorUsedError;
@@ -396,11 +414,16 @@ abstract class _RemoteServerError implements AppFailure {
 
 /// @nodoc
 
-class _$_LocalDataError implements _LocalDataError {
-  const _$_LocalDataError(this.e);
+class _$_LocalDataError extends _LocalDataError {
+  const _$_LocalDataError(this.e) : super._();
 
   @override
   final Object e;
+
+  @override
+  String toString() {
+    return 'AppFailure.localDataError(e: $e)';
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -495,16 +518,22 @@ class _$_LocalDataError implements _LocalDataError {
   }
 }
 
-abstract class _LocalDataError implements AppFailure {
+abstract class _LocalDataError extends AppFailure {
   const factory _LocalDataError(final Object e) = _$_LocalDataError;
+  const _LocalDataError._() : super._();
 
   Object get e => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 
-class _$_InvalidToken implements _InvalidToken {
-  const _$_InvalidToken();
+class _$_InvalidToken extends _InvalidToken {
+  const _$_InvalidToken() : super._();
+
+  @override
+  String toString() {
+    return 'AppFailure.invalidToken()';
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -596,6 +625,7 @@ class _$_InvalidToken implements _InvalidToken {
   }
 }
 
-abstract class _InvalidToken implements AppFailure {
+abstract class _InvalidToken extends AppFailure {
   const factory _InvalidToken() = _$_InvalidToken;
+  const _InvalidToken._() : super._();
 }

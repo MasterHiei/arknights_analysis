@@ -120,7 +120,7 @@ class __$$_UserDtoCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserDto extends _UserDto {
-  _$_UserDto(
+  const _$_UserDto(
       {@JsonKey(defaultValue: '') required this.uid,
       @JsonKey(defaultValue: '') required this.nickName,
       @JsonKey(defaultValue: '') required this.token})
@@ -174,11 +174,11 @@ class _$_UserDto extends _UserDto {
 }
 
 abstract class _UserDto extends UserDto {
-  factory _UserDto(
+  const factory _UserDto(
       {@JsonKey(defaultValue: '') required final String uid,
       @JsonKey(defaultValue: '') required final String nickName,
       @JsonKey(defaultValue: '') required final String token}) = _$_UserDto;
-  _UserDto._() : super._();
+  const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 

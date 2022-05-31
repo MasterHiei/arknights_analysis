@@ -11,7 +11,7 @@ final userLocalDataSourceProvider = Provider.autoDispose<UserLocalDataSource>(
 );
 
 abstract class UserLocalDataSource {
-  Future<UserDto?> findBy(Token token);
+  Stream<UserDto?> watch(Token token);
 
   Future<int> save(UserDto dto);
 }
@@ -22,10 +22,14 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   final Isar _isar;
 
   @override
-  Future<UserDto?> findBy(Token token) async {
-    final user =
-        await _isar.tUsers.where().tokenEqualTo(token.getOrCrash()).findFirst();
-    return UserDto.fromSchema(user!);
+  Stream<UserDto?> watch(Token token) {
+    final query = _isar.tUsers.filter().tokenEqualTo(token.getOrCrash());
+    return query.watch(initialReturn: true).map((users) {
+      if (users.isEmpty) {
+        return null;
+      }
+      return UserDto.fromSchema(users.first);
+    });
   }
 
   @override

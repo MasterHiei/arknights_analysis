@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +19,9 @@ final userRepositoryProvider = Provider.autoDispose<UserRepository>(
 );
 
 abstract class UserRepository {
-  Future<Either<AppFailure, User>> fetch(Token token);
+  Stream<Option<User>> watch(Token token);
+
+  Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token);
 }
 
 class UserRepositoryImpl implements UserRepository {
@@ -27,23 +31,29 @@ class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, User>> fetch(Token token) async {
+  Stream<Option<User>> watch(Token token) =>
+      _localDataSource.watch(token).map((dto) => optionOf(dto?.toDomain()));
+
+  @override
+  Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) async {
     try {
       final response = await _remoteDataSource.fetch(token);
 
       if (response.status == 3) {
-        return left(AppFailure.remoteServerError(
-          message: response.msg,
-          code: response.status,
-        ));
+        return left(const AppFailure.invalidToken());
       }
 
       final dto = response.data!.copyWith(token: token.getOrCrash());
       await _localDataSource.save(dto);
-      return right(dto.toDomain());
+      return right(unit);
     } on DioError catch (e) {
-      logger.e(e);
-      return left(const AppFailure.remoteServerError());
+      final code = e.response?.statusCode;
+      if (code == HttpStatus.unauthorized) {
+        return left(const AppFailure.invalidToken());
+      }
+
+      final message = e.response?.statusMessage;
+      return left(AppFailure.remoteServerError(message: message, code: code));
     } catch (e) {
       logger.e(e);
       return left(AppFailure.unexpectedError(e));

@@ -8,7 +8,7 @@ part 'user_response_dto.g.dart';
 
 @freezed
 class UserResponseDto with _$UserResponseDto {
-  factory UserResponseDto({
+  const factory UserResponseDto({
     int? status,
     @Default('') String msg,
     UserDto? data,

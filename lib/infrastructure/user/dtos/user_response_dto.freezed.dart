@@ -133,7 +133,7 @@ class __$$_UserResponseDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserResponseDto implements _UserResponseDto {
-  _$_UserResponseDto({this.status, this.msg = '', this.data});
+  const _$_UserResponseDto({this.status, this.msg = '', this.data});
 
   factory _$_UserResponseDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserResponseDtoFromJson(json);
@@ -181,7 +181,7 @@ class _$_UserResponseDto implements _UserResponseDto {
 }
 
 abstract class _UserResponseDto implements UserResponseDto {
-  factory _UserResponseDto(
+  const factory _UserResponseDto(
       {final int? status,
       final String msg,
       final UserDto? data}) = _$_UserResponseDto;

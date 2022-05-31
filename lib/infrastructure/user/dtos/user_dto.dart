@@ -12,7 +12,7 @@ part 'user_dto.g.dart';
 class UserDto with _$UserDto {
   const UserDto._();
 
-  factory UserDto({
+  const factory UserDto({
     @JsonKey(defaultValue: '') required String uid,
     @JsonKey(defaultValue: '') required String nickName,
     @JsonKey(defaultValue: '') required String token,

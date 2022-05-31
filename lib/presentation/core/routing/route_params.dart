@@ -10,5 +10,5 @@ part 'route_params.freezed.dart';
   when: FreezedWhenOptions.none,
 )
 class RouteParams with _$RouteParams {
-  const factory RouteParams.user({required Token token}) = UserParams;
+  const factory RouteParams.portal({required Token token}) = PortalParams;
 }

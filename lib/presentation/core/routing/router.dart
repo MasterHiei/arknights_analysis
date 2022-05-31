@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../ak_login/ak_login_page.dart';
+import '../../portal/portal_page.dart';
 import '../../splash/splash_page.dart';
-import '../../user/user_page.dart';
 import 'route_params.dart';
 
 enum Routes {
@@ -61,7 +61,7 @@ final router = GoRouter(
       path: Routes.user.path,
       pageBuilder: (_, state) => CustomTransitionPage(
         key: state.pageKey,
-        child: UserPage(state.extra as UserParams),
+        child: PortalPage(state.extra as PortalParams),
         transitionsBuilder: (_, animation, __, child) => FadeTransition(
           opacity: animation,
           child: child,
