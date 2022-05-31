@@ -21,6 +21,7 @@ UserResponseDto _$UserResponseDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserResponseDto {
   int? get status => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: '')
   String get msg => throw _privateConstructorUsedError;
   UserDto? get data => throw _privateConstructorUsedError;
 
@@ -35,7 +36,8 @@ abstract class $UserResponseDtoCopyWith<$Res> {
   factory $UserResponseDtoCopyWith(
           UserResponseDto value, $Res Function(UserResponseDto) then) =
       _$UserResponseDtoCopyWithImpl<$Res>;
-  $Res call({int? status, String msg, UserDto? data});
+  $Res call(
+      {int? status, @JsonKey(defaultValue: '') String msg, UserDto? data});
 
   $UserDtoCopyWith<$Res>? get data;
 }
@@ -90,7 +92,8 @@ abstract class _$$_UserResponseDtoCopyWith<$Res>
           _$_UserResponseDto value, $Res Function(_$_UserResponseDto) then) =
       __$$_UserResponseDtoCopyWithImpl<$Res>;
   @override
-  $Res call({int? status, String msg, UserDto? data});
+  $Res call(
+      {int? status, @JsonKey(defaultValue: '') String msg, UserDto? data});
 
   @override
   $UserDtoCopyWith<$Res>? get data;
@@ -133,7 +136,8 @@ class __$$_UserResponseDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserResponseDto implements _UserResponseDto {
-  const _$_UserResponseDto({this.status, this.msg = '', this.data});
+  const _$_UserResponseDto(
+      {this.status, @JsonKey(defaultValue: '') required this.msg, this.data});
 
   factory _$_UserResponseDto.fromJson(Map<String, dynamic> json) =>
       _$$_UserResponseDtoFromJson(json);
@@ -141,7 +145,7 @@ class _$_UserResponseDto implements _UserResponseDto {
   @override
   final int? status;
   @override
-  @JsonKey()
+  @JsonKey(defaultValue: '')
   final String msg;
   @override
   final UserDto? data;
@@ -183,7 +187,7 @@ class _$_UserResponseDto implements _UserResponseDto {
 abstract class _UserResponseDto implements UserResponseDto {
   const factory _UserResponseDto(
       {final int? status,
-      final String msg,
+      @JsonKey(defaultValue: '') required final String msg,
       final UserDto? data}) = _$_UserResponseDto;
 
   factory _UserResponseDto.fromJson(Map<String, dynamic> json) =
@@ -192,6 +196,7 @@ abstract class _UserResponseDto implements UserResponseDto {
   @override
   int? get status => throw _privateConstructorUsedError;
   @override
+  @JsonKey(defaultValue: '')
   String get msg => throw _privateConstructorUsedError;
   @override
   UserDto? get data => throw _privateConstructorUsedError;

@@ -10,7 +10,7 @@ part 'user_response_dto.g.dart';
 class UserResponseDto with _$UserResponseDto {
   const factory UserResponseDto({
     int? status,
-    @Default('') String msg,
+    @JsonKey(defaultValue: '') required String msg,
     UserDto? data,
   }) = _UserResponseDto;
 

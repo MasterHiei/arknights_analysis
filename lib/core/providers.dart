@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../infrastructure/gacha/schemas/t_gacha_char.dart';
+import '../infrastructure/gacha/schemas/t_gacha_record.dart';
 import '../infrastructure/user/schemas/t_user.dart';
 import 'common/dio_interceptors.dart';
 import 'constants/constants.dart';
@@ -41,7 +43,11 @@ Future<List<Override>> generateOverrides() async {
   final isar = await Isar.open(
     name: dbName,
     directory: dir.path,
-    schemas: [TUserSchema],
+    schemas: [
+      TUserSchema,
+      TGachaCharSchema,
+      TGachaRecordSchema,
+    ],
     inspector: kDebugMode,
   );
 

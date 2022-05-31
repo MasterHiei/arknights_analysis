@@ -7,4 +7,8 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidToken({
     required T failedValue,
   }) = _InvalidToken<T>;
+
+  const factory ValueFailure.invalidTs({
+    required T failedValue,
+  }) = _InvalidTs<T>;
 }

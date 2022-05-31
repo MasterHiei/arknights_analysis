@@ -13,9 +13,9 @@ class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
-    @JsonKey(defaultValue: '') required String uid,
-    @JsonKey(defaultValue: '') required String nickName,
-    @JsonKey(defaultValue: '') required String token,
+    required String uid,
+    required String nickName,
+    required String token,
   }) = _UserDto;
 
   factory UserDto.fromJson(Json json) => _$UserDtoFromJson(json);
