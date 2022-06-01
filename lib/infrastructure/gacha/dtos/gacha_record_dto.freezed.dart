@@ -23,6 +23,8 @@ mixin _$GachaRecordDto {
   int get ts => throw _privateConstructorUsedError;
   String get pool => throw _privateConstructorUsedError;
   List<GachaCharDto> get chars => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,11 @@ abstract class $GachaRecordDtoCopyWith<$Res> {
   factory $GachaRecordDtoCopyWith(
           GachaRecordDto value, $Res Function(GachaRecordDto) then) =
       _$GachaRecordDtoCopyWithImpl<$Res>;
-  $Res call({int ts, String pool, List<GachaCharDto> chars});
+  $Res call(
+      {int ts,
+      String pool,
+      List<GachaCharDto> chars,
+      @JsonKey(ignore: true) String uid});
 }
 
 /// @nodoc
@@ -52,6 +58,7 @@ class _$GachaRecordDtoCopyWithImpl<$Res>
     Object? ts = freezed,
     Object? pool = freezed,
     Object? chars = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_value.copyWith(
       ts: ts == freezed
@@ -66,6 +73,10 @@ class _$GachaRecordDtoCopyWithImpl<$Res>
           ? _value.chars
           : chars // ignore: cast_nullable_to_non_nullable
               as List<GachaCharDto>,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -77,7 +88,11 @@ abstract class _$$_GachaRecordDtoCopyWith<$Res>
           _$_GachaRecordDto value, $Res Function(_$_GachaRecordDto) then) =
       __$$_GachaRecordDtoCopyWithImpl<$Res>;
   @override
-  $Res call({int ts, String pool, List<GachaCharDto> chars});
+  $Res call(
+      {int ts,
+      String pool,
+      List<GachaCharDto> chars,
+      @JsonKey(ignore: true) String uid});
 }
 
 /// @nodoc
@@ -96,6 +111,7 @@ class __$$_GachaRecordDtoCopyWithImpl<$Res>
     Object? ts = freezed,
     Object? pool = freezed,
     Object? chars = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_$_GachaRecordDto(
       ts: ts == freezed
@@ -110,6 +126,10 @@ class __$$_GachaRecordDtoCopyWithImpl<$Res>
           ? _value._chars
           : chars // ignore: cast_nullable_to_non_nullable
               as List<GachaCharDto>,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -120,7 +140,8 @@ class _$_GachaRecordDto extends _GachaRecordDto {
   const _$_GachaRecordDto(
       {required this.ts,
       required this.pool,
-      required final List<GachaCharDto> chars})
+      required final List<GachaCharDto> chars,
+      @JsonKey(ignore: true) this.uid = ''})
       : _chars = chars,
         super._();
 
@@ -139,8 +160,12 @@ class _$_GachaRecordDto extends _GachaRecordDto {
   }
 
   @override
+  @JsonKey(ignore: true)
+  final String uid;
+
+  @override
   String toString() {
-    return 'GachaRecordDto(ts: $ts, pool: $pool, chars: $chars)';
+    return 'GachaRecordDto(ts: $ts, pool: $pool, chars: $chars, uid: $uid)';
   }
 
   @override
@@ -150,7 +175,8 @@ class _$_GachaRecordDto extends _GachaRecordDto {
             other is _$_GachaRecordDto &&
             const DeepCollectionEquality().equals(other.ts, ts) &&
             const DeepCollectionEquality().equals(other.pool, pool) &&
-            const DeepCollectionEquality().equals(other._chars, _chars));
+            const DeepCollectionEquality().equals(other._chars, _chars) &&
+            const DeepCollectionEquality().equals(other.uid, uid));
   }
 
   @JsonKey(ignore: true)
@@ -159,7 +185,8 @@ class _$_GachaRecordDto extends _GachaRecordDto {
       runtimeType,
       const DeepCollectionEquality().hash(ts),
       const DeepCollectionEquality().hash(pool),
-      const DeepCollectionEquality().hash(_chars));
+      const DeepCollectionEquality().hash(_chars),
+      const DeepCollectionEquality().hash(uid));
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +203,8 @@ abstract class _GachaRecordDto extends GachaRecordDto {
   const factory _GachaRecordDto(
       {required final int ts,
       required final String pool,
-      required final List<GachaCharDto> chars}) = _$_GachaRecordDto;
+      required final List<GachaCharDto> chars,
+      @JsonKey(ignore: true) final String uid}) = _$_GachaRecordDto;
   const _GachaRecordDto._() : super._();
 
   factory _GachaRecordDto.fromJson(Map<String, dynamic> json) =
@@ -188,6 +216,9 @@ abstract class _GachaRecordDto extends GachaRecordDto {
   String get pool => throw _privateConstructorUsedError;
   @override
   List<GachaCharDto> get chars => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  String get uid => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_GachaRecordDtoCopyWith<_$_GachaRecordDto> get copyWith =>

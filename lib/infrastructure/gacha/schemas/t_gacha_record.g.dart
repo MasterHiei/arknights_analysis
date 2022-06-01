@@ -15,13 +15,18 @@ extension GetTGachaRecordCollection on Isar {
 const TGachaRecordSchema = CollectionSchema(
   name: 'gacha_record',
   schema:
-      '{"name":"gacha_record","idName":"id","properties":[{"name":"pool","type":"String"},{"name":"ts","type":"Long"}],"indexes":[],"links":[]}',
+      '{"name":"gacha_record","idName":"id","properties":[{"name":"pool","type":"String"},{"name":"ts","type":"Long"},{"name":"uid","type":"String"}],"indexes":[{"name":"ts_uid","unique":true,"properties":[{"name":"ts","type":"Value","caseSensitive":false},{"name":"uid","type":"Hash","caseSensitive":true}]}],"links":[{"name":"chars","target":"gacha_char"}]}',
   idName: 'id',
-  propertyIds: {'pool': 0, 'ts': 1},
+  propertyIds: {'pool': 0, 'ts': 1, 'uid': 2},
   listProperties: {},
-  indexIds: {},
-  indexValueTypes: {},
-  linkIds: {},
+  indexIds: {'ts_uid': 0},
+  indexValueTypes: {
+    'ts_uid': [
+      IndexValueType.long,
+      IndexValueType.stringHash,
+    ]
+  },
+  linkIds: {'chars': 0},
   backlinkLinkNames: {},
   getId: _tGachaRecordGetId,
   setId: _tGachaRecordSetId,
@@ -49,7 +54,7 @@ void _tGachaRecordSetId(TGachaRecord object, int id) {
 }
 
 List<IsarLinkBase> _tGachaRecordGetLinks(TGachaRecord object) {
-  return [];
+  return [object.chars];
 }
 
 void _tGachaRecordSerializeNative(
@@ -65,6 +70,9 @@ void _tGachaRecordSerializeNative(
   dynamicSize += (_pool.length) as int;
   final value1 = object.ts;
   final _ts = value1;
+  final value2 = object.uid;
+  final _uid = IsarBinaryWriter.utf8Encoder.convert(value2);
+  dynamicSize += (_uid.length) as int;
   final size = staticSize + dynamicSize;
 
   rawObj.buffer = alloc(size);
@@ -73,6 +81,7 @@ void _tGachaRecordSerializeNative(
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeBytes(offsets[0], _pool);
   writer.writeLong(offsets[1], _ts);
+  writer.writeBytes(offsets[2], _uid);
 }
 
 TGachaRecord _tGachaRecordDeserializeNative(
@@ -84,6 +93,8 @@ TGachaRecord _tGachaRecordDeserializeNative(
   object.id = id;
   object.pool = reader.readString(offsets[0]);
   object.ts = reader.readLong(offsets[1]);
+  object.uid = reader.readString(offsets[2]);
+  _tGachaRecordAttachLinks(collection, id, object);
   return object;
 }
 
@@ -96,6 +107,8 @@ P _tGachaRecordDeserializePropNative<P>(
       return (reader.readString(offset)) as P;
     case 1:
       return (reader.readLong(offset)) as P;
+    case 2:
+      return (reader.readString(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -107,6 +120,7 @@ dynamic _tGachaRecordSerializeWeb(
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'pool', object.pool);
   IsarNative.jsObjectSet(jsObj, 'ts', object.ts);
+  IsarNative.jsObjectSet(jsObj, 'uid', object.uid);
   return jsObj;
 }
 
@@ -116,6 +130,9 @@ TGachaRecord _tGachaRecordDeserializeWeb(
   object.id = IsarNative.jsObjectGet(jsObj, 'id');
   object.pool = IsarNative.jsObjectGet(jsObj, 'pool') ?? '';
   object.ts = IsarNative.jsObjectGet(jsObj, 'ts') ?? double.negativeInfinity;
+  object.uid = IsarNative.jsObjectGet(jsObj, 'uid') ?? '';
+  _tGachaRecordAttachLinks(
+      collection, IsarNative.jsObjectGet(jsObj, 'id'), object);
   return object;
 }
 
@@ -128,18 +145,94 @@ P _tGachaRecordDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case 'ts':
       return (IsarNative.jsObjectGet(jsObj, 'ts') ?? double.negativeInfinity)
           as P;
+    case 'uid':
+      return (IsarNative.jsObjectGet(jsObj, 'uid') ?? '') as P;
     default:
       throw 'Illegal propertyName';
   }
 }
 
-void _tGachaRecordAttachLinks(
-    IsarCollection col, int id, TGachaRecord object) {}
+void _tGachaRecordAttachLinks(IsarCollection col, int id, TGachaRecord object) {
+  object.chars.attach(col, col.isar.tGachaChars, 'chars', id);
+}
+
+extension TGachaRecordByIndex on IsarCollection<TGachaRecord> {
+  Future<TGachaRecord?> getByTsUid(int ts, String uid) {
+    return getByIndex('ts_uid', [ts, uid]);
+  }
+
+  TGachaRecord? getByTsUidSync(int ts, String uid) {
+    return getByIndexSync('ts_uid', [ts, uid]);
+  }
+
+  Future<bool> deleteByTsUid(int ts, String uid) {
+    return deleteByIndex('ts_uid', [ts, uid]);
+  }
+
+  bool deleteByTsUidSync(int ts, String uid) {
+    return deleteByIndexSync('ts_uid', [ts, uid]);
+  }
+
+  Future<List<TGachaRecord?>> getAllByTsUid(
+      List<int> tsValues, List<String> uidValues) {
+    final len = tsValues.length;
+    assert(
+        uidValues.length == len, 'All index values must have the same length');
+    final values = <List<dynamic>>[];
+    for (var i = 0; i < len; i++) {
+      values.add([tsValues[i], uidValues[i]]);
+    }
+
+    return getAllByIndex('ts_uid', values);
+  }
+
+  List<TGachaRecord?> getAllByTsUidSync(
+      List<int> tsValues, List<String> uidValues) {
+    final len = tsValues.length;
+    assert(
+        uidValues.length == len, 'All index values must have the same length');
+    final values = <List<dynamic>>[];
+    for (var i = 0; i < len; i++) {
+      values.add([tsValues[i], uidValues[i]]);
+    }
+
+    return getAllByIndexSync('ts_uid', values);
+  }
+
+  Future<int> deleteAllByTsUid(List<int> tsValues, List<String> uidValues) {
+    final len = tsValues.length;
+    assert(
+        uidValues.length == len, 'All index values must have the same length');
+    final values = <List<dynamic>>[];
+    for (var i = 0; i < len; i++) {
+      values.add([tsValues[i], uidValues[i]]);
+    }
+
+    return deleteAllByIndex('ts_uid', values);
+  }
+
+  int deleteAllByTsUidSync(List<int> tsValues, List<String> uidValues) {
+    final len = tsValues.length;
+    assert(
+        uidValues.length == len, 'All index values must have the same length');
+    final values = <List<dynamic>>[];
+    for (var i = 0; i < len; i++) {
+      values.add([tsValues[i], uidValues[i]]);
+    }
+
+    return deleteAllByIndexSync('ts_uid', values);
+  }
+}
 
 extension TGachaRecordQueryWhereSort
     on QueryBuilder<TGachaRecord, TGachaRecord, QWhere> {
   QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhere> anyId() {
     return addWhereClauseInternal(const IdWhereClause.any());
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhere> anyTsUid() {
+    return addWhereClauseInternal(
+        const IndexWhereClause.any(indexName: 'ts_uid'));
   }
 }
 
@@ -199,6 +292,109 @@ extension TGachaRecordQueryWhere
       upper: upperId,
       includeUpper: includeUpper,
     ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsEqualTo(
+      int ts) {
+    return addWhereClauseInternal(IndexWhereClause.equalTo(
+      indexName: 'ts_uid',
+      value: [ts],
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsNotEqualTo(
+      int ts) {
+    if (whereSortInternal == Sort.asc) {
+      return addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'ts_uid',
+        upper: [ts],
+        includeUpper: false,
+      )).addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'ts_uid',
+        lower: [ts],
+        includeLower: false,
+      ));
+    } else {
+      return addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'ts_uid',
+        lower: [ts],
+        includeLower: false,
+      )).addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'ts_uid',
+        upper: [ts],
+        includeUpper: false,
+      ));
+    }
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsGreaterThan(
+    int ts, {
+    bool include = false,
+  }) {
+    return addWhereClauseInternal(IndexWhereClause.greaterThan(
+      indexName: 'ts_uid',
+      lower: [ts],
+      includeLower: include,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsLessThan(
+    int ts, {
+    bool include = false,
+  }) {
+    return addWhereClauseInternal(IndexWhereClause.lessThan(
+      indexName: 'ts_uid',
+      upper: [ts],
+      includeUpper: include,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsBetween(
+    int lowerTs,
+    int upperTs, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addWhereClauseInternal(IndexWhereClause.between(
+      indexName: 'ts_uid',
+      lower: [lowerTs],
+      includeLower: includeLower,
+      upper: [upperTs],
+      includeUpper: includeUpper,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsUidEqualTo(
+      int ts, String uid) {
+    return addWhereClauseInternal(IndexWhereClause.equalTo(
+      indexName: 'ts_uid',
+      value: [ts, uid],
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsUidNotEqualTo(
+      int ts, String uid) {
+    if (whereSortInternal == Sort.asc) {
+      return addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'ts_uid',
+        upper: [ts, uid],
+        includeUpper: false,
+      )).addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'ts_uid',
+        lower: [ts, uid],
+        includeLower: false,
+      ));
+    } else {
+      return addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'ts_uid',
+        lower: [ts, uid],
+        includeLower: false,
+      )).addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'ts_uid',
+        upper: [ts, uid],
+        includeUpper: false,
+      ));
+    }
   }
 }
 
@@ -412,10 +608,123 @@ extension TGachaRecordQueryFilter
       includeUpper: includeUpper,
     ));
   }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition>
+      uidGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'uid',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'uid',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> uidMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'uid',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
 }
 
 extension TGachaRecordQueryLinks
-    on QueryBuilder<TGachaRecord, TGachaRecord, QFilterCondition> {}
+    on QueryBuilder<TGachaRecord, TGachaRecord, QFilterCondition> {
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterFilterCondition> chars(
+      FilterQuery<TGachaChar> q) {
+    return linkInternal(
+      isar.tGachaChars,
+      q,
+      'chars',
+    );
+  }
+}
 
 extension TGachaRecordQueryWhereSortBy
     on QueryBuilder<TGachaRecord, TGachaRecord, QSortBy> {
@@ -441,6 +750,14 @@ extension TGachaRecordQueryWhereSortBy
 
   QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> sortByTsDesc() {
     return addSortByInternal('ts', Sort.desc);
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> sortByUid() {
+    return addSortByInternal('uid', Sort.asc);
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> sortByUidDesc() {
+    return addSortByInternal('uid', Sort.desc);
   }
 }
 
@@ -469,6 +786,14 @@ extension TGachaRecordQueryWhereSortThenBy
   QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> thenByTsDesc() {
     return addSortByInternal('ts', Sort.desc);
   }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> thenByUid() {
+    return addSortByInternal('uid', Sort.asc);
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterSortBy> thenByUidDesc() {
+    return addSortByInternal('uid', Sort.desc);
+  }
 }
 
 extension TGachaRecordQueryWhereDistinct
@@ -485,6 +810,11 @@ extension TGachaRecordQueryWhereDistinct
   QueryBuilder<TGachaRecord, TGachaRecord, QDistinct> distinctByTs() {
     return addDistinctByInternal('ts');
   }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QDistinct> distinctByUid(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('uid', caseSensitive: caseSensitive);
+  }
 }
 
 extension TGachaRecordQueryProperty
@@ -499,5 +829,9 @@ extension TGachaRecordQueryProperty
 
   QueryBuilder<TGachaRecord, int, QQueryOperations> tsProperty() {
     return addPropertyNameInternal('ts');
+  }
+
+  QueryBuilder<TGachaRecord, String, QQueryOperations> uidProperty() {
+    return addPropertyNameInternal('uid');
   }
 }

@@ -38,11 +38,6 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) async {
     try {
       final response = await _remoteDataSource.fetch(token);
-
-      if (response.status == 3) {
-        return left(const AppFailure.invalidToken());
-      }
-
       final dto = response.data!.copyWith(token: token.getOrCrash());
       await _localDataSource.save(dto);
       return right(unit);
@@ -54,8 +49,8 @@ class UserRepositoryImpl implements UserRepository {
 
       final message = e.response?.statusMessage;
       return left(AppFailure.remoteServerError(message: message, code: code));
-    } catch (e) {
-      logger.e(e);
+    } catch (e, stackTrace) {
+      logger.e(e, e, stackTrace);
       return left(AppFailure.unexpectedError(e));
     }
   }

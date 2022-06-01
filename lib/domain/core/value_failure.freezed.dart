@@ -19,18 +19,21 @@ mixin _$ValueFailure<T> {
   T get failedValue => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) invalidUid,
     required TResult Function(T failedValue) invalidToken,
     required TResult Function(T failedValue) invalidTs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
     required TResult orElse(),
@@ -38,18 +41,21 @@ mixin _$ValueFailure<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidUid<T> value) invalidUid,
     required TResult Function(_InvalidToken<T> value) invalidToken,
     required TResult Function(_InvalidTs<T> value) invalidTs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
     required TResult orElse(),
@@ -89,6 +95,151 @@ class _$ValueFailureCopyWithImpl<T, $Res>
               as T,
     ));
   }
+}
+
+/// @nodoc
+abstract class _$$_InvalidUidCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory _$$_InvalidUidCopyWith(
+          _$_InvalidUid<T> value, $Res Function(_$_InvalidUid<T>) then) =
+      __$$_InvalidUidCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class __$$_InvalidUidCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements _$$_InvalidUidCopyWith<T, $Res> {
+  __$$_InvalidUidCopyWithImpl(
+      _$_InvalidUid<T> _value, $Res Function(_$_InvalidUid<T>) _then)
+      : super(_value, (v) => _then(v as _$_InvalidUid<T>));
+
+  @override
+  _$_InvalidUid<T> get _value => super._value as _$_InvalidUid<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(_$_InvalidUid<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_InvalidUid<T> implements _InvalidUid<T> {
+  const _$_InvalidUid({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidUid(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InvalidUid<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_InvalidUidCopyWith<T, _$_InvalidUid<T>> get copyWith =>
+      __$$_InvalidUidCopyWithImpl<T, _$_InvalidUid<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) invalidUid,
+    required TResult Function(T failedValue) invalidToken,
+    required TResult Function(T failedValue) invalidTs,
+  }) {
+    return invalidUid(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
+    TResult Function(T failedValue)? invalidToken,
+    TResult Function(T failedValue)? invalidTs,
+  }) {
+    return invalidUid?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
+    TResult Function(T failedValue)? invalidToken,
+    TResult Function(T failedValue)? invalidTs,
+    required TResult orElse(),
+  }) {
+    if (invalidUid != null) {
+      return invalidUid(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidUid<T> value) invalidUid,
+    required TResult Function(_InvalidToken<T> value) invalidToken,
+    required TResult Function(_InvalidTs<T> value) invalidTs,
+  }) {
+    return invalidUid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
+    TResult Function(_InvalidToken<T> value)? invalidToken,
+    TResult Function(_InvalidTs<T> value)? invalidTs,
+  }) {
+    return invalidUid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
+    TResult Function(_InvalidToken<T> value)? invalidToken,
+    TResult Function(_InvalidTs<T> value)? invalidTs,
+    required TResult orElse(),
+  }) {
+    if (invalidUid != null) {
+      return invalidUid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidUid<T> implements ValueFailure<T> {
+  const factory _InvalidUid({required final T failedValue}) = _$_InvalidUid<T>;
+
+  @override
+  T get failedValue => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InvalidUidCopyWith<T, _$_InvalidUid<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -159,6 +310,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) invalidUid,
     required TResult Function(T failedValue) invalidToken,
     required TResult Function(T failedValue) invalidTs,
   }) {
@@ -168,6 +320,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
   }) {
@@ -177,6 +330,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
     required TResult orElse(),
@@ -190,6 +344,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidUid<T> value) invalidUid,
     required TResult Function(_InvalidToken<T> value) invalidToken,
     required TResult Function(_InvalidTs<T> value) invalidTs,
   }) {
@@ -199,6 +354,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
   }) {
@@ -208,6 +364,7 @@ class _$_InvalidToken<T> implements _InvalidToken<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
     required TResult orElse(),
@@ -299,6 +456,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue) invalidUid,
     required TResult Function(T failedValue) invalidToken,
     required TResult Function(T failedValue) invalidTs,
   }) {
@@ -308,6 +466,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
   }) {
@@ -317,6 +476,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue)? invalidUid,
     TResult Function(T failedValue)? invalidToken,
     TResult Function(T failedValue)? invalidTs,
     required TResult orElse(),
@@ -330,6 +490,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidUid<T> value) invalidUid,
     required TResult Function(_InvalidToken<T> value) invalidToken,
     required TResult Function(_InvalidTs<T> value) invalidTs,
   }) {
@@ -339,6 +500,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
   }) {
@@ -348,6 +510,7 @@ class _$_InvalidTs<T> implements _InvalidTs<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidUid<T> value)? invalidUid,
     TResult Function(_InvalidToken<T> value)? invalidToken,
     TResult Function(_InvalidTs<T> value)? invalidTs,
     required TResult orElse(),

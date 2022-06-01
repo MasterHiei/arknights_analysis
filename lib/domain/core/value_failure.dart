@@ -4,6 +4,10 @@ part 'value_failure.freezed.dart';
 
 @freezed
 class ValueFailure<T> with _$ValueFailure<T> {
+  const factory ValueFailure.invalidUid({
+    required T failedValue,
+  }) = _InvalidUid<T>;
+
   const factory ValueFailure.invalidToken({
     required T failedValue,
   }) = _InvalidToken<T>;

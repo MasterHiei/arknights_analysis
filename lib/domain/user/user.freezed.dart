@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$User {
-  String get uid => throw _privateConstructorUsedError;
+  Uid get uid => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
   Token get token => throw _privateConstructorUsedError;
 
@@ -28,7 +28,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({String uid, String nickName, Token token});
+  $Res call({Uid uid, String nickName, Token token});
 }
 
 /// @nodoc
@@ -49,7 +49,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uid,
       nickName: nickName == freezed
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
@@ -67,7 +67,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
-  $Res call({String uid, String nickName, Token token});
+  $Res call({Uid uid, String nickName, Token token});
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Uid,
       nickName: nickName == freezed
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ class _$_User implements _User {
       {required this.uid, required this.nickName, required this.token});
 
   @override
-  final String uid;
+  final Uid uid;
   @override
   final String nickName;
   @override
@@ -145,12 +145,12 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String uid,
+      {required final Uid uid,
       required final String nickName,
       required final Token token}) = _$_User;
 
   @override
-  String get uid => throw _privateConstructorUsedError;
+  Uid get uid => throw _privateConstructorUsedError;
   @override
   String get nickName => throw _privateConstructorUsedError;
   @override

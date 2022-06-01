@@ -24,8 +24,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> {
     super.initState();
     try {
       _initWebView();
-    } catch (e) {
-      logger.e(e);
+    } catch (e, stackTrace) {
+      logger.e(e, e, stackTrace);
     }
   }
 

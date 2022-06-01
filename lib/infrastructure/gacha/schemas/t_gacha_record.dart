@@ -9,9 +9,12 @@ part 't_gacha_record.g.dart';
 class TGachaRecord {
   int? id;
 
+  @Index(unique: true, composite: [CompositeIndex('uid')])
   late int ts;
 
   late String pool;
 
-  final chars = IsarLinks<TGachaChar>;
+  final chars = IsarLinks<TGachaChar>();
+
+  late String uid;
 }

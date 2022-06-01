@@ -39,7 +39,7 @@ class PortalHeader extends ConsumerWidget {
                   style: TextStyle(fontSize: 20.sp),
                 ),
                 Text(
-                  'UID: ${user.uid}',
+                  'UID: ${user.uid.getOrCrash()}',
                   style: TextStyle(color: Colors.grey[100], fontSize: 14.sp),
                 ),
               ],

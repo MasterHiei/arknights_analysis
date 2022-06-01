@@ -13,3 +13,5 @@ const akLoginPage = 'https://ak.hypergryph.com/user/login';
 const akHomePage = 'https://ak.hypergryph.com/user/home';
 
 const asGetToken = 'https://as.hypergryph.com/user/info/v1/token_by_cookie';
+
+const pageSize = 10;
