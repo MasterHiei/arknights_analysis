@@ -15,14 +15,20 @@ extension GetTGachaRecordCollection on Isar {
 const TGachaRecordSchema = CollectionSchema(
   name: 'gacha_record',
   schema:
-      '{"name":"gacha_record","idName":"id","properties":[{"name":"pool","type":"String"},{"name":"ts","type":"Long"},{"name":"uid","type":"String"}],"indexes":[{"name":"ts_uid","unique":true,"properties":[{"name":"ts","type":"Value","caseSensitive":false},{"name":"uid","type":"Hash","caseSensitive":true}]}],"links":[{"name":"chars","target":"gacha_char"}]}',
+      '{"name":"gacha_record","idName":"id","properties":[{"name":"pool","type":"String"},{"name":"ts","type":"Long"},{"name":"uid","type":"String"}],"indexes":[{"name":"ts","unique":false,"properties":[{"name":"ts","type":"Value","caseSensitive":false}]},{"name":"ts_uid","unique":true,"properties":[{"name":"ts","type":"Value","caseSensitive":false},{"name":"uid","type":"Hash","caseSensitive":true}]},{"name":"uid","unique":false,"properties":[{"name":"uid","type":"Hash","caseSensitive":true}]}],"links":[{"name":"chars","target":"gacha_char"}]}',
   idName: 'id',
   propertyIds: {'pool': 0, 'ts': 1, 'uid': 2},
   listProperties: {},
-  indexIds: {'ts_uid': 0},
+  indexIds: {'ts': 0, 'ts_uid': 1, 'uid': 2},
   indexValueTypes: {
+    'ts': [
+      IndexValueType.long,
+    ],
     'ts_uid': [
       IndexValueType.long,
+      IndexValueType.stringHash,
+    ],
+    'uid': [
       IndexValueType.stringHash,
     ]
   },
@@ -230,9 +236,17 @@ extension TGachaRecordQueryWhereSort
     return addWhereClauseInternal(const IdWhereClause.any());
   }
 
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhere> anyTs() {
+    return addWhereClauseInternal(const IndexWhereClause.any(indexName: 'ts'));
+  }
+
   QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhere> anyTsUid() {
     return addWhereClauseInternal(
         const IndexWhereClause.any(indexName: 'ts_uid'));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhere> anyUid() {
+    return addWhereClauseInternal(const IndexWhereClause.any(indexName: 'uid'));
   }
 }
 
@@ -297,7 +311,7 @@ extension TGachaRecordQueryWhere
   QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> tsEqualTo(
       int ts) {
     return addWhereClauseInternal(IndexWhereClause.equalTo(
-      indexName: 'ts_uid',
+      indexName: 'ts',
       value: [ts],
     ));
   }
@@ -306,21 +320,21 @@ extension TGachaRecordQueryWhere
       int ts) {
     if (whereSortInternal == Sort.asc) {
       return addWhereClauseInternal(IndexWhereClause.lessThan(
-        indexName: 'ts_uid',
+        indexName: 'ts',
         upper: [ts],
         includeUpper: false,
       )).addWhereClauseInternal(IndexWhereClause.greaterThan(
-        indexName: 'ts_uid',
+        indexName: 'ts',
         lower: [ts],
         includeLower: false,
       ));
     } else {
       return addWhereClauseInternal(IndexWhereClause.greaterThan(
-        indexName: 'ts_uid',
+        indexName: 'ts',
         lower: [ts],
         includeLower: false,
       )).addWhereClauseInternal(IndexWhereClause.lessThan(
-        indexName: 'ts_uid',
+        indexName: 'ts',
         upper: [ts],
         includeUpper: false,
       ));
@@ -332,7 +346,7 @@ extension TGachaRecordQueryWhere
     bool include = false,
   }) {
     return addWhereClauseInternal(IndexWhereClause.greaterThan(
-      indexName: 'ts_uid',
+      indexName: 'ts',
       lower: [ts],
       includeLower: include,
     ));
@@ -343,7 +357,7 @@ extension TGachaRecordQueryWhere
     bool include = false,
   }) {
     return addWhereClauseInternal(IndexWhereClause.lessThan(
-      indexName: 'ts_uid',
+      indexName: 'ts',
       upper: [ts],
       includeUpper: include,
     ));
@@ -356,7 +370,7 @@ extension TGachaRecordQueryWhere
     bool includeUpper = true,
   }) {
     return addWhereClauseInternal(IndexWhereClause.between(
-      indexName: 'ts_uid',
+      indexName: 'ts',
       lower: [lowerTs],
       includeLower: includeLower,
       upper: [upperTs],
@@ -392,6 +406,39 @@ extension TGachaRecordQueryWhere
       )).addWhereClauseInternal(IndexWhereClause.lessThan(
         indexName: 'ts_uid',
         upper: [ts, uid],
+        includeUpper: false,
+      ));
+    }
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> uidEqualTo(
+      String uid) {
+    return addWhereClauseInternal(IndexWhereClause.equalTo(
+      indexName: 'uid',
+      value: [uid],
+    ));
+  }
+
+  QueryBuilder<TGachaRecord, TGachaRecord, QAfterWhereClause> uidNotEqualTo(
+      String uid) {
+    if (whereSortInternal == Sort.asc) {
+      return addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'uid',
+        upper: [uid],
+        includeUpper: false,
+      )).addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'uid',
+        lower: [uid],
+        includeLower: false,
+      ));
+    } else {
+      return addWhereClauseInternal(IndexWhereClause.greaterThan(
+        indexName: 'uid',
+        lower: [uid],
+        includeLower: false,
+      )).addWhereClauseInternal(IndexWhereClause.lessThan(
+        indexName: 'uid',
+        upper: [uid],
         includeUpper: false,
       ));
     }

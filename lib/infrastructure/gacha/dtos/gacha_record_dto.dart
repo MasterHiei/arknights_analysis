@@ -27,6 +27,7 @@ class GachaRecordDto with _$GachaRecordDto {
         ts: record.ts,
         pool: record.pool,
         chars: record.chars.map(GachaCharDto.fromSchema).toList(),
+        uid: record.uid,
       );
 
   GachaRecord toDomain() => GachaRecord(

@@ -10,12 +10,13 @@ import '../infrastructure/user/schemas/t_user.dart';
 import 'common/dio_interceptors.dart';
 import 'constants/constants.dart';
 
-final _dioProvider = Provider((_) {
+final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(
     BaseOptions(
       connectTimeout: httpTimeout,
       receiveTimeout: httpTimeout,
       sendTimeout: httpTimeout,
+      baseUrl: baseUrl,
       validateStatus: (code) => code != null && 200 <= code && code < 400,
     ),
   );
@@ -23,17 +24,9 @@ final _dioProvider = Provider((_) {
   return dio;
 });
 
-final akDioProvider = Provider((ref) {
-  final dio = ref.watch(_dioProvider);
-  dio.options.baseUrl = akBaseUrl;
-  return dio;
-});
+final akDioProvider = _dioProvider(akBaseUrl);
 
-final asDioProvider = Provider((ref) {
-  final dio = ref.watch(_dioProvider);
-  dio.options.baseUrl = asBaseUrl;
-  return dio;
-});
+final asDioProvider = _dioProvider(asBaseUrl);
 
 final isarProvider = Provider<Isar>((_) => throw UnimplementedError());
 
