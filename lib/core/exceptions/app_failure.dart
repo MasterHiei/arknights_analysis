@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_failure.freezed.dart';
 
-@Freezed(copyWith: false)
+@freezed
 class AppFailure with _$AppFailure {
   const AppFailure._();
 

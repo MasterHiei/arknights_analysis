@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
-import '../../../domain/core/common/pagination.dart';
+import '../../../../core/types/types.dart';
+import '../../../../domain/core/common/pagination.dart';
 
 part 'pagination_dto.freezed.dart';
 part 'pagination_dto.g.dart';

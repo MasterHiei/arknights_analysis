@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/types/types.dart';
 import '../../../domain/gacha/gacha.dart';
-import '../../core/common/pagination_dto.dart';
+import '../../core/common/dtos/pagination_dto.dart';
 import 'gacha_record_dto.dart';
 
 part 'gacha_dto.freezed.dart';

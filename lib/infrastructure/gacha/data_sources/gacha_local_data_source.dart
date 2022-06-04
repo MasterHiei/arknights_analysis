@@ -4,7 +4,7 @@ import 'package:isar/isar.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/providers.dart';
 import '../../../domain/user/value_objects/uid.dart';
-import '../../core/common/pagination_dto.dart';
+import '../../core/common/dtos/pagination_dto.dart';
 import '../dtos/gacha_dto.dart';
 import '../dtos/gacha_record_dto.dart';
 import '../schemas/t_gacha_record.dart';

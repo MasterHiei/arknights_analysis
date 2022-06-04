@@ -98,8 +98,8 @@ class __$$_PaginationCopyWithImpl<$Res> extends _$PaginationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Pagination implements _Pagination {
-  const _$_Pagination({required this.current, required this.total});
+class _$_Pagination extends _Pagination {
+  const _$_Pagination({required this.current, required this.total}) : super._();
 
   @override
   final int current;
@@ -132,9 +132,10 @@ class _$_Pagination implements _Pagination {
       __$$_PaginationCopyWithImpl<_$_Pagination>(this, _$identity);
 }
 
-abstract class _Pagination implements Pagination {
+abstract class _Pagination extends Pagination {
   const factory _Pagination(
       {required final int current, required final int total}) = _$_Pagination;
+  const _Pagination._() : super._();
 
   @override
   int get current => throw _privateConstructorUsedError;

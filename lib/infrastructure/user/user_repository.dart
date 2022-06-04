@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
-import '../../core/utils/logger.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
+import '../core/mixins/error_handler_mixin.dart';
 import 'data_sources/user_local_data_source.dart';
 import 'data_sources/user_remote_data_source.dart';
 
@@ -24,7 +21,7 @@ abstract class UserRepository {
   Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token);
 }
 
-class UserRepositoryImpl implements UserRepository {
+class UserRepositoryImpl with ErrorHandlerMixin implements UserRepository {
   const UserRepositoryImpl(this._localDataSource, this._remoteDataSource);
 
   final UserLocalDataSource _localDataSource;
@@ -35,23 +32,11 @@ class UserRepositoryImpl implements UserRepository {
       _localDataSource.watch(token).map((dto) => optionOf(dto?.toDomain()));
 
   @override
-  Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) async {
-    try {
-      final response = await _remoteDataSource.fetch(token);
-      final dto = response.data!.copyWith(token: token.getOrCrash());
-      await _localDataSource.save(dto);
-      return right(unit);
-    } on DioError catch (e) {
-      final code = e.response?.statusCode;
-      if (code == HttpStatus.unauthorized) {
-        return left(const AppFailure.invalidToken());
-      }
-
-      final message = e.response?.statusMessage;
-      return left(AppFailure.remoteServerError(message: message, code: code));
-    } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
-      return left(AppFailure.unexpectedError(e));
-    }
-  }
+  Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) =>
+      execute(() async {
+        final response = await _remoteDataSource.fetch(token);
+        final dto = response.data!.copyWith(token: token.getOrCrash());
+        await _localDataSource.save(dto);
+        return unit;
+      });
 }

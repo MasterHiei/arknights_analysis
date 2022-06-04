@@ -75,6 +75,54 @@ mixin _$AppFailure {
 }
 
 /// @nodoc
+abstract class $AppFailureCopyWith<$Res> {
+  factory $AppFailureCopyWith(
+          AppFailure value, $Res Function(AppFailure) then) =
+      _$AppFailureCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$AppFailureCopyWithImpl<$Res> implements $AppFailureCopyWith<$Res> {
+  _$AppFailureCopyWithImpl(this._value, this._then);
+
+  final AppFailure _value;
+  // ignore: unused_field
+  final $Res Function(AppFailure) _then;
+}
+
+/// @nodoc
+abstract class _$$_UnexpectedErrorCopyWith<$Res> {
+  factory _$$_UnexpectedErrorCopyWith(
+          _$_UnexpectedError value, $Res Function(_$_UnexpectedError) then) =
+      __$$_UnexpectedErrorCopyWithImpl<$Res>;
+  $Res call({Object e});
+}
+
+/// @nodoc
+class __$$_UnexpectedErrorCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_UnexpectedErrorCopyWith<$Res> {
+  __$$_UnexpectedErrorCopyWithImpl(
+      _$_UnexpectedError _value, $Res Function(_$_UnexpectedError) _then)
+      : super(_value, (v) => _then(v as _$_UnexpectedError));
+
+  @override
+  _$_UnexpectedError get _value => super._value as _$_UnexpectedError;
+
+  @override
+  $Res call({
+    Object? e = freezed,
+  }) {
+    return _then(_$_UnexpectedError(
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Object,
+    ));
+  }
+}
+
+/// @nodoc
 
 class _$_UnexpectedError extends _UnexpectedError {
   const _$_UnexpectedError(this.e) : super._();
@@ -98,6 +146,11 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_UnexpectedErrorCopyWith<_$_UnexpectedError> get copyWith =>
+      __$$_UnexpectedErrorCopyWithImpl<_$_UnexpectedError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -185,6 +238,28 @@ abstract class _UnexpectedError extends AppFailure {
   const _UnexpectedError._() : super._();
 
   Object get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_UnexpectedErrorCopyWith<_$_UnexpectedError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_NetworkUnreachableCopyWith<$Res> {
+  factory _$$_NetworkUnreachableCopyWith(_$_NetworkUnreachable value,
+          $Res Function(_$_NetworkUnreachable) then) =
+      __$$_NetworkUnreachableCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NetworkUnreachableCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_NetworkUnreachableCopyWith<$Res> {
+  __$$_NetworkUnreachableCopyWithImpl(
+      _$_NetworkUnreachable _value, $Res Function(_$_NetworkUnreachable) _then)
+      : super(_value, (v) => _then(v as _$_NetworkUnreachable));
+
+  @override
+  _$_NetworkUnreachable get _value => super._value as _$_NetworkUnreachable;
 }
 
 /// @nodoc
@@ -293,6 +368,43 @@ abstract class _NetworkUnreachable extends AppFailure {
 }
 
 /// @nodoc
+abstract class _$$_RemoteServerErrorCopyWith<$Res> {
+  factory _$$_RemoteServerErrorCopyWith(_$_RemoteServerError value,
+          $Res Function(_$_RemoteServerError) then) =
+      __$$_RemoteServerErrorCopyWithImpl<$Res>;
+  $Res call({String? message, int? code});
+}
+
+/// @nodoc
+class __$$_RemoteServerErrorCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_RemoteServerErrorCopyWith<$Res> {
+  __$$_RemoteServerErrorCopyWithImpl(
+      _$_RemoteServerError _value, $Res Function(_$_RemoteServerError) _then)
+      : super(_value, (v) => _then(v as _$_RemoteServerError));
+
+  @override
+  _$_RemoteServerError get _value => super._value as _$_RemoteServerError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+    Object? code = freezed,
+  }) {
+    return _then(_$_RemoteServerError(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
 
 class _$_RemoteServerError extends _RemoteServerError {
   const _$_RemoteServerError({this.message, this.code}) : super._();
@@ -321,6 +433,12 @@ class _$_RemoteServerError extends _RemoteServerError {
       runtimeType,
       const DeepCollectionEquality().hash(message),
       const DeepCollectionEquality().hash(code));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_RemoteServerErrorCopyWith<_$_RemoteServerError> get copyWith =>
+      __$$_RemoteServerErrorCopyWithImpl<_$_RemoteServerError>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -410,6 +528,41 @@ abstract class _RemoteServerError extends AppFailure {
 
   String? get message => throw _privateConstructorUsedError;
   int? get code => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_RemoteServerErrorCopyWith<_$_RemoteServerError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LocalDataErrorCopyWith<$Res> {
+  factory _$$_LocalDataErrorCopyWith(
+          _$_LocalDataError value, $Res Function(_$_LocalDataError) then) =
+      __$$_LocalDataErrorCopyWithImpl<$Res>;
+  $Res call({Object e});
+}
+
+/// @nodoc
+class __$$_LocalDataErrorCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_LocalDataErrorCopyWith<$Res> {
+  __$$_LocalDataErrorCopyWithImpl(
+      _$_LocalDataError _value, $Res Function(_$_LocalDataError) _then)
+      : super(_value, (v) => _then(v as _$_LocalDataError));
+
+  @override
+  _$_LocalDataError get _value => super._value as _$_LocalDataError;
+
+  @override
+  $Res call({
+    Object? e = freezed,
+  }) {
+    return _then(_$_LocalDataError(
+      e == freezed
+          ? _value.e
+          : e // ignore: cast_nullable_to_non_nullable
+              as Object,
+    ));
+  }
 }
 
 /// @nodoc
@@ -436,6 +589,11 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LocalDataErrorCopyWith<_$_LocalDataError> get copyWith =>
+      __$$_LocalDataErrorCopyWithImpl<_$_LocalDataError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -523,6 +681,27 @@ abstract class _LocalDataError extends AppFailure {
   const _LocalDataError._() : super._();
 
   Object get e => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_LocalDataErrorCopyWith<_$_LocalDataError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_InvalidTokenCopyWith<$Res> {
+  factory _$$_InvalidTokenCopyWith(
+          _$_InvalidToken value, $Res Function(_$_InvalidToken) then) =
+      __$$_InvalidTokenCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InvalidTokenCopyWithImpl<$Res> extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_InvalidTokenCopyWith<$Res> {
+  __$$_InvalidTokenCopyWithImpl(
+      _$_InvalidToken _value, $Res Function(_$_InvalidToken) _then)
+      : super(_value, (v) => _then(v as _$_InvalidToken));
+
+  @override
+  _$_InvalidToken get _value => super._value as _$_InvalidToken;
 }
 
 /// @nodoc
