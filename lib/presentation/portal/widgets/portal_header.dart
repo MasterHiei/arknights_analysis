@@ -31,7 +31,7 @@ class PortalHeader extends ConsumerWidget {
   Widget _buildUserInfoArea() {
     return Consumer(
       builder: (_, ref, __) => ref.watch(_userProvider).userOption.fold(
-            () => Container(),
+            () => const SizedBox(),
             (user) => Column(
               children: [
                 Text(

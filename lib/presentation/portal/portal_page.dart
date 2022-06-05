@@ -23,7 +23,7 @@ class PortalPage extends StatelessWidget {
               builder: (_, ref, __) {
                 final state = ref.watch(userProvider(params.token));
                 return state.userOption.fold(
-                  () => const ProgressRing(),
+                  () => const SizedBox(),
                   (user) => PortalGachaStatsView(user),
                 );
               },
