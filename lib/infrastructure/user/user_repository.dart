@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
+import '../core/common/dtos/token_body_dto.dart';
 import '../core/mixins/error_handler_mixin.dart';
 import 'data_sources/user_local_data_source.dart';
 import 'data_sources/user_remote_data_source.dart';
@@ -34,7 +35,8 @@ class UserRepositoryImpl with ErrorHandlerMixin implements UserRepository {
   @override
   Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) =>
       execute(() async {
-        final response = await _remoteDataSource.fetch(token);
+        final body = TokenBodyDto(token: token.getOrCrash());
+        final response = await _remoteDataSource.request(body);
         final dto = response.data!.copyWith(token: token.getOrCrash());
         await _localDataSource.save(dto);
         return unit;

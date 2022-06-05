@@ -27,6 +27,7 @@ dependencies:
   logger: 1.1.0
   path_provider: 2.0.10
   pretty_dio_logger: 1.2.0-beta-1
+  retrofit: 3.0.1+1
   riverpod: 1.0.3
   webview_windows: 0.1.9
   window_manager: 0.2.5
@@ -40,6 +41,7 @@ dev_dependencies:
   isar_generator: 2.5.0
   json_serializable: 6.2.0
   msix: 3.6.2
+  retrofit_generator: 4.0.1
 
 flutter:
   uses-material-design: true

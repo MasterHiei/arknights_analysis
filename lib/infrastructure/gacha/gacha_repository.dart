@@ -37,7 +37,10 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
     int page = 1,
   }) =>
       execute(() async {
-        final response = await _remoteDataSource.fetch(token, page: page);
+        final response = await _remoteDataSource.fetch(
+          token: token.getOrCrash(),
+          page: page,
+        );
         final dto = response.data!;
         final list = dto.list.map(
           (record) => record.copyWith(uid: uid.getOrCrash()),

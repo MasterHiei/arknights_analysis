@@ -1,31 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:retrofit/http.dart';
 
 import '../../../core/providers.dart';
-import '../../../core/types/types.dart';
-import '../../../domain/user/value_objects/token.dart';
-import '../../core/mixins/token_mixin.dart';
+import '../../core/common/dtos/token_body_dto.dart';
 import '../dtos/user_response_dto.dart';
 
+part 'user_remote_data_source.g.dart';
+
 final userRemoteDataSourceProvider = Provider.autoDispose<UserRemoteDataSource>(
-  (ref) => UserRemoteDataSourceImpl(ref.watch(asDioProvider)),
+  (ref) => UserRemoteDataSource(ref.watch(asDioProvider)),
 );
 
+@RestApi()
 abstract class UserRemoteDataSource {
-  Future<UserResponseDto> fetch(Token token);
-}
+  factory UserRemoteDataSource(Dio asDio) = _UserRemoteDataSource;
 
-class UserRemoteDataSourceImpl with TokenMixin implements UserRemoteDataSource {
-  const UserRemoteDataSourceImpl(this._asDio);
-
-  final Dio _asDio;
-
-  @override
-  Future<UserResponseDto> fetch(Token token) async {
-    final response = await _asDio.post<Json>(
-      '/u8/user/info/v1/basic',
-      data: generatePostData(token),
-    );
-    return UserResponseDto.fromJson(response.data!);
-  }
+  @POST('/u8/user/info/v1/basic')
+  Future<UserResponseDto> request(@Body() TokenBodyDto body);
 }

@@ -1,35 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:retrofit/http.dart';
 
 import '../../../core/providers.dart';
-import '../../../core/types/types.dart';
-import '../../../domain/user/value_objects/token.dart';
 import '../dtos/gacha_response_dto.dart';
+
+part 'gacha_remote_data_source.g.dart';
 
 final gachaRemoteDataSourceProvider =
     Provider.autoDispose<GachaRemoteDataSource>(
-  (ref) => GachaRemoteDataSourceImpl(ref.watch(akDioProvider)),
+  (ref) => GachaRemoteDataSource(ref.watch(akDioProvider)),
 );
 
+@RestApi()
 abstract class GachaRemoteDataSource {
-  Future<GachaResponseDto> fetch(Token token, {required int page});
-}
+  factory GachaRemoteDataSource(Dio akDio) = _GachaRemoteDataSource;
 
-class GachaRemoteDataSourceImpl implements GachaRemoteDataSource {
-  const GachaRemoteDataSourceImpl(this._akDio);
-
-  final Dio _akDio;
-
-  @override
-  Future<GachaResponseDto> fetch(Token token, {required int page}) async {
-    final queryParameters = {
-      'page': page,
-      'token': token.getOrCrash(),
-    };
-    final response = await _akDio.get<Json>(
-      '/user/api/inquiry/gacha',
-      queryParameters: queryParameters,
-    );
-    return GachaResponseDto.fromJson(response.data!);
-  }
+  @GET('/user/api/inquiry/gacha')
+  Future<GachaResponseDto> fetch({
+    @Query('token') required String token,
+    @Query('page') required int page,
+  });
 }
