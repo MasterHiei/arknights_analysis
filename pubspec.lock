@@ -15,6 +15,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.4.1"
+  analyzer_plugin:
+    dependency: transitive
+    description:
+      name: analyzer_plugin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.0"
   another_flushbar:
     dependency: "direct main"
     description:
@@ -218,6 +225,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.6"
+  drift:
+    dependency: "direct main"
+    description:
+      name: drift
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.0"
+  drift_dev:
+    dependency: "direct dev"
+    description:
+      name: drift_dev
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.0"
   fake_async:
     dependency: transitive
     description:
@@ -378,27 +399,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
-  isar:
-    dependency: "direct main"
-    description:
-      name: isar
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.5.0"
-  isar_flutter_libs:
-    dependency: "direct main"
-    description:
-      name: isar_flutter_libs
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.5.0"
-  isar_generator:
-    dependency: "direct dev"
-    description:
-      name: isar_generator
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.5.0"
   js:
     dependency: transitive
     description:
@@ -484,12 +484,12 @@ packages:
     source: hosted
     version: "2.0.2"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.2"
   path_provider:
     dependency: "direct main"
     description:
@@ -684,6 +684,27 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.2"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.7.1"
+  sqlite3_flutter_libs:
+    dependency: "direct main"
+    description:
+      name: sqlite3_flutter_libs
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.7"
+  sqlparser:
+    dependency: transitive
+    description:
+      name: sqlparser
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.21.0"
   stack_trace:
     dependency: transitive
     description:

@@ -2,6 +2,8 @@ const appName = 'Arknights Analysis';
 
 const dbName = 'arknights_analysis';
 
+const dbVersion = 1;
+
 const httpTimeout = 30 * 1000;
 
 const asBaseUrl = 'https://as.hypergryph.com';

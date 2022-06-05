@@ -34,8 +34,8 @@ class UserNotifier extends StateNotifier<UserState> {
   }
 
   void _watch() => _repository.watch(_token).listen(
-        (userOption) => state = state.copyWith(
-          userOption: userOption,
+        (user) => state = state.copyWith(
+          userOption: optionOf(user),
           failureOption: none(),
         ),
       );

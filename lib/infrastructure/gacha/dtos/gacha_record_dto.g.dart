@@ -13,6 +13,7 @@ _$_GachaRecordDto _$$_GachaRecordDtoFromJson(Map<String, dynamic> json) =>
       chars: (json['chars'] as List<dynamic>)
           .map((e) => GachaCharDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      uid: json['uid'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_GachaRecordDtoToJson(_$_GachaRecordDto instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_GachaRecordDtoToJson(_$_GachaRecordDto instance) =>
       'ts': instance.ts,
       'pool': instance.pool,
       'chars': instance.chars,
+      'uid': instance.uid,
     };

@@ -23,7 +23,7 @@ mixin _$GachaRecordDto {
   int get ts => throw _privateConstructorUsedError;
   String get pool => throw _privateConstructorUsedError;
   List<GachaCharDto> get chars => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $GachaRecordDtoCopyWith<$Res> {
       {int ts,
       String pool,
       List<GachaCharDto> chars,
-      @JsonKey(ignore: true) String uid});
+      @JsonKey(defaultValue: '') String uid});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ abstract class _$$_GachaRecordDtoCopyWith<$Res>
       {int ts,
       String pool,
       List<GachaCharDto> chars,
-      @JsonKey(ignore: true) String uid});
+      @JsonKey(defaultValue: '') String uid});
 }
 
 /// @nodoc
@@ -141,7 +141,7 @@ class _$_GachaRecordDto extends _GachaRecordDto {
       {required this.ts,
       required this.pool,
       required final List<GachaCharDto> chars,
-      @JsonKey(ignore: true) this.uid = ''})
+      @JsonKey(defaultValue: '') required this.uid})
       : _chars = chars,
         super._();
 
@@ -160,7 +160,7 @@ class _$_GachaRecordDto extends _GachaRecordDto {
   }
 
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   final String uid;
 
   @override
@@ -201,10 +201,11 @@ class _$_GachaRecordDto extends _GachaRecordDto {
 
 abstract class _GachaRecordDto extends GachaRecordDto {
   const factory _GachaRecordDto(
-      {required final int ts,
-      required final String pool,
-      required final List<GachaCharDto> chars,
-      @JsonKey(ignore: true) final String uid}) = _$_GachaRecordDto;
+          {required final int ts,
+          required final String pool,
+          required final List<GachaCharDto> chars,
+          @JsonKey(defaultValue: '') required final String uid}) =
+      _$_GachaRecordDto;
   const _GachaRecordDto._() : super._();
 
   factory _GachaRecordDto.fromJson(Map<String, dynamic> json) =
@@ -217,7 +218,7 @@ abstract class _GachaRecordDto extends GachaRecordDto {
   @override
   List<GachaCharDto> get chars => throw _privateConstructorUsedError;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   String get uid => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

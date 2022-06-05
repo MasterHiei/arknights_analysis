@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  isar_flutter_libs
   screen_retriever
+  sqlite3_flutter_libs
   webview_windows
   window_manager
 )

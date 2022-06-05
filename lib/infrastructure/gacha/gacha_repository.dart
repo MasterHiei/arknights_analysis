@@ -30,7 +30,7 @@ abstract class GachaRepository {
     required int page,
   });
 
-  Future<Either<AppFailure, List<GachaChar>>> readChars(Uid uid);
+  Stream<List<GachaChar>> watchChars(Uid uid);
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -69,9 +69,7 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       });
 
   @override
-  Future<Either<AppFailure, List<GachaChar>>> readChars(Uid uid) =>
-      execute(() async {
-        final dtos = await _localDataSource.readChars(uid);
-        return dtos.map((dto) => dto.toDomain()).toList();
-      });
+  Stream<List<GachaChar>> watchChars(Uid uid) => _localDataSource
+      .watchChars(uid)
+      .map((dtos) => dtos.map((dto) => dto.toDomain()).toList());
 }

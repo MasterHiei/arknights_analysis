@@ -22,7 +22,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   String get uid => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   String get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,8 @@ mixin _$UserDto {
 abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res>;
-  $Res call({String uid, String nickName, @JsonKey(ignore: true) String token});
+  $Res call(
+      {String uid, String nickName, @JsonKey(defaultValue: '') String token});
 }
 
 /// @nodoc
@@ -74,7 +75,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           _$_UserDto value, $Res Function(_$_UserDto) then) =
       __$$_UserDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String uid, String nickName, @JsonKey(ignore: true) String token});
+  $Res call(
+      {String uid, String nickName, @JsonKey(defaultValue: '') String token});
 }
 
 /// @nodoc
@@ -115,7 +117,7 @@ class _$_UserDto extends _UserDto {
   const _$_UserDto(
       {required this.uid,
       required this.nickName,
-      @JsonKey(ignore: true) this.token = ''})
+      @JsonKey(defaultValue: '') required this.token})
       : super._();
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
@@ -126,7 +128,7 @@ class _$_UserDto extends _UserDto {
   @override
   final String nickName;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   final String token;
 
   @override
@@ -167,7 +169,7 @@ abstract class _UserDto extends UserDto {
   const factory _UserDto(
       {required final String uid,
       required final String nickName,
-      @JsonKey(ignore: true) final String token}) = _$_UserDto;
+      @JsonKey(defaultValue: '') required final String token}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -177,7 +179,7 @@ abstract class _UserDto extends UserDto {
   @override
   String get nickName => throw _privateConstructorUsedError;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(defaultValue: '')
   String get token => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
