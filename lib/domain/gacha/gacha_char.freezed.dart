@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GachaChar {
   String get name => throw _privateConstructorUsedError;
-  int get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +29,7 @@ mixin _$GachaChar {
 abstract class $GachaCharCopyWith<$Res> {
   factory $GachaCharCopyWith(GachaChar value, $Res Function(GachaChar) then) =
       _$GachaCharCopyWithImpl<$Res>;
-  $Res call({String name, int rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$GachaCharCopyWithImpl<$Res> implements $GachaCharCopyWith<$Res> {
       rarity: rarity == freezed
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Rarity,
       isNew: isNew == freezed
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
@@ -69,7 +69,7 @@ abstract class _$$_GachaCharCopyWith<$Res> implements $GachaCharCopyWith<$Res> {
           _$_GachaChar value, $Res Function(_$_GachaChar) then) =
       __$$_GachaCharCopyWithImpl<$Res>;
   @override
-  $Res call({String name, int rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$_GachaCharCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res>
       rarity: rarity == freezed
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Rarity,
       isNew: isNew == freezed
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ class _$_GachaChar implements _GachaChar {
   @override
   final String name;
   @override
-  final int rarity;
+  final Rarity rarity;
   @override
   final bool isNew;
 
@@ -149,13 +149,13 @@ class _$_GachaChar implements _GachaChar {
 abstract class _GachaChar implements GachaChar {
   const factory _GachaChar(
       {required final String name,
-      required final int rarity,
+      required final Rarity rarity,
       required final bool isNew}) = _$_GachaChar;
 
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  int get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity => throw _privateConstructorUsedError;
   @override
   bool get isNew => throw _privateConstructorUsedError;
   @override

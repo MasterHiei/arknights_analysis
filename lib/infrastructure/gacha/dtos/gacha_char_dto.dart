@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/enums/rarity.dart';
 import '../../../core/types/types.dart';
 import '../../../domain/gacha/gacha_char.dart';
 import '../schemas/t_gacha_char.dart';
@@ -13,7 +14,7 @@ class GachaCharDto with _$GachaCharDto {
 
   const factory GachaCharDto({
     required String name,
-    required int rarity,
+    required Rarity rarity,
     required bool isNew,
   }) = _GachaCharDto;
 

@@ -21,7 +21,7 @@ GachaCharDto _$GachaCharDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GachaCharDto {
   String get name => throw _privateConstructorUsedError;
-  int get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $GachaCharDtoCopyWith<$Res> {
   factory $GachaCharDtoCopyWith(
           GachaCharDto value, $Res Function(GachaCharDto) then) =
       _$GachaCharDtoCopyWithImpl<$Res>;
-  $Res call({String name, int rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$GachaCharDtoCopyWithImpl<$Res> implements $GachaCharDtoCopyWith<$Res> {
       rarity: rarity == freezed
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Rarity,
       isNew: isNew == freezed
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,7 @@ abstract class _$$_GachaCharDtoCopyWith<$Res>
           _$_GachaCharDto value, $Res Function(_$_GachaCharDto) then) =
       __$$_GachaCharDtoCopyWithImpl<$Res>;
   @override
-  $Res call({String name, int rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$_GachaCharDtoCopyWithImpl<$Res>
       rarity: rarity == freezed
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Rarity,
       isNew: isNew == freezed
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ class _$_GachaCharDto extends _GachaCharDto {
   @override
   final String name;
   @override
-  final int rarity;
+  final Rarity rarity;
   @override
   final bool isNew;
 
@@ -167,7 +167,7 @@ class _$_GachaCharDto extends _GachaCharDto {
 abstract class _GachaCharDto extends GachaCharDto {
   const factory _GachaCharDto(
       {required final String name,
-      required final int rarity,
+      required final Rarity rarity,
       required final bool isNew}) = _$_GachaCharDto;
   const _GachaCharDto._() : super._();
 
@@ -177,7 +177,7 @@ abstract class _GachaCharDto extends GachaCharDto {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  int get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity => throw _privateConstructorUsedError;
   @override
   bool get isNew => throw _privateConstructorUsedError;
   @override

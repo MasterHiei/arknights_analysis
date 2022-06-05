@@ -1,5 +1,7 @@
 import 'package:isar/isar.dart';
 
+import '../../../core/enums/rarity.dart';
+
 part 't_gacha_char.g.dart';
 
 @Collection()
@@ -9,7 +11,8 @@ class TGachaChar {
 
   late String name;
 
-  late int rarity;
+  @RarityTypeConverter()
+  late Rarity rarity;
 
   late bool isNew;
 }

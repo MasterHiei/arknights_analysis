@@ -52,6 +52,8 @@ List<IsarLinkBase> _tGachaCharGetLinks(TGachaChar object) {
   return [];
 }
 
+const _tGachaCharRarityTypeConverter = RarityTypeConverter();
+
 void _tGachaCharSerializeNative(
     IsarCollection<TGachaChar> collection,
     IsarRawObject rawObj,
@@ -65,7 +67,7 @@ void _tGachaCharSerializeNative(
   final value1 = object.name;
   final _name = IsarBinaryWriter.utf8Encoder.convert(value1);
   dynamicSize += (_name.length) as int;
-  final value2 = object.rarity;
+  final value2 = _tGachaCharRarityTypeConverter.toIsar(object.rarity);
   final _rarity = value2;
   final size = staticSize + dynamicSize;
 
@@ -84,7 +86,8 @@ TGachaChar _tGachaCharDeserializeNative(IsarCollection<TGachaChar> collection,
   object.id = id;
   object.isNew = reader.readBool(offsets[0]);
   object.name = reader.readString(offsets[1]);
-  object.rarity = reader.readLong(offsets[2]);
+  object.rarity =
+      _tGachaCharRarityTypeConverter.fromIsar(reader.readLong(offsets[2]));
   return object;
 }
 
@@ -98,7 +101,8 @@ P _tGachaCharDeserializePropNative<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
+      return (_tGachaCharRarityTypeConverter.fromIsar(reader.readLong(offset)))
+          as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -110,7 +114,8 @@ dynamic _tGachaCharSerializeWeb(
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'isNew', object.isNew);
   IsarNative.jsObjectSet(jsObj, 'name', object.name);
-  IsarNative.jsObjectSet(jsObj, 'rarity', object.rarity);
+  IsarNative.jsObjectSet(
+      jsObj, 'rarity', _tGachaCharRarityTypeConverter.toIsar(object.rarity));
   return jsObj;
 }
 
@@ -120,8 +125,8 @@ TGachaChar _tGachaCharDeserializeWeb(
   object.id = IsarNative.jsObjectGet(jsObj, 'id');
   object.isNew = IsarNative.jsObjectGet(jsObj, 'isNew') ?? false;
   object.name = IsarNative.jsObjectGet(jsObj, 'name') ?? '';
-  object.rarity =
-      IsarNative.jsObjectGet(jsObj, 'rarity') ?? double.negativeInfinity;
+  object.rarity = _tGachaCharRarityTypeConverter.fromIsar(
+      IsarNative.jsObjectGet(jsObj, 'rarity') ?? double.negativeInfinity);
   return object;
 }
 
@@ -134,8 +139,9 @@ P _tGachaCharDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case 'name':
       return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
     case 'rarity':
-      return (IsarNative.jsObjectGet(jsObj, 'rarity') ??
-          double.negativeInfinity) as P;
+      return (_tGachaCharRarityTypeConverter.fromIsar(
+          IsarNative.jsObjectGet(jsObj, 'rarity') ??
+              double.negativeInfinity)) as P;
     default:
       throw 'Illegal propertyName';
   }
@@ -377,49 +383,49 @@ extension TGachaCharQueryFilter
   }
 
   QueryBuilder<TGachaChar, TGachaChar, QAfterFilterCondition> rarityEqualTo(
-      int value) {
+      Rarity value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'rarity',
-      value: value,
+      value: _tGachaCharRarityTypeConverter.toIsar(value),
     ));
   }
 
   QueryBuilder<TGachaChar, TGachaChar, QAfterFilterCondition> rarityGreaterThan(
-    int value, {
+    Rarity value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
       property: 'rarity',
-      value: value,
+      value: _tGachaCharRarityTypeConverter.toIsar(value),
     ));
   }
 
   QueryBuilder<TGachaChar, TGachaChar, QAfterFilterCondition> rarityLessThan(
-    int value, {
+    Rarity value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
       property: 'rarity',
-      value: value,
+      value: _tGachaCharRarityTypeConverter.toIsar(value),
     ));
   }
 
   QueryBuilder<TGachaChar, TGachaChar, QAfterFilterCondition> rarityBetween(
-    int lower,
-    int upper, {
+    Rarity lower,
+    Rarity upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'rarity',
-      lower: lower,
+      lower: _tGachaCharRarityTypeConverter.toIsar(lower),
       includeLower: includeLower,
-      upper: upper,
+      upper: _tGachaCharRarityTypeConverter.toIsar(upper),
       includeUpper: includeUpper,
     ));
   }
@@ -532,7 +538,7 @@ extension TGachaCharQueryProperty
     return addPropertyNameInternal('name');
   }
 
-  QueryBuilder<TGachaChar, int, QQueryOperations> rarityProperty() {
+  QueryBuilder<TGachaChar, Rarity, QQueryOperations> rarityProperty() {
     return addPropertyNameInternal('rarity');
   }
 }
