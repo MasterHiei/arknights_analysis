@@ -163,7 +163,7 @@ packages:
     source: hosted
     version: "4.1.0"
   collection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: collection
       url: "https://pub.flutter-io.cn"
@@ -198,7 +198,7 @@ packages:
     source: hosted
     version: "2.2.3"
   dartx:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dartx
       url: "https://pub.flutter-io.cn"

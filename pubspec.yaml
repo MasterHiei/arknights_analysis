@@ -11,7 +11,7 @@ environment:
 dependencies:
   another_flushbar: 1.10.29
   bot_toast: 4.0.2
-  collection: 1.16.0
+  dartx: 1.1.0
   dartz: 0.10.1
   dio: 4.0.6
   fluent_ui: 3.12.0

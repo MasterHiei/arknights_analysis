@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 
@@ -5,6 +6,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/providers.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/common/dtos/pagination_dto.dart';
+import '../dtos/gacha_char_dto.dart';
 import '../dtos/gacha_dto.dart';
 import '../dtos/gacha_record_dto.dart';
 import '../schemas/t_gacha_record.dart';
@@ -17,6 +19,8 @@ abstract class GachaLocalDataSource {
   Future<GachaDto> read(Uid uid, {required int page});
 
   Future<List<int>> save(GachaDto dto);
+
+  Future<List<GachaCharDto>> readChars(Uid uid);
 }
 
 class GachaLocalDataSourceImpl implements GachaLocalDataSource {
@@ -36,13 +40,13 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
         .limit(pageSize)
         .findAll();
     await Future.wait(tRecords.map((record) => record.chars.load()));
-    final records = tRecords.map((record) => GachaRecordDto.fromSchema(record));
+    final records = tRecords.map(GachaRecordDto.fromSchema).toList();
 
     final count = await _isar.tGachaRecords.count();
     final total = (count / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return GachaDto(list: records.toList(), pagination: pagination);
+    return GachaDto(list: records, pagination: pagination);
   }
 
   @override
@@ -53,4 +57,15 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
           saveLinks: true,
         ),
       );
+
+  @override
+  Future<List<GachaCharDto>> readChars(Uid uid) async {
+    final tRecords = await _isar.tGachaRecords
+        .filter()
+        .uidEqualTo(uid.getOrCrash())
+        .findAll();
+    await Future.wait(tRecords.map((record) => record.chars.load()));
+    final records = tRecords.map(GachaRecordDto.fromSchema).toList();
+    return records.map((record) => record.chars).toList().flatten();
+  }
 }

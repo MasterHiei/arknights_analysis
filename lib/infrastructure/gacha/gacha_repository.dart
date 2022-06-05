@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/core/common/pagination.dart';
+import '../../domain/gacha/gacha.dart';
+import '../../domain/gacha/gacha_char.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../core/mixins/error_handler_mixin.dart';
@@ -22,6 +24,13 @@ abstract class GachaRepository {
     required Uid uid,
     int page = 1,
   });
+
+  Future<Either<AppFailure, Gacha>> read(
+    Uid uid, {
+    required int page,
+  });
+
+  Future<Either<AppFailure, List<GachaChar>>> readChars(Uid uid);
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -47,5 +56,22 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
         );
         await _localDataSource.save(dto.copyWith(list: list.toList()));
         return dto.pagination.toDomain();
+      });
+
+  @override
+  Future<Either<AppFailure, Gacha>> read(
+    Uid uid, {
+    required int page,
+  }) =>
+      execute(() async {
+        final dto = await _localDataSource.read(uid, page: page);
+        return dto.toDomain();
+      });
+
+  @override
+  Future<Either<AppFailure, List<GachaChar>>> readChars(Uid uid) =>
+      execute(() async {
+        final dtos = await _localDataSource.readChars(uid);
+        return dtos.map((dto) => dto.toDomain()).toList();
       });
 }
