@@ -893,7 +893,7 @@ packages:
       name: webview_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.9"
+    version: "0.2.0"
   win32:
     dependency: transitive
     description:
