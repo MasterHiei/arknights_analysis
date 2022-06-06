@@ -23,9 +23,11 @@ class GachaRecordDto with _$GachaRecordDto {
   factory GachaRecordDto.fromJson(Json json) => _$GachaRecordDtoFromJson(json);
 
   GachaRecord toDomain() => GachaRecord(
-        ts: Ts(ts),
+        ts: _ts,
         pool: pool,
-        chars: chars.map((char) => char.toDomain()).toList(),
+        chars: chars.map((char) => char.toDomain(pool: pool, ts: _ts)).toList(),
         uid: Uid(uid),
       );
+
+  Ts get _ts => Ts(ts);
 }

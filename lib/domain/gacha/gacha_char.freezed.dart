@@ -19,6 +19,8 @@ mixin _$GachaChar {
   String get name => throw _privateConstructorUsedError;
   Rarity get rarity => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
+  String get pool => throw _privateConstructorUsedError;
+  Ts get ts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GachaCharCopyWith<GachaChar> get copyWith =>
@@ -29,7 +31,7 @@ mixin _$GachaChar {
 abstract class $GachaCharCopyWith<$Res> {
   factory $GachaCharCopyWith(GachaChar value, $Res Function(GachaChar) then) =
       _$GachaCharCopyWithImpl<$Res>;
-  $Res call({String name, Rarity rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew, String pool, Ts ts});
 }
 
 /// @nodoc
@@ -45,6 +47,8 @@ class _$GachaCharCopyWithImpl<$Res> implements $GachaCharCopyWith<$Res> {
     Object? name = freezed,
     Object? rarity = freezed,
     Object? isNew = freezed,
+    Object? pool = freezed,
+    Object? ts = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -59,6 +63,14 @@ class _$GachaCharCopyWithImpl<$Res> implements $GachaCharCopyWith<$Res> {
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
               as bool,
+      pool: pool == freezed
+          ? _value.pool
+          : pool // ignore: cast_nullable_to_non_nullable
+              as String,
+      ts: ts == freezed
+          ? _value.ts
+          : ts // ignore: cast_nullable_to_non_nullable
+              as Ts,
     ));
   }
 }
@@ -69,7 +81,7 @@ abstract class _$$_GachaCharCopyWith<$Res> implements $GachaCharCopyWith<$Res> {
           _$_GachaChar value, $Res Function(_$_GachaChar) then) =
       __$$_GachaCharCopyWithImpl<$Res>;
   @override
-  $Res call({String name, Rarity rarity, bool isNew});
+  $Res call({String name, Rarity rarity, bool isNew, String pool, Ts ts});
 }
 
 /// @nodoc
@@ -87,6 +99,8 @@ class __$$_GachaCharCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res>
     Object? name = freezed,
     Object? rarity = freezed,
     Object? isNew = freezed,
+    Object? pool = freezed,
+    Object? ts = freezed,
   }) {
     return _then(_$_GachaChar(
       name: name == freezed
@@ -101,6 +115,14 @@ class __$$_GachaCharCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res>
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
               as bool,
+      pool: pool == freezed
+          ? _value.pool
+          : pool // ignore: cast_nullable_to_non_nullable
+              as String,
+      ts: ts == freezed
+          ? _value.ts
+          : ts // ignore: cast_nullable_to_non_nullable
+              as Ts,
     ));
   }
 }
@@ -109,7 +131,11 @@ class __$$_GachaCharCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res>
 
 class _$_GachaChar implements _GachaChar {
   const _$_GachaChar(
-      {required this.name, required this.rarity, required this.isNew});
+      {required this.name,
+      required this.rarity,
+      required this.isNew,
+      required this.pool,
+      required this.ts});
 
   @override
   final String name;
@@ -117,10 +143,14 @@ class _$_GachaChar implements _GachaChar {
   final Rarity rarity;
   @override
   final bool isNew;
+  @override
+  final String pool;
+  @override
+  final Ts ts;
 
   @override
   String toString() {
-    return 'GachaChar(name: $name, rarity: $rarity, isNew: $isNew)';
+    return 'GachaChar(name: $name, rarity: $rarity, isNew: $isNew, pool: $pool, ts: $ts)';
   }
 
   @override
@@ -130,7 +160,9 @@ class _$_GachaChar implements _GachaChar {
             other is _$_GachaChar &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.rarity, rarity) &&
-            const DeepCollectionEquality().equals(other.isNew, isNew));
+            const DeepCollectionEquality().equals(other.isNew, isNew) &&
+            const DeepCollectionEquality().equals(other.pool, pool) &&
+            const DeepCollectionEquality().equals(other.ts, ts));
   }
 
   @override
@@ -138,7 +170,9 @@ class _$_GachaChar implements _GachaChar {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(rarity),
-      const DeepCollectionEquality().hash(isNew));
+      const DeepCollectionEquality().hash(isNew),
+      const DeepCollectionEquality().hash(pool),
+      const DeepCollectionEquality().hash(ts));
 
   @JsonKey(ignore: true)
   @override
@@ -150,7 +184,9 @@ abstract class _GachaChar implements GachaChar {
   const factory _GachaChar(
       {required final String name,
       required final Rarity rarity,
-      required final bool isNew}) = _$_GachaChar;
+      required final bool isNew,
+      required final String pool,
+      required final Ts ts}) = _$_GachaChar;
 
   @override
   String get name => throw _privateConstructorUsedError;
@@ -158,6 +194,10 @@ abstract class _GachaChar implements GachaChar {
   Rarity get rarity => throw _privateConstructorUsedError;
   @override
   bool get isNew => throw _privateConstructorUsedError;
+  @override
+  String get pool => throw _privateConstructorUsedError;
+  @override
+  Ts get ts => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_GachaCharCopyWith<_$_GachaChar> get copyWith =>

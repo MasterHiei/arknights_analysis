@@ -65,9 +65,10 @@ class PortalHeader extends ConsumerWidget {
       _userProvider,
       (_, next) => next.failureOption.fold(
         () {},
-        (failure) => AppFlushBar.showError(
+        (failure) => AppFlushBar.show(
           context,
           message: failure.localizedMessage,
+          severity: FlushBarSeverity.error,
         ),
       ),
     );

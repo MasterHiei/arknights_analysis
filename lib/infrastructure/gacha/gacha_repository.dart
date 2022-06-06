@@ -1,10 +1,11 @@
+import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/core/common/pagination.dart';
 import '../../domain/gacha/gacha.dart';
-import '../../domain/gacha/gacha_char.dart';
+import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../core/mixins/error_handler_mixin.dart';
@@ -30,7 +31,7 @@ abstract class GachaRepository {
     required int page,
   });
 
-  Stream<List<GachaChar>> watchChars(Uid uid);
+  Stream<GachaStats> watchStats(Uid uid);
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -69,7 +70,9 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       });
 
   @override
-  Stream<List<GachaChar>> watchChars(Uid uid) => _localDataSource
-      .watchChars(uid)
-      .map((dtos) => dtos.map((dto) => dto.toDomain()).toList());
+  Stream<GachaStats> watchStats(Uid uid) => _localDataSource
+      .watchRecords(uid)
+      .map((dtos) => dtos.map((dto) => dto.toDomain()).toList())
+      .map((records) => records.map((record) => record.chars).flatten())
+      .map((chars) => GachaStats(uid: uid, chars: chars.toList()));
 }

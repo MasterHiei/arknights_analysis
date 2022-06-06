@@ -1,8 +1,6 @@
-import 'package:dartx/dartx.dart';
 import 'package:drift/drift.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../gacha/dtos/gacha_char_dto.dart';
 import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
@@ -44,18 +42,15 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     return Future.wait(futures);
   }
 
-  Stream<List<GachaCharDto>> watchChars(String uid) {
+  Stream<List<GachaRecordDto>> watchRecords(String uid) {
     final query = select(gachaRecords)
       ..where((tbl) => tbl.uid.equals(uid))
       ..orderBy([(tbl) => OrderingTerm.desc(tbl.ts)]);
-    return query
-        .watch()
-        .map(
+    return query.watch().map(
           (records) => records
               .map((record) => GachaRecordDto.fromJson(record.toJson()))
-              .map((dto) => dto.chars),
-        )
-        .map((chars) => chars.toList().flatten());
+              .toList(),
+        );
   }
 
   Future<void> clear() => delete(gachaRecords).go();

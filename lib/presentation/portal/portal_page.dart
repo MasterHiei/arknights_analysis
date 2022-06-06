@@ -18,6 +18,7 @@ class PortalPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
         child: Column(children: [
           PortalHeader(params.token),
+          SizedBox(height: 20.h),
           Expanded(
             child: Consumer(
               builder: (_, ref, __) {

@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/database/app_database.dart';
-import '../dtos/gacha_char_dto.dart';
 import '../dtos/gacha_dto.dart';
+import '../dtos/gacha_record_dto.dart';
 
 final gachaLocalDataSourceProvider = Provider.autoDispose<GachaLocalDataSource>(
   (ref) => GachaLocalDataSourceImpl(ref.watch(dbProvider)),
@@ -15,7 +15,7 @@ abstract class GachaLocalDataSource {
 
   Future<List<int>> save(GachaDto dto);
 
-  Stream<List<GachaCharDto>> watchChars(Uid uid);
+  Stream<List<GachaRecordDto>> watchRecords(Uid uid);
 }
 
 class GachaLocalDataSourceImpl implements GachaLocalDataSource {
@@ -32,6 +32,6 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
       _db.gachaRecordsDao.replaceInto(gacha);
 
   @override
-  Stream<List<GachaCharDto>> watchChars(Uid uid) =>
-      _db.gachaRecordsDao.watchChars(uid.getOrCrash());
+  Stream<List<GachaRecordDto>> watchRecords(Uid uid) =>
+      _db.gachaRecordsDao.watchRecords(uid.getOrCrash());
 }
