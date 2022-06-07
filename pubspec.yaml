@@ -28,7 +28,7 @@ dependencies:
   json_annotation: 4.5.0
   logger: 1.1.0
   path: 1.8.2
-  path_provider: 2.0.10
+  path_provider: 2.0.11
   pretty_dio_logger: 1.2.0-beta-1
   retrofit: 3.0.1+1
   riverpod: 1.0.3
