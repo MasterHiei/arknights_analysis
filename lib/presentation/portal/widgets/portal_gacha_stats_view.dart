@@ -8,6 +8,7 @@ import '../../../application/gacha/gacha_pie_chart_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/states/gacha_state.dart';
+import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
 import '../../../domain/user/value_objects/uid.dart';
@@ -98,7 +99,9 @@ class _StatsView extends ConsumerWidget {
             stats.statsPerPool.forEach(
               (key, value) => items.add(_PieChart(key, value)),
             );
-            return Wrap(
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
               children: items,
             );
           },
@@ -125,17 +128,17 @@ class _PieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.h),
-        child: Column(
-          children: [
-            _poolNameLabel,
-            SizedBox(height: 4.h),
-            _pullDateRangeLabel,
-            SizedBox(width: 300.w, height: 400.w, child: _buildChart()),
-          ],
-        ),
+    return Container(
+      width: 360.w,
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: Column(
+        children: [
+          _poolNameLabel,
+          SizedBox(height: 10.h),
+          _buildIndicators(),
+          SizedBox(width: 300.w, height: 300.w, child: _chart),
+          _pullDateRangeLabel,
+        ],
       ),
     );
   }
@@ -145,19 +148,68 @@ class _PieChart extends StatelessWidget {
         style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
       );
 
-  Widget get _pullDateRangeLabel => Text(
-        stats.dateRange,
-        style: TextStyle(color: Colors.grey[120], fontSize: 13.sp),
-      );
-
-  Widget _buildChart() => Consumer(
+  Widget _buildIndicators() {
+    final items = Rarity.poolExclusive.map(
+      (rarity) => Consumer(
         builder: (_, ref, __) {
-          final sections = stats.statsPerRarity.mapIndexed((index, pair) {
-            final isTouched = ref.watch(gachaPieChartProvider).isTouched(index);
+          final indicatorSize = Size(24.w, 16.h);
+          final indicator = Consumer(
+            builder: (_, ref, __) {
+              final isTouched =
+                  ref.watch(gachaPieChartProvider).isTouched(rarity);
+              final alpha = isTouched ? 180 : 255;
+              return Container(
+                width: indicatorSize.width,
+                height: indicatorSize.height,
+                decoration: BoxDecoration(
+                  color: rarity.color.withAlpha(alpha),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              );
+            },
+          );
+          final rarityLabel = Text(
+            rarity.title,
+            style: TextStyle(
+              color: Colors.grey[130],
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              height: indicatorSize.height / 14.sp,
+            ),
+          );
+          final divider = SizedBox(width: 12.w);
+          return MouseRegion(
+            onHover: (_) => ref.read(gachaPieChartProvider).touch(rarity),
+            child: Row(
+              children: [
+                indicator,
+                SizedBox(width: 4.w),
+                rarityLabel,
+                if (rarity != Rarity.poolExclusive.last) divider,
+              ],
+            ),
+          );
+        },
+      ),
+    );
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: items.toList(),
+    );
+  }
+
+  Widget get _chart => Consumer(
+        builder: (_, ref, __) {
+          final sources = stats.statsPerRarity;
+          final sections = stats.statsPerRarity.map((pair) {
             final rarity = pair.first;
             final chars = pair.second;
+            final isTouched =
+                ref.watch(gachaPieChartProvider).isTouched(rarity);
             final radius = isTouched ? 130.w : 120.w;
-            final fontSize = isTouched ? 15.sp : 13.sp;
+            final fontSize = isTouched ? 14.sp : 12.sp;
             return PieChartSectionData(
               value: chars.length.toDouble(),
               color: rarity.color,
@@ -177,15 +229,21 @@ class _PieChart extends StatelessWidget {
                     event.isInterestedForInteractions;
                 final touchedSection = response?.touchedSection;
                 if (!isInterestedForInteractions || touchedSection == null) {
-                  ref.read(gachaPieChartProvider).touch(-1);
+                  ref.read(gachaPieChartProvider).touch(null);
                   return;
                 }
                 final index = touchedSection.touchedSectionIndex;
-                ref.read(gachaPieChartProvider).touch(index);
+                final rarity = sources.elementAtOrNull(index)?.first;
+                ref.read(gachaPieChartProvider).touch(rarity);
               },
             ),
           );
           return PieChart(data);
         },
+      );
+
+  Widget get _pullDateRangeLabel => Text(
+        stats.dateRange,
+        style: TextStyle(color: Colors.grey[100], fontSize: 13.sp),
       );
 }

@@ -1,17 +1,22 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/enums/rarity.dart';
+
 final gachaPieChartProvider = ChangeNotifierProvider.autoDispose(
   (_) => GachaPieChartNotifier(),
 );
 
 class GachaPieChartNotifier extends ChangeNotifier {
-  var _touchedIndex = -1;
+  Rarity? _touchedRarity;
 
-  void touch(int touchedIndex) {
-    _touchedIndex = touchedIndex;
+  void touch(Rarity? rarity) {
+    if (isTouched(rarity)) {
+      return;
+    }
+    _touchedRarity = rarity;
     notifyListeners();
   }
 
-  bool isTouched(int index) => index == _touchedIndex;
+  bool isTouched(Rarity? rarity) => rarity != null && rarity == _touchedRarity;
 }

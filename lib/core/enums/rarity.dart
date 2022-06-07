@@ -25,5 +25,12 @@ enum Rarity {
   final Color color;
   final String title;
 
-  static List<Rarity> rares() => [Rarity.six];
+  static List<Rarity> get rares => [Rarity.six];
+
+  static List<Rarity> get poolExclusive => [
+        Rarity.three,
+        Rarity.four,
+        Rarity.five,
+        Rarity.six,
+      ];
 }
