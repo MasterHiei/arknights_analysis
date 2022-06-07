@@ -135,7 +135,7 @@ class _PieChart extends StatelessWidget {
         children: [
           _poolNameLabel,
           SizedBox(height: 10.h),
-          _buildIndicators(),
+          _indicators,
           SizedBox(width: 300.w, height: 300.w, child: _chart),
           _pullDateRangeLabel,
         ],
@@ -145,10 +145,14 @@ class _PieChart extends StatelessWidget {
 
   Widget get _poolNameLabel => Text(
         pool,
-        style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          color: Colors.grey[150],
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+        ),
       );
 
-  Widget _buildIndicators() {
+  Widget get _indicators {
     final items = Rarity.poolExclusive.map(
       (rarity) => Consumer(
         builder: (_, ref, __) {
