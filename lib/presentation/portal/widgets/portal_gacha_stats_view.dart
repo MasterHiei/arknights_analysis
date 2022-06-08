@@ -299,11 +299,13 @@ class _PieChart extends StatelessWidget {
   List<Widget> get _pullRateLabels => Rarity.rares.map(
         (rarity) {
           final total = stats.filter(rarity).length;
+          if (total == 0) {
+            return const SizedBox();
+          }
           final details = Row(
             children: [
               Expanded(child: Text('$total')),
-              SizedBox(width: 12.w),
-              Text('[${stats.caclPullRate(rarity)}]'),
+              Text('平均出货次数：${stats.caclAvgPulls(rarity)}'),
             ],
           );
           return DefaultTextStyle(
@@ -313,13 +315,13 @@ class _PieChart extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             child: SizedBox(
-              width: 200.w,
+              width: 280.w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text('${rarity.title}：'),
                   SizedBox(width: 12.w),
-                  if (total == 0) const Text('无') else Expanded(child: details),
+                  Expanded(child: details),
                 ],
               ),
             ),

@@ -74,4 +74,10 @@ class GachaStats with _$GachaStats {
     }
     return pairs;
   }
+
+  String caclAvgPulls(Rarity rarity) {
+    final sources = filterWithPulls(rarity).map((pair) => pair.second);
+    final amount = sources.reduce((v, e) => v + e);
+    return (amount / sources.length).toStringAsFixed(2);
+  }
 }
