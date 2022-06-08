@@ -32,11 +32,11 @@ class _MainApp extends StatelessWidget {
     return FluentApp.router(
       theme: ThemeData(
         brightness: Brightness.light,
-        fontFamily: 'NotoSansSC',
+        fontFamily: 'SourceHanSC',
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'NotoSansSC',
+        fontFamily: 'SourceHanSC',
       ),
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,

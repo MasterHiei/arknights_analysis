@@ -10,7 +10,9 @@ part 'gacha_stats.freezed.dart';
 
 typedef StatsPerPool = Map<String, GachaStats>;
 
-typedef CharsPerRarity = Pair<Rarity, List<GachaChar>>;
+typedef CharsPerRarity = Pair<Rarity, GachaStats>;
+
+typedef CharWithPulls = Pair<GachaChar, int>;
 
 @freezed
 class GachaStats with _$GachaStats {
@@ -29,7 +31,12 @@ class GachaStats with _$GachaStats {
 
   List<CharsPerRarity> get statsPerRarity => chars
       .groupBy((char) => char.rarity)
-      .mapEntries((entry) => CharsPerRarity(entry.key, entry.value))
+      .mapEntries(
+        (entry) => CharsPerRarity(
+          entry.key,
+          GachaStats(uid: uid, chars: entry.value),
+        ),
+      )
       .toList();
 
   String get dateRange {
@@ -43,19 +50,21 @@ class GachaStats with _$GachaStats {
   List<GachaChar> filter(Rarity rarity) =>
       chars.filter((char) => char.rarity == rarity).toList();
 
-  String caclPullRate(List<GachaChar> chars) =>
-      '${((chars.length / this.chars.length) * 100).toStringAsFixed(2)}%';
+  String caclPullRate(Rarity rarity) =>
+      '${((filter(rarity).length / chars.length) * 100).toStringAsFixed(2)}%';
 
-  int sinceLastPull(Rarity rarity) =>
-      chars.lastIndexWhere((char) => char.rarity == rarity);
+  int sinceLastPull(Rarity rarity) {
+    final index = chars.lastIndexWhere((char) => char.rarity == rarity);
+    return index == -1 ? chars.length : index;
+  }
 
-  List<Pair<GachaChar, int>> filterWithPulls(Rarity rarity) {
+  List<CharWithPulls> filterWithPulls(Rarity rarity) {
     final pairs = <Pair<GachaChar, int>>[];
     final splittedChars = chars.splitWhen(
       (_, next) => next.rarity == rarity,
     );
     var correction = 0;
-    for (final chars in splittedChars) {
+    for (final chars in splittedChars.reversed) {
       if (chars.every((char) => char.rarity != rarity)) {
         correction = chars.length;
         continue;

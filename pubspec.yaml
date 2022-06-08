@@ -10,9 +10,11 @@ environment:
 
 dependencies:
   another_flushbar: 1.10.29
+  badges: 2.0.3
   bot_toast: 4.0.2
   dartx: 1.1.0
   dartz: 0.10.1
+  data_table_2: 2.3.0
   dio: 4.0.6
   drift: 1.6.0
   easy_localization: 3.0.1
@@ -27,6 +29,7 @@ dependencies:
   intl: 0.17.0
   json_annotation: 4.5.0
   logger: 1.1.0
+  modal_bottom_sheet: 2.0.1
   path: 1.8.2
   path_provider: 2.0.11
   pretty_dio_logger: 1.2.0-beta-1
@@ -55,11 +58,11 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: NotoSansSC
+    - family: SourceHanSC
       fonts:
-        - asset: fonts/NotoSansSC-Regular.otf
+        - asset: fonts/SourceHanSansCN-Regular.ttf
           weight: 400
-        - asset: fonts/NotoSansSC-Bold.otf
+        - asset: fonts/SourceHanSansCN-Bold.ttf
           weight: 700
 
   assets:
