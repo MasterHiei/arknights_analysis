@@ -11,9 +11,16 @@ class GachaResponseDto with _$GachaResponseDto {
   const factory GachaResponseDto({
     int? code,
     @JsonKey(defaultValue: '') required String msg,
-    GachaDto? data,
+    @JsonKey(fromJson: _dataFromJson) GachaDto? data,
   }) = _GachaResponseDto;
 
   factory GachaResponseDto.fromJson(Json json) =>
       _$GachaResponseDtoFromJson(json);
+}
+
+GachaDto? _dataFromJson(Json? json) {
+  if (json == null || json.isEmpty) {
+    return null;
+  }
+  return GachaDto.fromJson(json);
 }

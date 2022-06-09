@@ -35,7 +35,7 @@ class PortalGachaStatsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     _listenState(context, ref);
 
-    return ref.watch(_gachaProvider).map(
+    return ref.watch(_gachaProvider).maybeMap(
           fetching: (state) {
             double? value;
             if (state.total != null) {
@@ -46,11 +46,10 @@ class PortalGachaStatsView extends ConsumerWidget {
               label: '正在获取第${state.current}页数据',
             );
           },
-          success: (_) => ProviderScope(
+          orElse: () => ProviderScope(
             overrides: [_uidProvider.overrideWithValue(user.uid)],
             child: const _StatsView(),
           ),
-          failure: (_) => const _ErrorView(),
         );
   }
 
@@ -131,6 +130,9 @@ class _PieChart extends StatelessWidget {
   final String pool;
   final GachaStats stats;
 
+  AutoDisposeChangeNotifierProvider<GachaPieChartNotifier>
+      get _gachaPieChartProvider => gachaPieChartProvider(pool);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -170,7 +172,7 @@ class _PieChart extends StatelessWidget {
           final indicator = Consumer(
             builder: (_, ref, __) {
               final isTouched =
-                  ref.watch(gachaPieChartProvider).isTouched(rarity);
+                  ref.watch(_gachaPieChartProvider).isTouched(rarity);
               final alpha = isTouched ? 180 : 255;
               return Container(
                 width: indicatorSize.width,
@@ -194,8 +196,8 @@ class _PieChart extends StatelessWidget {
           );
           final divider = SizedBox(width: 12.w);
           return MouseRegion(
-            onEnter: (_) => ref.read(gachaPieChartProvider).touch(rarity),
-            onExit: (_) => ref.read(gachaPieChartProvider).touch(null),
+            onEnter: (_) => ref.read(_gachaPieChartProvider).touch(rarity),
+            onExit: (_) => ref.read(_gachaPieChartProvider).touch(null),
             child: Row(
               children: [
                 indicator,
@@ -222,7 +224,7 @@ class _PieChart extends StatelessWidget {
             final rarity = pair.first;
             final stats = pair.second;
             final isTouched =
-                ref.watch(gachaPieChartProvider).isTouched(rarity);
+                ref.watch(_gachaPieChartProvider).isTouched(rarity);
             final radius = isTouched ? 130.w : 120.w;
             final fontSize = isTouched ? 14.sp : 12.sp;
             return PieChartSectionData(
@@ -340,12 +342,12 @@ class _PieChart extends StatelessWidget {
     final isInterestedForInteractions = event.isInterestedForInteractions;
     final touchedSection = response?.touchedSection;
     if (!isInterestedForInteractions || touchedSection == null) {
-      ref.read(gachaPieChartProvider).touch(null);
+      ref.read(_gachaPieChartProvider).touch(null);
       return;
     }
     final index = touchedSection.touchedSectionIndex;
     final rarity = sources.elementAtOrNull(index)?.first;
-    ref.read(gachaPieChartProvider).touch(rarity);
+    ref.read(_gachaPieChartProvider).touch(rarity);
 
     //* Tap
     if (event is FlTapUpEvent && rarity != null) {

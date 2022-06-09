@@ -51,7 +51,13 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
           token: token.getOrCrash(),
           page: page,
         );
-        final dto = response.data!;
+        final dto = response.data;
+        if (dto == null) {
+          throw AppFailure.remoteServerError(
+            message: response.msg,
+            code: response.code,
+          );
+        }
         final list = dto.list.map(
           (record) => record.copyWith(uid: uid.getOrCrash()),
         );

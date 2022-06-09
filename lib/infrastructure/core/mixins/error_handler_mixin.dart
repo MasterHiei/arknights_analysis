@@ -12,6 +12,8 @@ class ErrorHandlerMixin {
   ) async {
     try {
       return right(await run());
+    } on AppFailure catch (e) {
+      return left(e);
     } on DioError catch (e) {
       final code = e.response?.statusCode;
       if (code == HttpStatus.unauthorized) {

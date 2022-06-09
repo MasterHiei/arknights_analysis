@@ -10,9 +10,7 @@ _$_GachaResponseDto _$$_GachaResponseDtoFromJson(Map<String, dynamic> json) =>
     _$_GachaResponseDto(
       code: json['code'] as int?,
       msg: json['msg'] as String? ?? '',
-      data: json['data'] == null
-          ? null
-          : GachaDto.fromJson(json['data'] as Map<String, dynamic>),
+      data: _dataFromJson(json['data'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$$_GachaResponseDtoToJson(_$_GachaResponseDto instance) =>

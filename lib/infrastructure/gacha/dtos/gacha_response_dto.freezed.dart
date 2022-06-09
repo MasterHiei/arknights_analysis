@@ -23,6 +23,7 @@ mixin _$GachaResponseDto {
   int? get code => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: '')
   String get msg => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _dataFromJson)
   GachaDto? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,10 @@ abstract class $GachaResponseDtoCopyWith<$Res> {
   factory $GachaResponseDtoCopyWith(
           GachaResponseDto value, $Res Function(GachaResponseDto) then) =
       _$GachaResponseDtoCopyWithImpl<$Res>;
-  $Res call({int? code, @JsonKey(defaultValue: '') String msg, GachaDto? data});
+  $Res call(
+      {int? code,
+      @JsonKey(defaultValue: '') String msg,
+      @JsonKey(fromJson: _dataFromJson) GachaDto? data});
 
   $GachaDtoCopyWith<$Res>? get data;
 }
@@ -91,7 +95,10 @@ abstract class _$$_GachaResponseDtoCopyWith<$Res>
           _$_GachaResponseDto value, $Res Function(_$_GachaResponseDto) then) =
       __$$_GachaResponseDtoCopyWithImpl<$Res>;
   @override
-  $Res call({int? code, @JsonKey(defaultValue: '') String msg, GachaDto? data});
+  $Res call(
+      {int? code,
+      @JsonKey(defaultValue: '') String msg,
+      @JsonKey(fromJson: _dataFromJson) GachaDto? data});
 
   @override
   $GachaDtoCopyWith<$Res>? get data;
@@ -135,7 +142,9 @@ class __$$_GachaResponseDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_GachaResponseDto implements _GachaResponseDto {
   const _$_GachaResponseDto(
-      {this.code, @JsonKey(defaultValue: '') required this.msg, this.data});
+      {this.code,
+      @JsonKey(defaultValue: '') required this.msg,
+      @JsonKey(fromJson: _dataFromJson) this.data});
 
   factory _$_GachaResponseDto.fromJson(Map<String, dynamic> json) =>
       _$$_GachaResponseDtoFromJson(json);
@@ -146,6 +155,7 @@ class _$_GachaResponseDto implements _GachaResponseDto {
   @JsonKey(defaultValue: '')
   final String msg;
   @override
+  @JsonKey(fromJson: _dataFromJson)
   final GachaDto? data;
 
   @override
@@ -184,9 +194,10 @@ class _$_GachaResponseDto implements _GachaResponseDto {
 
 abstract class _GachaResponseDto implements GachaResponseDto {
   const factory _GachaResponseDto(
-      {final int? code,
-      @JsonKey(defaultValue: '') required final String msg,
-      final GachaDto? data}) = _$_GachaResponseDto;
+          {final int? code,
+          @JsonKey(defaultValue: '') required final String msg,
+          @JsonKey(fromJson: _dataFromJson) final GachaDto? data}) =
+      _$_GachaResponseDto;
 
   factory _GachaResponseDto.fromJson(Map<String, dynamic> json) =
       _$_GachaResponseDto.fromJson;
@@ -197,6 +208,7 @@ abstract class _GachaResponseDto implements GachaResponseDto {
   @JsonKey(defaultValue: '')
   String get msg => throw _privateConstructorUsedError;
   @override
+  @JsonKey(fromJson: _dataFromJson)
   GachaDto? get data => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

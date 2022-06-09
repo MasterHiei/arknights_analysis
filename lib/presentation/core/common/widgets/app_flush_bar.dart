@@ -8,7 +8,7 @@ enum FlushBarSeverity {
 
   warning(FluentIcons.critical_error_solid, Colors.warningPrimaryColor),
 
-  error(Icons.check_circle, Colors.errorPrimaryColor),
+  error(FluentIcons.critical_error_solid, Colors.errorPrimaryColor),
 
   success(Icons.check_circle, Colors.successPrimaryColor);
 
