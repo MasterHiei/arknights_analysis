@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gacha_table_dto.dart';
+part of 'gacha_pool_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GachaTableDto _$$_GachaTableDtoFromJson(Map<String, dynamic> json) =>
-    _$_GachaTableDto(
+_$_GachaPoolDto _$$_GachaPoolDtoFromJson(Map<String, dynamic> json) =>
+    _$_GachaPoolDto(
       gachaPoolId: json['gachaPoolId'] as String,
       gachaIndex: json['gachaIndex'] as int,
       openTime: json['openTime'] as int,
@@ -16,7 +16,7 @@ _$_GachaTableDto _$$_GachaTableDtoFromJson(Map<String, dynamic> json) =>
       gachaRuleType: $enumDecode(_$GachaRuleTypeEnumMap, json['gachaRuleType']),
     );
 
-Map<String, dynamic> _$$_GachaTableDtoToJson(_$_GachaTableDto instance) =>
+Map<String, dynamic> _$$_GachaPoolDtoToJson(_$_GachaPoolDto instance) =>
     <String, dynamic>{
       'gachaPoolId': instance.gachaPoolId,
       'gachaIndex': instance.gachaIndex,

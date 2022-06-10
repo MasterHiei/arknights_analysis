@@ -26,12 +26,13 @@ abstract class GachaRepository {
     int page = 1,
   });
 
-  Future<Either<AppFailure, Gacha>> read(
+  Stream<GachaStats> watchStats(Uid uid);
+
+  Future<Either<AppFailure, Gacha>> paginate(
     Uid uid, {
     required int page,
+    String? pool,
   });
-
-  Stream<GachaStats> watchStats(Uid uid);
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -66,19 +67,24 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       });
 
   @override
-  Future<Either<AppFailure, Gacha>> read(
-    Uid uid, {
-    required int page,
-  }) =>
-      execute(() async {
-        final dto = await _localDataSource.read(uid, page: page);
-        return dto.toDomain();
-      });
-
-  @override
   Stream<GachaStats> watchStats(Uid uid) => _localDataSource
       .watchRecords(uid)
       .map((dtos) => dtos.map((dto) => dto.toDomain()).toList())
       .map((records) => records.map((record) => record.chars).flatten())
       .map((chars) => GachaStats(uid: uid, chars: chars.toList()));
+
+  @override
+  Future<Either<AppFailure, Gacha>> paginate(
+    Uid uid, {
+    required int page,
+    String? pool,
+  }) =>
+      execute(() async {
+        final dto = await _localDataSource.paginate(
+          uid,
+          page: page,
+          pool: pool,
+        );
+        return dto.toDomain();
+      });
 }

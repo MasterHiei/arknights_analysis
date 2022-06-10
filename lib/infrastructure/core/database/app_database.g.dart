@@ -216,6 +216,347 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   }
 }
 
+class GachaPool extends DataClass implements Insertable<GachaPool> {
+  final String gachaPoolId;
+  final int gachaIndex;
+  final int openTime;
+  final int endTime;
+  final String gachaPoolName;
+  final String gachaRuleType;
+  GachaPool(
+      {required this.gachaPoolId,
+      required this.gachaIndex,
+      required this.openTime,
+      required this.endTime,
+      required this.gachaPoolName,
+      required this.gachaRuleType});
+  factory GachaPool.fromData(Map<String, dynamic> data, {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return GachaPool(
+      gachaPoolId: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_pool_id'])!,
+      gachaIndex: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_index'])!,
+      openTime: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}open_time'])!,
+      endTime: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}end_time'])!,
+      gachaPoolName: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_pool_name'])!,
+      gachaRuleType: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_rule_type'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['gacha_pool_id'] = Variable<String>(gachaPoolId);
+    map['gacha_index'] = Variable<int>(gachaIndex);
+    map['open_time'] = Variable<int>(openTime);
+    map['end_time'] = Variable<int>(endTime);
+    map['gacha_pool_name'] = Variable<String>(gachaPoolName);
+    map['gacha_rule_type'] = Variable<String>(gachaRuleType);
+    return map;
+  }
+
+  GachaPoolsCompanion toCompanion(bool nullToAbsent) {
+    return GachaPoolsCompanion(
+      gachaPoolId: Value(gachaPoolId),
+      gachaIndex: Value(gachaIndex),
+      openTime: Value(openTime),
+      endTime: Value(endTime),
+      gachaPoolName: Value(gachaPoolName),
+      gachaRuleType: Value(gachaRuleType),
+    );
+  }
+
+  factory GachaPool.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GachaPool(
+      gachaPoolId: serializer.fromJson<String>(json['gachaPoolId']),
+      gachaIndex: serializer.fromJson<int>(json['gachaIndex']),
+      openTime: serializer.fromJson<int>(json['openTime']),
+      endTime: serializer.fromJson<int>(json['endTime']),
+      gachaPoolName: serializer.fromJson<String>(json['gachaPoolName']),
+      gachaRuleType: serializer.fromJson<String>(json['gachaRuleType']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'gachaPoolId': serializer.toJson<String>(gachaPoolId),
+      'gachaIndex': serializer.toJson<int>(gachaIndex),
+      'openTime': serializer.toJson<int>(openTime),
+      'endTime': serializer.toJson<int>(endTime),
+      'gachaPoolName': serializer.toJson<String>(gachaPoolName),
+      'gachaRuleType': serializer.toJson<String>(gachaRuleType),
+    };
+  }
+
+  GachaPool copyWith(
+          {String? gachaPoolId,
+          int? gachaIndex,
+          int? openTime,
+          int? endTime,
+          String? gachaPoolName,
+          String? gachaRuleType}) =>
+      GachaPool(
+        gachaPoolId: gachaPoolId ?? this.gachaPoolId,
+        gachaIndex: gachaIndex ?? this.gachaIndex,
+        openTime: openTime ?? this.openTime,
+        endTime: endTime ?? this.endTime,
+        gachaPoolName: gachaPoolName ?? this.gachaPoolName,
+        gachaRuleType: gachaRuleType ?? this.gachaRuleType,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('GachaPool(')
+          ..write('gachaPoolId: $gachaPoolId, ')
+          ..write('gachaIndex: $gachaIndex, ')
+          ..write('openTime: $openTime, ')
+          ..write('endTime: $endTime, ')
+          ..write('gachaPoolName: $gachaPoolName, ')
+          ..write('gachaRuleType: $gachaRuleType')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      gachaPoolId, gachaIndex, openTime, endTime, gachaPoolName, gachaRuleType);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GachaPool &&
+          other.gachaPoolId == this.gachaPoolId &&
+          other.gachaIndex == this.gachaIndex &&
+          other.openTime == this.openTime &&
+          other.endTime == this.endTime &&
+          other.gachaPoolName == this.gachaPoolName &&
+          other.gachaRuleType == this.gachaRuleType);
+}
+
+class GachaPoolsCompanion extends UpdateCompanion<GachaPool> {
+  final Value<String> gachaPoolId;
+  final Value<int> gachaIndex;
+  final Value<int> openTime;
+  final Value<int> endTime;
+  final Value<String> gachaPoolName;
+  final Value<String> gachaRuleType;
+  const GachaPoolsCompanion({
+    this.gachaPoolId = const Value.absent(),
+    this.gachaIndex = const Value.absent(),
+    this.openTime = const Value.absent(),
+    this.endTime = const Value.absent(),
+    this.gachaPoolName = const Value.absent(),
+    this.gachaRuleType = const Value.absent(),
+  });
+  GachaPoolsCompanion.insert({
+    required String gachaPoolId,
+    required int gachaIndex,
+    required int openTime,
+    required int endTime,
+    required String gachaPoolName,
+    required String gachaRuleType,
+  })  : gachaPoolId = Value(gachaPoolId),
+        gachaIndex = Value(gachaIndex),
+        openTime = Value(openTime),
+        endTime = Value(endTime),
+        gachaPoolName = Value(gachaPoolName),
+        gachaRuleType = Value(gachaRuleType);
+  static Insertable<GachaPool> custom({
+    Expression<String>? gachaPoolId,
+    Expression<int>? gachaIndex,
+    Expression<int>? openTime,
+    Expression<int>? endTime,
+    Expression<String>? gachaPoolName,
+    Expression<String>? gachaRuleType,
+  }) {
+    return RawValuesInsertable({
+      if (gachaPoolId != null) 'gacha_pool_id': gachaPoolId,
+      if (gachaIndex != null) 'gacha_index': gachaIndex,
+      if (openTime != null) 'open_time': openTime,
+      if (endTime != null) 'end_time': endTime,
+      if (gachaPoolName != null) 'gacha_pool_name': gachaPoolName,
+      if (gachaRuleType != null) 'gacha_rule_type': gachaRuleType,
+    });
+  }
+
+  GachaPoolsCompanion copyWith(
+      {Value<String>? gachaPoolId,
+      Value<int>? gachaIndex,
+      Value<int>? openTime,
+      Value<int>? endTime,
+      Value<String>? gachaPoolName,
+      Value<String>? gachaRuleType}) {
+    return GachaPoolsCompanion(
+      gachaPoolId: gachaPoolId ?? this.gachaPoolId,
+      gachaIndex: gachaIndex ?? this.gachaIndex,
+      openTime: openTime ?? this.openTime,
+      endTime: endTime ?? this.endTime,
+      gachaPoolName: gachaPoolName ?? this.gachaPoolName,
+      gachaRuleType: gachaRuleType ?? this.gachaRuleType,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (gachaPoolId.present) {
+      map['gacha_pool_id'] = Variable<String>(gachaPoolId.value);
+    }
+    if (gachaIndex.present) {
+      map['gacha_index'] = Variable<int>(gachaIndex.value);
+    }
+    if (openTime.present) {
+      map['open_time'] = Variable<int>(openTime.value);
+    }
+    if (endTime.present) {
+      map['end_time'] = Variable<int>(endTime.value);
+    }
+    if (gachaPoolName.present) {
+      map['gacha_pool_name'] = Variable<String>(gachaPoolName.value);
+    }
+    if (gachaRuleType.present) {
+      map['gacha_rule_type'] = Variable<String>(gachaRuleType.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GachaPoolsCompanion(')
+          ..write('gachaPoolId: $gachaPoolId, ')
+          ..write('gachaIndex: $gachaIndex, ')
+          ..write('openTime: $openTime, ')
+          ..write('endTime: $endTime, ')
+          ..write('gachaPoolName: $gachaPoolName, ')
+          ..write('gachaRuleType: $gachaRuleType')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GachaPoolsTable extends GachaPools
+    with TableInfo<$GachaPoolsTable, GachaPool> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GachaPoolsTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _gachaPoolIdMeta =
+      const VerificationMeta('gachaPoolId');
+  @override
+  late final GeneratedColumn<String?> gachaPoolId = GeneratedColumn<String?>(
+      'gacha_pool_id', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _gachaIndexMeta = const VerificationMeta('gachaIndex');
+  @override
+  late final GeneratedColumn<int?> gachaIndex = GeneratedColumn<int?>(
+      'gacha_index', aliasedName, false,
+      type: const IntType(), requiredDuringInsert: true);
+  final VerificationMeta _openTimeMeta = const VerificationMeta('openTime');
+  @override
+  late final GeneratedColumn<int?> openTime = GeneratedColumn<int?>(
+      'open_time', aliasedName, false,
+      type: const IntType(), requiredDuringInsert: true);
+  final VerificationMeta _endTimeMeta = const VerificationMeta('endTime');
+  @override
+  late final GeneratedColumn<int?> endTime = GeneratedColumn<int?>(
+      'end_time', aliasedName, false,
+      type: const IntType(), requiredDuringInsert: true);
+  final VerificationMeta _gachaPoolNameMeta =
+      const VerificationMeta('gachaPoolName');
+  @override
+  late final GeneratedColumn<String?> gachaPoolName = GeneratedColumn<String?>(
+      'gacha_pool_name', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _gachaRuleTypeMeta =
+      const VerificationMeta('gachaRuleType');
+  @override
+  late final GeneratedColumn<String?> gachaRuleType = GeneratedColumn<String?>(
+      'gacha_rule_type', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        gachaPoolId,
+        gachaIndex,
+        openTime,
+        endTime,
+        gachaPoolName,
+        gachaRuleType
+      ];
+  @override
+  String get aliasedName => _alias ?? 'gacha_pools';
+  @override
+  String get actualTableName => 'gacha_pools';
+  @override
+  VerificationContext validateIntegrity(Insertable<GachaPool> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('gacha_pool_id')) {
+      context.handle(
+          _gachaPoolIdMeta,
+          gachaPoolId.isAcceptableOrUnknown(
+              data['gacha_pool_id']!, _gachaPoolIdMeta));
+    } else if (isInserting) {
+      context.missing(_gachaPoolIdMeta);
+    }
+    if (data.containsKey('gacha_index')) {
+      context.handle(
+          _gachaIndexMeta,
+          gachaIndex.isAcceptableOrUnknown(
+              data['gacha_index']!, _gachaIndexMeta));
+    } else if (isInserting) {
+      context.missing(_gachaIndexMeta);
+    }
+    if (data.containsKey('open_time')) {
+      context.handle(_openTimeMeta,
+          openTime.isAcceptableOrUnknown(data['open_time']!, _openTimeMeta));
+    } else if (isInserting) {
+      context.missing(_openTimeMeta);
+    }
+    if (data.containsKey('end_time')) {
+      context.handle(_endTimeMeta,
+          endTime.isAcceptableOrUnknown(data['end_time']!, _endTimeMeta));
+    } else if (isInserting) {
+      context.missing(_endTimeMeta);
+    }
+    if (data.containsKey('gacha_pool_name')) {
+      context.handle(
+          _gachaPoolNameMeta,
+          gachaPoolName.isAcceptableOrUnknown(
+              data['gacha_pool_name']!, _gachaPoolNameMeta));
+    } else if (isInserting) {
+      context.missing(_gachaPoolNameMeta);
+    }
+    if (data.containsKey('gacha_rule_type')) {
+      context.handle(
+          _gachaRuleTypeMeta,
+          gachaRuleType.isAcceptableOrUnknown(
+              data['gacha_rule_type']!, _gachaRuleTypeMeta));
+    } else if (isInserting) {
+      context.missing(_gachaRuleTypeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {gachaPoolId};
+  @override
+  GachaPool map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return GachaPool.fromData(data,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $GachaPoolsTable createAlias(String alias) {
+    return $GachaPoolsTable(attachedDatabase, alias);
+  }
+}
+
 class GachaRecord extends DataClass implements Insertable<GachaRecord> {
   final int ts;
   final String pool;
@@ -470,6 +811,7 @@ class $GachaRecordsTable extends GachaRecords
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $UsersTable users = $UsersTable(this);
+  late final $GachaPoolsTable gachaPools = $GachaPoolsTable(this);
   late final $GachaRecordsTable gachaRecords = $GachaRecordsTable(this);
   late final UsersDao usersDao = UsersDao(this as AppDatabase);
   late final GachaRecordsDao gachaRecordsDao =
@@ -477,5 +819,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [users, gachaRecords];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [users, gachaPools, gachaRecords];
 }

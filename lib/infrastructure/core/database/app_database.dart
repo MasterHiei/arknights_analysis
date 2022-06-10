@@ -14,6 +14,7 @@ part 'app_database.g.dart';
 
 const _tables = [
   Users,
+  GachaPools,
   GachaRecords,
 ];
 const _daos = [

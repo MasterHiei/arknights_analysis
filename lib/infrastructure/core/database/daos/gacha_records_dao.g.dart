@@ -7,5 +7,6 @@ part of 'gacha_records_dao.dart';
 // **************************************************************************
 
 mixin _$GachaRecordsDaoMixin on DatabaseAccessor<AppDatabase> {
+  $GachaPoolsTable get gachaPools => attachedDatabase.gachaPools;
   $GachaRecordsTable get gachaRecords => attachedDatabase.gachaRecords;
 }

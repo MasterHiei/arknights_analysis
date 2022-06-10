@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'gacha_table_dto.dart';
+part of 'gacha_pool_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GachaTableDto _$GachaTableDtoFromJson(Map<String, dynamic> json) {
-  return _GachaTableDto.fromJson(json);
+GachaPoolDto _$GachaPoolDtoFromJson(Map<String, dynamic> json) {
+  return _GachaPoolDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GachaTableDto {
+mixin _$GachaPoolDto {
   String get gachaPoolId => throw _privateConstructorUsedError;
   int get gachaIndex => throw _privateConstructorUsedError;
   int get openTime => throw _privateConstructorUsedError;
@@ -29,15 +29,15 @@ mixin _$GachaTableDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GachaTableDtoCopyWith<GachaTableDto> get copyWith =>
+  $GachaPoolDtoCopyWith<GachaPoolDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GachaTableDtoCopyWith<$Res> {
-  factory $GachaTableDtoCopyWith(
-          GachaTableDto value, $Res Function(GachaTableDto) then) =
-      _$GachaTableDtoCopyWithImpl<$Res>;
+abstract class $GachaPoolDtoCopyWith<$Res> {
+  factory $GachaPoolDtoCopyWith(
+          GachaPoolDto value, $Res Function(GachaPoolDto) then) =
+      _$GachaPoolDtoCopyWithImpl<$Res>;
   $Res call(
       {String gachaPoolId,
       int gachaIndex,
@@ -48,13 +48,12 @@ abstract class $GachaTableDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GachaTableDtoCopyWithImpl<$Res>
-    implements $GachaTableDtoCopyWith<$Res> {
-  _$GachaTableDtoCopyWithImpl(this._value, this._then);
+class _$GachaPoolDtoCopyWithImpl<$Res> implements $GachaPoolDtoCopyWith<$Res> {
+  _$GachaPoolDtoCopyWithImpl(this._value, this._then);
 
-  final GachaTableDto _value;
+  final GachaPoolDto _value;
   // ignore: unused_field
-  final $Res Function(GachaTableDto) _then;
+  final $Res Function(GachaPoolDto) _then;
 
   @override
   $Res call({
@@ -95,11 +94,11 @@ class _$GachaTableDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_GachaTableDtoCopyWith<$Res>
-    implements $GachaTableDtoCopyWith<$Res> {
-  factory _$$_GachaTableDtoCopyWith(
-          _$_GachaTableDto value, $Res Function(_$_GachaTableDto) then) =
-      __$$_GachaTableDtoCopyWithImpl<$Res>;
+abstract class _$$_GachaPoolDtoCopyWith<$Res>
+    implements $GachaPoolDtoCopyWith<$Res> {
+  factory _$$_GachaPoolDtoCopyWith(
+          _$_GachaPoolDto value, $Res Function(_$_GachaPoolDto) then) =
+      __$$_GachaPoolDtoCopyWithImpl<$Res>;
   @override
   $Res call(
       {String gachaPoolId,
@@ -111,15 +110,15 @@ abstract class _$$_GachaTableDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GachaTableDtoCopyWithImpl<$Res>
-    extends _$GachaTableDtoCopyWithImpl<$Res>
-    implements _$$_GachaTableDtoCopyWith<$Res> {
-  __$$_GachaTableDtoCopyWithImpl(
-      _$_GachaTableDto _value, $Res Function(_$_GachaTableDto) _then)
-      : super(_value, (v) => _then(v as _$_GachaTableDto));
+class __$$_GachaPoolDtoCopyWithImpl<$Res>
+    extends _$GachaPoolDtoCopyWithImpl<$Res>
+    implements _$$_GachaPoolDtoCopyWith<$Res> {
+  __$$_GachaPoolDtoCopyWithImpl(
+      _$_GachaPoolDto _value, $Res Function(_$_GachaPoolDto) _then)
+      : super(_value, (v) => _then(v as _$_GachaPoolDto));
 
   @override
-  _$_GachaTableDto get _value => super._value as _$_GachaTableDto;
+  _$_GachaPoolDto get _value => super._value as _$_GachaPoolDto;
 
   @override
   $Res call({
@@ -130,7 +129,7 @@ class __$$_GachaTableDtoCopyWithImpl<$Res>
     Object? gachaPoolName = freezed,
     Object? gachaRuleType = freezed,
   }) {
-    return _then(_$_GachaTableDto(
+    return _then(_$_GachaPoolDto(
       gachaPoolId: gachaPoolId == freezed
           ? _value.gachaPoolId
           : gachaPoolId // ignore: cast_nullable_to_non_nullable
@@ -161,8 +160,8 @@ class __$$_GachaTableDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GachaTableDto extends _GachaTableDto {
-  const _$_GachaTableDto(
+class _$_GachaPoolDto extends _GachaPoolDto {
+  const _$_GachaPoolDto(
       {required this.gachaPoolId,
       required this.gachaIndex,
       required this.openTime,
@@ -171,8 +170,8 @@ class _$_GachaTableDto extends _GachaTableDto {
       required this.gachaRuleType})
       : super._();
 
-  factory _$_GachaTableDto.fromJson(Map<String, dynamic> json) =>
-      _$$_GachaTableDtoFromJson(json);
+  factory _$_GachaPoolDto.fromJson(Map<String, dynamic> json) =>
+      _$$_GachaPoolDtoFromJson(json);
 
   @override
   final String gachaPoolId;
@@ -189,14 +188,14 @@ class _$_GachaTableDto extends _GachaTableDto {
 
   @override
   String toString() {
-    return 'GachaTableDto(gachaPoolId: $gachaPoolId, gachaIndex: $gachaIndex, openTime: $openTime, endTime: $endTime, gachaPoolName: $gachaPoolName, gachaRuleType: $gachaRuleType)';
+    return 'GachaPoolDto(gachaPoolId: $gachaPoolId, gachaIndex: $gachaIndex, openTime: $openTime, endTime: $endTime, gachaPoolName: $gachaPoolName, gachaRuleType: $gachaRuleType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GachaTableDto &&
+            other is _$_GachaPoolDto &&
             const DeepCollectionEquality()
                 .equals(other.gachaPoolId, gachaPoolId) &&
             const DeepCollectionEquality()
@@ -222,27 +221,27 @@ class _$_GachaTableDto extends _GachaTableDto {
 
   @JsonKey(ignore: true)
   @override
-  _$$_GachaTableDtoCopyWith<_$_GachaTableDto> get copyWith =>
-      __$$_GachaTableDtoCopyWithImpl<_$_GachaTableDto>(this, _$identity);
+  _$$_GachaPoolDtoCopyWith<_$_GachaPoolDto> get copyWith =>
+      __$$_GachaPoolDtoCopyWithImpl<_$_GachaPoolDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaTableDtoToJson(this);
+    return _$$_GachaPoolDtoToJson(this);
   }
 }
 
-abstract class _GachaTableDto extends GachaTableDto {
-  const factory _GachaTableDto(
+abstract class _GachaPoolDto extends GachaPoolDto {
+  const factory _GachaPoolDto(
       {required final String gachaPoolId,
       required final int gachaIndex,
       required final int openTime,
       required final int endTime,
       required final String gachaPoolName,
-      required final GachaRuleType gachaRuleType}) = _$_GachaTableDto;
-  const _GachaTableDto._() : super._();
+      required final GachaRuleType gachaRuleType}) = _$_GachaPoolDto;
+  const _GachaPoolDto._() : super._();
 
-  factory _GachaTableDto.fromJson(Map<String, dynamic> json) =
-      _$_GachaTableDto.fromJson;
+  factory _GachaPoolDto.fromJson(Map<String, dynamic> json) =
+      _$_GachaPoolDto.fromJson;
 
   @override
   String get gachaPoolId => throw _privateConstructorUsedError;
@@ -258,6 +257,6 @@ abstract class _GachaTableDto extends GachaTableDto {
   GachaRuleType get gachaRuleType => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_GachaTableDtoCopyWith<_$_GachaTableDto> get copyWith =>
+  _$$_GachaPoolDtoCopyWith<_$_GachaPoolDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

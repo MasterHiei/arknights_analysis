@@ -3,21 +3,21 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/types/types.dart';
 
-part 'gacha_table_dto.freezed.dart';
-part 'gacha_table_dto.g.dart';
+part 'gacha_pool_dto.freezed.dart';
+part 'gacha_pool_dto.g.dart';
 
 @freezed
-class GachaTableDto with _$GachaTableDto {
-  const GachaTableDto._();
+class GachaPoolDto with _$GachaPoolDto {
+  const GachaPoolDto._();
 
-  const factory GachaTableDto({
+  const factory GachaPoolDto({
     required String gachaPoolId,
     required int gachaIndex,
     required int openTime,
     required int endTime,
     required String gachaPoolName,
     required GachaRuleType gachaRuleType,
-  }) = _GachaTableDto;
+  }) = _GachaPoolDto;
 
-  factory GachaTableDto.fromJson(Json json) => _$GachaTableDtoFromJson(json);
+  factory GachaPoolDto.fromJson(Json json) => _$GachaPoolDtoFromJson(json);
 }

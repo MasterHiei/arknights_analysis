@@ -11,11 +11,15 @@ final gachaLocalDataSourceProvider = Provider.autoDispose<GachaLocalDataSource>(
 );
 
 abstract class GachaLocalDataSource {
-  Future<GachaDto> read(Uid uid, {required int page});
-
   Future<List<int>> save(GachaDto dto);
 
   Stream<List<GachaRecordDto>> watchRecords(Uid uid);
+
+  Future<GachaDto> paginate(
+    Uid uid, {
+    required int page,
+    String? pool,
+  });
 }
 
 class GachaLocalDataSourceImpl implements GachaLocalDataSource {
@@ -24,14 +28,18 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
   final AppDatabase _db;
 
   @override
-  Future<GachaDto> read(Uid uid, {required int page}) =>
-      _db.gachaRecordsDao.get(uid.getOrCrash(), page: page);
-
-  @override
   Future<List<int>> save(GachaDto gacha) =>
       _db.gachaRecordsDao.replaceInto(gacha);
 
   @override
   Stream<List<GachaRecordDto>> watchRecords(Uid uid) =>
-      _db.gachaRecordsDao.watchRecords(uid.getOrCrash());
+      _db.gachaRecordsDao.watch(uid.getOrCrash());
+
+  @override
+  Future<GachaDto> paginate(
+    Uid uid, {
+    required int page,
+    String? pool,
+  }) =>
+      _db.gachaRecordsDao.paginate(uid.getOrCrash(), page: page, pool: pool);
 }
