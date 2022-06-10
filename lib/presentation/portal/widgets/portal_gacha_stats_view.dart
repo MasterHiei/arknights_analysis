@@ -18,6 +18,7 @@ import '../../../domain/user/user.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
+import '../../core/resources/images.dart';
 
 final _uidProvider = Provider.autoDispose<Uid>(
   (_) => throw UnimplementedError(),
@@ -103,13 +104,17 @@ class _StatsView extends ConsumerWidget {
                 .toList()
                 .map((pair) => _PieChart(pair.first, pair.second))
                 .toList();
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: items,
+            return SingleChildScrollView(
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                spacing: 48.w,
+                runAlignment: WrapAlignment.spaceBetween,
+                runSpacing: 36.h,
+                children: items,
+              ),
             );
           },
-          error: (_, __) => const SizedBox(),
+          error: (_, __) => const _ErrorView(),
           loading: () => const SizedBox(),
         );
   }
@@ -120,7 +125,26 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return Container(
+      alignment: Alignment.center,
+      width: 400.w,
+      child: Column(
+        children: [
+          const Spacer(),
+          Image.asset(Images.horse.path, fit: BoxFit.contain),
+          SizedBox(height: 24.h),
+          Text(
+            '1 + 1 = 3',
+            style: TextStyle(
+              color: Colors.grey[120],
+              fontSize: 32.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Spacer(),
+        ],
+      ),
+    );
   }
 }
 
