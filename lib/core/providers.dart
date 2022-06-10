@@ -23,6 +23,8 @@ final akDioProvider = _dioProvider(akBaseUrl);
 
 final asDioProvider = _dioProvider(asBaseUrl);
 
+final gameDataProvider = _dioProvider(gameDataBaseUrl);
+
 final dbProvider = Provider((ref) {
   final db = AppDatabase();
   ref.onDispose(() => db.close());
