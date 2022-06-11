@@ -5,7 +5,13 @@ enum GachaRuleType {
   normal('NORMAL'),
 
   @JsonValue('LIMITED')
-  limited('LIMITED');
+  limited('LIMITED'),
+
+  @JsonValue('LINKAGE')
+  linkage('LINKAGE'),
+
+  @JsonValue('ATTAIN')
+  attain('ATTAIN');
 
   const GachaRuleType(this.value);
 
@@ -18,6 +24,12 @@ enum GachaRuleType {
 
       case GachaRuleType.limited:
         return '限定卡池';
+
+      case GachaRuleType.linkage:
+        return '联动卡池';
+
+      case GachaRuleType.attain:
+        return '必NEW卡池';
     }
   }
 }

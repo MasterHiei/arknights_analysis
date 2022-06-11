@@ -29,4 +29,6 @@ Map<String, dynamic> _$$_GachaPoolDtoToJson(_$_GachaPoolDto instance) =>
 const _$GachaRuleTypeEnumMap = {
   GachaRuleType.normal: 'NORMAL',
   GachaRuleType.limited: 'LIMITED',
+  GachaRuleType.linkage: 'LINKAGE',
+  GachaRuleType.attain: 'ATTAIN',
 };

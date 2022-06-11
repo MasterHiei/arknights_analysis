@@ -64,7 +64,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
         .toList();
 
     final amount = countAll();
-    final count = await (selectOnly(gachaRecords)..addColumns([amount]))
+    final count = await query
+        .addColumns([amount])
         .map((row) => row.read(amount))
         .getSingle();
     final total = (count / pageSize).ceil();

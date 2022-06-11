@@ -19,6 +19,7 @@ const _tables = [
 ];
 const _daos = [
   UsersDao,
+  GachaPoolsDao,
   GachaRecordsDao,
 ];
 

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,13 +24,15 @@ final akDioProvider = _dioProvider(akBaseUrl);
 
 final asDioProvider = _dioProvider(asBaseUrl);
 
-final gameDataProvider = _dioProvider(gameDataBaseUrl);
+final gdDioProvider = _dioProvider(gameDataBaseUrl);
 
 final dbProvider = Provider((ref) {
   final db = AppDatabase();
   ref.onDispose(() => db.close());
   return db;
 });
+
+final connectivityProvider = Provider.autoDispose((_) => Connectivity());
 
 Future<List<Override>> generateOverrides() async {
   return [];

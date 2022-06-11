@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -8,9 +9,13 @@ import '../../../core/utils/logger.dart';
 
 class ErrorHandlerMixin {
   Future<Either<AppFailure, T>> execute<T>(
-    Future<T> Function() run,
-  ) async {
+    Future<T> Function() run, {
+    Connectivity? connectivity,
+  }) async {
     try {
+      if (connectivity != null) {
+        await _checkConnectivity(connectivity);
+      }
       return right(await run());
     } on AppFailure catch (e) {
       return left(e);
@@ -25,6 +30,13 @@ class ErrorHandlerMixin {
     } catch (e, stackTrace) {
       logger.e(e, e, stackTrace);
       return left(AppFailure.unexpectedError(e));
+    }
+  }
+
+  Future<void> _checkConnectivity(Connectivity connectivity) async {
+    final result = await connectivity.checkConnectivity();
+    if (result == ConnectivityResult.none) {
+      throw const AppFailure.networkUnreachable();
     }
   }
 }

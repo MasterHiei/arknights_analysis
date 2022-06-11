@@ -1,6 +1,6 @@
 const appName = 'Arknights Analysis';
 
-const dbName = 'arknights_analysis';
+const dbName = 'arknights_analysis.db';
 
 const dbVersion = 1;
 

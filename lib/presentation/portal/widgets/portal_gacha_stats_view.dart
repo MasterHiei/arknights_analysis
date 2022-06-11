@@ -11,6 +11,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../../application/gacha/gacha_pie_chart_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
+import '../../../application/gacha/params/watch_gacha_stats_params.dart';
 import '../../../application/gacha/states/gacha_state.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
@@ -73,7 +74,7 @@ class PortalGachaStatsView extends ConsumerWidget {
   void _listenState(BuildContext context, WidgetRef ref) {
     ref.listen<GachaState>(
       _gachaProvider,
-      (_, next) => next.maybeWhen(
+      (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
           context,
           message: '数据已更新。',
@@ -84,9 +85,7 @@ class PortalGachaStatsView extends ConsumerWidget {
           message: failure.localizedMessage,
           severity: FlushBarSeverity.error,
         ),
-        orElse: () {
-          return null;
-        },
+        orElse: () {},
       ),
     );
   }
@@ -98,7 +97,7 @@ class _StatsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = ref.watch(_uidProvider);
-    return ref.watch(gachaStatsProvider(uid)).when(
+    return ref.watch(gachaStatsProvider(WatchGachaStatsParams(uid: uid))).when(
           data: (stats) {
             final items = stats.statsPerPool
                 .toList()

@@ -814,6 +814,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GachaPoolsTable gachaPools = $GachaPoolsTable(this);
   late final $GachaRecordsTable gachaRecords = $GachaRecordsTable(this);
   late final UsersDao usersDao = UsersDao(this as AppDatabase);
+  late final GachaPoolsDao gachaPoolsDao = GachaPoolsDao(this as AppDatabase);
   late final GachaRecordsDao gachaRecordsDao =
       GachaRecordsDao(this as AppDatabase);
   @override
