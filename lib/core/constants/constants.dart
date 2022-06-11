@@ -22,3 +22,5 @@ const asGetToken = 'https://as.hypergryph.com/user/info/v1/token_by_cookie';
 const pageSize = 10;
 
 const debouceDuration = Duration(milliseconds: 300);
+
+const minRequestInterval = Duration(minutes: 1);

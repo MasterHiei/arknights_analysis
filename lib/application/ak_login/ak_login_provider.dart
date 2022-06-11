@@ -1,10 +1,10 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../core/constants/constants.dart';
 import '../../domain/user/value_objects/token.dart';
+import '../../presentation/core/common/utils/app_loading_indicator.dart';
 import '../../presentation/core/routing/route_params.dart';
 import '../../presentation/core/routing/router.dart';
 import 'states/ak_login_state.dart';
@@ -31,7 +31,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       final isCompleted = _currentState == LoadingState.navigationCompleted;
       final isTokenPage = url == asGetToken;
       if (isCompleted && isTokenPage) {
-        BotToast.showLoading();
+        AppLoadingIndicator.show();
         await _postToken(controller);
       }
     });
@@ -55,7 +55,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     if (token.isNotEmpty) {
       _token = Token(token);
       state = const AkLoginState.shouldGo();
-      BotToast.closeAllLoading();
+      AppLoadingIndicator.dismiss();
     }
   }
 }

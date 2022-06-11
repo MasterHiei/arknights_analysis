@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../infrastructure/core/database/app_database.dart';
-import 'common/dio_interceptors.dart';
 import 'constants/constants.dart';
+import 'interceptors/dio_interceptors.dart';
 
 final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(

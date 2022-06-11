@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/exceptions/app_failure.dart';
@@ -7,11 +8,19 @@ part 'user_state.freezed.dart';
 
 @freezed
 class UserState with _$UserState {
-  const factory UserState.init() = _Init;
+  const UserState._();
 
-  const factory UserState.fetching() = _Fetching;
+  const factory UserState({
+    required bool isRefreshing,
+    required Option<User> userOption,
+    required Option<AppFailure> failureOption,
+  }) = _UserState;
 
-  const factory UserState.success(User user) = _Success;
+  factory UserState.init() => UserState(
+        isRefreshing: false,
+        userOption: none(),
+        failureOption: none(),
+      );
 
-  const factory UserState.failure(AppFailure failure) = _Failure;
+  bool get hasFailure => failureOption.isSome();
 }
