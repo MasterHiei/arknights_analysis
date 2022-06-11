@@ -25,6 +25,6 @@ class AppFailure with _$AppFailure {
         remoteServerError: (f) =>
             '[${f.code}]${f.message ?? '服务器软体不稳定，请稍后重试。'}',
         localDataError: (f) => '无法加载本地数据，请稍后重试。\n ${f.e}',
-        invalidToken: (_) => '令牌错误或已失效。',
+        invalidToken: (_) => '令牌错误或已失效，请重启程序获取最新的访问令牌。',
       );
 }

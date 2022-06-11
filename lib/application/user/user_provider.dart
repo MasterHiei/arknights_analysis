@@ -1,7 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/user/value_objects/token.dart';
+import '../../infrastructure/core/mixins/debounce_mixin.dart';
 import '../../infrastructure/user/user_repository.dart';
 import 'states/user_state.dart';
 
@@ -13,30 +13,39 @@ final userProvider =
   ),
 );
 
-class UserNotifier extends StateNotifier<UserState> {
+class UserNotifier extends StateNotifier<UserState> with DebounceMixin {
   UserNotifier(
     this._token,
     this._repository,
-  ) : super(UserState.init()) {
+  ) : super(const UserState.init()) {
     _fetchAndUpdate();
-    _watch();
   }
 
   final Token _token;
   final UserRepository _repository;
 
+  @override
+  void dispose() {
+    cancelDebounce();
+    super.dispose();
+  }
+
+  Future<void> refresh() async => debounce(_fetchAndUpdate);
+
   Future<void> _fetchAndUpdate() async {
+    state = const UserState.fetching();
     final failureOrSuccess = await _repository.fetchAndUpdate(_token);
     failureOrSuccess.fold(
-      (f) => state = state.copyWith(failureOption: optionOf(f)),
-      (_) {},
+      (failure) => state = UserState.failure(failure),
+      (_) => _get(),
     );
   }
 
-  void _watch() => _repository.watch(_token).listen(
-        (user) => state = state.copyWith(
-          userOption: optionOf(user),
-          failureOption: none(),
-        ),
-      );
+  Future<void> _get() async {
+    final failureOrUser = await _repository.get(_token);
+    state = failureOrUser.fold(
+      (failure) => UserState.failure(failure),
+      (user) => UserState.success(user),
+    );
+  }
 }

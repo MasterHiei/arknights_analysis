@@ -10,7 +10,7 @@ final userLocalDataSourceProvider = Provider.autoDispose<UserLocalDataSource>(
 );
 
 abstract class UserLocalDataSource {
-  Stream<UserDto?> watch(Token token);
+  Future<UserDto> get(Token token);
 
   Future<int> save(UserDto dto);
 }
@@ -21,7 +21,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   final AppDatabase _db;
 
   @override
-  Stream<UserDto?> watch(Token token) => _db.usersDao.watch(token.getOrCrash());
+  Future<UserDto> get(Token token) => _db.usersDao.get(token.getOrCrash());
 
   @override
   Future<int> save(UserDto user) => _db.usersDao.replaceInto(user);

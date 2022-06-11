@@ -18,8 +18,8 @@ import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../../core/common/widgets/app_error_view.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
-import '../../core/resources/images.dart';
 
 final _uidProvider = Provider.autoDispose<Uid>(
   (_) => throw UnimplementedError(),
@@ -113,37 +113,9 @@ class _StatsView extends ConsumerWidget {
               ),
             );
           },
-          error: (_, __) => const _ErrorView(),
+          error: (_, __) => const AppErrorView(),
           loading: () => const SizedBox(),
         );
-  }
-}
-
-class _ErrorView extends StatelessWidget {
-  const _ErrorView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 400.w,
-      child: Column(
-        children: [
-          const Spacer(),
-          Image.asset(Images.horse.path, fit: BoxFit.contain),
-          SizedBox(height: 24.h),
-          Text(
-            '1 + 1 = 3',
-            style: TextStyle(
-              color: Colors.grey[120],
-              fontSize: 32.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const Spacer(),
-        ],
-      ),
-    );
   }
 }
 

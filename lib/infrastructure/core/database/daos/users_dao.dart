@@ -10,14 +10,10 @@ part 'users_dao.g.dart';
 class UsersDao extends DatabaseAccessor<AppDatabase> with _$UsersDaoMixin {
   UsersDao(AppDatabase db) : super(db);
 
-  Stream<UserDto?> watch(String token) {
+  Future<UserDto> get(String token) async {
     final query = select(users)..where((tbl) => tbl.token.equals(token));
-    return query.watchSingleOrNull().map((user) {
-      if (user == null) {
-        return null;
-      }
-      return UserDto.fromJson(user.toJson());
-    });
+    final user = await query.getSingle();
+    return UserDto.fromJson(user.toJson());
   }
 
   Future<int> replaceInto(UserDto user) async {

@@ -40,9 +40,14 @@ class GachaStats with _$GachaStats {
       .toList();
 
   String get dateRange {
-    final start = chars.minBy((char) => char.ts.dateTime)!.ts.dateTime;
-    final end = chars.maxBy((char) => char.ts.dateTime)!.ts.dateTime;
-    return '${start.yMMMdString} ~ ${end.yMMMdString}';
+    final start =
+        chars.minBy((char) => char.ts.dateTime)!.ts.dateTime.yMMMdString;
+    final end =
+        chars.maxBy((char) => char.ts.dateTime)!.ts.dateTime.yMMMdString;
+    if (start == end) {
+      return start;
+    }
+    return '$start ~ $end';
   }
 
   //* Methods

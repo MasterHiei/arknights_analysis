@@ -20,7 +20,7 @@ final userRepositoryProvider = Provider.autoDispose<UserRepository>(
 );
 
 abstract class UserRepository {
-  Stream<User?> watch(Token token);
+  Future<Either<AppFailure, User>> get(Token token);
 
   Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token);
 }
@@ -37,8 +37,10 @@ class UserRepositoryImpl with ErrorHandlerMixin implements UserRepository {
   final UserRemoteDataSource _remoteDataSource;
 
   @override
-  Stream<User?> watch(Token token) =>
-      _localDataSource.watch(token).map((dto) => dto?.toDomain());
+  Future<Either<AppFailure, User>> get(Token token) => execute(() async {
+        final dto = await _localDataSource.get(token);
+        return dto.toDomain();
+      });
 
   @override
   Future<Either<AppFailure, Unit>> fetchAndUpdate(Token token) => execute(

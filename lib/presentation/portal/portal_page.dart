@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../application/user/user_provider.dart';
+import '../core/common/widgets/app_error_view.dart';
 import '../core/routing/route_params.dart';
 import 'widgets/index.dart';
 
@@ -23,9 +24,12 @@ class PortalPage extends StatelessWidget {
             child: Consumer(
               builder: (_, ref, __) {
                 final state = ref.watch(userProvider(params.token));
-                return state.userOption.fold(
-                  () => const SizedBox(),
-                  (user) => PortalGachaStatsView(user),
+                return state.maybeWhen(
+                  success: (user) => PortalGachaStatsView(user),
+                  failure: (_) => const AppErrorView(),
+                  orElse: () => const SizedBox.expand(
+                    child: Center(child: ProgressBar()),
+                  ),
                 );
               },
             ),

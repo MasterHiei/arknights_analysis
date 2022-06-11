@@ -19,7 +19,7 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
     state = const AsyncValue.loading();
     final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
     failureOrSuccess.fold(
-      (f) => state = AsyncValue.error(f),
+      (failure) => state = AsyncValue.error(failure),
       (_) => state = AsyncValue.data(_),
     );
   }

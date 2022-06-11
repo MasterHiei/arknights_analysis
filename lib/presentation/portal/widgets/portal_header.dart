@@ -30,9 +30,8 @@ class PortalHeader extends ConsumerWidget {
 
   Widget _buildUserInfoArea() {
     return Consumer(
-      builder: (_, ref, __) => ref.watch(_userProvider).userOption.fold(
-            () => const SizedBox(),
-            (user) => Column(
+      builder: (_, ref, __) => ref.watch(_userProvider).maybeWhen(
+            success: (user) => Column(
               children: [
                 Text(
                   user.nickName,
@@ -44,6 +43,7 @@ class PortalHeader extends ConsumerWidget {
                 ),
               ],
             ),
+            orElse: () => const SizedBox(),
           ),
     );
   }
@@ -54,7 +54,9 @@ class PortalHeader extends ConsumerWidget {
       children: [
         FilledButton(
           child: const Text('更新数据'),
-          onPressed: () {},
+          onPressed: () {
+            ref.read(_userProvider.notifier).refresh();
+          },
         ),
       ],
     );
@@ -63,13 +65,13 @@ class PortalHeader extends ConsumerWidget {
   void _listenState(BuildContext context, WidgetRef ref) {
     ref.listen<UserState>(
       _userProvider,
-      (_, next) => next.failureOption.fold(
-        () {},
-        (failure) => AppFlushBar.show(
+      (_, next) => next.maybeWhen<void>(
+        failure: (failure) => AppFlushBar.show(
           context,
           message: failure.localizedMessage,
           severity: FlushBarSeverity.error,
         ),
+        orElse: () {},
       ),
     );
   }
