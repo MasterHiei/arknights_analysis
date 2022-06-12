@@ -44,6 +44,7 @@ class PortalPage extends ConsumerWidget {
               },
             ),
           ),
+          const PortalFooter(),
         ]),
       ),
     );

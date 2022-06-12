@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../infrastructure/core/database/app_database.dart';
 import 'constants/constants.dart';
@@ -34,6 +35,13 @@ final dbProvider = Provider((ref) {
 
 final connectivityProvider = Provider.autoDispose((_) => Connectivity());
 
+final packageInfoProvider = Provider.autoDispose<PackageInfo>(
+  (_) => throw UnimplementedError(),
+);
+
 Future<List<Override>> generateOverrides() async {
-  return [];
+  final packageInfo = await PackageInfo.fromPlatform();
+  return [
+    packageInfoProvider.overrideWithValue(packageInfo),
+  ];
 }
