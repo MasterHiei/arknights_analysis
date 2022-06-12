@@ -35,7 +35,7 @@ class AppFlushBar extends StatelessWidget {
       borderRadius: BorderRadius.circular(2),
       backgroundColor: Colors.white,
       leftBarIndicatorColor: severity.color,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       isDismissible: false,
     );
     return flushBar.show(context);

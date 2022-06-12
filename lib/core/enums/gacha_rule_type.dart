@@ -20,16 +20,22 @@ enum GachaRuleType {
   String get title {
     switch (this) {
       case GachaRuleType.normal:
-        return '常规卡池';
+        return '常规寻访';
 
       case GachaRuleType.limited:
-        return '限定卡池';
+        return '限定寻访';
 
       case GachaRuleType.linkage:
-        return '联动卡池';
+        return '联动寻访';
 
       case GachaRuleType.attain:
-        return '必NEW卡池';
+        return '必NEW寻访';
     }
   }
+
+  static List<GachaRuleType> get independentGuarantee => [
+        limited,
+        linkage,
+        attain,
+      ];
 }

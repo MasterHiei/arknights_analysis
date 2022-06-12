@@ -8,7 +8,7 @@
 PRODUCT_NAME = arknights_analysis
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.arknightsAnalysis
+PRODUCT_BUNDLE_IDENTIFIER = club.kimomiya.arknightsAnalysis
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 club.kimomiya. All rights reserved.

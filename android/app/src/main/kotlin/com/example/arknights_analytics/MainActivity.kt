@@ -1,4 +1,4 @@
-package com.example.arknights_analysis
+package club.kimomiya.arknights_analysis
 
 import io.flutter.embedding.android.FlutterActivity
 

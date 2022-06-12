@@ -8,8 +8,6 @@ part 'gacha_table_dto.g.dart';
 
 @freezed
 class GachaTableDto with _$GachaTableDto {
-  const GachaTableDto._();
-
   const factory GachaTableDto({
     required List<GachaPoolDto> gachaPoolClient,
   }) = _GachaTableDto;

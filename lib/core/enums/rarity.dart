@@ -28,7 +28,7 @@ enum Rarity {
 
   String get fullTitle => '$title干员';
 
-  static List<Rarity> get rares => [Rarity.five, Rarity.six];
+  static List<Rarity> get rares => [Rarity.six, Rarity.five];
 
   static List<Rarity> get poolExclusive => [
         Rarity.three,

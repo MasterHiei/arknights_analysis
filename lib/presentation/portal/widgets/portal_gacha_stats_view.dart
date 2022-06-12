@@ -9,10 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../application/gacha/gacha_pie_chart_provider.dart';
+import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
-import '../../../application/gacha/params/watch_gacha_stats_params.dart';
+import '../../../application/gacha/params/get_gacha_stats_params.dart';
 import '../../../application/gacha/states/gacha_state.dart';
+import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
@@ -23,6 +25,10 @@ import '../../core/common/widgets/app_flush_bar.dart';
 
 final _uidProvider = Provider.autoDispose<Uid>(
   (_) => throw UnimplementedError(),
+);
+
+final _selectedPool = Provider.autoDispose(
+  (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
 );
 
 class PortalGachaStatsView extends ConsumerWidget {
@@ -97,22 +103,29 @@ class _StatsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = ref.watch(_uidProvider);
-    return ref.watch(gachaStatsProvider(WatchGachaStatsParams(uid: uid))).when(
-          data: (stats) {
-            final items = stats.statsPerPool
-                .toList()
-                .map((pair) => _PieChart(pair.first, pair.second))
-                .toList();
-            return SingleChildScrollView(
-              child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: 48.w,
-                runAlignment: WrapAlignment.spaceBetween,
-                runSpacing: 36.h,
-                children: items,
-              ),
-            );
-          },
+    final pool = ref.watch(_selectedPool);
+
+    // 总览
+    if (pool == null) {
+      final params = GetGachaStatsParams(
+        uid: uid,
+        excludeRuleTypes: GachaRuleType.independentGuarantee,
+      );
+      return Consumer(
+        builder: (_, ref, __) {
+          return ref.watch(gachaStatsProvider(params)).when(
+                data: (stats) => _PieChart(pool, stats),
+                error: (_, __) => const AppErrorView(),
+                loading: () => const SizedBox(),
+              );
+        },
+      );
+    }
+
+    // 指定寻访
+    final params = GetGachaStatsParams(uid: uid, pool: pool);
+    return ref.watch(gachaStatsProvider(params)).when(
+          data: (stats) => _PieChart(pool, stats),
           error: (_, __) => const AppErrorView(),
           loading: () => const SizedBox(),
         );
@@ -120,41 +133,52 @@ class _StatsView extends ConsumerWidget {
 }
 
 class _PieChart extends StatelessWidget {
-  const _PieChart(this.pool, this.stats, {Key? key}) : super(key: key);
+  const _PieChart(
+    this.pool,
+    this.stats, {
+    Key? key,
+  }) : super(key: key);
 
-  final String pool;
+  final String? pool;
   final GachaStats stats;
 
+  String get title => pool ?? '常规寻访';
+
   AutoDisposeChangeNotifierProvider<GachaPieChartNotifier>
-      get _gachaPieChartProvider => gachaPieChartProvider(pool);
+      get _gachaPieChartProvider => gachaPieChartProvider(title);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 400.w,
-      padding: EdgeInsets.symmetric(vertical: 20.h),
+      padding: EdgeInsets.symmetric(vertical: 24.h),
       child: Column(
         children: [
-          _poolNameLabel,
-          SizedBox(height: 16.h),
+          _titleLabel,
+          SizedBox(height: 28.h),
           _indicators,
-          SizedBox(width: 300.w, height: 300.h, child: _chart),
+          Container(
+            padding: EdgeInsets.all(4.w),
+            width: 320.w,
+            height: 320.h,
+            child: _chart,
+          ),
           _pullDateRangeLabel,
-          SizedBox(height: 16.h),
+          SizedBox(height: 18.h),
           _totalPullsLabel,
           ..._totalPullsWithoutRareLabels,
-          SizedBox(height: 16.h),
+          SizedBox(height: 18.h),
           ..._pullRateLabels,
         ],
       ),
     );
   }
 
-  Widget get _poolNameLabel => Text(
-        pool,
+  Widget get _titleLabel => Text(
+        title,
         style: TextStyle(
           color: Colors.grey[150],
-          fontSize: 20.sp,
+          fontSize: 22.sp,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -352,9 +376,10 @@ class _PieChart extends StatelessWidget {
 
   Future<void> _showCharsTable(BuildContext context, Rarity rarity) async {
     final columns = [
-      DataColumn2(label: const SizedBox(), fixedWidth: 24.w),
-      DataColumn2(label: const Text('干员'), fixedWidth: 180.w),
+      DataColumn2(label: const SizedBox(), fixedWidth: 80.w),
+      const DataColumn2(label: Text('干员')),
       const DataColumn2(label: Text('抽数'), size: ColumnSize.S),
+      const DataColumn2(label: Text('寻访')),
       const DataColumn2(label: Text('获取时间')),
     ];
     final rows = stats.filterWithPulls(rarity).reversed.mapIndexed(
@@ -367,7 +392,7 @@ class _PieChart extends StatelessWidget {
             DataCell(
               Text(
                 '${index + 1}',
-                style: TextStyle(color: Colors.grey[80], fontSize: 16.sp),
+                style: TextStyle(color: Colors.grey[80], fontSize: 14.sp),
               ),
             ),
             DataCell(
@@ -383,13 +408,23 @@ class _PieChart extends StatelessWidget {
                 showBadge: char.isNew,
                 child: Text(
                   char.name,
-                  style: TextStyle(color: rarity.color, fontSize: 16.sp),
+                  style: TextStyle(
+                    color: rarity.color,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
             DataCell(
               Text(
                 '$pulls',
+                style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
+              ),
+            ),
+            DataCell(
+              Text(
+                char.pool,
                 style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
               ),
             ),
@@ -416,28 +451,16 @@ class _PieChart extends StatelessWidget {
     await showCustomModalBottomSheet<void>(
       context: context,
       builder: (_) => Container(
-        height: ScreenUtil().screenHeight * 0.4,
+        height: 480.h,
         padding: EdgeInsets.only(left: 12.w, top: 16.h, right: 12.w),
-        child: Column(
-          children: [
-            Text(
-              '[$pool] ${rarity.fullTitle}抽取记录',
-              style: TextStyle(
-                color: Colors.grey[130],
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Expanded(child: dataTable),
-          ],
-        ),
+        child: dataTable,
       ),
       containerWidget: (_, __, child) {
         return SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: 24.h,
-              horizontal: 640.w,
+              horizontal: 540.w,
             ),
             child: Material(
               clipBehavior: Clip.antiAlias,

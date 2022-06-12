@@ -30,10 +30,13 @@ abstract class GachaRepository {
     int page = 1,
   });
 
-  Stream<GachaStats> watchStats(
+  Future<Either<AppFailure, List<String>>> getPools();
+
+  Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
     String? pool,
-    GachaRuleType? ruleType,
+    List<GachaRuleType>? includeRuleTypes,
+    List<GachaRuleType>? excludeRuleTypes,
   });
 
   Future<Either<AppFailure, Gacha>> paginate(
@@ -83,16 +86,30 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Stream<GachaStats> watchStats(
+  Future<Either<AppFailure, List<String>>> getPools() =>
+      execute(() => _localDataSource.getPools());
+
+  @override
+  Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
     String? pool,
-    GachaRuleType? ruleType,
+    List<GachaRuleType>? includeRuleTypes,
+    List<GachaRuleType>? excludeRuleTypes,
   }) =>
-      _localDataSource
-          .watchRecords(uid)
-          .map((dtos) => dtos.map((dto) => dto.toDomain()).toList())
-          .map((records) => records.map((record) => record.chars).flatten())
-          .map((chars) => GachaStats(uid: uid, chars: chars.toList()));
+      execute(() async {
+        final dtos = await _localDataSource.getRecords(
+          uid,
+          pool: pool,
+          includeRuleTypes: includeRuleTypes,
+          excludeRuleTypes: excludeRuleTypes,
+        );
+        final chars = dtos
+            .map((dto) => dto.toDomain())
+            .map((record) => record.chars)
+            .flatten()
+            .toList();
+        return GachaStats(uid: uid, chars: chars);
+      });
 
   @override
   Future<Either<AppFailure, Gacha>> paginate(

@@ -94,10 +94,9 @@ class __$$_GachaTableDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GachaTableDto extends _GachaTableDto {
+class _$_GachaTableDto implements _GachaTableDto {
   const _$_GachaTableDto({required final List<GachaPoolDto> gachaPoolClient})
-      : _gachaPoolClient = gachaPoolClient,
-        super._();
+      : _gachaPoolClient = gachaPoolClient;
 
   factory _$_GachaTableDto.fromJson(Map<String, dynamic> json) =>
       _$$_GachaTableDtoFromJson(json);
@@ -139,10 +138,9 @@ class _$_GachaTableDto extends _GachaTableDto {
   }
 }
 
-abstract class _GachaTableDto extends GachaTableDto {
+abstract class _GachaTableDto implements GachaTableDto {
   const factory _GachaTableDto(
       {required final List<GachaPoolDto> gachaPoolClient}) = _$_GachaTableDto;
-  const _GachaTableDto._() : super._();
 
   factory _GachaTableDto.fromJson(Map<String, dynamic> json) =
       _$_GachaTableDto.fromJson;
