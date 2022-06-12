@@ -49,3 +49,4 @@ app.*.map.json
 # Development related
 .fvm/flutter_sdk
 *.http
+*.pfx

@@ -76,6 +76,7 @@ flutter:
 
 msix_config:
   display_name: Arknights Analysis
-  publisher_display_name: MasterHiei
-  identity_name: club.kimomiya.arknights_analysis
+  publisher_display_name: C. Liu
   capabilities: internetClient
+  certificate_path: CERTIFICATE.pfx
+  certificate_password: ak_123
