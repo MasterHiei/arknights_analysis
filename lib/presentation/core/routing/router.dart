@@ -10,7 +10,7 @@ import 'route_params.dart';
 enum Routes {
   splash(name: 'splash', path: '/'),
   akLogin(name: 'akLogin', path: '/akLogin'),
-  user(name: 'user', path: '/user');
+  portal(name: 'portal', path: '/portal');
 
   const Routes({
     required this.name,
@@ -57,8 +57,8 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      name: Routes.user.name,
-      path: Routes.user.path,
+      name: Routes.portal.name,
+      path: Routes.portal.path,
       pageBuilder: (_, state) => CustomTransitionPage(
         key: state.pageKey,
         child: PortalPage(state.extra as PortalParams),

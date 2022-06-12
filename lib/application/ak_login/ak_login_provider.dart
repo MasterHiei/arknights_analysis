@@ -39,7 +39,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     controller.webMessage.listen(_onTokenRecieved);
   }
 
-  void go(BuildContext context) => Routes.user.go(
+  void go(BuildContext context) => Routes.portal.go(
         context,
         extra: RouteParams.portal(token: _token),
       );
