@@ -5,14 +5,14 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:arknights_analysis/presentation/arknights_analysis.dart';
+import 'package:arknights_analysis/presentation/arknights_analysis_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const ArknightsAnalysis());
+    await tester.pumpWidget(const ArknightsAnalysisApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

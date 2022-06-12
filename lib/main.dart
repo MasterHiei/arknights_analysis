@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/providers.dart';
-import 'presentation/arknights_analysis.dart';
+import 'presentation/arknights_analysis_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +33,6 @@ Future<Widget> _initializeApp() async {
 
   return ProviderScope(
     overrides: await generateOverrides(),
-    child: const ArknightsAnalysis(),
+    child: const ArknightsAnalysisApp(),
   );
 }
