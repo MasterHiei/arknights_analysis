@@ -31,7 +31,7 @@ class PortalFooter extends ConsumerWidget {
             style: TextStyle(
               color: Colors.grey[80],
               fontSize: 14.sp,
-              height: 1.25,
+              height: 1.1,
             ),
           ),
         ),
