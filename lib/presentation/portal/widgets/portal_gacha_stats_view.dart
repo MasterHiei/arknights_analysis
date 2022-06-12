@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' show Material, DataCell;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,10 @@ import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/params/get_gacha_stats_params.dart';
 import '../../../application/gacha/states/gacha_state.dart';
+import '../../../core/constants/constants.dart';
 import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/enums/rarity.dart';
+import '../../../core/utils/launch_url.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
 import '../../../domain/user/value_objects/uid.dart';
@@ -406,12 +409,16 @@ class _PieChart extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
                 borderRadius: BorderRadius.circular(4.w),
                 showBadge: char.isNew,
-                child: Text(
-                  char.name,
-                  style: TextStyle(
-                    color: rarity.color,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
+                child: RichText(
+                  text: TextSpan(
+                    text: char.name,
+                    style: TextStyle(
+                      color: rarity.color,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launch('$prts/w/${char.name}'),
                   ),
                 ),
               ),
