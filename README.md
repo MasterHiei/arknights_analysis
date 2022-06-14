@@ -2,15 +2,26 @@
 
 A new Flutter project.
 
+## System Requirements
+
+:white_check_mark:Windows 10 1809+
+
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Installation
 
-A few resources to get you started if this is your first Flutter project:
+1. Download latest release.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. (if is an .exe file)Follow the instructions to install the software.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Locate and double-click the `arknights_analysis.exe` file.
+
+### Uninstallation
+
+#### From .exe file
+1. Locate and double-click the `unins000.exe` file.
+
+2. Follow the instructions to uninstall the software.
+
+#### From .zip file
+Locate and move the applicaion folder to trash.
