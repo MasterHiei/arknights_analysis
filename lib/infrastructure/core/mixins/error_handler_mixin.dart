@@ -19,13 +19,14 @@ class ErrorHandlerMixin {
       return right(await run());
     } on AppFailure catch (e) {
       return left(e);
-    } on DioError catch (e) {
+    } on DioError catch (e, stackTrace) {
+      logger.e(e, e, stackTrace);
+
       final code = e.response?.statusCode;
       if (code == HttpStatus.unauthorized) {
         return left(const AppFailure.invalidToken());
       }
-
-      final message = e.response?.statusMessage;
+      final message = e.response?.statusMessage ?? e.message;
       return left(AppFailure.remoteServerError(message: message, code: code));
     } catch (e, stackTrace) {
       logger.e(e, e, stackTrace);

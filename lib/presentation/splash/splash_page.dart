@@ -59,11 +59,14 @@ class SplashPage extends ConsumerWidget {
       gachaPoolProvider,
       (_, next) => next.maybeWhen<void>(
         data: (_) => ref.read(splashProvider.notifier).fetched(context),
-        error: (failure, _) => AppFlushBar.show(
-          context,
-          message: (failure as AppFailure).localizedMessage,
-          severity: FlushBarSeverity.error,
-        ),
+        error: (failure, _) {
+          final errorMessage = (failure as AppFailure).localizedMessage;
+          AppFlushBar.show(
+            context,
+            message: '远程数据读取失败，即将加载本地数据源。\n$errorMessage',
+            severity: FlushBarSeverity.error,
+          );
+        },
         orElse: () {},
       ),
     );

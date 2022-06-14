@@ -16,18 +16,17 @@ class _GameDataRemoteDataSource implements GameDataRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<GachaTableDto> fetchGachaTable() async {
+  Future<String> fetchGachaTable() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GachaTableDto>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/excel/gacha_table.json',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GachaTableDto.fromJson(_result.data!);
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/excel/gacha_table.json',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 

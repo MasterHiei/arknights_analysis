@@ -15,7 +15,7 @@ const asBaseUrl = 'https://as.hypergryph.com';
 const akBaseUrl = 'https://ak.hypergryph.com';
 
 const gameDataBaseUrl =
-    'https://gitee.com/yzyang/ArknightsGameData/raw/master/zh_CN/gamedata';
+    'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
 
 const akLoginPage = 'https://ak.hypergryph.com/user/login';
 
