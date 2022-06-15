@@ -601,7 +601,7 @@ packages:
       name: package_config
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0"
   package_info_plus:
     dependency: "direct main"
     description:
@@ -1047,7 +1047,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.11"
+    version: "2.0.12"
   url_launcher_windows:
     dependency: transitive
     description:
