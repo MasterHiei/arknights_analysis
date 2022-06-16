@@ -33,7 +33,7 @@ dependencies:
   logger: 1.1.0
   modal_bottom_sheet: 2.0.1
   package_info_plus: 1.4.2
-  path: 1.8.2
+  path: 1.8.1
   path_provider: 2.0.11
   pretty_dio_logger: 1.2.0-beta-1
   retrofit: 3.0.1+1
@@ -54,9 +54,6 @@ dev_dependencies:
   json_serializable: 6.2.0
   msix: 3.6.2
   retrofit_generator: 4.0.1
-
-dependency_overrides:
-  path: 1.8.2
 
 flutter:
   uses-material-design: true
