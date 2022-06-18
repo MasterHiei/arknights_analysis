@@ -34,8 +34,8 @@ final _selectedPool = Provider.autoDispose(
   (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
 );
 
-class PortalGachaStatsView extends ConsumerWidget {
-  const PortalGachaStatsView(this.user, {Key? key}) : super(key: key);
+class GachaStatsView extends ConsumerWidget {
+  const GachaStatsView(this.user, {Key? key}) : super(key: key);
 
   final User user;
 
