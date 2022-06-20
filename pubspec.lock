@@ -273,7 +273,7 @@ packages:
       name: data_table_2
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   dbus:
     dependency: transitive
     description:
@@ -907,7 +907,7 @@ packages:
       name: sqlite3
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.1"
+    version: "1.7.2"
   sqlite3_flutter_libs:
     dependency: "direct main"
     description:
