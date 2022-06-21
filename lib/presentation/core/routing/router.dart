@@ -20,6 +20,28 @@ enum Routes {
   final String name;
   final String path;
 
+  GoRoute get route {
+    switch (this) {
+      case Routes.splash:
+        return _buildFadeTransitionPage(
+          this,
+          pageBuilder: (_, __) => const SplashPage(),
+        );
+
+      case Routes.akLogin:
+        return _buildFadeTransitionPage(
+          this,
+          pageBuilder: (_, __) => const AkLoginPage(),
+        );
+
+      case Routes.portal:
+        return _buildFadeTransitionPage(
+          this,
+          pageBuilder: (_, state) => PortalPage(state.extra as PortalParams),
+        );
+    }
+  }
+
   void go(
     BuildContext context, {
     Map<String, String> params = const <String, String>{},
@@ -35,39 +57,28 @@ enum Routes {
 }
 
 final router = GoRouter(
-  routes: [
-    GoRoute(
-      name: Routes.splash.name,
-      path: Routes.splash.path,
-      pageBuilder: (_, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const SplashPage(),
-      ),
-    ),
-    GoRoute(
-      name: Routes.akLogin.name,
-      path: Routes.akLogin.path,
-      pageBuilder: (_, state) => CustomTransitionPage(
-        key: state.pageKey,
-        child: const AkLoginPage(),
-        transitionsBuilder: (_, animation, __, child) => FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-      ),
-    ),
-    GoRoute(
-      name: Routes.portal.name,
-      path: Routes.portal.path,
-      pageBuilder: (_, state) => CustomTransitionPage(
-        key: state.pageKey,
-        child: PortalPage(state.extra as PortalParams),
-        transitionsBuilder: (_, animation, __, child) => FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-      ),
-    ),
-  ],
+  routes: Routes.values.map((route) => route.route).toList(),
   debugLogDiagnostics: kDebugMode,
 );
+
+typedef _PageBuilder = Widget Function(
+  BuildContext context,
+  GoRouterState state,
+);
+
+GoRoute _buildFadeTransitionPage(
+  Routes route, {
+  required _PageBuilder pageBuilder,
+}) =>
+    GoRoute(
+      name: route.name,
+      path: route.path,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        key: state.pageKey,
+        child: pageBuilder(context, state),
+        transitionsBuilder: (_, animation, __, child) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+      ),
+    );
