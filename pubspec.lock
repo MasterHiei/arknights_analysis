@@ -189,7 +189,7 @@ packages:
       name: connectivity_plus
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.3.4"
+    version: "2.3.5"
   connectivity_plus_linux:
     dependency: transitive
     description:
@@ -203,7 +203,7 @@ packages:
       name: connectivity_plus_macos
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.3"
+    version: "1.2.4"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
