@@ -4,6 +4,7 @@ import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/pane/pane_provider.dart';
+import '../core/common/widgets/app_dialog.dart';
 import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
 import '../gacha_stats/gacha_stats_page.dart';
@@ -35,47 +36,16 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   }
 
   @override
-  Future<void> onWindowClose() async {
-    final isPreventClose = await windowManager.isPreventClose();
-    if (!isPreventClose) {
-      return;
-    }
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return ContentDialog(
-          title: const Text('确认'),
-          content: const Text('确定关闭本程序？'),
-          actions: [
-            FilledButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('取消'),
-            ),
-            FilledButton(
-              onPressed: () => windowManager.destroy(),
-              style: ButtonStyle(
-                backgroundColor: ButtonState.resolveWith(
-                  (states) {
-                    if (states.isNone) {
-                      return Colors.red.normal;
-                    }
-                    if (states.isPressing) {
-                      return Colors.red.lighter;
-                    }
-                    if (states.isHovering) {
-                      return Colors.red.light;
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              child: const Text('关闭'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  Future<void> onWindowClose() => AppDialog.show<void>(
+        context,
+        title: const Text('确认'),
+        content: const Text('确定关闭本程序？'),
+        confirmButtonText: '关闭',
+        confirmButtonColor: Colors.red,
+        onConfirmButtonTap: windowManager.destroy,
+        closeButtonText: '取消',
+        closeButtonColor: Colors.blue,
+      );
 
   @override
   Widget build(BuildContext context) {
