@@ -21,6 +21,8 @@ final gameDataRepositoryProvider = Provider.autoDispose<GameDataRepository>(
 );
 
 abstract class GameDataRepository {
+  Future<Either<AppFailure, int>> count();
+
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable();
 
   Future<Either<AppFailure, Unit>> saveGachaTableFromLocalFile();
@@ -38,6 +40,10 @@ class GameDataRepositoryImpl
   final Connectivity _connectivity;
   final GameDataLocalDataSource _localDataSource;
   final GameDataRemoteDataSource _remoteDataSource;
+
+  @override
+  Future<Either<AppFailure, int>> count() =>
+      execute(() => _localDataSource.count());
 
   @override
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable() => execute(

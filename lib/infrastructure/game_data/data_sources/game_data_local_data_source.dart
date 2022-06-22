@@ -11,6 +11,8 @@ final gameDataLocalDataSourceProvider =
 );
 
 abstract class GameDataLocalDataSource {
+  Future<int> count();
+
   Future<GachaTableDto> readGachaPoolsFromLocalFile();
 
   Future<List<int>> saveGachaPools(GachaTableDto dto);
@@ -20,6 +22,9 @@ class GameDataLocalDataSourceImpl implements GameDataLocalDataSource {
   const GameDataLocalDataSourceImpl(this._db);
 
   final AppDatabase _db;
+
+  @override
+  Future<int> count() => _db.gachaPoolsDao.count();
 
   @override
   Future<GachaTableDto> readGachaPoolsFromLocalFile() async {

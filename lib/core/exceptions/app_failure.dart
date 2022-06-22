@@ -6,6 +6,8 @@ part 'app_failure.freezed.dart';
 class AppFailure with _$AppFailure {
   const AppFailure._();
 
+  const factory AppFailure.localizedError(String message) = _LocalizedError;
+
   const factory AppFailure.unexpectedError(Object e) = _UnexpectedError;
 
   const factory AppFailure.networkUnreachable() = _NetworkUnreachable;
@@ -20,6 +22,7 @@ class AppFailure with _$AppFailure {
   const factory AppFailure.invalidToken() = _InvalidToken;
 
   String get localizedMessage => map(
+        localizedError: (f) => f.message,
         unexpectedError: (f) => '未知错误\n ${f.e}',
         networkUnreachable: (_) => '系统检测到网络异常，请确保您的网线没有被猫咬断。',
         remoteServerError: (f) {

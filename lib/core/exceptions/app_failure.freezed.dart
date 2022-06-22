@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -27,6 +28,7 @@ mixin _$AppFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -36,6 +38,7 @@ mixin _$AppFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -46,6 +49,7 @@ mixin _$AppFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -55,6 +59,7 @@ mixin _$AppFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -64,6 +69,7 @@ mixin _$AppFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -88,6 +94,165 @@ class _$AppFailureCopyWithImpl<$Res> implements $AppFailureCopyWith<$Res> {
   final AppFailure _value;
   // ignore: unused_field
   final $Res Function(AppFailure) _then;
+}
+
+/// @nodoc
+abstract class _$$_LocalizedErrorCopyWith<$Res> {
+  factory _$$_LocalizedErrorCopyWith(
+          _$_LocalizedError value, $Res Function(_$_LocalizedError) then) =
+      __$$_LocalizedErrorCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$_LocalizedErrorCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_LocalizedErrorCopyWith<$Res> {
+  __$$_LocalizedErrorCopyWithImpl(
+      _$_LocalizedError _value, $Res Function(_$_LocalizedError) _then)
+      : super(_value, (v) => _then(v as _$_LocalizedError));
+
+  @override
+  _$_LocalizedError get _value => super._value as _$_LocalizedError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$_LocalizedError(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LocalizedError extends _LocalizedError {
+  const _$_LocalizedError(this.message) : super._();
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'AppFailure.localizedError(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LocalizedError &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LocalizedErrorCopyWith<_$_LocalizedError> get copyWith =>
+      __$$_LocalizedErrorCopyWithImpl<_$_LocalizedError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
+    required TResult Function(Object e) unexpectedError,
+    required TResult Function() networkUnreachable,
+    required TResult Function(String? message, int? code) remoteServerError,
+    required TResult Function(Object e) localDataError,
+    required TResult Function() invalidToken,
+  }) {
+    return localizedError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
+    TResult Function(Object e)? unexpectedError,
+    TResult Function()? networkUnreachable,
+    TResult Function(String? message, int? code)? remoteServerError,
+    TResult Function(Object e)? localDataError,
+    TResult Function()? invalidToken,
+  }) {
+    return localizedError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
+    TResult Function(Object e)? unexpectedError,
+    TResult Function()? networkUnreachable,
+    TResult Function(String? message, int? code)? remoteServerError,
+    TResult Function(Object e)? localDataError,
+    TResult Function()? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (localizedError != null) {
+      return localizedError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
+    required TResult Function(_UnexpectedError value) unexpectedError,
+    required TResult Function(_NetworkUnreachable value) networkUnreachable,
+    required TResult Function(_RemoteServerError value) remoteServerError,
+    required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_InvalidToken value) invalidToken,
+  }) {
+    return localizedError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
+    TResult Function(_UnexpectedError value)? unexpectedError,
+    TResult Function(_NetworkUnreachable value)? networkUnreachable,
+    TResult Function(_RemoteServerError value)? remoteServerError,
+    TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_InvalidToken value)? invalidToken,
+  }) {
+    return localizedError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
+    TResult Function(_UnexpectedError value)? unexpectedError,
+    TResult Function(_NetworkUnreachable value)? networkUnreachable,
+    TResult Function(_RemoteServerError value)? remoteServerError,
+    TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_InvalidToken value)? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (localizedError != null) {
+      return localizedError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocalizedError extends AppFailure {
+  const factory _LocalizedError(final String message) = _$_LocalizedError;
+  const _LocalizedError._() : super._();
+
+  String get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_LocalizedErrorCopyWith<_$_LocalizedError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -155,6 +320,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -167,6 +333,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -179,6 +346,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -195,6 +363,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -207,6 +376,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -219,6 +389,7 @@ class _$_UnexpectedError extends _UnexpectedError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -284,6 +455,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -296,6 +468,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -308,6 +481,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -324,6 +498,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -336,6 +511,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -348,6 +524,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -443,6 +620,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -455,6 +633,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -467,6 +646,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -483,6 +663,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -495,6 +676,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -507,6 +689,7 @@ class _$_RemoteServerError extends _RemoteServerError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -598,6 +781,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -610,6 +794,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -622,6 +807,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -638,6 +824,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -650,6 +837,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -662,6 +850,7 @@ class _$_LocalDataError extends _LocalDataError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -726,6 +915,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
     required TResult Function(Object e) unexpectedError,
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
@@ -738,6 +928,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -750,6 +941,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
     TResult Function(Object e)? unexpectedError,
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
@@ -766,6 +958,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
     required TResult Function(_UnexpectedError value) unexpectedError,
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
@@ -778,6 +971,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
@@ -790,6 +984,7 @@ class _$_InvalidToken extends _InvalidToken {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
     TResult Function(_UnexpectedError value)? unexpectedError,
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,

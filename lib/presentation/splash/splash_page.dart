@@ -63,7 +63,7 @@ class SplashPage extends ConsumerWidget {
           final errorMessage = (failure as AppFailure).localizedMessage;
           AppFlushBar.show(
             context,
-            message: '远程数据读取失败，即将加载本地数据源。\n$errorMessage',
+            message: errorMessage,
             severity: FlushBarSeverity.error,
           );
         },

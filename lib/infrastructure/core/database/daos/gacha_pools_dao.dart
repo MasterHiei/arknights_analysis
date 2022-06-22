@@ -11,6 +11,13 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaPoolsDaoMixin {
   GachaPoolsDao(AppDatabase db) : super(db);
 
+  Future<int> count() async {
+    final countColumn = countAll();
+    final query = selectOnly(gachaPools)..addColumns([countColumn]);
+    final result = await query.getSingle();
+    return result.read(countColumn);
+  }
+
   Future<List<int>> replaceInto(GachaTableDto gachaTable) async {
     final futures = gachaTable.gachaPoolClient.map((pool) {
       final entity = GachaPool.fromJson(pool.toJson());
