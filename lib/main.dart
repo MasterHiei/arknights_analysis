@@ -26,6 +26,7 @@ Future<Widget> _initializeApp() async {
     windowManager.waitUntilReadyToShow(options, () async {
       await windowManager.show();
       await windowManager.focus();
+      await windowManager.setPreventClose(true);
     });
   }
 
