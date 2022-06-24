@@ -15,7 +15,7 @@ dependencies:
   connectivity_plus: 2.3.5
   dartx: 1.1.0
   dartz: 0.10.1
-  data_table_2: 2.3.2
+  data_table_2: 2.3.3
   dio: 4.0.6
   drift: 1.6.0
   easy_localization: 3.0.1
