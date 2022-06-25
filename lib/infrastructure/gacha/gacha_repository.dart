@@ -7,7 +7,7 @@ import '../../core/enums/gacha_rule_type.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/core/common/pagination.dart';
-import '../../domain/gacha/gacha.dart';
+import '../../domain/gacha/gacha_char.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
@@ -39,9 +39,8 @@ abstract class GachaRepository {
     List<GachaRuleType>? excludeRuleTypes,
   });
 
-  Future<Either<AppFailure, Gacha>> paginate(
+  Future<Either<AppFailure, List<GachaChar>>> getHistory(
     Uid uid, {
-    required int page,
     String? pool,
   });
 }
@@ -112,17 +111,16 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       });
 
   @override
-  Future<Either<AppFailure, Gacha>> paginate(
+  Future<Either<AppFailure, List<GachaChar>>> getHistory(
     Uid uid, {
-    required int page,
     String? pool,
   }) =>
       execute(() async {
-        final dto = await _localDataSource.paginate(
-          uid,
-          page: page,
-          pool: pool,
-        );
-        return dto.toDomain();
+        final dtos = await _localDataSource.getRecords(uid, pool: pool);
+        return dtos
+            .map((dto) => dto.toDomain())
+            .map((record) => record.chars)
+            .flatten()
+            .toList();
       });
 }

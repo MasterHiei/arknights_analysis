@@ -1,7 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:drift/drift.dart';
 
-import '../../../../core/constants/constants.dart';
 import '../../../../core/enums/gacha_rule_type.dart';
 import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
@@ -72,6 +71,7 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
   Future<GachaDto> paginate(
     String uid, {
     required int page,
+    required int pageSize,
     String? pool,
   }) async {
     final offset = (page - 1) * pageSize;

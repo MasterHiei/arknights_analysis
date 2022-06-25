@@ -7,6 +7,7 @@ import '../../application/pane/pane_provider.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
+import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 
 class PortalPage extends ConsumerStatefulWidget {
@@ -52,25 +53,30 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     final token = widget.params.token;
     final bodyItems = [
       GachaStatsPage(token),
+      GachaHistoryPage(token),
     ];
+    final index = ref.watch(paneProvider).selectedIndex;
     return NavigationView(
-      pane: _navigationPane,
-      content: Consumer(builder: (_, ref, __) {
-        return NavigationBody.builder(
-          index: ref.watch(paneProvider).selectedIndex,
-          itemBuilder: (_, index) => bodyItems[index],
-          itemCount: bodyItems.length,
-        );
-      }),
+      pane: _buildPane(index),
+      content: NavigationBody.builder(
+        index: index,
+        itemBuilder: (_, index) => bodyItems[index],
+        itemCount: bodyItems.length,
+      ),
     );
   }
 
-  NavigationPane get _navigationPane => NavigationPane(
+  NavigationPane _buildPane(int selected) => NavigationPane(
+        selected: selected,
         onChanged: ref.read(paneProvider.notifier).select,
         items: [
           PaneItem(
             icon: const Icon(FluentIcons.chart),
             title: const Text('寻访统计'),
+          ),
+          PaneItem(
+            icon: const Icon(FluentIcons.full_history),
+            title: const Text('寻访记录'),
           ),
         ],
         footerItems: [

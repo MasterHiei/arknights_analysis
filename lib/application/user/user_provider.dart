@@ -45,7 +45,7 @@ class UserNotifier extends StateNotifier<UserState> with DebounceMixin {
     } else {
       AppFlushBar.show(
         context,
-        message: '您的请求过于频繁，请稍后重试。',
+        message: '太快了！这还不到${minRequestInterval.inMinutes}分钟呢！',
         severity: FlushBarSeverity.warning,
       );
     }

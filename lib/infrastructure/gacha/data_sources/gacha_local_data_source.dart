@@ -26,6 +26,7 @@ abstract class GachaLocalDataSource {
   Future<GachaDto> paginate(
     Uid uid, {
     required int page,
+    required int pageSize,
     String? pool,
   });
 }
@@ -60,7 +61,13 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
   Future<GachaDto> paginate(
     Uid uid, {
     required int page,
+    required int pageSize,
     String? pool,
   }) =>
-      _db.gachaRecordsDao.paginate(uid.getOrCrash(), page: page, pool: pool);
+      _db.gachaRecordsDao.paginate(
+        uid.getOrCrash(),
+        page: page,
+        pageSize: pageSize,
+        pool: pool,
+      );
 }

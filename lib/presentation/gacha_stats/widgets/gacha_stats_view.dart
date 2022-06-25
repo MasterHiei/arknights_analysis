@@ -380,13 +380,19 @@ class _PieChart extends StatelessWidget {
   Future<void> _showCharsTable(BuildContext context, Rarity rarity) async {
     final columns = [
       DataColumn2(label: const SizedBox(), fixedWidth: 80.w),
-      const DataColumn2(label: Text('干员')),
+      const DataColumn2(label: Text('干员'), size: ColumnSize.L),
       const DataColumn2(label: Text('抽数'), size: ColumnSize.S),
-      const DataColumn2(label: Text('寻访')),
-      const DataColumn2(label: Text('获取时间')),
+      const DataColumn2(label: Text('寻访'), size: ColumnSize.L),
+      const DataColumn2(label: Text('获取时间'), size: ColumnSize.L),
     ];
     final rows = stats.filterWithPulls(rarity).reversed.mapIndexed(
       (index, pair) {
+        DataCell buildTextCell(String text) => DataCell(
+              Text(
+                text,
+                style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
+              ),
+            );
         final char = pair.first;
         final pulls = pair.second;
         return DataRow2.byIndex(
@@ -423,24 +429,9 @@ class _PieChart extends StatelessWidget {
                 ),
               ),
             ),
-            DataCell(
-              Text(
-                '$pulls',
-                style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
-              ),
-            ),
-            DataCell(
-              Text(
-                char.pool,
-                style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
-              ),
-            ),
-            DataCell(
-              Text(
-                char.ts.dateTime.yMMMdHmsString,
-                style: TextStyle(color: Colors.grey[120], fontSize: 14.sp),
-              ),
-            ),
+            buildTextCell('$pulls'),
+            buildTextCell(char.pool),
+            buildTextCell(char.ts.dateTime.yMMMdHmsString),
           ],
         );
       },
@@ -458,7 +449,7 @@ class _PieChart extends StatelessWidget {
     await showCustomModalBottomSheet<void>(
       context: context,
       builder: (_) => Container(
-        height: 480.h,
+        height: 540.h,
         padding: EdgeInsets.only(left: 12.w, top: 16.h, right: 12.w),
         child: dataTable,
       ),
@@ -467,7 +458,7 @@ class _PieChart extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: 24.h,
-              horizontal: 540.w,
+              horizontal: 480.w,
             ),
             child: Material(
               clipBehavior: Clip.antiAlias,
