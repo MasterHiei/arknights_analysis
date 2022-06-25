@@ -31,7 +31,7 @@ dependencies:
   intl: 0.17.0
   json_annotation: 4.5.0
   logger: 1.1.0
-  modal_bottom_sheet: 2.0.1
+  modal_bottom_sheet: 2.1.0
   package_info_plus: 1.4.2
   path: 1.8.1
   path_provider: 2.0.11

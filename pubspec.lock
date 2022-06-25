@@ -580,7 +580,7 @@ packages:
       name: modal_bottom_sheet
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0"
   msix:
     dependency: "direct dev"
     description:
