@@ -82,14 +82,23 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         footerItems: [
           PaneItemAction(
             icon: const Icon(FluentIcons.sign_out),
-            onTap: () {
-              if (!_webviewController.value.isInitialized) {
-                return;
-              }
-              _webviewController
-                  .clearCookies()
-                  .then((_) => Routes.splash.go(context));
-            },
+            onTap: () => AppDialog.show<void>(
+              context,
+              title: const Text('确认'),
+              content: const Text('确定退出登录吗？'),
+              confirmButtonText: '退出',
+              confirmButtonColor: Colors.red,
+              onConfirmButtonTap: () async {
+                if (!_webviewController.value.isInitialized) {
+                  return;
+                }
+                await _webviewController.clearCookies();
+                if (!mounted) return;
+                Routes.splash.go(context);
+              },
+              closeButtonText: '取消',
+              closeButtonColor: Colors.blue,
+            ),
             title: const Text('退出登录'),
           ),
         ],
