@@ -273,7 +273,7 @@ packages:
       name: data_table_2
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.3.3"
+    version: "2.3.5"
   dbus:
     dependency: transitive
     description:
