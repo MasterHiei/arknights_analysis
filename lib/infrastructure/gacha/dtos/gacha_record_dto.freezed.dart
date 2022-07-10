@@ -212,14 +212,14 @@ abstract class _GachaRecordDto extends GachaRecordDto {
       _$_GachaRecordDto.fromJson;
 
   @override
-  int get ts => throw _privateConstructorUsedError;
+  int get ts;
   @override
-  String get pool => throw _privateConstructorUsedError;
+  String get pool;
   @override
-  List<GachaCharDto> get chars => throw _privateConstructorUsedError;
+  List<GachaCharDto> get chars;
   @override
   @JsonKey(defaultValue: '')
-  String get uid => throw _privateConstructorUsedError;
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$_GachaRecordDtoCopyWith<_$_GachaRecordDto> get copyWith =>

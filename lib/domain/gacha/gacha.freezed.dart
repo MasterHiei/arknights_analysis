@@ -153,9 +153,9 @@ abstract class _Gacha implements Gacha {
       required final Pagination pagination}) = _$_Gacha;
 
   @override
-  List<GachaRecord> get list => throw _privateConstructorUsedError;
+  List<GachaRecord> get list;
   @override
-  Pagination get pagination => throw _privateConstructorUsedError;
+  Pagination get pagination;
   @override
   @JsonKey(ignore: true)
   _$$_GachaCopyWith<_$_Gacha> get copyWith =>

@@ -174,9 +174,9 @@ abstract class _GachaDto extends GachaDto {
   factory _GachaDto.fromJson(Map<String, dynamic> json) = _$_GachaDto.fromJson;
 
   @override
-  List<GachaRecordDto> get list => throw _privateConstructorUsedError;
+  List<GachaRecordDto> get list;
   @override
-  PaginationDto get pagination => throw _privateConstructorUsedError;
+  PaginationDto get pagination;
   @override
   @JsonKey(ignore: true)
   _$$_GachaDtoCopyWith<_$_GachaDto> get copyWith =>

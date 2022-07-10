@@ -224,17 +224,17 @@ abstract class _GachaPool extends GachaPool {
   const _GachaPool._() : super._();
 
   @override
-  String get gachaPoolId => throw _privateConstructorUsedError;
+  String get gachaPoolId;
   @override
-  int get gachaIndex => throw _privateConstructorUsedError;
+  int get gachaIndex;
   @override
-  int get openTime => throw _privateConstructorUsedError;
+  int get openTime;
   @override
-  int get endTime => throw _privateConstructorUsedError;
+  int get endTime;
   @override
-  String get gachaPoolName => throw _privateConstructorUsedError;
+  String get gachaPoolName;
   @override
-  GachaRuleType get gachaRuleType => throw _privateConstructorUsedError;
+  GachaRuleType get gachaRuleType;
   @override
   @JsonKey(ignore: true)
   _$$_GachaPoolCopyWith<_$_GachaPool> get copyWith =>

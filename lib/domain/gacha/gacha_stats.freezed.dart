@@ -145,9 +145,9 @@ abstract class _GachaStats extends GachaStats {
   const _GachaStats._() : super._();
 
   @override
-  Uid get uid => throw _privateConstructorUsedError;
+  Uid get uid;
   @override
-  List<GachaChar> get chars => throw _privateConstructorUsedError;
+  List<GachaChar> get chars;
   @override
   @JsonKey(ignore: true)
   _$$_GachaStatsCopyWith<_$_GachaStats> get copyWith =>

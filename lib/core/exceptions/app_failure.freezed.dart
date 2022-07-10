@@ -249,7 +249,7 @@ abstract class _LocalizedError extends AppFailure {
   const factory _LocalizedError(final String message) = _$_LocalizedError;
   const _LocalizedError._() : super._();
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$_LocalizedErrorCopyWith<_$_LocalizedError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -408,7 +408,7 @@ abstract class _UnexpectedError extends AppFailure {
   const factory _UnexpectedError(final Object e) = _$_UnexpectedError;
   const _UnexpectedError._() : super._();
 
-  Object get e => throw _privateConstructorUsedError;
+  Object get e;
   @JsonKey(ignore: true)
   _$$_UnexpectedErrorCopyWith<_$_UnexpectedError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -709,8 +709,8 @@ abstract class _RemoteServerError extends AppFailure {
       _$_RemoteServerError;
   const _RemoteServerError._() : super._();
 
-  String? get message => throw _privateConstructorUsedError;
-  int? get code => throw _privateConstructorUsedError;
+  String? get message;
+  int? get code;
   @JsonKey(ignore: true)
   _$$_RemoteServerErrorCopyWith<_$_RemoteServerError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -869,7 +869,7 @@ abstract class _LocalDataError extends AppFailure {
   const factory _LocalDataError(final Object e) = _$_LocalDataError;
   const _LocalDataError._() : super._();
 
-  Object get e => throw _privateConstructorUsedError;
+  Object get e;
   @JsonKey(ignore: true)
   _$$_LocalDataErrorCopyWith<_$_LocalDataError> get copyWith =>
       throw _privateConstructorUsedError;

@@ -166,11 +166,11 @@ abstract class _UserState extends UserState {
   const _UserState._() : super._();
 
   @override
-  bool get isRefreshing => throw _privateConstructorUsedError;
+  bool get isRefreshing;
   @override
-  Option<User> get userOption => throw _privateConstructorUsedError;
+  Option<User> get userOption;
   @override
-  Option<AppFailure> get failureOption => throw _privateConstructorUsedError;
+  Option<AppFailure> get failureOption;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

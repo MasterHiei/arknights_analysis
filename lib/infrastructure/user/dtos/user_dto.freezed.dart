@@ -175,12 +175,12 @@ abstract class _UserDto extends UserDto {
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
 
   @override
-  String get uid => throw _privateConstructorUsedError;
+  String get uid;
   @override
-  String get nickName => throw _privateConstructorUsedError;
+  String get nickName;
   @override
   @JsonKey(defaultValue: '')
-  String get token => throw _privateConstructorUsedError;
+  String get token;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

@@ -141,9 +141,9 @@ abstract class _GetGachaHistoryParams implements GetGachaHistoryParams {
       {required final Uid uid, final String? pool}) = _$_GetGachaHistoryParams;
 
   @override
-  Uid get uid => throw _privateConstructorUsedError;
+  Uid get uid;
   @override
-  String? get pool => throw _privateConstructorUsedError;
+  String? get pool;
   @override
   @JsonKey(ignore: true)
   _$$_GetGachaHistoryParamsCopyWith<_$_GetGachaHistoryParams> get copyWith =>

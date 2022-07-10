@@ -49,5 +49,5 @@ abstract class PortalParams implements RouteParams {
   const factory PortalParams({required final Token token}) = _$PortalParams;
 
   @override
-  Token get token => throw _privateConstructorUsedError;
+  Token get token;
 }

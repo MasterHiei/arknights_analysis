@@ -222,8 +222,8 @@ abstract class _Fetching implements GachaState {
   const factory _Fetching({required final int current, final int? total}) =
       _$_Fetching;
 
-  int get current => throw _privateConstructorUsedError;
-  int? get total => throw _privateConstructorUsedError;
+  int get current;
+  int? get total;
   @JsonKey(ignore: true)
   _$$_FetchingCopyWith<_$_Fetching> get copyWith =>
       throw _privateConstructorUsedError;
@@ -479,7 +479,7 @@ class _$_Failure implements _Failure {
 abstract class _Failure implements GachaState {
   const factory _Failure(final AppFailure failure) = _$_Failure;
 
-  AppFailure get failure => throw _privateConstructorUsedError;
+  AppFailure get failure;
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<_$_Failure> get copyWith =>
       throw _privateConstructorUsedError;

@@ -180,13 +180,13 @@ abstract class _GachaRecord implements GachaRecord {
       required final Uid uid}) = _$_GachaRecord;
 
   @override
-  Ts get ts => throw _privateConstructorUsedError;
+  Ts get ts;
   @override
-  String get pool => throw _privateConstructorUsedError;
+  String get pool;
   @override
-  List<GachaChar> get chars => throw _privateConstructorUsedError;
+  List<GachaChar> get chars;
   @override
-  Uid get uid => throw _privateConstructorUsedError;
+  Uid get uid;
   @override
   @JsonKey(ignore: true)
   _$$_GachaRecordCopyWith<_$_GachaRecord> get copyWith =>

@@ -175,11 +175,11 @@ abstract class _GachaCharDto extends GachaCharDto {
       _$_GachaCharDto.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  Rarity get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity;
   @override
-  bool get isNew => throw _privateConstructorUsedError;
+  bool get isNew;
   @override
   @JsonKey(ignore: true)
   _$$_GachaCharDtoCopyWith<_$_GachaCharDto> get copyWith =>

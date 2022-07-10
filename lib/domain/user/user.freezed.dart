@@ -150,11 +150,11 @@ abstract class _User implements User {
       required final Token token}) = _$_User;
 
   @override
-  Uid get uid => throw _privateConstructorUsedError;
+  Uid get uid;
   @override
-  String get nickName => throw _privateConstructorUsedError;
+  String get nickName;
   @override
-  Token get token => throw _privateConstructorUsedError;
+  Token get token;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

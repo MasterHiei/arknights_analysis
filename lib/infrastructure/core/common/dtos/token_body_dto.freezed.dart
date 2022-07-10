@@ -190,12 +190,12 @@ abstract class _TokenBodyDto implements TokenBodyDto {
       _$_TokenBodyDto.fromJson;
 
   @override
-  int get appId => throw _privateConstructorUsedError;
+  int get appId;
   @override
-  int get channelMasterId => throw _privateConstructorUsedError;
+  int get channelMasterId;
   @override
   @JsonKey(name: 'channelToken', fromJson: _tokenFromJson, toJson: _tokenToJson)
-  String get token => throw _privateConstructorUsedError;
+  String get token;
   @override
   @JsonKey(ignore: true)
   _$$_TokenBodyDtoCopyWith<_$_TokenBodyDto> get copyWith =>

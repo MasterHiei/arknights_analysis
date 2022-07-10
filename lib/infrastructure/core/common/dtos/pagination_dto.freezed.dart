@@ -159,9 +159,9 @@ abstract class _PaginationDto extends PaginationDto {
       _$_PaginationDto.fromJson;
 
   @override
-  int get current => throw _privateConstructorUsedError;
+  int get current;
   @override
-  int get total => throw _privateConstructorUsedError;
+  int get total;
   @override
   @JsonKey(ignore: true)
   _$$_PaginationDtoCopyWith<_$_PaginationDto> get copyWith =>

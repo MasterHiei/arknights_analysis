@@ -235,7 +235,7 @@ abstract class _InvalidUid<T> implements ValueFailure<T> {
   const factory _InvalidUid({required final T failedValue}) = _$_InvalidUid<T>;
 
   @override
-  T get failedValue => throw _privateConstructorUsedError;
+  T get failedValue;
   @override
   @JsonKey(ignore: true)
   _$$_InvalidUidCopyWith<T, _$_InvalidUid<T>> get copyWith =>
@@ -381,7 +381,7 @@ abstract class _InvalidToken<T> implements ValueFailure<T> {
       _$_InvalidToken<T>;
 
   @override
-  T get failedValue => throw _privateConstructorUsedError;
+  T get failedValue;
   @override
   @JsonKey(ignore: true)
   _$$_InvalidTokenCopyWith<T, _$_InvalidToken<T>> get copyWith =>
@@ -526,7 +526,7 @@ abstract class _InvalidTs<T> implements ValueFailure<T> {
   const factory _InvalidTs({required final T failedValue}) = _$_InvalidTs<T>;
 
   @override
-  T get failedValue => throw _privateConstructorUsedError;
+  T get failedValue;
   @override
   @JsonKey(ignore: true)
   _$$_InvalidTsCopyWith<T, _$_InvalidTs<T>> get copyWith =>

@@ -138,9 +138,9 @@ abstract class _Pagination extends Pagination {
   const _Pagination._() : super._();
 
   @override
-  int get current => throw _privateConstructorUsedError;
+  int get current;
   @override
-  int get total => throw _privateConstructorUsedError;
+  int get total;
   @override
   @JsonKey(ignore: true)
   _$$_PaginationCopyWith<_$_Pagination> get copyWith =>

@@ -203,13 +203,13 @@ abstract class _GachaResponseDto implements GachaResponseDto {
       _$_GachaResponseDto.fromJson;
 
   @override
-  int? get code => throw _privateConstructorUsedError;
+  int? get code;
   @override
   @JsonKey(defaultValue: '')
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @override
   @JsonKey(fromJson: _dataFromJson)
-  GachaDto? get data => throw _privateConstructorUsedError;
+  GachaDto? get data;
   @override
   @JsonKey(ignore: true)
   _$$_GachaResponseDtoCopyWith<_$_GachaResponseDto> get copyWith =>

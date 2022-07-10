@@ -146,7 +146,7 @@ abstract class _GachaTableDto implements GachaTableDto {
       _$_GachaTableDto.fromJson;
 
   @override
-  List<GachaPoolDto> get gachaPoolClient => throw _privateConstructorUsedError;
+  List<GachaPoolDto> get gachaPoolClient;
   @override
   @JsonKey(ignore: true)
   _$$_GachaTableDtoCopyWith<_$_GachaTableDto> get copyWith =>

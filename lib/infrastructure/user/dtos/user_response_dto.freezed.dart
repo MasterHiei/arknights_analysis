@@ -194,12 +194,12 @@ abstract class _UserResponseDto implements UserResponseDto {
       _$_UserResponseDto.fromJson;
 
   @override
-  int? get status => throw _privateConstructorUsedError;
+  int? get status;
   @override
   @JsonKey(defaultValue: '')
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @override
-  UserDto? get data => throw _privateConstructorUsedError;
+  UserDto? get data;
   @override
   @JsonKey(ignore: true)
   _$$_UserResponseDtoCopyWith<_$_UserResponseDto> get copyWith =>

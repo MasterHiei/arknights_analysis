@@ -204,15 +204,13 @@ abstract class _GetGachaStatsParams implements GetGachaStatsParams {
       final List<GachaRuleType>? excludeRuleTypes}) = _$_GetGachaStatsParams;
 
   @override
-  Uid get uid => throw _privateConstructorUsedError;
+  Uid get uid;
   @override
-  String? get pool => throw _privateConstructorUsedError;
+  String? get pool;
   @override
-  List<GachaRuleType>? get includeRuleTypes =>
-      throw _privateConstructorUsedError;
+  List<GachaRuleType>? get includeRuleTypes;
   @override
-  List<GachaRuleType>? get excludeRuleTypes =>
-      throw _privateConstructorUsedError;
+  List<GachaRuleType>? get excludeRuleTypes;
   @override
   @JsonKey(ignore: true)
   _$$_GetGachaStatsParamsCopyWith<_$_GetGachaStatsParams> get copyWith =>

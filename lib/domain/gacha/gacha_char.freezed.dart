@@ -189,15 +189,15 @@ abstract class _GachaChar implements GachaChar {
       required final Ts ts}) = _$_GachaChar;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  Rarity get rarity => throw _privateConstructorUsedError;
+  Rarity get rarity;
   @override
-  bool get isNew => throw _privateConstructorUsedError;
+  bool get isNew;
   @override
-  String get pool => throw _privateConstructorUsedError;
+  String get pool;
   @override
-  Ts get ts => throw _privateConstructorUsedError;
+  Ts get ts;
   @override
   @JsonKey(ignore: true)
   _$$_GachaCharCopyWith<_$_GachaChar> get copyWith =>
