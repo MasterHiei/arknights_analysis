@@ -19,18 +19,21 @@ mixin _$AkLoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(AppFailure failure) failed,
     required TResult Function() shouldGo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
     required TResult orElse(),
   }) =>
@@ -92,6 +95,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(AppFailure failure) failed,
     required TResult Function() shouldGo,
   }) {
     return init();
@@ -101,6 +105,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
   }) {
     return init?.call();
@@ -110,6 +115,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
     required TResult orElse(),
   }) {
@@ -122,6 +128,118 @@ class _$_Init implements _Init {
 
 abstract class _Init implements AkLoginState {
   const factory _Init() = _$_Init;
+}
+
+/// @nodoc
+abstract class _$$_FailedCopyWith<$Res> {
+  factory _$$_FailedCopyWith(_$_Failed value, $Res Function(_$_Failed) then) =
+      __$$_FailedCopyWithImpl<$Res>;
+  $Res call({AppFailure failure});
+
+  $AppFailureCopyWith<$Res> get failure;
+}
+
+/// @nodoc
+class __$$_FailedCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res>
+    implements _$$_FailedCopyWith<$Res> {
+  __$$_FailedCopyWithImpl(_$_Failed _value, $Res Function(_$_Failed) _then)
+      : super(_value, (v) => _then(v as _$_Failed));
+
+  @override
+  _$_Failed get _value => super._value as _$_Failed;
+
+  @override
+  $Res call({
+    Object? failure = freezed,
+  }) {
+    return _then(_$_Failed(
+      failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as AppFailure,
+    ));
+  }
+
+  @override
+  $AppFailureCopyWith<$Res> get failure {
+    return $AppFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Failed implements _Failed {
+  const _$_Failed(this.failure);
+
+  @override
+  final AppFailure failure;
+
+  @override
+  String toString() {
+    return 'AkLoginState.failed(failure: $failure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Failed &&
+            const DeepCollectionEquality().equals(other.failure, failure));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_FailedCopyWith<_$_Failed> get copyWith =>
+      __$$_FailedCopyWithImpl<_$_Failed>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(AppFailure failure) failed,
+    required TResult Function() shouldGo,
+  }) {
+    return failed(failure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
+    TResult Function()? shouldGo,
+  }) {
+    return failed?.call(failure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
+    TResult Function()? shouldGo,
+    required TResult orElse(),
+  }) {
+    if (failed != null) {
+      return failed(failure);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Failed implements AkLoginState {
+  const factory _Failed(final AppFailure failure) = _$_Failed;
+
+  AppFailure get failure;
+  @JsonKey(ignore: true)
+  _$$_FailedCopyWith<_$_Failed> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -165,6 +283,7 @@ class _$_ShouldGo implements _ShouldGo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(AppFailure failure) failed,
     required TResult Function() shouldGo,
   }) {
     return shouldGo();
@@ -174,6 +293,7 @@ class _$_ShouldGo implements _ShouldGo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
   }) {
     return shouldGo?.call();
@@ -183,6 +303,7 @@ class _$_ShouldGo implements _ShouldGo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(AppFailure failure)? failed,
     TResult Function()? shouldGo,
     required TResult orElse(),
   }) {
