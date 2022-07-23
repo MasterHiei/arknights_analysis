@@ -175,7 +175,9 @@ class _$_TokenBodyDto implements _TokenBodyDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TokenBodyDtoToJson(this);
+    return _$$_TokenBodyDtoToJson(
+      this,
+    );
   }
 }
 

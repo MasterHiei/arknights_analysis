@@ -38,6 +38,7 @@ class _MainApp extends StatelessWidget {
         brightness: Brightness.dark,
         fontFamily: 'SourceHanSC',
       ),
+      routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
       builder: BotToastInit(),

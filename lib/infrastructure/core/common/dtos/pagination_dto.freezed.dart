@@ -145,7 +145,9 @@ class _$_PaginationDto extends _PaginationDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationDtoToJson(this);
+    return _$$_PaginationDtoToJson(
+      this,
+    );
   }
 }
 

@@ -160,7 +160,9 @@ class _$_GachaCharDto extends _GachaCharDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaCharDtoToJson(this);
+    return _$$_GachaCharDtoToJson(
+      this,
+    );
   }
 }
 

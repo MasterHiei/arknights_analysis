@@ -188,7 +188,9 @@ class _$_GachaResponseDto implements _GachaResponseDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaResponseDtoToJson(this);
+    return _$$_GachaResponseDtoToJson(
+      this,
+    );
   }
 }
 

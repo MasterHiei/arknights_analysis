@@ -134,7 +134,9 @@ class _$_GachaTableDto implements _GachaTableDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaTableDtoToJson(this);
+    return _$$_GachaTableDtoToJson(
+      this,
+    );
   }
 }
 

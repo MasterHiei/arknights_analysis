@@ -23,7 +23,7 @@ Map<String, dynamic> _$$_GachaPoolDtoToJson(_$_GachaPoolDto instance) =>
       'openTime': instance.openTime,
       'endTime': instance.endTime,
       'gachaPoolName': instance.gachaPoolName,
-      'gachaRuleType': _$GachaRuleTypeEnumMap[instance.gachaRuleType],
+      'gachaRuleType': _$GachaRuleTypeEnumMap[instance.gachaRuleType]!,
     };
 
 const _$GachaRuleTypeEnumMap = {

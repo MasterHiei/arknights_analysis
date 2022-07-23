@@ -16,7 +16,7 @@ _$_GachaCharDto _$$_GachaCharDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_GachaCharDtoToJson(_$_GachaCharDto instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'rarity': _$RarityEnumMap[instance.rarity],
+      'rarity': _$RarityEnumMap[instance.rarity]!,
       'isNew': instance.isNew,
     };
 

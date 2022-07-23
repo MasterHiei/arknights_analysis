@@ -180,7 +180,9 @@ class _$_UserResponseDto implements _UserResponseDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserResponseDtoToJson(this);
+    return _$$_UserResponseDtoToJson(
+      this,
+    );
   }
 }
 

@@ -161,7 +161,9 @@ class _$_GachaDto extends _GachaDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaDtoToJson(this);
+    return _$$_GachaDtoToJson(
+      this,
+    );
   }
 }
 

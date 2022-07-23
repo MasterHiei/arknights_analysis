@@ -226,7 +226,9 @@ class _$_GachaPoolDto extends _GachaPoolDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GachaPoolDtoToJson(this);
+    return _$$_GachaPoolDtoToJson(
+      this,
+    );
   }
 }
 
