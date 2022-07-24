@@ -20,21 +20,21 @@ mixin _$AkLoginState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(AppFailure failure) failed,
-    required TResult Function() shouldGo,
+    required TResult Function() loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -96,7 +96,7 @@ class _$_Init implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(AppFailure failure) failed,
-    required TResult Function() shouldGo,
+    required TResult Function() loggedIn,
   }) {
     return init();
   }
@@ -106,7 +106,7 @@ class _$_Init implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
   }) {
     return init?.call();
   }
@@ -116,7 +116,7 @@ class _$_Init implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -203,7 +203,7 @@ class _$_Failed implements _Failed {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(AppFailure failure) failed,
-    required TResult Function() shouldGo,
+    required TResult Function() loggedIn,
   }) {
     return failed(failure);
   }
@@ -213,7 +213,7 @@ class _$_Failed implements _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
   }) {
     return failed?.call(failure);
   }
@@ -223,7 +223,7 @@ class _$_Failed implements _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -243,37 +243,37 @@ abstract class _Failed implements AkLoginState {
 }
 
 /// @nodoc
-abstract class _$$_ShouldGoCopyWith<$Res> {
-  factory _$$_ShouldGoCopyWith(
-          _$_ShouldGo value, $Res Function(_$_ShouldGo) then) =
-      __$$_ShouldGoCopyWithImpl<$Res>;
+abstract class _$$_LoggedInCopyWith<$Res> {
+  factory _$$_LoggedInCopyWith(
+          _$_LoggedIn value, $Res Function(_$_LoggedIn) then) =
+      __$$_LoggedInCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ShouldGoCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res>
-    implements _$$_ShouldGoCopyWith<$Res> {
-  __$$_ShouldGoCopyWithImpl(
-      _$_ShouldGo _value, $Res Function(_$_ShouldGo) _then)
-      : super(_value, (v) => _then(v as _$_ShouldGo));
+class __$$_LoggedInCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res>
+    implements _$$_LoggedInCopyWith<$Res> {
+  __$$_LoggedInCopyWithImpl(
+      _$_LoggedIn _value, $Res Function(_$_LoggedIn) _then)
+      : super(_value, (v) => _then(v as _$_LoggedIn));
 
   @override
-  _$_ShouldGo get _value => super._value as _$_ShouldGo;
+  _$_LoggedIn get _value => super._value as _$_LoggedIn;
 }
 
 /// @nodoc
 
-class _$_ShouldGo implements _ShouldGo {
-  const _$_ShouldGo();
+class _$_LoggedIn implements _LoggedIn {
+  const _$_LoggedIn();
 
   @override
   String toString() {
-    return 'AkLoginState.shouldGo()';
+    return 'AkLoginState.loggedIn()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ShouldGo);
+        (other.runtimeType == runtimeType && other is _$_LoggedIn);
   }
 
   @override
@@ -284,9 +284,9 @@ class _$_ShouldGo implements _ShouldGo {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(AppFailure failure) failed,
-    required TResult Function() shouldGo,
+    required TResult Function() loggedIn,
   }) {
-    return shouldGo();
+    return loggedIn();
   }
 
   @override
@@ -294,9 +294,9 @@ class _$_ShouldGo implements _ShouldGo {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
   }) {
-    return shouldGo?.call();
+    return loggedIn?.call();
   }
 
   @override
@@ -304,16 +304,16 @@ class _$_ShouldGo implements _ShouldGo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(AppFailure failure)? failed,
-    TResult Function()? shouldGo,
+    TResult Function()? loggedIn,
     required TResult orElse(),
   }) {
-    if (shouldGo != null) {
-      return shouldGo();
+    if (loggedIn != null) {
+      return loggedIn();
     }
     return orElse();
   }
 }
 
-abstract class _ShouldGo implements AkLoginState {
-  const factory _ShouldGo() = _$_ShouldGo;
+abstract class _LoggedIn implements AkLoginState {
+  const factory _LoggedIn() = _$_LoggedIn;
 }

@@ -49,7 +49,7 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> {
             context,
             message: failure.localizedMessage,
           ),
-          shouldGo: () => ref.read(akLoginProvider.notifier).go(context),
+          loggedIn: () => ref.read(akLoginProvider.notifier).go(context),
           orElse: () => null,
         ),
       );

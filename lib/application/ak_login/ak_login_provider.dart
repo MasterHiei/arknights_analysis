@@ -28,16 +28,16 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
 
   late final Token _token;
 
+  void go(BuildContext context) => Routes.portal.go(
+        context,
+        extra: RouteParams.portal(token: _token),
+      );
+
   void _startListening() {
     controller.url.listen(_onUrlChanged);
     controller.loadingState.listen(_onStateChanged);
     controller.webMessage.listen(_onTokenRecieved);
   }
-
-  void go(BuildContext context) => Routes.portal.go(
-        context,
-        extra: RouteParams.portal(token: _token),
-      );
 
   Future<void> _onUrlChanged(String url) async {
     final isHomePage = url == akHomePage;
@@ -70,7 +70,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     final token = data['data']?['token'] as String? ?? '';
     if (token.isNotEmpty) {
       _token = Token(token);
-      state = const AkLoginState.shouldGo();
+      state = const AkLoginState.loggedIn();
       AppLoadingIndicator.dismiss();
       return;
     }

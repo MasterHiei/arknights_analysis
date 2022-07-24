@@ -1,12 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../application/ak_logout/ak_logout_provider.dart';
+import '../../application/ak_logout/states/ak_logout_state.dart';
 import '../../application/pane/pane_provider.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/routing/route_params.dart';
-import '../core/routing/router.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 
@@ -20,19 +20,15 @@ class PortalPage extends ConsumerStatefulWidget {
 }
 
 class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
-  final _webviewController = WebviewController();
-
   @override
   void initState() {
     windowManager.addListener(this);
-    _webviewController.initialize();
     super.initState();
   }
 
   @override
   void dispose() {
     windowManager.removeListener(this);
-    _webviewController.dispose();
     super.dispose();
   }
 
@@ -50,6 +46,8 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
+    _listenLogoutState();
+
     final token = widget.params.token;
     final bodyItems = [
       GachaStatsPage(token),
@@ -88,14 +86,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
               content: const Text('确定退出登录吗？'),
               confirmButtonText: '退出',
               confirmButtonColor: Colors.red,
-              onConfirmButtonTap: () async {
-                if (!_webviewController.value.isInitialized) {
-                  return;
-                }
-                await _webviewController.clearCookies();
-                if (!mounted) return;
-                Routes.splash.go(context);
-              },
+              onConfirmButtonTap: ref.read(akLogoutProvider.notifier).logout,
               closeButtonText: '取消',
               closeButtonColor: Colors.blue,
             ),
@@ -104,4 +95,14 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         ],
         displayMode: PaneDisplayMode.compact,
       );
+
+  void _listenLogoutState() {
+    ref.listen<AkLogoutState>(
+      akLogoutProvider,
+      (_, next) => next.maybeWhen<void>(
+        loggedOut: () => ref.read(akLogoutProvider.notifier).go(context),
+        orElse: () {},
+      ),
+    );
+  }
 }

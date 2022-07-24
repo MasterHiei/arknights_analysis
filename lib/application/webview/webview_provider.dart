@@ -19,10 +19,13 @@ class WebviewNotifier extends ChangeNotifier {
 
   Future<void> initialize(
     BuildContext context, {
-    required String initialUrl,
+    String? initialUrl,
   }) async {
     try {
       await controller.initialize();
+      if (initialUrl == null || initialUrl.isEmpty) {
+        return;
+      }
       await Future.wait([
         controller.setBackgroundColor(Colors.transparent),
         controller.setPopupWindowPolicy(WebviewPopupWindowPolicy.deny),

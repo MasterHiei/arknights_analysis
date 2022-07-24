@@ -10,5 +10,5 @@ class AkLoginState with _$AkLoginState {
 
   const factory AkLoginState.failed(AppFailure failure) = _Failed;
 
-  const factory AkLoginState.shouldGo() = _ShouldGo;
+  const factory AkLoginState.loggedIn() = _LoggedIn;
 }
