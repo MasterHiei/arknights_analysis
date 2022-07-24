@@ -31,7 +31,7 @@ class AppFlushBar extends StatelessWidget {
       icon: Icon(severity.icon, size: 24.w, color: severity.color),
       shouldIconPulse: false,
       maxWidth: ScreenUtil().screenWidth * 0.3,
-      margin: EdgeInsets.only(bottom: 24.h),
+      margin: EdgeInsets.only(bottom: 8.h),
       borderRadius: BorderRadius.circular(2),
       backgroundColor: Colors.white,
       leftBarIndicatorColor: severity.color,

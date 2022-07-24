@@ -23,6 +23,7 @@ mixin _$AppFailure {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$AppFailure {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ mixin _$AppFailure {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) =>
@@ -54,6 +57,7 @@ mixin _$AppFailure {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +68,7 @@ mixin _$AppFailure {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +79,7 @@ mixin _$AppFailure {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) =>
@@ -166,6 +172,7 @@ class _$_LocalizedError extends _LocalizedError {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return localizedError(message);
@@ -179,6 +186,7 @@ class _$_LocalizedError extends _LocalizedError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return localizedError?.call(message);
@@ -192,6 +200,7 @@ class _$_LocalizedError extends _LocalizedError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -209,6 +218,7 @@ class _$_LocalizedError extends _LocalizedError {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return localizedError(this);
@@ -222,6 +232,7 @@ class _$_LocalizedError extends _LocalizedError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return localizedError?.call(this);
@@ -235,6 +246,7 @@ class _$_LocalizedError extends _LocalizedError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
@@ -325,6 +337,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return unexpectedError(e);
@@ -338,6 +351,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return unexpectedError?.call(e);
@@ -351,6 +365,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -368,6 +383,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return unexpectedError(this);
@@ -381,6 +397,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return unexpectedError?.call(this);
@@ -394,6 +411,7 @@ class _$_UnexpectedError extends _UnexpectedError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
@@ -460,6 +478,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return networkUnreachable();
@@ -473,6 +492,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return networkUnreachable?.call();
@@ -486,6 +506,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -503,6 +524,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return networkUnreachable(this);
@@ -516,6 +538,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return networkUnreachable?.call(this);
@@ -529,6 +552,7 @@ class _$_NetworkUnreachable extends _NetworkUnreachable {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
@@ -625,6 +649,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return remoteServerError(message, code);
@@ -638,6 +663,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return remoteServerError?.call(message, code);
@@ -651,6 +677,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -668,6 +695,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return remoteServerError(this);
@@ -681,6 +709,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return remoteServerError?.call(this);
@@ -694,6 +723,7 @@ class _$_RemoteServerError extends _RemoteServerError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
@@ -786,6 +816,7 @@ class _$_LocalDataError extends _LocalDataError {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return localDataError(e);
@@ -799,6 +830,7 @@ class _$_LocalDataError extends _LocalDataError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return localDataError?.call(e);
@@ -812,6 +844,7 @@ class _$_LocalDataError extends _LocalDataError {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -829,6 +862,7 @@ class _$_LocalDataError extends _LocalDataError {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return localDataError(this);
@@ -842,6 +876,7 @@ class _$_LocalDataError extends _LocalDataError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return localDataError?.call(this);
@@ -855,6 +890,7 @@ class _$_LocalDataError extends _LocalDataError {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {
@@ -873,6 +909,142 @@ abstract class _LocalDataError extends AppFailure {
   @JsonKey(ignore: true)
   _$$_LocalDataErrorCopyWith<_$_LocalDataError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LocalDataEmptyCopyWith<$Res> {
+  factory _$$_LocalDataEmptyCopyWith(
+          _$_LocalDataEmpty value, $Res Function(_$_LocalDataEmpty) then) =
+      __$$_LocalDataEmptyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LocalDataEmptyCopyWithImpl<$Res>
+    extends _$AppFailureCopyWithImpl<$Res>
+    implements _$$_LocalDataEmptyCopyWith<$Res> {
+  __$$_LocalDataEmptyCopyWithImpl(
+      _$_LocalDataEmpty _value, $Res Function(_$_LocalDataEmpty) _then)
+      : super(_value, (v) => _then(v as _$_LocalDataEmpty));
+
+  @override
+  _$_LocalDataEmpty get _value => super._value as _$_LocalDataEmpty;
+}
+
+/// @nodoc
+
+class _$_LocalDataEmpty extends _LocalDataEmpty {
+  const _$_LocalDataEmpty() : super._();
+
+  @override
+  String toString() {
+    return 'AppFailure.localDataEmpty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_LocalDataEmpty);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) localizedError,
+    required TResult Function(Object e) unexpectedError,
+    required TResult Function() networkUnreachable,
+    required TResult Function(String? message, int? code) remoteServerError,
+    required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
+    required TResult Function() invalidToken,
+  }) {
+    return localDataEmpty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
+    TResult Function(Object e)? unexpectedError,
+    TResult Function()? networkUnreachable,
+    TResult Function(String? message, int? code)? remoteServerError,
+    TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
+    TResult Function()? invalidToken,
+  }) {
+    return localDataEmpty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? localizedError,
+    TResult Function(Object e)? unexpectedError,
+    TResult Function()? networkUnreachable,
+    TResult Function(String? message, int? code)? remoteServerError,
+    TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
+    TResult Function()? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (localDataEmpty != null) {
+      return localDataEmpty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LocalizedError value) localizedError,
+    required TResult Function(_UnexpectedError value) unexpectedError,
+    required TResult Function(_NetworkUnreachable value) networkUnreachable,
+    required TResult Function(_RemoteServerError value) remoteServerError,
+    required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
+    required TResult Function(_InvalidToken value) invalidToken,
+  }) {
+    return localDataEmpty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
+    TResult Function(_UnexpectedError value)? unexpectedError,
+    TResult Function(_NetworkUnreachable value)? networkUnreachable,
+    TResult Function(_RemoteServerError value)? remoteServerError,
+    TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
+    TResult Function(_InvalidToken value)? invalidToken,
+  }) {
+    return localDataEmpty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LocalizedError value)? localizedError,
+    TResult Function(_UnexpectedError value)? unexpectedError,
+    TResult Function(_NetworkUnreachable value)? networkUnreachable,
+    TResult Function(_RemoteServerError value)? remoteServerError,
+    TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
+    TResult Function(_InvalidToken value)? invalidToken,
+    required TResult orElse(),
+  }) {
+    if (localDataEmpty != null) {
+      return localDataEmpty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocalDataEmpty extends AppFailure {
+  const factory _LocalDataEmpty() = _$_LocalDataEmpty;
+  const _LocalDataEmpty._() : super._();
 }
 
 /// @nodoc
@@ -920,6 +1092,7 @@ class _$_InvalidToken extends _InvalidToken {
     required TResult Function() networkUnreachable,
     required TResult Function(String? message, int? code) remoteServerError,
     required TResult Function(Object e) localDataError,
+    required TResult Function() localDataEmpty,
     required TResult Function() invalidToken,
   }) {
     return invalidToken();
@@ -933,6 +1106,7 @@ class _$_InvalidToken extends _InvalidToken {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
   }) {
     return invalidToken?.call();
@@ -946,6 +1120,7 @@ class _$_InvalidToken extends _InvalidToken {
     TResult Function()? networkUnreachable,
     TResult Function(String? message, int? code)? remoteServerError,
     TResult Function(Object e)? localDataError,
+    TResult Function()? localDataEmpty,
     TResult Function()? invalidToken,
     required TResult orElse(),
   }) {
@@ -963,6 +1138,7 @@ class _$_InvalidToken extends _InvalidToken {
     required TResult Function(_NetworkUnreachable value) networkUnreachable,
     required TResult Function(_RemoteServerError value) remoteServerError,
     required TResult Function(_LocalDataError value) localDataError,
+    required TResult Function(_LocalDataEmpty value) localDataEmpty,
     required TResult Function(_InvalidToken value) invalidToken,
   }) {
     return invalidToken(this);
@@ -976,6 +1152,7 @@ class _$_InvalidToken extends _InvalidToken {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
   }) {
     return invalidToken?.call(this);
@@ -989,6 +1166,7 @@ class _$_InvalidToken extends _InvalidToken {
     TResult Function(_NetworkUnreachable value)? networkUnreachable,
     TResult Function(_RemoteServerError value)? remoteServerError,
     TResult Function(_LocalDataError value)? localDataError,
+    TResult Function(_LocalDataEmpty value)? localDataEmpty,
     TResult Function(_InvalidToken value)? invalidToken,
     required TResult orElse(),
   }) {

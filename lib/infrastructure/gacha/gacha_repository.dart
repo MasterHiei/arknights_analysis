@@ -95,32 +95,36 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
-      execute(() async {
-        final dtos = await _localDataSource.getRecords(
-          uid,
-          pool: pool,
-          includeRuleTypes: includeRuleTypes,
-          excludeRuleTypes: excludeRuleTypes,
-        );
-        final chars = dtos
-            .map((dto) => dto.toDomain())
-            .map((record) => record.chars)
-            .flatten()
-            .toList();
-        return GachaStats(uid: uid, chars: chars);
-      });
+      execute(
+        () async {
+          final dtos = await _localDataSource.getRecords(
+            uid,
+            pool: pool,
+            includeRuleTypes: includeRuleTypes,
+            excludeRuleTypes: excludeRuleTypes,
+          );
+          final chars = dtos
+              .map((dto) => dto.toDomain())
+              .map((record) => record.chars)
+              .flatten()
+              .toList();
+          return GachaStats(uid: uid, chars: chars);
+        },
+      );
 
   @override
   Future<Either<AppFailure, List<GachaChar>>> getHistory(
     Uid uid, {
     String? pool,
   }) =>
-      execute(() async {
-        final dtos = await _localDataSource.getRecords(uid, pool: pool);
-        return dtos
-            .map((dto) => dto.toDomain())
-            .map((record) => record.chars)
-            .flatten()
-            .toList();
-      });
+      execute(
+        () async {
+          final dtos = await _localDataSource.getRecords(uid, pool: pool);
+          return dtos
+              .map((dto) => dto.toDomain())
+              .map((record) => record.chars)
+              .flatten()
+              .toList();
+        },
+      );
 }

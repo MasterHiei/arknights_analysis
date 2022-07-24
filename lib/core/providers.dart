@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../infrastructure/core/database/app_database.dart';
 import 'constants/constants.dart';
@@ -27,11 +28,17 @@ final asDioProvider = _dioProvider(asBaseUrl);
 
 final gdDioProvider = _dioProvider(gameDataBaseUrl);
 
+final gdApiDioProvider = _dioProvider(gameDataApiBaseUrl);
+
 final dbProvider = Provider((ref) {
   final db = AppDatabase();
   ref.onDispose(() => db.close());
   return db;
 });
+
+final prefsProvider = Provider.autoDispose<SharedPreferences>(
+  (_) => throw UnimplementedError(),
+);
 
 final connectivityProvider = Provider.autoDispose((_) => Connectivity());
 
@@ -40,8 +47,10 @@ final packageInfoProvider = Provider.autoDispose<PackageInfo>(
 );
 
 Future<List<Override>> generateOverrides() async {
+  final prefs = await SharedPreferences.getInstance();
   final packageInfo = await PackageInfo.fromPlatform();
   return [
+    prefsProvider.overrideWithValue(prefs),
     packageInfoProvider.overrideWithValue(packageInfo),
   ];
 }

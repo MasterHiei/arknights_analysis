@@ -3,22 +3,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../infrastructure/game_data/game_data_repository.dart';
+import '../../infrastructure/game_data_api/game_data_api_repository.dart';
 
 final gachaPoolProvider =
     StateNotifierProvider.autoDispose<GachaPoolNotifier, AsyncValue<Unit>>(
-  (ref) => GachaPoolNotifier(ref.watch(gameDataRepositoryProvider)),
+  (ref) => GachaPoolNotifier(
+    ref.watch(gameDataApiRepositoryProvider),
+    ref.watch(gameDataRepositoryProvider),
+  ),
 );
 
 class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
-  GachaPoolNotifier(this._repository) : super(const AsyncValue.loading()) {
+  GachaPoolNotifier(
+    this._apiRepository,
+    this._repository,
+  ) : super(const AsyncValue.loading()) {
     Future.delayed(const Duration(milliseconds: 1200), _fetch);
   }
 
+  final GameDataApiRepository _apiRepository;
   final GameDataRepository _repository;
 
   Future<bool> _hasData() async {
-    final failrueOrCount = await _repository.count();
-    return failrueOrCount.fold((_) => false, (count) => count > 0);
+    final failureOrCommitDate =
+        await _apiRepository.fetchLastGachaTableCommitDate();
+    return failureOrCommitDate.fold(
+      (f) => false,
+      (commitDate) async {
+        final failureOrUpdateDate =
+            await _apiRepository.getLastGachaTableUpdateDateTime();
+        return failureOrUpdateDate.fold((f) => false, commitDate.isBefore);
+      },
+    );
   }
 
   Future<void> _fetch() async {
@@ -30,14 +46,16 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
     final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
     failureOrSuccess.fold(
       (failure) async {
-        state = AsyncValue.error(
-          AppFailure.localizedError(
-            '远程数据读取失败，即将加载本地数据源。\n${failure.localizedMessage}',
-          ),
+        final error = AppFailure.localizedError(
+          '远程数据读取失败，即将加载本地数据源。\n${failure.localizedMessage}',
         );
+        state = AsyncValue.error(error);
         Future.delayed(const Duration(seconds: 3), _applyLocalData);
       },
-      (_) => state = AsyncValue.data(_),
+      (_) async {
+        await _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());
+        state = AsyncValue.data(_);
+      },
     );
   }
 

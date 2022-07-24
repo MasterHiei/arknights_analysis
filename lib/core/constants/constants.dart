@@ -14,6 +14,9 @@ const asBaseUrl = 'https://as.hypergryph.com';
 
 const akBaseUrl = 'https://ak.hypergryph.com';
 
+const gameDataApiBaseUrl =
+    'https://api.github.com/repos/Kengxxiao/ArknightsGameData';
+
 const gameDataBaseUrl =
     'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
 

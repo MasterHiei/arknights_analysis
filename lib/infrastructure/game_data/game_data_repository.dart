@@ -42,8 +42,9 @@ class GameDataRepositoryImpl
   final GameDataRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, int>> count() =>
-      execute(() => _localDataSource.count());
+  Future<Either<AppFailure, int>> count() => execute(
+        () => _localDataSource.count(),
+      );
 
   @override
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable() => execute(
@@ -57,10 +58,11 @@ class GameDataRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, Unit>> saveGachaTableFromLocalFile() =>
-      execute(() async {
-        final dto = await _localDataSource.readGachaPoolsFromLocalFile();
-        await _localDataSource.saveGachaPools(dto);
-        return unit;
-      });
+  Future<Either<AppFailure, Unit>> saveGachaTableFromLocalFile() => execute(
+        () async {
+          final dto = await _localDataSource.readGachaPoolsFromLocalFile();
+          await _localDataSource.saveGachaPools(dto);
+          return unit;
+        },
+      );
 }
