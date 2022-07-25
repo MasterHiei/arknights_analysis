@@ -15,12 +15,39 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaRecordsDaoMixin {
   GachaRecordsDao(AppDatabase db) : super(db);
 
-  Future<List<String>> getPools() async {
+  Future<List<String>> getPools({
+    List<GachaRuleType>? includeRuleTypes,
+    List<GachaRuleType>? excludeRuleTypes,
+  }) async {
+    final query = select(gachaRecords);
+
+    if (includeRuleTypes != null) {
+      final poolName = gachaPools.gachaPoolName;
+      final poolNameQuery = selectOnly(gachaPools)
+        ..addColumns([poolName])
+        ..where(
+          gachaPools.gachaRuleType.isIn(
+            includeRuleTypes.map((type) => type.value),
+          ),
+        );
+      query.where((tbl) => tbl.pool.isInQuery(poolNameQuery));
+    }
+
+    if (excludeRuleTypes != null) {
+      final poolName = gachaPools.gachaPoolName;
+      final poolNameQuery = selectOnly(gachaPools)
+        ..addColumns([poolName])
+        ..where(
+          gachaPools.gachaRuleType.isIn(
+            excludeRuleTypes.map((type) => type.value),
+          ),
+        );
+      query.where((tbl) => tbl.pool.isNotInQuery(poolNameQuery));
+    }
+
     final pool = gachaRecords.pool;
-    final pools = await select(gachaRecords)
-        .addColumns([pool])
-        .map((row) => row.read(pool))
-        .get();
+    final pools =
+        await query.addColumns([pool]).map((row) => row.read(pool)).get();
     return pools.toSet().filterNotNull().toList();
   }
 

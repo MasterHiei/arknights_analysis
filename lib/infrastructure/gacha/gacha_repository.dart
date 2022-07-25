@@ -30,7 +30,10 @@ abstract class GachaRepository {
     int page = 1,
   });
 
-  Future<Either<AppFailure, List<String>>> getPools();
+  Future<Either<AppFailure, List<String>>> getPools({
+    List<GachaRuleType>? includeRuleTypes,
+    List<GachaRuleType>? excludeRuleTypes,
+  });
 
   Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
@@ -85,8 +88,16 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<String>>> getPools() =>
-      execute(() => _localDataSource.getPools());
+  Future<Either<AppFailure, List<String>>> getPools({
+    List<GachaRuleType>? includeRuleTypes,
+    List<GachaRuleType>? excludeRuleTypes,
+  }) =>
+      execute(
+        () => _localDataSource.getPools(
+          includeRuleTypes: includeRuleTypes,
+          excludeRuleTypes: excludeRuleTypes,
+        ),
+      );
 
   @override
   Future<Either<AppFailure, GachaStats>> getStats(

@@ -108,7 +108,7 @@ class _StatsView extends ConsumerWidget {
     final uid = ref.watch(_uidProvider);
     final pool = ref.watch(_selectedPool);
 
-    // 总览
+    // 常规寻访
     if (pool == null) {
       final params = GetGachaStatsParams(
         uid: uid,
@@ -125,7 +125,7 @@ class _StatsView extends ConsumerWidget {
       );
     }
 
-    // 指定寻访
+    // 独立寻访
     final params = GetGachaStatsParams(uid: uid, pool: pool);
     return ref.watch(gachaStatsProvider(params)).when(
           data: (stats) => _PieChart(pool, stats),
@@ -167,10 +167,11 @@ class _PieChart extends StatelessWidget {
             child: _chart,
           ),
           _pullDateRangeLabel,
-          SizedBox(height: 18.h),
+          SizedBox(height: 16.h),
           _totalPullsLabel,
+          SizedBox(height: 4.h),
           ..._totalPullsWithoutRareLabels,
-          SizedBox(height: 18.h),
+          SizedBox(height: 16.h),
           ..._pullRateLabels,
         ],
       ),
@@ -328,8 +329,11 @@ class _PieChart extends StatelessWidget {
           }
           final details = Row(
             children: [
-              Expanded(child: Text('$total')),
-              Text('平均出货次数：${stats.caclAvgPulls(rarity)}'),
+              Expanded(flex: 2, child: Text('$total')),
+              Expanded(
+                flex: 4,
+                child: Text('平均出货次数：${stats.caclAvgPulls(rarity)}'),
+              ),
             ],
           );
           return DefaultTextStyle(
@@ -339,7 +343,7 @@ class _PieChart extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             child: SizedBox(
-              width: 280.w,
+              width: 320.w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

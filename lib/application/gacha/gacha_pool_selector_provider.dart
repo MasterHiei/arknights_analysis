@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/enums/gacha_rule_type.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
 
 final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
@@ -31,7 +32,9 @@ class GachaPoolSelectorNotifier extends ChangeNotifier {
   }
 
   Future<void> _get() async {
-    final failureOrPools = await _repository.getPools();
+    final failureOrPools = await _repository.getPools(
+      includeRuleTypes: GachaRuleType.independentGuarantee,
+    );
     failureOrPools.fold(
       (_) {},
       (pools) => _pools.addAll(pools),
