@@ -336,7 +336,7 @@ class _PieChart extends StatelessWidget {
               ),
             ],
           );
-          return DefaultTextStyle(
+          return DefaultTextStyle.merge(
             style: TextStyle(
               color: rarity.color,
               fontSize: 16.sp,
