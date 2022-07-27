@@ -29,7 +29,7 @@ class GachaHistoryPage extends ConsumerWidget {
     return userOption.fold(
       () => _progressBar,
       (user) => Scaffold(
-        body: _buildDataTable(user.uid),
+        body: _buildDataTable(context, user.uid),
         backgroundColor: FluentTheme.of(context).scaffoldBackgroundColor,
       ),
     );
@@ -38,43 +38,60 @@ class GachaHistoryPage extends ConsumerWidget {
   Widget get _progressBar =>
       const SizedBox.expand(child: Center(child: ProgressBar()));
 
-  Widget _buildDataTable(Uid uid) => Consumer(
-        builder: (_, ref, __) {
-          final params = GetGachaHistoryParams(uid: uid);
-          return ref.watch(gachaHistoryProvider(params)).when(
-                data: (chars) => PaginatedDataTable2(
-                  header: const Text('寻访记录'),
-                  columns: const [
-                    DataColumn2(label: SizedBox(), size: ColumnSize.S),
-                    DataColumn2(label: Text('干员'), size: ColumnSize.L),
-                    DataColumn2(label: Text('星级'), size: ColumnSize.S),
-                    DataColumn2(label: Text('寻访'), size: ColumnSize.M),
-                    DataColumn2(label: Text('获取时间'), size: ColumnSize.L),
-                  ],
-                  columnSpacing: 60.h,
-                  showCheckboxColumn: false,
-                  showFirstLastButtons: true,
-                  rowsPerPage: pageSize,
-                  availableRowsPerPage: const [
-                    pageSize,
-                    pageSize * 2,
-                    pageSize * 5,
-                  ],
-                  onRowsPerPageChanged: (_) {},
-                  wrapInCard: false,
-                  source: _DataTableSource(chars),
-                  empty: const Center(child: Text('Empty')),
+  Widget _buildDataTable(BuildContext context, Uid uid) {
+    DataColumn2 buildColumn(
+      String label, {
+      ColumnSize size = ColumnSize.M,
+    }) =>
+        DataColumn2(
+          label: Text(
+            label,
+            style: DefaultTextStyle.of(context).style.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
                 ),
-                error: (_, __) => const SizedBox(),
-                loading: () => _progressBar,
-              );
-        },
-      );
+          ),
+          size: size,
+        );
+    return Consumer(
+      builder: (_, ref, __) {
+        final params = GetGachaHistoryParams(uid: uid);
+        return ref.watch(gachaHistoryProvider(params)).when(
+              data: (chars) => PaginatedDataTable2(
+                header: const Text('寻访记录'),
+                columns: [
+                  const DataColumn2(label: SizedBox(), size: ColumnSize.S),
+                  buildColumn('干员', size: ColumnSize.L),
+                  buildColumn('星级', size: ColumnSize.S),
+                  buildColumn('寻访'),
+                  buildColumn('获取时间', size: ColumnSize.L),
+                ],
+                columnSpacing: 60.h,
+                showCheckboxColumn: false,
+                showFirstLastButtons: true,
+                rowsPerPage: pageSize,
+                availableRowsPerPage: const [
+                  pageSize,
+                  pageSize * 2,
+                  pageSize * 5,
+                ],
+                onRowsPerPageChanged: (_) {},
+                wrapInCard: false,
+                source: _DataTableSource(context, chars),
+                empty: const Center(child: Text('Empty')),
+              ),
+              error: (_, __) => const SizedBox(),
+              loading: () => _progressBar,
+            );
+      },
+    );
+  }
 }
 
 class _DataTableSource extends DataTableSource {
-  _DataTableSource(this.chars);
+  _DataTableSource(this.context, this.chars);
 
+  final BuildContext context;
   final List<GachaChar> chars;
 
   @override
@@ -83,25 +100,28 @@ class _DataTableSource extends DataTableSource {
     return DataRow2.byIndex(
       index: index,
       cells: [
-        DataCell(Text('${index + 1}')),
+        _buildTextCell('${index + 1}'),
         DataCell(
           Badge(
             badgeContent: Text(
               'NEW',
-              style: TextStyle(color: Colors.white, fontSize: 10.sp),
+              style: DefaultTextStyle.of(context).style.copyWith(
+                    color: Colors.white,
+                    fontSize: 9.sp,
+                  ),
             ),
-            position: BadgePosition.topEnd(top: 3.h, end: -40.w),
+            position: BadgePosition.topEnd(top: 4.h, end: -34.w),
             shape: BadgeShape.square,
-            padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+            padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
             borderRadius: BorderRadius.circular(4.w),
             showBadge: char.isNew,
             child: Text(
               char.name,
-              style: TextStyle(
-                color: char.rarity.color,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: DefaultTextStyle.of(context).style.copyWith(
+                    color: char.rarity.color,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
         ),
@@ -123,9 +143,12 @@ class _DataTableSource extends DataTableSource {
   int get selectedRowCount => 0;
 
   DataCell _buildTextCell(String text) => DataCell(
-        Text(
-          text,
-          style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
+        DefaultTextStyle.merge(
+          style: TextStyle(
+            color: Colors.grey[120],
+            fontSize: 15.sp,
+          ),
+          child: Text(text),
         ),
       );
 }

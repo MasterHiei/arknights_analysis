@@ -277,8 +277,8 @@ class _PieChart extends StatelessWidget {
         style: TextStyle(color: Colors.grey[100], fontSize: 14.sp),
       );
 
-  Widget get _totalPullsLabel => RichText(
-        text: TextSpan(
+  Widget get _totalPullsLabel => Text.rich(
+        TextSpan(
           children: [
             const TextSpan(text: '共抽取'),
             TextSpan(
@@ -289,7 +289,7 @@ class _PieChart extends StatelessWidget {
           ],
           style: TextStyle(
             color: Colors.grey[130],
-            fontSize: 16.sp,
+            fontSize: 15.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -297,8 +297,8 @@ class _PieChart extends StatelessWidget {
 
   List<Widget> get _totalPullsWithoutRareLabels => Rarity.rares
       .map(
-        (rarity) => RichText(
-          text: TextSpan(
+        (rarity) => Text.rich(
+          TextSpan(
             children: [
               const TextSpan(text: '已累计'),
               TextSpan(
@@ -313,7 +313,7 @@ class _PieChart extends StatelessWidget {
             ],
             style: TextStyle(
               color: Colors.grey[130],
-              fontSize: 16.sp,
+              fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -339,7 +339,7 @@ class _PieChart extends StatelessWidget {
           return DefaultTextStyle.merge(
             style: TextStyle(
               color: rarity.color,
-              fontSize: 16.sp,
+              fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),
             child: SizedBox(
@@ -389,47 +389,54 @@ class _PieChart extends StatelessWidget {
       const DataColumn2(label: Text('寻访'), size: ColumnSize.L),
       const DataColumn2(label: Text('获取时间'), size: ColumnSize.L),
     ];
+
+    DataCell buildTextCell(String text, {TextStyle? style}) => DataCell(
+          DefaultTextStyle.merge(
+            style: style ??
+                TextStyle(
+                  color: Colors.grey[120],
+                  fontSize: 15.sp,
+                ),
+            child: Text(text),
+          ),
+        );
+
     final rows = stats.filterWithPulls(rarity).reversed.mapIndexed(
       (index, pair) {
-        DataCell buildTextCell(String text) => DataCell(
-              Text(
-                text,
-                style: TextStyle(color: Colors.grey[120], fontSize: 16.sp),
-              ),
-            );
         final char = pair.first;
         final pulls = pair.second;
         return DataRow2.byIndex(
           index: index,
           cells: [
-            DataCell(
-              Text(
-                '${index + 1}',
-                style: TextStyle(color: Colors.grey[80], fontSize: 14.sp),
-              ),
+            buildTextCell(
+              '${index + 1}',
+              style: TextStyle(color: Colors.grey[80], fontSize: 14.sp),
             ),
             DataCell(
               Badge(
                 badgeContent: Text(
                   'NEW',
-                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                        color: Colors.white,
+                        fontSize: 9.sp,
+                      ),
                 ),
-                position: BadgePosition.topEnd(top: 3.h, end: -40.w),
+                position: BadgePosition.topEnd(top: 4.h, end: -34.w),
                 shape: BadgeShape.square,
-                padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
                 borderRadius: BorderRadius.circular(4.w),
                 showBadge: char.isNew,
-                child: RichText(
-                  text: TextSpan(
+                child: Text.rich(
+                  TextSpan(
                     text: char.name,
-                    style: TextStyle(
-                      color: rarity.color,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => launch('$prts/w/${char.name}'),
                   ),
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                        color: rarity.color,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
             ),
@@ -442,11 +449,10 @@ class _PieChart extends StatelessWidget {
     ).toList();
     final dataTable = DataTable2(
       columns: columns,
-      headingTextStyle: TextStyle(
-        color: Colors.black,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.bold,
-      ),
+      headingTextStyle: DefaultTextStyle.of(context).style.copyWith(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+          ),
       rows: rows,
     );
 
