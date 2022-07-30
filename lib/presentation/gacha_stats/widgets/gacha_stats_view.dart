@@ -434,7 +434,7 @@ class _PieChart extends StatelessWidget {
                   ),
                   style: DefaultTextStyle.of(context).style.copyWith(
                         color: rarity.color,
-                        fontSize: 15.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
                       ),
                 ),

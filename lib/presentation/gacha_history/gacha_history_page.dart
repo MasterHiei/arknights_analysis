@@ -119,7 +119,7 @@ class _DataTableSource extends DataTableSource {
               char.name,
               style: DefaultTextStyle.of(context).style.copyWith(
                     color: char.rarity.color,
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
             ),
