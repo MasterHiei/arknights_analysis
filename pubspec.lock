@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "43.0.0"
+    version: "44.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.3.1"
+    version: "4.4.0"
   analyzer_plugin:
     dependency: transitive
     description:
@@ -273,7 +273,7 @@ packages:
       name: data_table_2
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.3.5"
+    version: "2.3.6"
   dbus:
     dependency: transitive
     description:
@@ -357,7 +357,7 @@ packages:
       name: fl_chart
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.55.0"
+    version: "0.55.1"
   fluent_ui:
     dependency: "direct main"
     description:
@@ -454,7 +454,7 @@ packages:
       name: go_router
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.2"
+    version: "4.2.7"
   graphs:
     dependency: transitive
     description:
@@ -468,7 +468,7 @@ packages:
       name: http
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.13.4"
+    version: "0.13.5"
   http_multi_server:
     dependency: transitive
     description:
@@ -699,7 +699,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   petitparser:
     dependency: transitive
     description:
@@ -1047,7 +1047,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.12"
+    version: "2.0.13"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -1082,7 +1082,7 @@ packages:
       name: webview_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   win32:
     dependency: transitive
     description:
