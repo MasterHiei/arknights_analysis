@@ -57,7 +57,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
 
   void _onStateChanged(LoadingState state) => _currentState = state;
 
-  Future<void> _onTokenRecieved(Map<dynamic, dynamic> data) async {
+  Future<void> _onTokenRecieved(dynamic data) async {
     final status = data['status'] as int? ?? -1;
     if (status != 0) {
       final message = data['msg'] as String? ?? '登录已过期，请重新登录。';

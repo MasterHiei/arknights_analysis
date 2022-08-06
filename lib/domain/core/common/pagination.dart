@@ -15,5 +15,5 @@ class Pagination with _$Pagination {
 
   int get totalPage => (total / pageSize).ceil();
 
-  bool get isLastPage => current == totalPage;
+  bool get isLastPage => current >= totalPage;
 }

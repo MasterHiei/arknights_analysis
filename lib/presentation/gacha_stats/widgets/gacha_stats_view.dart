@@ -49,7 +49,10 @@ class GachaStatsView extends ConsumerWidget {
     return ref.watch(_gachaProvider).maybeMap(
           fetching: (state) {
             double? value;
-            if (state.total != null) {
+            final total = state.total ?? 0;
+            if (total == 0) {
+              value = 100;
+            } else {
               value = (state.current / state.total!) * 100;
             }
             return _buildProgressBar(
