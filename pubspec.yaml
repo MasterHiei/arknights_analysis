@@ -12,7 +12,7 @@ dependencies:
   another_flushbar: 1.10.29
   badges: 2.0.3
   bot_toast: 4.0.3
-  connectivity_plus: 2.3.6
+  connectivity_plus: 2.3.6+1
   dartx: 1.1.0
   dartz: 0.10.1
   data_table_2: 2.3.6
@@ -32,7 +32,7 @@ dependencies:
   json_annotation: 4.6.0
   logger: 1.1.0
   modal_bottom_sheet: 2.1.0
-  package_info_plus: 1.4.3
+  package_info_plus: 1.4.3+1
   path: 1.8.1
   path_provider: 2.0.11
   pretty_dio_logger: 1.2.0-beta-1
@@ -46,13 +46,13 @@ dependencies:
 
 dev_dependencies:
   build_runner: 2.2.0
-  drift_dev: 1.7.0
+  drift_dev: 1.7.1
   flutter_lints: 2.0.1
   flutter_test:
     sdk: flutter
   freezed: 2.1.0+1
   json_serializable: 6.3.1
-  msix: 3.6.2
+  msix: 3.6.3
   retrofit_generator: 4.0.3
 
 flutter:
