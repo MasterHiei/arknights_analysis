@@ -59,7 +59,7 @@ class GachaStats with _$GachaStats {
       '${((filter(rarity).length / chars.length) * 100).toStringAsFixed(2)}%';
 
   int sinceLastPull(Rarity rarity) {
-    final index = chars.lastIndexWhere((char) => char.rarity == rarity);
+    final index = chars.indexWhere((char) => char.rarity == rarity);
     return index == -1 ? chars.length : index;
   }
 
