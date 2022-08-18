@@ -53,7 +53,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
 
   Future<List<GachaRecordDto>> get(
     String uid, {
-    String? pool,
+    bool showAllPools = true,
+    required List<String> pools,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) async {
@@ -61,8 +62,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
       ..where((tbl) => tbl.uid.equals(uid))
       ..orderBy([(tbl) => OrderingTerm.desc(tbl.ts)]);
 
-    if (pool != null) {
-      query.where((tbl) => tbl.pool.equals(pool));
+    if (!showAllPools) {
+      query.where((tbl) => tbl.pool.isIn(pools));
     }
 
     if (includeRuleTypes != null) {

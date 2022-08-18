@@ -12,6 +12,7 @@ dependencies:
   another_flushbar: 1.10.29
   badges: 2.0.3
   bot_toast: 4.0.3
+  collection: 1.16.0
   connectivity_plus: 2.3.6+1
   dartx: 1.1.0
   dartz: 0.10.1

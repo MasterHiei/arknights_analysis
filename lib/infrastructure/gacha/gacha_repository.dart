@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/gacha_rule_type.dart';
+import '../../core/enums/rarity.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/core/common/pagination.dart';
@@ -44,7 +45,9 @@ abstract class GachaRepository {
 
   Future<Either<AppFailure, List<GachaChar>>> getHistory(
     Uid uid, {
-    String? pool,
+    required bool showAllPools,
+    required List<String> pools,
+    required List<Rarity> rarities,
   });
 }
 
@@ -108,9 +111,12 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
   }) =>
       execute(
         () async {
+          final showAllPools = pool == null;
+          final pools = showAllPools ? <String>[] : [pool];
           final dtos = await _localDataSource.getRecords(
             uid,
-            pool: pool,
+            showAllPools: showAllPools,
+            pools: pools,
             includeRuleTypes: includeRuleTypes,
             excludeRuleTypes: excludeRuleTypes,
           );
@@ -126,15 +132,22 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
   @override
   Future<Either<AppFailure, List<GachaChar>>> getHistory(
     Uid uid, {
-    String? pool,
+    required bool showAllPools,
+    required List<String> pools,
+    required List<Rarity> rarities,
   }) =>
       execute(
         () async {
-          final dtos = await _localDataSource.getRecords(uid, pool: pool);
+          final dtos = await _localDataSource.getRecords(
+            uid,
+            showAllPools: showAllPools,
+            pools: pools,
+          );
           return dtos
               .map((dto) => dto.toDomain())
               .map((record) => record.chars)
               .flatten()
+              .filter((char) => rarities.contains(char.rarity))
               .toList();
         },
       );

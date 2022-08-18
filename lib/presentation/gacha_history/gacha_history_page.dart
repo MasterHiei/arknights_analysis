@@ -4,8 +4,8 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Scaffold, DataTableSource, DataCell;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../application/gacha/gacha_history_provider.dart';
-import '../../application/gacha/params/get_gacha_history_params.dart';
 import '../../application/user/user_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../core/utils/launch_url.dart';
@@ -13,6 +13,7 @@ import '../../domain/gacha/gacha_char.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
+import 'widgets/index.dart';
 
 final _userProvider = Provider.autoDispose.family(
   (ref, Token token) => ref.watch(userProvider(token)).userOption,
@@ -29,7 +30,12 @@ class GachaHistoryPage extends ConsumerWidget {
     return userOption.fold(
       () => _progressBar,
       (user) => Scaffold(
-        body: _buildDataTable(context, user.uid),
+        body: Column(
+          children: [
+            const GachaHistoryFilter(),
+            Expanded(child: _buildDataTable(context, user.uid)),
+          ],
+        ),
         backgroundColor: FluentTheme.of(context).scaffoldBackgroundColor,
       ),
     );
@@ -55,10 +61,8 @@ class GachaHistoryPage extends ConsumerWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        final params = GetGachaHistoryParams(uid: uid);
-        return ref.watch(gachaHistoryProvider(params)).when(
+        return ref.watch(gachaHistoryProvider(uid)).when(
               data: (chars) => PaginatedDataTable2(
-                header: const Text('寻访记录'),
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),
                   buildColumn('干员', size: ColumnSize.L),
@@ -78,7 +82,7 @@ class GachaHistoryPage extends ConsumerWidget {
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
                 source: _DataTableSource(context, chars),
-                empty: const Center(child: Text('Empty')),
+                empty: const Center(child: Text('暂无数据')),
               ),
               error: (_, __) => const SizedBox(),
               loading: () => _progressBar,

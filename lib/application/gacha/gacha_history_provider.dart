@@ -1,18 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import 'params/get_gacha_history_params.dart';
+import 'gacha_history_filter_provider.dart';
 
 final gachaHistoryProvider = FutureProvider.autoDispose.family(
-  (ref, GetGachaHistoryParams params) async {
-    final provider = ref.watch(gachaRepositoryProvider);
-    final failureOrChars = await provider.getHistory(
-      params.uid,
-      pool: params.pool,
+  (ref, Uid uid) async {
+    final repository = ref.watch(gachaRepositoryProvider);
+    final filter = ref.watch(gachaHistoryFilterProvider);
+    final failureOrChars = await repository.getHistory(
+      uid,
+      showAllPools: filter.showAllPools,
+      pools: filter.selectedPools,
+      rarities: filter.selectedRarities,
     );
     return failureOrChars.fold(
       (failure) => throw failure,
       (chars) => chars,
     );
   },
+  dependencies: [gachaHistoryFilterProvider],
 );
