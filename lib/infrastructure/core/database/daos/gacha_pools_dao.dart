@@ -15,7 +15,7 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
     final countColumn = countAll();
     final query = selectOnly(gachaPools)..addColumns([countColumn]);
     final result = await query.getSingle();
-    return result.read(countColumn);
+    return result.read(countColumn) ?? 0;
   }
 
   Future<List<int>> replaceInto(GachaTableDto gachaTable) async {

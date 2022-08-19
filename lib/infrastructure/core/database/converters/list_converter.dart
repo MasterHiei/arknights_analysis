@@ -6,18 +6,8 @@ class ListConverter extends TypeConverter<List<dynamic>, String> {
   const ListConverter();
 
   @override
-  List<dynamic>? mapToDart(String? fromDb) {
-    if (fromDb == null) {
-      return null;
-    }
-    return jsonDecode(fromDb) as List?;
-  }
+  List<dynamic> fromSql(String fromDb) => jsonDecode(fromDb) as List;
 
   @override
-  String? mapToSql(List<dynamic>? value) {
-    if (value == null) {
-      return null;
-    }
-    return jsonEncode(value);
-  }
+  String toSql(List<dynamic> value) => jsonEncode(value);
 }

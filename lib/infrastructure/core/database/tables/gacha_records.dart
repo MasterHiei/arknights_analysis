@@ -12,5 +12,5 @@ class GachaRecords extends Table {
   TextColumn get uid => text()();
 
   @override
-  Set<Column<dynamic>> get primaryKey => {ts, uid};
+  Set<Column> get primaryKey => {ts, uid};
 }

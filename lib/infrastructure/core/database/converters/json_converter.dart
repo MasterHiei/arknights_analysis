@@ -8,18 +8,8 @@ class JsonConverter extends TypeConverter<Json, String> {
   const JsonConverter();
 
   @override
-  Json? mapToDart(String? fromDb) {
-    if (fromDb == null) {
-      return null;
-    }
-    return jsonDecode(fromDb) as Json?;
-  }
+  Json fromSql(String fromDb) => jsonDecode(fromDb) as Json;
 
   @override
-  String? mapToSql(Json? value) {
-    if (value == null) {
-      return null;
-    }
-    return jsonEncode(value);
-  }
+  String toSql(Json value) => jsonEncode(value);
 }

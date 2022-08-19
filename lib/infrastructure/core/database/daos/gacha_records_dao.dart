@@ -22,9 +22,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     final query = select(gachaRecords);
 
     if (includeRuleTypes != null) {
-      final poolName = gachaPools.gachaPoolName;
       final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([poolName])
+        ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             includeRuleTypes.map((type) => type.value),
@@ -34,9 +33,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     }
 
     if (excludeRuleTypes != null) {
-      final poolName = gachaPools.gachaPoolName;
       final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([poolName])
+        ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             excludeRuleTypes.map((type) => type.value),
@@ -67,9 +65,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     }
 
     if (includeRuleTypes != null) {
-      final poolName = gachaPools.gachaPoolName;
       final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([poolName])
+        ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             includeRuleTypes.map((type) => type.value),
@@ -79,9 +76,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     }
 
     if (excludeRuleTypes != null) {
-      final poolName = gachaPools.gachaPoolName;
       final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([poolName])
+        ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             excludeRuleTypes.map((type) => type.value),
@@ -121,7 +117,7 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
         .addColumns([amount])
         .map((row) => row.read(amount))
         .getSingle();
-    final total = (count / pageSize).ceil();
+    final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
     return GachaDto(list: records, pagination: pagination);

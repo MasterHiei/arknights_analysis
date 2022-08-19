@@ -8,5 +8,5 @@ class Users extends Table {
   TextColumn get token => text().unique()();
 
   @override
-  Set<Column<dynamic>> get primaryKey => {uid};
+  Set<Column> get primaryKey => {uid};
 }

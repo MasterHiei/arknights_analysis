@@ -294,14 +294,14 @@ packages:
       name: drift
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.1"
+    version: "2.0.2"
   drift_dev:
     dependency: "direct dev"
     description:
       name: drift_dev
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.1"
+    version: "2.0.1"
   easy_localization:
     dependency: "direct main"
     description:
@@ -322,7 +322,7 @@ packages:
       name: equatable
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -343,7 +343,7 @@ packages:
       name: file
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.1.2"
+    version: "6.1.4"
   fixnum:
     dependency: transitive
     description:
@@ -454,7 +454,7 @@ packages:
       name: go_router
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.7"
+    version: "4.2.8"
   graphs:
     dependency: transitive
     description:
@@ -755,7 +755,7 @@ packages:
       name: pubspec_parse
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   quiver:
     dependency: transitive
     description:
@@ -907,7 +907,7 @@ packages:
       name: sqlite3
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.7.2"
+    version: "1.8.0"
   sqlite3_flutter_libs:
     dependency: "direct main"
     description:
@@ -921,7 +921,7 @@ packages:
       name: sqlparser
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.22.0"
+    version: "0.23.0"
   stack_trace:
     dependency: transitive
     description:

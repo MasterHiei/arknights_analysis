@@ -14,5 +14,5 @@ class GachaPools extends Table {
   TextColumn get gachaRuleType => text()();
 
   @override
-  Set<Column<dynamic>> get primaryKey => {gachaPoolId};
+  Set<Column> get primaryKey => {gachaPoolId};
 }

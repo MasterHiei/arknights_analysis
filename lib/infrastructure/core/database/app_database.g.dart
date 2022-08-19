@@ -3,7 +3,7 @@
 part of 'app_database.dart';
 
 // **************************************************************************
-// MoorGenerator
+// DriftDatabaseGenerator
 // **************************************************************************
 
 // ignore_for_file: type=lint
@@ -11,18 +11,7 @@ class User extends DataClass implements Insertable<User> {
   final String uid;
   final String nickName;
   final String token;
-  User({required this.uid, required this.nickName, required this.token});
-  factory User.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return User(
-      uid: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}uid'])!,
-      nickName: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}nick_name'])!,
-      token: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}token'])!,
-    );
-  }
+  const User({required this.uid, required this.nickName, required this.token});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -155,19 +144,19 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   $UsersTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _uidMeta = const VerificationMeta('uid');
   @override
-  late final GeneratedColumn<String?> uid = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> uid = GeneratedColumn<String>(
       'uid', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _nickNameMeta = const VerificationMeta('nickName');
   @override
-  late final GeneratedColumn<String?> nickName = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> nickName = GeneratedColumn<String>(
       'nick_name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _tokenMeta = const VerificationMeta('token');
   @override
-  late final GeneratedColumn<String?> token = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> token = GeneratedColumn<String>(
       'token', aliasedName, false,
-      type: const StringType(),
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints: 'UNIQUE');
   @override
@@ -206,8 +195,15 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   Set<GeneratedColumn> get $primaryKey => {uid};
   @override
   User map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return User.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return User(
+      uid: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}uid'])!,
+      nickName: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}nick_name'])!,
+      token: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}token'])!,
+    );
   }
 
   @override
@@ -223,30 +219,13 @@ class GachaPool extends DataClass implements Insertable<GachaPool> {
   final int endTime;
   final String gachaPoolName;
   final String gachaRuleType;
-  GachaPool(
+  const GachaPool(
       {required this.gachaPoolId,
       required this.gachaIndex,
       required this.openTime,
       required this.endTime,
       required this.gachaPoolName,
       required this.gachaRuleType});
-  factory GachaPool.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return GachaPool(
-      gachaPoolId: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_pool_id'])!,
-      gachaIndex: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_index'])!,
-      openTime: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}open_time'])!,
-      endTime: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}end_time'])!,
-      gachaPoolName: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_pool_name'])!,
-      gachaRuleType: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}gacha_rule_type'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -448,36 +427,36 @@ class $GachaPoolsTable extends GachaPools
   final VerificationMeta _gachaPoolIdMeta =
       const VerificationMeta('gachaPoolId');
   @override
-  late final GeneratedColumn<String?> gachaPoolId = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> gachaPoolId = GeneratedColumn<String>(
       'gacha_pool_id', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _gachaIndexMeta = const VerificationMeta('gachaIndex');
   @override
-  late final GeneratedColumn<int?> gachaIndex = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> gachaIndex = GeneratedColumn<int>(
       'gacha_index', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   final VerificationMeta _openTimeMeta = const VerificationMeta('openTime');
   @override
-  late final GeneratedColumn<int?> openTime = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> openTime = GeneratedColumn<int>(
       'open_time', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   final VerificationMeta _endTimeMeta = const VerificationMeta('endTime');
   @override
-  late final GeneratedColumn<int?> endTime = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> endTime = GeneratedColumn<int>(
       'end_time', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   final VerificationMeta _gachaPoolNameMeta =
       const VerificationMeta('gachaPoolName');
   @override
-  late final GeneratedColumn<String?> gachaPoolName = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> gachaPoolName = GeneratedColumn<String>(
       'gacha_pool_name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _gachaRuleTypeMeta =
       const VerificationMeta('gachaRuleType');
   @override
-  late final GeneratedColumn<String?> gachaRuleType = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> gachaRuleType = GeneratedColumn<String>(
       'gacha_rule_type', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         gachaPoolId,
@@ -547,8 +526,21 @@ class $GachaPoolsTable extends GachaPools
   Set<GeneratedColumn> get $primaryKey => {gachaPoolId};
   @override
   GachaPool map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return GachaPool.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GachaPool(
+      gachaPoolId: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}gacha_pool_id'])!,
+      gachaIndex: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}gacha_index'])!,
+      openTime: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}open_time'])!,
+      endTime: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}end_time'])!,
+      gachaPoolName: attachedDatabase.options.types.read(
+          DriftSqlType.string, data['${effectivePrefix}gacha_pool_name'])!,
+      gachaRuleType: attachedDatabase.options.types.read(
+          DriftSqlType.string, data['${effectivePrefix}gacha_rule_type'])!,
+    );
   }
 
   @override
@@ -562,24 +554,11 @@ class GachaRecord extends DataClass implements Insertable<GachaRecord> {
   final String pool;
   final List<dynamic> chars;
   final String uid;
-  GachaRecord(
+  const GachaRecord(
       {required this.ts,
       required this.pool,
       required this.chars,
       required this.uid});
-  factory GachaRecord.fromData(Map<String, dynamic> data, {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return GachaRecord(
-      ts: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}ts'])!,
-      pool: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}pool'])!,
-      chars: $GachaRecordsTable.$converter0.mapToDart(const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}chars']))!,
-      uid: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}uid'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -587,7 +566,7 @@ class GachaRecord extends DataClass implements Insertable<GachaRecord> {
     map['pool'] = Variable<String>(pool);
     {
       final converter = $GachaRecordsTable.$converter0;
-      map['chars'] = Variable<String>(converter.mapToSql(chars)!);
+      map['chars'] = Variable<String>(converter.toSql(chars));
     }
     map['uid'] = Variable<String>(uid);
     return map;
@@ -677,7 +656,7 @@ class GachaRecordsCompanion extends UpdateCompanion<GachaRecord> {
   static Insertable<GachaRecord> custom({
     Expression<int>? ts,
     Expression<String>? pool,
-    Expression<List<dynamic>>? chars,
+    Expression<String>? chars,
     Expression<String>? uid,
   }) {
     return RawValuesInsertable({
@@ -712,7 +691,7 @@ class GachaRecordsCompanion extends UpdateCompanion<GachaRecord> {
     }
     if (chars.present) {
       final converter = $GachaRecordsTable.$converter0;
-      map['chars'] = Variable<String>(converter.mapToSql(chars.value)!);
+      map['chars'] = Variable<String>(converter.toSql(chars.value));
     }
     if (uid.present) {
       map['uid'] = Variable<String>(uid.value);
@@ -740,25 +719,25 @@ class $GachaRecordsTable extends GachaRecords
   $GachaRecordsTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _tsMeta = const VerificationMeta('ts');
   @override
-  late final GeneratedColumn<int?> ts = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> ts = GeneratedColumn<int>(
       'ts', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   final VerificationMeta _poolMeta = const VerificationMeta('pool');
   @override
-  late final GeneratedColumn<String?> pool = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> pool = GeneratedColumn<String>(
       'pool', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _charsMeta = const VerificationMeta('chars');
   @override
-  late final GeneratedColumnWithTypeConverter<List<dynamic>, String?> chars =
-      GeneratedColumn<String?>('chars', aliasedName, false,
-              type: const StringType(), requiredDuringInsert: true)
+  late final GeneratedColumnWithTypeConverter<List<dynamic>, String> chars =
+      GeneratedColumn<String>('chars', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<List<dynamic>>($GachaRecordsTable.$converter0);
   final VerificationMeta _uidMeta = const VerificationMeta('uid');
   @override
-  late final GeneratedColumn<String?> uid = GeneratedColumn<String?>(
+  late final GeneratedColumn<String> uid = GeneratedColumn<String>(
       'uid', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [ts, pool, chars, uid];
   @override
@@ -795,8 +774,18 @@ class $GachaRecordsTable extends GachaRecords
   Set<GeneratedColumn> get $primaryKey => {ts, uid};
   @override
   GachaRecord map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return GachaRecord.fromData(data,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GachaRecord(
+      ts: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}ts'])!,
+      pool: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}pool'])!,
+      chars: $GachaRecordsTable.$converter0.fromSql(attachedDatabase
+          .options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}chars'])!),
+      uid: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}uid'])!,
+    );
   }
 
   @override
@@ -809,7 +798,7 @@ class $GachaRecordsTable extends GachaRecords
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$AppDatabase(QueryExecutor e) : super(e);
   late final $UsersTable users = $UsersTable(this);
   late final $GachaPoolsTable gachaPools = $GachaPoolsTable(this);
   late final $GachaRecordsTable gachaRecords = $GachaRecordsTable(this);
@@ -818,7 +807,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final GachaRecordsDao gachaRecordsDao =
       GachaRecordsDao(this as AppDatabase);
   @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+  Iterable<TableInfo<Table, dynamic>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [users, gachaPools, gachaRecords];
