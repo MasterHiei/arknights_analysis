@@ -8,7 +8,7 @@ import '../core/common/widgets/app_error_view.dart';
 import 'widgets/index.dart';
 
 class GachaStatsPage extends StatelessWidget {
-  const GachaStatsPage(this.token, {Key? key}) : super(key: key);
+  const GachaStatsPage(this.token, {super.key});
 
   final Token token;
 

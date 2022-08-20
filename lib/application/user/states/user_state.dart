@@ -8,13 +8,13 @@ part 'user_state.freezed.dart';
 
 @freezed
 class UserState with _$UserState {
-  const UserState._();
-
   const factory UserState({
     required bool isRefreshing,
     required Option<User> userOption,
     required Option<AppFailure> failureOption,
   }) = _UserState;
+
+  const UserState._();
 
   factory UserState.init() => UserState(
         isRefreshing: false,

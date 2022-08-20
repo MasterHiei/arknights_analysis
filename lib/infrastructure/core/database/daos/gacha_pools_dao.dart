@@ -9,7 +9,7 @@ part 'gacha_pools_dao.g.dart';
 @DriftAccessor(tables: [GachaPools])
 class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaPoolsDaoMixin {
-  GachaPoolsDao(AppDatabase db) : super(db);
+  GachaPoolsDao(super.db);
 
   Future<int> count() async {
     final countColumn = countAll();

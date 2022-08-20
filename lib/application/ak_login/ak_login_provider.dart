@@ -7,6 +7,7 @@ import 'package:webview_windows/webview_windows.dart';
 
 import '../../core/constants/constants.dart';
 import '../../core/exceptions/app_failure.dart';
+import '../../core/types/types.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
 import '../../presentation/core/routing/route_params.dart';
@@ -40,7 +41,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
 
   void _startListening() {
     _controller.url.listen(_onUrlChanged);
-    _controller.loadingState.listen(_onStateChanged);
+    _controller.loadingState.listen((state) => _currentState = state);
     _controller.webMessage.listen(_onTokenRecieved);
     _controller.loadUrl(akLoginPage);
   }
@@ -61,19 +62,19 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     }
   }
 
-  void _onStateChanged(LoadingState state) => _currentState = state;
-
   Future<void> _onTokenRecieved(dynamic data) async {
-    final status = data['status'] as int? ?? -1;
+    final json = data as Json?;
+
+    final status = json?['status'] as int? ?? -1;
     if (status != 0) {
-      final message = data['msg'] as String? ?? '登录已过期，请重新登录。';
+      final message = json?['msg'] as String? ?? '登录已过期，请重新登录。';
       state = AkLoginState.failed(AppFailure.localizedError(message));
       await _controller.loadUrl(akLoginPage);
       AppLoadingIndicator.dismiss();
       return;
     }
 
-    final token = data['data']?['token'] as String? ?? '';
+    final token = (json?['data'] as Json?)?['token'] as String? ?? '';
     if (token.isNotEmpty) {
       _token = Token(token);
       state = const AkLoginState.loggedIn();

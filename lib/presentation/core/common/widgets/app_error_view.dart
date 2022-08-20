@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/images.dart';
 
 class AppErrorView extends StatelessWidget {
-  const AppErrorView({Key? key}) : super(key: key);
+  const AppErrorView({super.key});
 
   @override
   Widget build(BuildContext context) {

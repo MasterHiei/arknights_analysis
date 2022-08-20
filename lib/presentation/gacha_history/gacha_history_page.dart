@@ -21,7 +21,7 @@ final _userProvider = Provider.autoDispose.family(
 );
 
 class GachaHistoryPage extends ConsumerWidget {
-  const GachaHistoryPage(this.token, {Key? key}) : super(key: key);
+  const GachaHistoryPage(this.token, {super.key});
 
   final Token token;
 
@@ -74,7 +74,6 @@ class GachaHistoryPage extends ConsumerWidget {
                 columnSpacing: 60.h,
                 showCheckboxColumn: false,
                 showFirstLastButtons: true,
-                rowsPerPage: pageSize,
                 availableRowsPerPage: const [
                   pageSize,
                   pageSize * 2,

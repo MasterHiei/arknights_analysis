@@ -8,14 +8,14 @@ part 'pagination_dto.g.dart';
 
 @freezed
 class PaginationDto with _$PaginationDto {
-  const PaginationDto._();
-
   const factory PaginationDto({
     required int current,
     required int total,
   }) = _PaginationDto;
 
   factory PaginationDto.fromJson(Json json) => _$PaginationDtoFromJson(json);
+
+  const PaginationDto._();
 
   Pagination toDomain() => Pagination(
         current: current,

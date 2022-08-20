@@ -7,7 +7,7 @@ import '../../../domain/user/value_objects/token.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
 class GachaExtraPanel extends StatelessWidget {
-  const GachaExtraPanel(this.token, {Key? key}) : super(key: key);
+  const GachaExtraPanel(this.token, {super.key});
 
   final Token token;
 

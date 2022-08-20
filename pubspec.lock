@@ -370,13 +370,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.1"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -525,13 +518,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.3.1"
-  lints:
-    dependency: transitive
+  lint:
+    dependency: "direct dev"
     description:
-      name: lints
+      name: lint
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "1.10.0"
   logger:
     dependency: "direct main"
     description:

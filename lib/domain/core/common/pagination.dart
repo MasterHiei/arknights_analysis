@@ -6,12 +6,12 @@ part 'pagination.freezed.dart';
 
 @freezed
 class Pagination with _$Pagination {
-  const Pagination._();
-
   const factory Pagination({
     required int current,
     required int total,
   }) = _Pagination;
+
+  const Pagination._();
 
   int get totalPage => (total / pageSize).ceil();
 

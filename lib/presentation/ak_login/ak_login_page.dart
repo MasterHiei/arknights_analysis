@@ -10,7 +10,7 @@ import '../../core/constants/constants.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 
 class AkLoginPage extends ConsumerWidget {
-  const AkLoginPage({Key? key}) : super(key: key);
+  const AkLoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

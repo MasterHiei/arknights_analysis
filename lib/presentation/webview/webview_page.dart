@@ -9,7 +9,7 @@ import '../../core/utils/launch_url.dart';
 import '../core/routing/route_params.dart';
 
 class WebviewPage extends ConsumerWidget {
-  const WebviewPage(this.params, {Key? key}) : super(key: key);
+  const WebviewPage(this.params, {super.key});
 
   final WebviewParams params;
 
@@ -40,7 +40,7 @@ class WebviewPage extends ConsumerWidget {
 }
 
 class _NavigationBar extends StatelessWidget {
-  const _NavigationBar(this.controller, {Key? key}) : super(key: key);
+  const _NavigationBar(this.controller);
 
   final WebviewController controller;
 
@@ -48,7 +48,7 @@ class _NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 48.h,
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.black.withAlpha(20),
           borderRadius: BorderRadius.circular(6),
@@ -67,19 +67,20 @@ class _NavigationBar extends StatelessWidget {
               onPressed: controller.goForward,
             ),
             StreamBuilder<String>(
-                stream: controller.url,
-                builder: (_, snapshot) {
-                  return _NavigationBarItem(
-                    tooltip: '在浏览器打开',
-                    icon: FluentIcons.chrome_restore,
-                    onPressed: () async {
-                      final urlString = snapshot.data;
-                      if (urlString != null) {
-                        launch(urlString);
-                      }
-                    },
-                  );
-                }),
+              stream: controller.url,
+              builder: (_, snapshot) {
+                return _NavigationBarItem(
+                  tooltip: '在浏览器打开',
+                  icon: FluentIcons.chrome_restore,
+                  onPressed: () async {
+                    final urlString = snapshot.data;
+                    if (urlString != null) {
+                      launch(urlString);
+                    }
+                  },
+                );
+              },
+            ),
             _NavigationBarItem(
               tooltip: '关闭页面',
               icon: FluentIcons.chrome_close,
@@ -94,11 +95,10 @@ class _NavigationBar extends StatelessWidget {
 
 class _NavigationBarItem extends StatelessWidget {
   const _NavigationBarItem({
-    Key? key,
     required this.tooltip,
     required this.icon,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   final String tooltip;
   final IconData icon;

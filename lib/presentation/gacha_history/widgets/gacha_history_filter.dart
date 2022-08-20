@@ -27,7 +27,7 @@ final _selectedPools = Provider.autoDispose((ref) {
 });
 
 class GachaHistoryFilter extends StatelessWidget {
-  const GachaHistoryFilter({Key? key}) : super(key: key);
+  const GachaHistoryFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +70,9 @@ class GachaHistoryFilter extends StatelessWidget {
         final checked = ref.watch(_showAllPools);
         return ToggleSwitch(
           checked: checked,
-          onChanged:
-              ref.read(gachaHistoryFilterProvider.notifier).switchShowAllPools,
+          onChanged: (value) => ref
+              .read(gachaHistoryFilterProvider.notifier)
+              .switchShowAllPools(value: value),
           content: Text(
             checked ? '全部寻访' : '部分寻访',
             style: TextStyle(fontSize: 15.sp),
@@ -188,10 +189,9 @@ class GachaHistoryFilter extends StatelessWidget {
 
 class _FilterItem extends StatelessWidget {
   const _FilterItem({
-    Key? key,
     required this.label,
     required this.child,
-  }) : super(key: key);
+  });
 
   final String label;
   final Widget child;

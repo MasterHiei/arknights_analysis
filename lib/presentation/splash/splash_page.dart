@@ -12,7 +12,7 @@ import '../core/common/widgets/app_flush_bar.dart';
 import '../core/resources/images.dart';
 
 class SplashPage extends ConsumerWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

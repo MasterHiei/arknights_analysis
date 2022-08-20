@@ -6,8 +6,6 @@ part 'gacha_pool.freezed.dart';
 
 @freezed
 class GachaPool with _$GachaPool {
-  const GachaPool._();
-
   const factory GachaPool({
     required String gachaPoolId,
     required int gachaIndex,
@@ -16,4 +14,6 @@ class GachaPool with _$GachaPool {
     required String gachaPoolName,
     required GachaRuleType gachaRuleType,
   }) = _GachaPool;
+
+  const GachaPool._();
 }

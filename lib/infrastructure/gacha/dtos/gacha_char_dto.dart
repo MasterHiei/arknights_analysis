@@ -10,8 +10,6 @@ part 'gacha_char_dto.g.dart';
 
 @freezed
 class GachaCharDto with _$GachaCharDto {
-  const GachaCharDto._();
-
   const factory GachaCharDto({
     required String name,
     required Rarity rarity,
@@ -19,6 +17,8 @@ class GachaCharDto with _$GachaCharDto {
   }) = _GachaCharDto;
 
   factory GachaCharDto.fromJson(Json json) => _$GachaCharDtoFromJson(json);
+
+  const GachaCharDto._();
 
   GachaChar toDomain({required String pool, required Ts ts}) => GachaChar(
         name: name,

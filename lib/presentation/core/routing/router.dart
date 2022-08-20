@@ -39,13 +39,13 @@ enum Routes {
       case Routes.portal:
         return _buildFadeTransitionPage(
           this,
-          pageBuilder: (_, state) => PortalPage(state.extra as PortalParams),
+          pageBuilder: (_, state) => PortalPage(state.extra! as PortalParams),
         );
 
       case Routes.webview:
         return _buildFadeTransitionPage(
           this,
-          pageBuilder: (_, state) => WebviewPage(state.extra as WebviewParams),
+          pageBuilder: (_, state) => WebviewPage(state.extra! as WebviewParams),
           fullscreenDialog: true,
         );
     }
@@ -83,15 +83,10 @@ final router = GoRouter(
   debugLogDiagnostics: kDebugMode,
 );
 
-typedef _PageBuilder = Widget Function(
-  BuildContext context,
-  GoRouterState state,
-);
-
 GoRoute _buildFadeTransitionPage(
   Routes route, {
   bool fullscreenDialog = false,
-  required _PageBuilder pageBuilder,
+  required Widget Function(BuildContext, GoRouterState) pageBuilder,
 }) =>
     GoRoute(
       name: route.name,

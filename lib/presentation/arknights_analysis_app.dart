@@ -8,7 +8,7 @@ import '../core/enums/i18n.dart';
 import 'core/routing/router.dart';
 
 class ArknightsAnalysisApp extends StatelessWidget {
-  const ArknightsAnalysisApp({Key? key}) : super(key: key);
+  const ArknightsAnalysisApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ArknightsAnalysisApp extends StatelessWidget {
 }
 
 class _MainApp extends StatelessWidget {
-  const _MainApp({Key? key}) : super(key: key);
+  const _MainApp();
 
   @override
   Widget build(BuildContext context) {

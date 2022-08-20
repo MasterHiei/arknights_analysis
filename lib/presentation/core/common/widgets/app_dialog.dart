@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 class AppDialog extends StatelessWidget {
   const AppDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
     required this.confirmButtonText,
@@ -11,7 +11,7 @@ class AppDialog extends StatelessWidget {
     required this.closeButtonText,
     required this.closeButtonColor,
     required this.onCloseButtonTap,
-  }) : super(key: key);
+  });
 
   final Widget title;
   final Widget content;

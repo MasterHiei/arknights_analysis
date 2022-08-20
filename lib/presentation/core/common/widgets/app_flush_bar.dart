@@ -19,7 +19,7 @@ enum FlushBarSeverity {
 }
 
 class AppFlushBar extends StatelessWidget {
-  const AppFlushBar._({Key? key}) : super(key: key);
+  const AppFlushBar._();
 
   static Future<void> show(
     BuildContext context, {

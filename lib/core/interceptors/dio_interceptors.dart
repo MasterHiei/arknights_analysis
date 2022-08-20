@@ -7,5 +7,4 @@ final dioInterceptors = <Interceptor>[
 
 final _loggerInterceptor = PrettyDioLogger(
   requestBody: true,
-  responseBody: true,
 );

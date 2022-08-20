@@ -10,8 +10,6 @@ part 'user_dto.g.dart';
 
 @freezed
 class UserDto with _$UserDto {
-  const UserDto._();
-
   const factory UserDto({
     required String uid,
     required String nickName,
@@ -25,6 +23,8 @@ class UserDto with _$UserDto {
         nickName: user.nickName,
         token: user.token.getOrCrash(),
       );
+
+  const UserDto._();
 
   User toDomain() => User(
         uid: Uid(uid),

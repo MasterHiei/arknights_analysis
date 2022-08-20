@@ -11,8 +11,6 @@ part 'gacha_record_dto.g.dart';
 
 @freezed
 class GachaRecordDto with _$GachaRecordDto {
-  const GachaRecordDto._();
-
   const factory GachaRecordDto({
     required int ts,
     required String pool,
@@ -21,6 +19,8 @@ class GachaRecordDto with _$GachaRecordDto {
   }) = _GachaRecordDto;
 
   factory GachaRecordDto.fromJson(Json json) => _$GachaRecordDtoFromJson(json);
+
+  const GachaRecordDto._();
 
   GachaRecord toDomain() => GachaRecord(
         ts: _ts,

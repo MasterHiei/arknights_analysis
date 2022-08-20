@@ -16,12 +16,12 @@ typedef CharWithPulls = Pair<GachaChar, int>;
 
 @freezed
 class GachaStats with _$GachaStats {
-  const GachaStats._();
-
   const factory GachaStats({
     required Uid uid,
     required List<GachaChar> chars,
   }) = _GachaStats;
+
+  const GachaStats._();
 
   //* Properties
 

@@ -8,7 +8,7 @@ part 'users_dao.g.dart';
 
 @DriftAccessor(tables: [Users])
 class UsersDao extends DatabaseAccessor<AppDatabase> with _$UsersDaoMixin {
-  UsersDao(AppDatabase db) : super(db);
+  UsersDao(super.db);
 
   Future<UserDto> get(String token) async {
     final query = select(users)..where((tbl) => tbl.token.equals(token));

@@ -42,8 +42,8 @@ class GachaHistoryFilterNotifier
     state = state.copyWith(selectedRarities: newRarities);
   }
 
-  void switchShowAllPools(bool checked) =>
-      state = state.copyWith(showAllPools: checked);
+  void switchShowAllPools({required bool value}) =>
+      state = state.copyWith(showAllPools: value);
 
   void selectPool(String value) {
     final oldPools = [...state.selectedPools];

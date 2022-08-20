@@ -6,14 +6,14 @@ part 'gacha_history_filter_state.freezed.dart';
 
 @freezed
 class GachaHistoryFilterState with _$GachaHistoryFilterState {
-  const GachaHistoryFilterState._();
-
   const factory GachaHistoryFilterState({
     required List<String> pools,
     required bool showAllPools,
     required List<String> selectedPools,
     required List<Rarity> selectedRarities,
   }) = _GachaHistoryFilterState;
+
+  const GachaHistoryFilterState._();
 
   factory GachaHistoryFilterState.init() => const GachaHistoryFilterState(
         pools: [],

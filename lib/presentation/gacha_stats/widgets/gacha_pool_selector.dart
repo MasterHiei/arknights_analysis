@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 
 class GachaPoolSelector extends ConsumerWidget {
-  const GachaPoolSelector({Key? key}) : super(key: key);
+  const GachaPoolSelector({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

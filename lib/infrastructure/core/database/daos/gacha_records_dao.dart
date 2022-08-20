@@ -13,7 +13,7 @@ part 'gacha_records_dao.g.dart';
 @DriftAccessor(tables: [GachaPools, GachaRecords])
 class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaRecordsDaoMixin {
-  GachaRecordsDao(AppDatabase db) : super(db);
+  GachaRecordsDao(super.db);
 
   Future<List<String>> getPools({
     List<GachaRuleType>? includeRuleTypes,

@@ -1,4 +1,4 @@
-include: package:flutter_lints/flutter.yaml
+include: package:lint/analysis_options.yaml
 
 analyzer:
   strong-mode:
@@ -20,3 +20,4 @@ linter:
     always_use_package_imports: false
     prefer_relative_imports: true
     sort_constructors_first: true
+    use_key_in_widget_constructors: true

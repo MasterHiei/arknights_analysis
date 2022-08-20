@@ -35,7 +35,7 @@ final _selectedPool = Provider.autoDispose(
 );
 
 class GachaStatsView extends ConsumerWidget {
-  const GachaStatsView(this.user, {Key? key}) : super(key: key);
+  const GachaStatsView(this.user, {super.key});
 
   final User user;
 
@@ -74,7 +74,6 @@ class GachaStatsView extends ConsumerWidget {
       SizedBox.expand(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           children: [
             ProgressBar(value: value),
             SizedBox(height: 12.h),
@@ -104,7 +103,7 @@ class GachaStatsView extends ConsumerWidget {
 }
 
 class _StatsView extends ConsumerWidget {
-  const _StatsView({Key? key}) : super(key: key);
+  const _StatsView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -139,11 +138,7 @@ class _StatsView extends ConsumerWidget {
 }
 
 class _PieChart extends StatelessWidget {
-  const _PieChart(
-    this.pool,
-    this.stats, {
-    Key? key,
-  }) : super(key: key);
+  const _PieChart(this.pool, this.stats);
 
   final String? pool;
   final GachaStats stats;
@@ -205,7 +200,6 @@ class _PieChart extends StatelessWidget {
                 height: indicatorSize.height,
                 decoration: BoxDecoration(
                   color: rarity.color.withAlpha(alpha),
-                  shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(2),
                 ),
               );
@@ -348,7 +342,6 @@ class _PieChart extends StatelessWidget {
             child: SizedBox(
               width: 320.w,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text('${rarity.title}：'),
                   SizedBox(width: 12.w),

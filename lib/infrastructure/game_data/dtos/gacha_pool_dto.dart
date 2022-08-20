@@ -9,8 +9,6 @@ part 'gacha_pool_dto.g.dart';
 
 @freezed
 class GachaPoolDto with _$GachaPoolDto {
-  const GachaPoolDto._();
-
   const factory GachaPoolDto({
     required String gachaPoolId,
     required int gachaIndex,
@@ -21,6 +19,8 @@ class GachaPoolDto with _$GachaPoolDto {
   }) = _GachaPoolDto;
 
   factory GachaPoolDto.fromJson(Json json) => _$GachaPoolDtoFromJson(json);
+
+  const GachaPoolDto._();
 
   GachaPool toDomain() => GachaPool(
         gachaPoolId: gachaPoolId,

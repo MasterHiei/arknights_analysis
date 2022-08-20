@@ -11,7 +11,7 @@ import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 
 class PortalPage extends ConsumerStatefulWidget {
-  const PortalPage(this.params, {Key? key}) : super(key: key);
+  const PortalPage(this.params, {super.key});
 
   final PortalParams params;
 

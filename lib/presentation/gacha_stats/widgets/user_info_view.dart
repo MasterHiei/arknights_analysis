@@ -12,7 +12,7 @@ final _userOptionProvider = Provider.autoDispose.family(
 );
 
 class UserInfoView extends ConsumerWidget {
-  const UserInfoView(this.token, {Key? key}) : super(key: key);
+  const UserInfoView(this.token, {super.key});
 
   final Token token;
 
