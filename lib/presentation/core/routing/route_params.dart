@@ -11,4 +11,9 @@ part 'route_params.freezed.dart';
 )
 class RouteParams with _$RouteParams {
   const factory RouteParams.portal({required Token token}) = PortalParams;
+
+  const factory RouteParams.webview({
+    required String initialUrl,
+    @Default(false) bool enableNavigationBar,
+  }) = WebviewParams;
 }

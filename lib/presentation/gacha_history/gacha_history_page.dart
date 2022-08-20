@@ -8,11 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../application/gacha/gacha_history_provider.dart';
 import '../../application/user/user_provider.dart';
 import '../../core/constants/constants.dart';
-import '../../core/utils/launch_url.dart';
 import '../../domain/gacha/gacha_char.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../core/routing/route_params.dart';
+import '../core/routing/router.dart';
 import 'widgets/index.dart';
 
 final _userProvider = Provider.autoDispose.family(
@@ -133,7 +134,13 @@ class _DataTableSource extends DataTableSource {
         _buildTextCell(char.pool),
         _buildTextCell(char.ts.dateTime.yMMMdHmsString),
       ],
-      onTap: () => launch('$prts/w/${char.name}'),
+      onTap: () => Routes.webview.push(
+        context,
+        extra: WebviewParams(
+          initialUrl: '$prts/w/${Uri.encodeComponent(char.name)}',
+          enableNavigationBar: true,
+        ),
+      ),
     );
   }
 

@@ -5,12 +5,14 @@ import 'package:go_router/go_router.dart';
 import '../../ak_login/ak_login_page.dart';
 import '../../portal/portal_page.dart';
 import '../../splash/splash_page.dart';
+import '../../webview/webview_page.dart';
 import 'route_params.dart';
 
 enum Routes {
   splash(name: 'splash', path: '/'),
   akLogin(name: 'akLogin', path: '/akLogin'),
-  portal(name: 'portal', path: '/portal');
+  portal(name: 'portal', path: '/portal'),
+  webview(name: 'webview', path: '/webview');
 
   const Routes({
     required this.name,
@@ -39,6 +41,13 @@ enum Routes {
           this,
           pageBuilder: (_, state) => PortalPage(state.extra as PortalParams),
         );
+
+      case Routes.webview:
+        return _buildFadeTransitionPage(
+          this,
+          pageBuilder: (_, state) => WebviewPage(state.extra as WebviewParams),
+          fullscreenDialog: true,
+        );
     }
   }
 
@@ -49,6 +58,19 @@ enum Routes {
     Object? extra,
   }) =>
       context.goNamed(
+        name,
+        params: params,
+        queryParams: queryParams,
+        extra: extra,
+      );
+
+  void push(
+    BuildContext context, {
+    Map<String, String> params = const <String, String>{},
+    Map<String, String> queryParams = const <String, String>{},
+    Object? extra,
+  }) =>
+      context.pushNamed(
         name,
         params: params,
         queryParams: queryParams,
@@ -68,6 +90,7 @@ typedef _PageBuilder = Widget Function(
 
 GoRoute _buildFadeTransitionPage(
   Routes route, {
+  bool fullscreenDialog = false,
   required _PageBuilder pageBuilder,
 }) =>
     GoRoute(
@@ -75,10 +98,11 @@ GoRoute _buildFadeTransitionPage(
       path: route.path,
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
-        child: pageBuilder(context, state),
         transitionsBuilder: (_, animation, __, child) => FadeTransition(
           opacity: animation,
           child: child,
         ),
+        fullscreenDialog: fullscreenDialog,
+        child: pageBuilder(context, state),
       ),
     );

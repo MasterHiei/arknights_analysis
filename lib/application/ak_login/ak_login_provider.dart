@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
@@ -12,37 +15,40 @@ import '../webview/webview_provider.dart';
 import 'states/ak_login_state.dart';
 
 final akLoginProvider =
-    StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>((ref) {
-  final controller = ref.watch(webviewProvider).controller;
-  return AkLoginNotifier(controller);
-});
+    StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
+  (ref) {
+    final initialUrl = optionOf(akLoginPage);
+    final controller = ref.watch(webviewProvider(initialUrl)).controller;
+    return AkLoginNotifier(controller);
+  },
+);
 
 class AkLoginNotifier extends StateNotifier<AkLoginState> {
-  AkLoginNotifier(this.controller) : super(const AkLoginState.init()) {
+  AkLoginNotifier(this._controller) : super(const AkLoginState.init()) {
     _startListening();
   }
 
-  final WebviewController controller;
+  final WebviewController _controller;
 
   var _currentState = LoadingState.none;
 
   late final Token _token;
-
   void go(BuildContext context) => Routes.portal.go(
         context,
         extra: RouteParams.portal(token: _token),
       );
 
   void _startListening() {
-    controller.url.listen(_onUrlChanged);
-    controller.loadingState.listen(_onStateChanged);
-    controller.webMessage.listen(_onTokenRecieved);
+    _controller.url.listen(_onUrlChanged);
+    _controller.loadingState.listen(_onStateChanged);
+    _controller.webMessage.listen(_onTokenRecieved);
+    _controller.loadUrl(akLoginPage);
   }
 
   Future<void> _onUrlChanged(String url) async {
     final isHomePage = url == akHomePage;
     if (isHomePage) {
-      await controller.loadUrl(asGetToken);
+      await _controller.loadUrl(asGetToken);
     }
 
     final isCompleted = _currentState == LoadingState.navigationCompleted;
@@ -51,7 +57,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       AppLoadingIndicator.show();
       const data = 'document.getElementsByTagName("pre")[0].innerHTML';
       const script = 'window.chrome.webview.postMessage(JSON.parse($data))';
-      await controller.executeScript(script);
+      await _controller.executeScript(script);
     }
   }
 
@@ -62,7 +68,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     if (status != 0) {
       final message = data['msg'] as String? ?? '登录已过期，请重新登录。';
       state = AkLoginState.failed(AppFailure.localizedError(message));
-      await controller.loadUrl(akLoginPage);
+      await _controller.loadUrl(akLoginPage);
       AppLoadingIndicator.dismiss();
       return;
     }

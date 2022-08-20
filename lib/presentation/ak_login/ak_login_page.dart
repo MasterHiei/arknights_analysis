@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
@@ -8,28 +9,16 @@ import '../../application/webview/webview_provider.dart';
 import '../../core/constants/constants.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 
-class AkLoginPage extends ConsumerStatefulWidget {
+class AkLoginPage extends ConsumerWidget {
   const AkLoginPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<AkLoginPage> createState() => _AkLoginPageState();
-}
-
-class _AkLoginPageState extends ConsumerState<AkLoginPage> {
-  @override
-  void initState() {
-    super.initState();
-    ref
-        .read(webviewProvider.notifier)
-        .initialize(context, initialUrl: akLoginPage);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = ref.watch(webviewProvider).controller;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final initialUrl = optionOf(akLoginPage);
+    final controller = ref.watch(webviewProvider(initialUrl)).controller;
     final isInitialized = controller.value.isInitialized;
     if (isInitialized) {
-      _listenLoginState();
+      _listenState(context, ref);
     }
     return ScaffoldPage(
       content: Stack(
@@ -42,7 +31,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> {
     );
   }
 
-  void _listenLoginState() => ref.listen<AkLoginState>(
+  void _listenState(BuildContext context, WidgetRef ref) =>
+      ref.listen<AkLoginState>(
         akLoginProvider,
         (_, next) => next.maybeWhen(
           failed: (failure) => AppFlushBar.show(
