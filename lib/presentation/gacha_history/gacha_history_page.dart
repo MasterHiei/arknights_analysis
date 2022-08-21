@@ -136,8 +136,7 @@ class _DataTableSource extends DataTableSource {
       onTap: () => Routes.webview.push(
         context,
         extra: WebviewParams(
-          initialUrl: '$prts/w/${Uri.encodeComponent(char.name)}',
-          enableNavigationBar: true,
+          initialUrl: '$prts/w/${char.encodeName}',
         ),
       ),
     );

@@ -14,4 +14,8 @@ class GachaChar with _$GachaChar {
     required String pool,
     required Ts ts,
   }) = _GachaChar;
+
+  const GachaChar._();
+
+  String get encodeName => Uri.encodeComponent(name);
 }

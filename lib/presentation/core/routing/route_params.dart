@@ -14,6 +14,6 @@ class RouteParams with _$RouteParams {
 
   const factory RouteParams.webview({
     required String initialUrl,
-    @Default(false) bool enableNavigationBar,
+    @Default(true) bool enableNavigationBar,
   }) = WebviewParams;
 }

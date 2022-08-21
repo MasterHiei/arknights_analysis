@@ -129,13 +129,14 @@ class __$$_GachaCharCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GachaChar implements _GachaChar {
+class _$_GachaChar extends _GachaChar {
   const _$_GachaChar(
       {required this.name,
       required this.rarity,
       required this.isNew,
       required this.pool,
-      required this.ts});
+      required this.ts})
+      : super._();
 
   @override
   final String name;
@@ -180,13 +181,14 @@ class _$_GachaChar implements _GachaChar {
       __$$_GachaCharCopyWithImpl<_$_GachaChar>(this, _$identity);
 }
 
-abstract class _GachaChar implements GachaChar {
+abstract class _GachaChar extends GachaChar {
   const factory _GachaChar(
       {required final String name,
       required final Rarity rarity,
       required final bool isNew,
       required final String pool,
       required final Ts ts}) = _$_GachaChar;
+  const _GachaChar._() : super._();
 
   @override
   String get name;

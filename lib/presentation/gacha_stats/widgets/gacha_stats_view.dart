@@ -18,13 +18,14 @@ import '../../../application/gacha/states/gacha_state.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/enums/rarity.dart';
-import '../../../core/utils/launch_url.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_error_view.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
+import '../../core/routing/route_params.dart';
+import '../../core/routing/router.dart';
 
 final _uidProvider = Provider.autoDispose<Uid>(
   (_) => throw UnimplementedError(),
@@ -426,7 +427,12 @@ class _PieChart extends StatelessWidget {
                   TextSpan(
                     text: char.name,
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => launch('$prts/w/${char.name}'),
+                      ..onTap = () => Routes.webview.push(
+                            context,
+                            extra: WebviewParams(
+                              initialUrl: '$prts/w/${char.encodeName}',
+                            ),
+                          ),
                   ),
                   style: DefaultTextStyle.of(context).style.copyWith(
                         color: rarity.color,

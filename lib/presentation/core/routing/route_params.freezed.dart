@@ -53,7 +53,7 @@ abstract class PortalParams implements RouteParams {
 
 class _$WebviewParams implements WebviewParams {
   const _$WebviewParams(
-      {required this.initialUrl, this.enableNavigationBar = false});
+      {required this.initialUrl, this.enableNavigationBar = true});
 
   @override
   final String initialUrl;

@@ -75,7 +75,7 @@ class _NavigationBar extends StatelessWidget {
                   onPressed: () async {
                     final urlString = snapshot.data;
                     if (urlString != null) {
-                      launch(urlString);
+                      launchUrl(urlString);
                     }
                   },
                 );
