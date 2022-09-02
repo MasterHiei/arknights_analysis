@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:time/time.dart';
 
 import '../../presentation/core/routing/router.dart';
 
@@ -34,9 +35,9 @@ class SplashNotifier extends ChangeNotifier {
 
   void _go(BuildContext context) => Routes.akLogin.go(context);
 
-  Future<void> _startAnimation() =>
-      Future.delayed(const Duration(milliseconds: 200), () {
-        _opacity = 1;
-        notifyListeners();
-      });
+  Future<void> _startAnimation() async {
+    await 200.milliseconds.delay;
+    _opacity = 1;
+    notifyListeners();
+  }
 }

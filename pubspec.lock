@@ -965,7 +965,7 @@ packages:
     source: hosted
     version: "0.4.9"
   time:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: time
       url: "https://pub.flutter-io.cn"

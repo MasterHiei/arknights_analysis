@@ -22,9 +22,16 @@ const gameDataBaseUrl =
 
 const akLoginPage = 'https://ak.hypergryph.com/user/login';
 
-const akHomePage = 'https://ak.hypergryph.com/user/home';
+const akHomePageOfficial = 'https://ak.hypergryph.com/user/home';
 
-const asGetToken = 'https://as.hypergryph.com/user/info/v1/token_by_cookie';
+const akHomePageBilibili = 'https://ak.hypergryph.com/user/bilibili/home';
+
+const akHomePageBilibiliRedirect =
+    'https://ak.hypergryph.com/user/bilibili/home?auth=bilibili';
+
+const asGetTokenOfficial = 'https://web-api.hypergryph.com/account/info/hg';
+
+const asGetTokenBilibili = 'https://web-api.hypergryph.com/account/info/ak-b';
 
 const pageSize = 10;
 

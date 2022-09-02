@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:time/time.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../infrastructure/game_data/game_data_repository.dart';
@@ -18,7 +19,7 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
     this._apiRepository,
     this._repository,
   ) : super(const AsyncValue.loading()) {
-    Future.delayed(const Duration(milliseconds: 1200), _fetch);
+    _fetch();
   }
 
   final GameDataApiRepository _apiRepository;
@@ -38,6 +39,8 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
   }
 
   Future<void> _fetch() async {
+    await 1200.milliseconds.delay;
+
     if (await _hasData()) {
       state = const AsyncValue.data(unit);
       return;
@@ -50,7 +53,9 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
           '远程数据读取失败，即将加载本地数据源。\n${failure.localizedMessage}',
         );
         state = AsyncValue.error(error);
-        Future.delayed(const Duration(seconds: 3), _applyLocalData);
+
+        await 3.seconds.delay;
+        _applyLocalData();
       },
       (_) async {
         await _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());

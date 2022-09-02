@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/ak_logout/ak_logout_provider.dart';
 import '../../../application/user/states/user_state.dart';
 import '../../../application/user/user_provider.dart';
 import '../../../domain/user/value_objects/token.dart';
@@ -43,11 +44,17 @@ class UserInfoView extends ConsumerWidget {
       userProvider(token),
       (_, next) => next.failureOption.fold(
         () {},
-        (failure) => AppFlushBar.show(
-          context,
-          message: failure.localizedMessage,
-          severity: FlushBarSeverity.error,
-        ),
+        (failure) async {
+          await AppFlushBar.show(
+            context,
+            message: failure.localizedMessage,
+            severity: FlushBarSeverity.error,
+          );
+          failure.maybeWhen(
+            invalidToken: () => ref.read(akLogoutProvider.notifier).logout(),
+            orElse: () {},
+          );
+        },
       ),
     );
   }

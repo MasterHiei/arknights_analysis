@@ -54,7 +54,7 @@ class UserNotifier extends StateNotifier<UserState> with DebounceMixin {
   Future<void> _fetchAndUpdate() async {
     final failureOrSuccess = await _repository.fetchAndUpdate(_token);
     failureOrSuccess.fold(
-      (failure) => state.copyWith(failureOption: optionOf(failure)),
+      (failure) => state = state.copyWith(failureOption: optionOf(failure)),
       (_) => _get(),
     );
   }

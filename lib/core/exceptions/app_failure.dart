@@ -34,6 +34,6 @@ class AppFailure with _$AppFailure {
         },
         localDataError: (f) => '无法加载本地数据，请稍后重试。\n${f.e}',
         localDataEmpty: (_) => '本地数据不存在，请尝试重新获取数据。',
-        invalidToken: (_) => '令牌错误或已失效，请重启程序获取最新的访问令牌。',
+        invalidToken: (_) => '令牌错误或已失效，请重新登录获取最新的访问令牌。',
       );
 }
