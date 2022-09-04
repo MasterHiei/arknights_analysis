@@ -2,12 +2,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/types/types.dart';
 
-part 'token_body_dto.freezed.dart';
-part 'token_body_dto.g.dart';
+part 'token_body_official_dto.freezed.dart';
+part 'token_body_official_dto.g.dart';
 
 @freezed
-class TokenBodyDto with _$TokenBodyDto {
-  const factory TokenBodyDto({
+class TokenBodyOfficialDto with _$TokenBodyOfficialDto {
+  const factory TokenBodyOfficialDto({
     @Default(1)
         int appId,
     @Default(1)
@@ -18,9 +18,10 @@ class TokenBodyDto with _$TokenBodyDto {
       toJson: _tokenToJson,
     )
         required String token,
-  }) = _TokenBodyDto;
+  }) = _TokenBodyOfficialDto;
 
-  factory TokenBodyDto.fromJson(Json json) => _$TokenBodyDtoFromJson(json);
+  factory TokenBodyOfficialDto.fromJson(Json json) =>
+      _$TokenBodyOfficialDtoFromJson(json);
 }
 
 String _tokenFromJson(Json json) => json['token'] as String;

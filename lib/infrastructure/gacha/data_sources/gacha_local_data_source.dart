@@ -15,6 +15,7 @@ abstract class GachaLocalDataSource {
   Future<List<int>> save(GachaDto dto);
 
   Future<List<String>> getPools({
+    required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   });
@@ -46,10 +47,12 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
 
   @override
   Future<List<String>> getPools({
+    required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
       _db.gachaRecordsDao.getPools(
+        uid: uid,
         includeRuleTypes: includeRuleTypes,
         excludeRuleTypes: excludeRuleTypes,
       );

@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/enums/ak_login_type.dart';
 import '../../core/enums/gacha_rule_type.dart';
 import '../../core/enums/rarity.dart';
 import '../../core/exceptions/app_failure.dart';
@@ -29,9 +30,11 @@ abstract class GachaRepository {
     Token token, {
     required Uid uid,
     int page = 1,
+    required AkLoginType loginType,
   });
 
   Future<Either<AppFailure, List<String>>> getPools({
+    required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   });
@@ -67,12 +70,23 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
     Token token, {
     required Uid uid,
     int page = 1,
+    required AkLoginType loginType,
   }) =>
       execute(
         () async {
+          late final String? channelId;
+          switch (loginType) {
+            case AkLoginType.official:
+              break;
+
+            case AkLoginType.bilibili:
+              channelId = '2';
+              break;
+          }
           final response = await _remoteDataSource.fetch(
             token: token.getOrCrash(),
             page: page,
+            channelId: channelId,
           );
           final dto = response.data;
           if (dto == null) {
@@ -92,11 +106,13 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
 
   @override
   Future<Either<AppFailure, List<String>>> getPools({
+    required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
       execute(
         () => _localDataSource.getPools(
+          uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
         ),

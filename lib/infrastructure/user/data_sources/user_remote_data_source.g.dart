@@ -16,7 +16,24 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<UserResponseDto> request(body) async {
+  Future<UserResponseDto> requestOfficial(body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserResponseDto>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/u8/user/info/v1/basic',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserResponseDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserResponseDto> requestBilibili(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

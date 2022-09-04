@@ -1,0 +1,4 @@
+enum AkLoginType {
+  official,
+  bilibili,
+}

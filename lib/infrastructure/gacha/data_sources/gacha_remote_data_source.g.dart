@@ -16,9 +16,15 @@ class _GachaRemoteDataSource implements GachaRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<GachaResponseDto> fetch({required token, required page}) async {
+  Future<GachaResponseDto> fetch(
+      {required token, required page, channelId}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'token': token, r'page': page};
+    final queryParameters = <String, dynamic>{
+      r'token': token,
+      r'page': page,
+      r'channelId': channelId
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

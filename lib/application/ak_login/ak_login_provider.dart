@@ -7,6 +7,7 @@ import 'package:time/time.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../core/constants/constants.dart';
+import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/types/types.dart';
 import '../../domain/user/value_objects/token.dart';
@@ -14,23 +15,30 @@ import '../../presentation/core/common/utils/app_loading_indicator.dart';
 import '../../presentation/core/routing/route_params.dart';
 import '../../presentation/core/routing/router.dart';
 import '../webview/webview_provider.dart';
+import 'ak_login_type_provider.dart';
 import 'states/ak_login_state.dart';
 
 final akLoginProvider =
     StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
   (ref) {
     final initialUrl = optionOf(akLoginPage);
-    final controller = ref.watch(webviewProvider(initialUrl)).controller;
-    return AkLoginNotifier(controller);
+    return AkLoginNotifier(
+      ref.watch(webviewProvider(initialUrl)).controller,
+      ref.watch(akLoginTypeProvider.notifier),
+    );
   },
 );
 
 class AkLoginNotifier extends StateNotifier<AkLoginState> {
-  AkLoginNotifier(this._controller) : super(const AkLoginState.init()) {
+  AkLoginNotifier(
+    this._controller,
+    this._loginTypeProvider,
+  ) : super(const AkLoginState.init()) {
     _startListening();
   }
 
   final WebviewController _controller;
+  final StateController<AkLoginType> _loginTypeProvider;
 
   var _currentUrl = '';
 
@@ -56,12 +64,14 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     final isOfficial = url == akHomePageOfficial;
     if (isOfficial) {
       await _controller.loadUrl(asGetTokenOfficial);
+      _loginTypeProvider.state = AkLoginType.official;
     }
     final isBilibili =
         [akHomePageBilibili, akHomePageBilibiliRedirect].contains(url);
     if (isBilibili) {
       await 1.seconds.delay;
       await _controller.loadUrl(asGetTokenBilibili);
+      _loginTypeProvider.state = AkLoginType.bilibili;
     }
 
     final isTokenPage = url == asGetTokenOfficial || url == asGetTokenBilibili;

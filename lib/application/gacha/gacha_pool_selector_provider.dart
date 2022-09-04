@@ -1,20 +1,25 @@
+import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/gacha_rule_type.dart';
+import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
+import '../user/uid_provider.dart';
 
 final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
   (ref) => GachaPoolSelectorNotifier(
+    ref.watch(uidProvider),
     ref.watch(gachaRepositoryProvider),
   ),
 );
 
 class GachaPoolSelectorNotifier extends ChangeNotifier {
-  GachaPoolSelectorNotifier(this._repository) {
+  GachaPoolSelectorNotifier(this._uid, this._repository) {
     _get();
   }
 
+  final Option<Uid> _uid;
   final GachaRepository _repository;
 
   final _pools = <String>[];
@@ -32,13 +37,19 @@ class GachaPoolSelectorNotifier extends ChangeNotifier {
   }
 
   Future<void> _get() async {
-    final failureOrPools = await _repository.getPools(
-      includeRuleTypes: GachaRuleType.independentGuarantee,
+    _uid.fold(
+      () {},
+      (uid) async {
+        final failureOrPools = await _repository.getPools(
+          uid: uid,
+          includeRuleTypes: GachaRuleType.independentGuarantee,
+        );
+        failureOrPools.fold(
+          (_) {},
+          (pools) => _pools.addAll(pools),
+        );
+        notifyListeners();
+      },
     );
-    failureOrPools.fold(
-      (_) {},
-      (pools) => _pools.addAll(pools),
-    );
-    notifyListeners();
   }
 }

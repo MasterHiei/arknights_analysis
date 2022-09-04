@@ -20,5 +20,6 @@ abstract class GachaRemoteDataSource {
   Future<GachaResponseDto> fetch({
     @Query('token') required String token,
     @Query('page') required int page,
+    @Query('channelId') String? channelId,
   });
 }

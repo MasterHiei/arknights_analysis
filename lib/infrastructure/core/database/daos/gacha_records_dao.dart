@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:drift/drift.dart';
 
 import '../../../../core/enums/gacha_rule_type.dart';
+import '../../../../domain/user/value_objects/uid.dart';
 import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
@@ -16,10 +17,12 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
   GachaRecordsDao(super.db);
 
   Future<List<String>> getPools({
+    required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) async {
-    final query = select(gachaRecords);
+    final query = select(gachaRecords)
+      ..where((tbl) => tbl.uid.equals(uid.getOrCrash()));
 
     if (includeRuleTypes != null) {
       final poolNameQuery = selectOnly(gachaPools)
