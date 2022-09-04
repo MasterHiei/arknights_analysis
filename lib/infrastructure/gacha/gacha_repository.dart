@@ -77,6 +77,7 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
           late final String? channelId;
           switch (loginType) {
             case AkLoginType.official:
+              channelId = null;
               break;
 
             case AkLoginType.bilibili:
