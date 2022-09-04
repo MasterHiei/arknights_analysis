@@ -97,6 +97,5 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
         break;
     }
     AppLoadingIndicator.dismiss();
-    return;
   }
 }
