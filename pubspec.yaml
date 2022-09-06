@@ -16,7 +16,7 @@ dependencies:
   connectivity_plus: 2.3.6+1
   dartx: 1.1.0
   dartz: 0.10.1
-  data_table_2: 2.3.6
+  data_table_2: 2.3.7
   dio: 4.0.6
   drift: 2.1.0
   easy_localization: 3.0.1
@@ -32,7 +32,7 @@ dependencies:
   intl: 0.17.0
   json_annotation: 4.6.0
   logger: 1.1.0
-  modal_bottom_sheet: 2.1.0
+  modal_bottom_sheet: 2.1.2
   package_info_plus: 1.4.3+1
   path: 1.8.2
   path_provider: 2.0.11
