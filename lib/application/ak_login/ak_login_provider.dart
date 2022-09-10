@@ -40,8 +40,6 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
   final WebviewController _controller;
   final StateController<AkLoginType> _loginTypeProvider;
 
-  var _currentUrl = '';
-
   late final Token _token;
   void go(BuildContext context) => Routes.portal.go(
         context,
@@ -49,18 +47,12 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       );
 
   void _startListening() {
-    _controller.url.listen((url) => _currentUrl = url);
-    _controller.loadingState.listen((state) {
-      if (state == LoadingState.navigationCompleted) {
-        _postToken();
-      }
-    });
+    _controller.url.listen(_listenUrl);
     _controller.webMessage.listen(_onTokenRecieved);
     _controller.loadUrl(akLoginPage);
   }
 
-  Future<void> _postToken() async {
-    final url = _currentUrl;
+  Future<void> _listenUrl(String url) async {
     final isOfficial = url == akHomePageOfficial;
     if (isOfficial) {
       await _controller.loadUrl(asGetTokenOfficial);

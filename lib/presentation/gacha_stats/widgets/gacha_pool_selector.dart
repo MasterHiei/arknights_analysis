@@ -14,7 +14,7 @@ class GachaPoolSelector extends ConsumerWidget {
     final items = pools
         .map(
           (pool) => MenuFlyoutItem(
-            text: Text(pool ?? '常规寻访'),
+            text: Text(pool ?? '标准寻访'),
             onPressed: () => provider.select(pool),
           ),
         )
@@ -23,7 +23,7 @@ class GachaPoolSelector extends ConsumerWidget {
       items: items,
       leading: Icon(FluentIcons.filter, size: 16.w),
       title: Text(
-        provider.selectedPool ?? '常规寻访',
+        provider.selectedPool ?? '标准寻访',
         style: TextStyle(fontSize: 16.sp),
       ),
       verticalOffset: 20.h,

@@ -111,7 +111,7 @@ class _StatsView extends ConsumerWidget {
     final uid = ref.watch(_uidProvider);
     final pool = ref.watch(_selectedPool);
 
-    // 常规寻访
+    // 标准寻访
     if (pool == null) {
       final params = GetGachaStatsParams(
         uid: uid,
@@ -144,7 +144,7 @@ class _PieChart extends StatelessWidget {
   final String? pool;
   final GachaStats stats;
 
-  String get title => pool ?? '常规寻访';
+  String get title => pool ?? '标准寻访';
 
   AutoDisposeChangeNotifierProvider<GachaPieChartNotifier>
       get _gachaPieChartProvider => gachaPieChartProvider(title);

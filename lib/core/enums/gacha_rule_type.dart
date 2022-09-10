@@ -20,7 +20,7 @@ enum GachaRuleType {
   String get title {
     switch (this) {
       case GachaRuleType.normal:
-        return '常规寻访';
+        return '标准寻访';
 
       case GachaRuleType.limited:
         return '限定寻访';
