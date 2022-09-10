@@ -49,17 +49,23 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     _listenLogoutState();
 
     final token = widget.params.token;
-    final bodyItems = [
-      GachaStatsPage(token),
-      GachaHistoryPage(token),
-    ];
     final index = ref.watch(paneProvider).selectedIndex;
     return NavigationView(
       pane: _buildPane(index),
-      content: NavigationBody.builder(
-        index: index,
-        itemBuilder: (_, index) => bodyItems[index],
-        itemCount: bodyItems.length,
+      content: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        transitionBuilder: (child, animation) => DrillInPageTransition(
+          animation: animation,
+          child: child,
+        ),
+        child: IndexedStack(
+          key: ValueKey(index),
+          index: index,
+          children: [
+            GachaStatsPage(token),
+            GachaHistoryPage(token),
+          ],
+        ),
       ),
     );
   }
