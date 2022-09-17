@@ -13,7 +13,7 @@ dependencies:
   badges: 2.0.3
   bot_toast: 4.0.3
   collection: 1.16.0
-  connectivity_plus: 2.3.6+1
+  connectivity_plus: 2.3.7
   dartx: 1.1.0
   dartz: 0.10.1
   data_table_2: 2.3.7
@@ -28,7 +28,7 @@ dependencies:
   flutter_screenutil: 5.5.4
   font_awesome_flutter: 10.2.1
   freezed_annotation: 2.1.0
-  go_router: 4.4.1
+  go_router: 4.5.0
   intl: 0.17.0
   json_annotation: 4.6.0
   logger: 1.1.0
@@ -40,7 +40,7 @@ dependencies:
   retrofit: 3.0.1+1
   riverpod: 1.0.3
   shared_preferences: 2.0.15
-  sqlite3_flutter_libs: 0.5.9
+  sqlite3_flutter_libs: 0.5.10
   time: 2.1.3
   url_launcher: 6.1.5
   webview_windows: 0.2.1

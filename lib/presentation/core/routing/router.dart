@@ -91,7 +91,7 @@ GoRoute _buildFadeTransitionPage(
     GoRoute(
       name: route.name,
       path: route.path,
-      pageBuilder: (context, state) => CustomTransitionPage(
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
         transitionsBuilder: (_, animation, __, child) => FadeTransition(
           opacity: animation,
