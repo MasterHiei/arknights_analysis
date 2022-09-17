@@ -49,5 +49,7 @@
 	<array>
 		<string>zh_CN</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

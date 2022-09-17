@@ -6,7 +6,7 @@ publish_to: "none"
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.18.1 <3.0.0"
 
 dependencies:
   another_flushbar: 1.12.29
