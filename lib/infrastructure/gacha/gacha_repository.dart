@@ -55,7 +55,15 @@ abstract class GachaRepository {
     required List<Rarity> rarities,
   });
 
-  Future<Either<AppFailure, File>> export(Uid uid);
+  Future<Either<AppFailure, File>> export(
+    Uid uid, {
+    required String path,
+  });
+
+  Future<Either<AppFailure, List<int>>> import(
+    Uid uid, {
+    required String path,
+  });
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -174,7 +182,20 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, File>> export(Uid uid) => execute(
-        () => _localDataSource.export(uid),
+  Future<Either<AppFailure, File>> export(
+    Uid uid, {
+    required String path,
+  }) =>
+      execute(
+        () => _localDataSource.export(uid, path: path),
+      );
+
+  @override
+  Future<Either<AppFailure, List<int>>> import(
+    Uid uid, {
+    required String path,
+  }) =>
+      execute(
+        () => _localDataSource.import(uid, path: path),
       );
 }

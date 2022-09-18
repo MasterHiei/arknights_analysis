@@ -43,28 +43,32 @@ class GachaExtraPanel extends ConsumerWidget {
   }
 
   Widget _buildImportButton(BuildContext context) {
-    return FilledButton(
-      onPressed: () => AppFlushBar.show(
-        context,
-        message: 'Coming soooooooooooon.',
-      ),
-      style: ButtonStyle(
-        backgroundColor: ButtonState.resolveWith(
-          (states) {
-            if (states.isNone) {
-              return Colors.green.normal;
-            }
-            if (states.isPressing) {
-              return Colors.green.lighter;
-            }
-            if (states.isHovering) {
-              return Colors.green.light;
-            }
-            return null;
-          },
-        ),
-      ),
-      child: Text('导入', style: TextStyle(fontSize: 16.sp)),
+    return Consumer(
+      builder: (_, ref, __) {
+        final onPressed = ref.watch(_isProcessing)
+            ? null
+            : ref.read(gachaHistoryPersistenceProvider.notifier).import;
+        return FilledButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+            backgroundColor: ButtonState.resolveWith(
+              (states) {
+                if (states.isNone) {
+                  return Colors.green.normal;
+                }
+                if (states.isPressing) {
+                  return Colors.green.lighter;
+                }
+                if (states.isHovering) {
+                  return Colors.green.light;
+                }
+                return null;
+              },
+            ),
+          ),
+          child: Text('导入', style: TextStyle(fontSize: 16.sp)),
+        );
+      },
     );
   }
 
@@ -123,7 +127,7 @@ class GachaExtraPanel extends ConsumerWidget {
           importFailure: (state) => state.failure.localizedMessage,
           exportSuccess: (state) {
             launchUrl(state.file.absolute.parent.uri);
-            return '导出成功。\n${state.file.absolute.path}';
+            return '导出成功。';
           },
           exportFailure: (state) => state.failure.localizedMessage,
           orElse: () {},

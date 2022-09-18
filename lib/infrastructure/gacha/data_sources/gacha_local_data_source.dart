@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 
-import '../../../core/constants/constants.dart';
 import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/providers.dart';
 import '../../../core/utils/file_manager.dart';
@@ -43,11 +41,22 @@ abstract class GachaLocalDataSource {
     String? pool,
   });
 
-  Future<File> export(Uid uid);
+  Future<File> export(
+    Uid uid, {
+    required String path,
+  });
+
+  Future<List<int>> import(
+    Uid uid, {
+    required String path,
+  });
 }
 
 class GachaLocalDataSourceImpl implements GachaLocalDataSource {
-  const GachaLocalDataSourceImpl(this._db, this._fileManager);
+  const GachaLocalDataSourceImpl(
+    this._db,
+    this._fileManager,
+  );
 
   final AppDatabase _db;
   final FileManager _fileManager;
@@ -99,16 +108,24 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
       );
 
   @override
-  Future<File> export(Uid uid) async {
+  Future<File> export(
+    Uid uid, {
+    required String path,
+  }) async {
     final records = await _db.gachaRecordsDao.get(
       uid.getOrCrash(),
       pools: [],
     );
     final history = GachaDto.fromRecords(records);
-
-    final directory = await getApplicationDocumentsDirectory();
-    final path = '${directory.path}\\'
-        '${uid.getOrCrash()}_$gachaHistoryExportFileName.json';
     return _fileManager.writeJson(history.toJson(), path: path);
+  }
+
+  @override
+  Future<List<int>> import(
+    Uid uid, {
+    required String path,
+  }) async {
+    final json = await _fileManager.readJson(path);
+    return _db.gachaRecordsDao.replaceInto(GachaDto.fromJson(json));
   }
 }

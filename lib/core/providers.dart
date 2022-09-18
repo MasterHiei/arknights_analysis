@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +39,8 @@ final dbProvider = Provider((ref) {
 });
 
 final connectivityProvider = Provider.autoDispose((_) => Connectivity());
+
+final filePickerProvider = Provider.autoDispose((_) => FilePicker.platform);
 
 final fileManagerProvider = Provider.autoDispose((_) => FileManager());
 
