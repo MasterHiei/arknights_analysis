@@ -26,8 +26,21 @@ final _selectedPools = Provider.autoDispose((ref) {
   return provider.selectedPools;
 });
 
-class GachaHistoryFilter extends StatelessWidget {
+class GachaHistoryFilter extends StatefulWidget {
   const GachaHistoryFilter({super.key});
+
+  @override
+  State<GachaHistoryFilter> createState() => _GachaHistoryFilterState();
+}
+
+class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,13 +155,11 @@ class GachaHistoryFilter extends StatelessWidget {
               ),
             );
 
-        final controller =
-            ref.watch(gachaHistoryFilterProvider.notifier).scrollController;
         return Scrollbar(
-          controller: controller,
+          controller: _scrollController,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            controller: controller,
+            controller: _scrollController,
             child: Wrap(spacing: 16.w, children: children.toList()),
           ),
         );

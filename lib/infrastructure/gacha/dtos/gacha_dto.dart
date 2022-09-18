@@ -17,6 +17,11 @@ class GachaDto with _$GachaDto {
 
   factory GachaDto.fromJson(Json json) => _$GachaDtoFromJson(json);
 
+  factory GachaDto.fromRecords(List<GachaRecordDto> records) => GachaDto(
+        list: records,
+        pagination: PaginationDto.empty(),
+      );
+
   const GachaDto._();
 
   Gacha toDomain() => Gacha(

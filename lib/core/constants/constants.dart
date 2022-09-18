@@ -38,3 +38,5 @@ const pageSize = 10;
 const debouceDuration = Duration(milliseconds: 300);
 
 const minRequestInterval = Duration(minutes: 1);
+
+const gachaHistoryExportFileName = 'arknights_gacha_data';

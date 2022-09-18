@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../infrastructure/core/database/app_database.dart';
 import 'constants/constants.dart';
 import 'interceptors/dio_interceptors.dart';
+import 'utils/file_manager.dart';
 
 final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(
@@ -36,11 +37,13 @@ final dbProvider = Provider((ref) {
   return db;
 });
 
+final connectivityProvider = Provider.autoDispose((_) => Connectivity());
+
+final fileManagerProvider = Provider.autoDispose((_) => FileManager());
+
 final prefsProvider = Provider.autoDispose<SharedPreferences>(
   (_) => throw UnimplementedError(),
 );
-
-final connectivityProvider = Provider.autoDispose((_) => Connectivity());
 
 final packageInfoProvider = Provider.autoDispose<PackageInfo>(
   (_) => throw UnimplementedError(),

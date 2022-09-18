@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
@@ -52,6 +54,8 @@ abstract class GachaRepository {
     required List<String> pools,
     required List<Rarity> rarities,
   });
+
+  Future<Either<AppFailure, File>> export(Uid uid);
 }
 
 class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
@@ -167,5 +171,10 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
               .filter((char) => rarities.contains(char.rarity))
               .toList();
         },
+      );
+
+  @override
+  Future<Either<AppFailure, File>> export(Uid uid) => execute(
+        () => _localDataSource.export(uid),
       );
 }

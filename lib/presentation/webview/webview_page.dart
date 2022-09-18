@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../application/webview/webview_provider.dart';
-import '../../core/utils/launch_url.dart';
 import '../core/routing/route_params.dart';
 
 class WebviewPage extends ConsumerWidget {
@@ -75,7 +75,7 @@ class _NavigationBar extends StatelessWidget {
                   onPressed: () async {
                     final urlString = snapshot.data;
                     if (urlString != null) {
-                      launchUrl(urlString);
+                      launchUrlString(urlString);
                     }
                   },
                 );

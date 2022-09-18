@@ -15,6 +15,11 @@ class PaginationDto with _$PaginationDto {
 
   factory PaginationDto.fromJson(Json json) => _$PaginationDtoFromJson(json);
 
+  factory PaginationDto.empty() => const PaginationDto(
+        current: -1,
+        total: -1,
+      );
+
   const PaginationDto._();
 
   Pagination toDomain() => Pagination(

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/rarity.dart';
@@ -27,14 +26,6 @@ class GachaHistoryFilterNotifier
 
   final Option<Uid> _uid;
   final GachaRepository _repository;
-
-  final scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
 
   void onRarityChanged(Rarity value, {bool? checked}) {
     final oldRarities = [...state.selectedRarities];
