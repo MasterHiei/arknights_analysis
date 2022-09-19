@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../core/constants/constants.dart';
+import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
@@ -41,7 +42,6 @@ class GachaHistoryPersistenceNotifier
         final path = await _filePicker.saveFile(
           fileName: fileName,
           initialDirectory: directory.path,
-          allowedExtensions: ['json'],
         );
         if (path == null) {
           return;
@@ -72,6 +72,13 @@ class GachaHistoryPersistenceNotifier
         }
 
         state = const GachaHistoryPersistenceState.processing();
+
+        if (!path.endsWith('.json')) {
+          const failure = AppFailure.localizedError('文件格式不正确。');
+          state = const GachaHistoryPersistenceState.exportFailure(failure);
+          return;
+        }
+
         final failureOrFile = await _repository.import(uid, path: path);
         state = failureOrFile.fold(
           (failure) => GachaHistoryPersistenceState.importFailure(failure),

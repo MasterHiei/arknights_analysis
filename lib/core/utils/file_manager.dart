@@ -23,7 +23,7 @@ class FileManager {
       return jsonDecode(contents) as Json;
     } catch (e, stackTrace) {
       logger.e(e, e, stackTrace);
-      throw AppFailure.localizedError('读取文件错误。\n $e');
+      throw AppFailure.localizedError('读取文件错误。\n $path');
     }
   }
 

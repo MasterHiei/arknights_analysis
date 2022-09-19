@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../application/gacha/gacha_history_persistence_provider.dart';
 import '../../../application/gacha/states/gacha_history_persistence_state.dart';
 import '../../../application/user/user_provider.dart';
-// import '../../../core/utils/launch_url.dart';
 import '../../../domain/user/value_objects/token.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
