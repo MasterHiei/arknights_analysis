@@ -55,7 +55,6 @@ dev_dependencies:
   freezed: 2.1.0+1
   json_serializable: 6.4.0
   lint: 1.10.0
-  msix: 3.6.3
   retrofit_generator: 4.1.0+1
 
 flutter:
@@ -73,9 +72,3 @@ flutter:
     - assets/images/
     - assets/translations/
 
-msix_config:
-  display_name: Arknights Analysis
-  publisher_display_name: C. Liu
-  capabilities: internetClient
-  certificate_path: CERTIFICATE.pfx
-  certificate_password: ak_123
