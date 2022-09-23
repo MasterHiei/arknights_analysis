@@ -36,6 +36,8 @@ class GachaPoolSelectorNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void refresh() => _get();
+
   Future<void> _get() async {
     _uid.fold(
       () {},

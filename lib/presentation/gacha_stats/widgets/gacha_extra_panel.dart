@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../application/gacha/gacha_history_persistence_provider.dart';
+import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/states/gacha_history_persistence_state.dart';
 import '../../../application/user/user_provider.dart';
@@ -123,10 +124,13 @@ class GachaExtraPanel extends ConsumerWidget {
           orElse: AppLoadingIndicator.dismiss,
         );
         final message = next.maybeMap(
-          importSuccess: (_) => '导入成功。',
+          importSuccess: (_) {
+            ref.read(gachaPoolSelectorProvider.notifier).refresh();
+            ref.read(gachaStatsProvider.notifier).refresh();
+            return '导入成功。';
+          },
           importFailure: (state) => state.failure.localizedMessage,
           exportSuccess: (state) {
-            ref.read(gachaStatsProvider.notifier).refresh();
             launchUrl(state.file.absolute.parent.uri);
             return '导出成功。';
           },
