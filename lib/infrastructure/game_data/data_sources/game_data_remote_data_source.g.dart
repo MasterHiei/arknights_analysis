@@ -9,10 +9,7 @@ part of 'game_data_remote_data_source.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _GameDataRemoteDataSource implements GameDataRemoteDataSource {
-  _GameDataRemoteDataSource(
-    this._dio, {
-    this.baseUrl,
-  });
+  _GameDataRemoteDataSource(this._dio, {this.baseUrl});
 
   final Dio _dio;
 
@@ -24,18 +21,11 @@ class _GameDataRemoteDataSource implements GameDataRemoteDataSource {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/excel/gacha_table.json',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/excel/gacha_table.json',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }
