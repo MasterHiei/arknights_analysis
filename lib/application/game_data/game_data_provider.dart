@@ -25,51 +25,64 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
   final GameDataApiRepository _apiRepository;
   final GameDataRepository _repository;
 
-  Future<bool> _hasData() async {
+  Future<DateTime?> _getLastUpdateDateTime() async {
+    final failureOrDateTime =
+        await _apiRepository.getLastGachaTableUpdateDateTime();
+    return failureOrDateTime.fold((_) => null, (dateTime) => dateTime);
+  }
+
+  Future<void> retry() => _fetch();
+
+  Future<bool> _isNewest() async {
     final failureOrCommitDate =
         await _apiRepository.fetchLastGachaTableCommitDate();
     return failureOrCommitDate.fold(
       (f) => false,
       (commitDate) async {
-        final failureOrUpdateDate =
-            await _apiRepository.getLastGachaTableUpdateDateTime();
-        return failureOrUpdateDate.fold((f) => false, commitDate.isBefore);
+        final lastUpdateDateTime = await _getLastUpdateDateTime();
+        if (lastUpdateDateTime == null) {
+          return false;
+        }
+        return commitDate.isBefore(lastUpdateDateTime);
       },
     );
+  }
+
+  Future<bool> _hasData() async {
+    final lastUpdateDateTime = await _getLastUpdateDateTime();
+    return lastUpdateDateTime != null;
   }
 
   Future<void> _fetch() async {
     await 1200.milliseconds.delay;
 
-    if (await _hasData()) {
+    if (await _isNewest()) {
       state = const AsyncValue.data(unit);
       return;
     }
 
+    state = const AsyncValue.loading();
     final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
-    failureOrSuccess.fold(
+    state = await failureOrSuccess.fold(
       (failure) async {
-        final error = AppFailure.localizedError(
-          '远程数据读取失败，即将加载本地数据源。\n${failure.localizedMessage}',
-        );
-        state = AsyncValue.error(error);
-
-        await 3.seconds.delay;
-        _applyLocalData();
+        final errorMessage = failure.localizedMessage;
+        late final AppFailure error;
+        if (await _hasData()) {
+          error = AppFailure.localizedError(
+            '游戏数据获取失败，即将加载本地数据源...\n$errorMessage',
+          );
+        } else {
+          error = const AppFailure.unexpectedError(
+            '游戏数据获取失败，即将重新尝试获取...\n'
+            '如果问题仍然存在，请检查网络连接或与开发人员联系。',
+          );
+        }
+        return AsyncValue.error(error);
       },
       (_) async {
         await _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());
-        state = AsyncValue.data(_);
+        return AsyncValue.data(_);
       },
-    );
-  }
-
-  Future<void> _applyLocalData() async {
-    state = const AsyncValue.loading();
-    final failureOrSuccess = await _repository.saveGachaTableFromLocalFile();
-    state = failureOrSuccess.fold(
-      (failure) => AsyncValue.error(failure),
-      (_) => AsyncValue.data(_),
     );
   }
 }

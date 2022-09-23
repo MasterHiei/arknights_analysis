@@ -24,8 +24,6 @@ abstract class GameDataRepository {
   Future<Either<AppFailure, int>> count();
 
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable();
-
-  Future<Either<AppFailure, Unit>> saveGachaTableFromLocalFile();
 }
 
 class GameDataRepositoryImpl
@@ -55,14 +53,5 @@ class GameDataRepositoryImpl
           return unit;
         },
         connectivity: _connectivity,
-      );
-
-  @override
-  Future<Either<AppFailure, Unit>> saveGachaTableFromLocalFile() => execute(
-        () async {
-          final dto = await _localDataSource.readGachaPoolsFromLocalFile();
-          await _localDataSource.saveGachaPools(dto);
-          return unit;
-        },
       );
 }

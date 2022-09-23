@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:time/time.dart';
 
 import '../../application/game_data/game_data_provider.dart';
 import '../../application/splash/splash_provider.dart';
@@ -59,12 +60,19 @@ class SplashPage extends ConsumerWidget {
       gachaPoolProvider,
       (_, next) => next.maybeWhen<void>(
         data: (_) => ref.read(splashProvider.notifier).fetched(context),
-        error: (failure, _) {
-          final errorMessage = (failure as AppFailure).localizedMessage;
+        error: (error, _) {
+          final failure = error as AppFailure;
           AppFlushBar.show(
             context,
-            message: errorMessage,
+            message: failure.localizedMessage,
             severity: FlushBarSeverity.error,
+          );
+          failure.maybeWhen(
+            unexpectedError: (_) async {
+              await 3.seconds.delay;
+              ref.read(gachaPoolProvider.notifier).retry();
+            },
+            orElse: () {},
           );
         },
         orElse: () {},
