@@ -16,20 +16,14 @@ import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/params/get_gacha_stats_params.dart';
 import '../../../application/gacha/states/gacha_state.dart';
 import '../../../core/constants/constants.dart';
-import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../domain/user/user.dart';
-import '../../../domain/user/value_objects/uid.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_error_view.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 import '../../core/routing/route_params.dart';
 import '../../core/routing/router.dart';
-
-final _uidProvider = Provider.autoDispose<Uid>(
-  (_) => throw UnimplementedError(),
-);
 
 final _selectedPool = Provider.autoDispose(
   (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
@@ -47,9 +41,9 @@ class GachaStatsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     _listenState(context, ref);
 
-    return ref.watch(_gachaProvider).maybeMap(
+    return ref.watch(_gachaProvider).map(
           fetching: (state) {
-            double? value;
+            late final double? value;
             final total = state.total ?? 0;
             if (total == 0) {
               value = 100;
@@ -61,10 +55,8 @@ class GachaStatsView extends ConsumerWidget {
               label: '正在获取第${state.current}页数据',
             );
           },
-          orElse: () => ProviderScope(
-            overrides: [_uidProvider.overrideWithValue(user.uid)],
-            child: const _StatsView(),
-          ),
+          failure: (_) => const AppErrorView(),
+          success: (_) => const _StatsView(),
         );
   }
 
@@ -103,38 +95,49 @@ class GachaStatsView extends ConsumerWidget {
   }
 }
 
-class _StatsView extends ConsumerWidget {
+class _StatsView extends ConsumerStatefulWidget {
   const _StatsView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final uid = ref.watch(_uidProvider);
+  ConsumerState<_StatsView> createState() => _StatsViewState();
+}
+
+class _StatsViewState extends ConsumerState<_StatsView> {
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, _fetch);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _listenState();
+
     final pool = ref.watch(_selectedPool);
-
-    // 标准寻访
-    if (pool == null) {
-      final params = GetGachaStatsParams(
-        uid: uid,
-        excludeRuleTypes: GachaRuleType.independentGuarantee,
-      );
-      return Consumer(
-        builder: (_, ref, __) {
-          return ref.watch(gachaStatsProvider(params)).when(
-                data: (stats) => _PieChart(pool, stats),
-                error: (_, __) => const AppErrorView(),
-                loading: () => const SizedBox(),
-              );
-        },
-      );
-    }
-
-    // 独立寻访
-    final params = GetGachaStatsParams(uid: uid, pool: pool);
-    return ref.watch(gachaStatsProvider(params)).when(
+    return ref.watch(gachaStatsProvider).when(
           data: (stats) => _PieChart(pool, stats),
           error: (_, __) => const AppErrorView(),
           loading: () => const SizedBox(),
         );
+  }
+
+  void _fetch({String? pool}) {
+    late final GetGachaStatsParams params;
+    if (pool == null) {
+      // 标准寻访
+      params = GetGachaStatsParams.normal();
+    } else {
+      // 指定寻访
+      params = GetGachaStatsParams.pool(pool);
+    }
+    ref.read(gachaStatsProvider.notifier).get(params);
+  }
+
+  void _listenState() {
+    ref.listen(
+      _selectedPool,
+      (_, pool) => _fetch(pool: pool),
+    );
   }
 }
 
