@@ -48,7 +48,9 @@ class GachaPoolSelectorNotifier extends ChangeNotifier {
         );
         failureOrPools.fold(
           (_) {},
-          (pools) => _pools.addAll(pools),
+          (pools) => _pools
+            ..clear()
+            ..addAll(pools),
         );
         notifyListeners();
       },
