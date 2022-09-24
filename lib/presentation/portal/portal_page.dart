@@ -33,15 +33,9 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   }
 
   @override
-  Future<void> onWindowClose() => AppDialog.show<void>(
+  Future<void> onWindowClose() => AppDialog.closeWindow(
         context,
-        title: const Text('确认'),
-        content: const Text('确定关闭本程序吗？'),
-        confirmButtonText: '关闭',
-        confirmButtonColor: Colors.red,
-        onConfirmButtonTap: windowManager.destroy,
-        closeButtonText: '取消',
-        closeButtonColor: Colors.blue,
+        windowManager: windowManager,
       );
 
   @override

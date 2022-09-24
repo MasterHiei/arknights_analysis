@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:window_manager/window_manager.dart';
 
 class AppDialog extends StatelessWidget {
   const AppDialog({
@@ -45,6 +46,21 @@ class AppDialog extends StatelessWidget {
           closeButtonColor: closeButtonColor ?? Colors.grey[80],
           onCloseButtonTap: onCloseButtonTap ?? () => Navigator.pop(context),
         ),
+      );
+
+  static Future<void> closeWindow(
+    BuildContext context, {
+    required WindowManager windowManager,
+  }) =>
+      AppDialog.show<void>(
+        context,
+        title: const Text('确认'),
+        content: const Text('确定关闭本程序吗？'),
+        confirmButtonText: '关闭',
+        confirmButtonColor: Colors.red,
+        onConfirmButtonTap: windowManager.destroy,
+        closeButtonText: '取消',
+        closeButtonColor: Colors.blue,
       );
 
   @override

@@ -2,18 +2,43 @@ import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_login/ak_login_provider.dart';
 import '../../application/ak_login/states/ak_login_state.dart';
 import '../../application/webview/webview_provider.dart';
 import '../../core/constants/constants.dart';
+import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 
-class AkLoginPage extends ConsumerWidget {
+class AkLoginPage extends ConsumerStatefulWidget {
   const AkLoginPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AkLoginPage> createState() => _AkLoginPageState();
+}
+
+class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
+  @override
+  void initState() {
+    windowManager.addListener(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> onWindowClose() => AppDialog.closeWindow(
+        context,
+        windowManager: windowManager,
+      );
+
+  @override
+  Widget build(BuildContext context) {
     final initialUrl = optionOf(akLoginPage);
     final controller = ref.watch(webviewProvider(initialUrl)).controller;
     final isInitialized = controller.value.isInitialized;

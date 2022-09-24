@@ -5,18 +5,43 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:time/time.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../application/game_data/game_data_provider.dart';
 import '../../application/splash/splash_provider.dart';
 import '../../core/exceptions/app_failure.dart';
+import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../core/resources/images.dart';
 
-class SplashPage extends ConsumerWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
+  @override
+  void initState() {
+    windowManager.addListener(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> onWindowClose() => AppDialog.closeWindow(
+        context,
+        windowManager: windowManager,
+      );
+
+  @override
+  Widget build(BuildContext context) {
     _listenState(context, ref);
 
     final useSimple = Random().nextBool();
