@@ -53,6 +53,6 @@ app.*.map.json
 *.pfx
 installers/
 
-# Development related
+# Generator related
 *.freezed.dart
 *.g.dart
