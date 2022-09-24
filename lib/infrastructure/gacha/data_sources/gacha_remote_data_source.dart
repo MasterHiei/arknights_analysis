@@ -14,7 +14,7 @@ final gachaRemoteDataSourceProvider =
 
 @RestApi()
 abstract class GachaRemoteDataSource {
-  factory GachaRemoteDataSource(Dio akDio) = _GachaRemoteDataSource;
+  factory GachaRemoteDataSource(Dio dio) = _GachaRemoteDataSource;
 
   @GET('/user/api/inquiry/gacha')
   Future<GachaResponseDto> fetch({

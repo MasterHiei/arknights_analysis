@@ -14,7 +14,7 @@ final gameDataApiRemoteDataSourceProvider =
 
 @RestApi()
 abstract class GameDataApiRemoteDataSource {
-  factory GameDataApiRemoteDataSource(Dio gdDio) = _GameDataApiRemoteDataSource;
+  factory GameDataApiRemoteDataSource(Dio dio) = _GameDataApiRemoteDataSource;
 
   @GET('/commits?path=zh_CN/gamedata/excel/gacha_table.json&per_page=1')
   Future<List<GameDataCommitResponseDto>> fetchLastGachaTableCommit();

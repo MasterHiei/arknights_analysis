@@ -13,7 +13,7 @@ final gameDataRemoteDataSourceProvider =
 
 @RestApi()
 abstract class GameDataRemoteDataSource {
-  factory GameDataRemoteDataSource(Dio gdDio) = _GameDataRemoteDataSource;
+  factory GameDataRemoteDataSource(Dio dio) = _GameDataRemoteDataSource;
 
   @GET('/excel/gacha_table.json')
   Future<String> fetchGachaTable();

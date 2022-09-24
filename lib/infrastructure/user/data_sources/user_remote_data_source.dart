@@ -15,7 +15,7 @@ final userRemoteDataSourceProvider = Provider.autoDispose<UserRemoteDataSource>(
 
 @RestApi()
 abstract class UserRemoteDataSource {
-  factory UserRemoteDataSource(Dio asDio) = _UserRemoteDataSource;
+  factory UserRemoteDataSource(Dio dio) = _UserRemoteDataSource;
 
   @POST('/u8/user/info/v1/basic')
   Future<UserResponseDto> requestOfficial(@Body() TokenBodyOfficialDto body);
