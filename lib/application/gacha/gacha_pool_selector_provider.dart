@@ -3,23 +3,27 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/gacha_rule_type.dart';
-import '../../domain/user/value_objects/uid.dart';
+import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/uid_provider.dart';
+import '../user/user_provider.dart';
 
 final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
   (ref) => GachaPoolSelectorNotifier(
-    ref.watch(uidProvider),
+    ref.watch(userProvider),
     ref.watch(gachaRepositoryProvider),
   ),
+  dependencies: [
+    userProvider,
+    gachaRepositoryProvider,
+  ],
 );
 
 class GachaPoolSelectorNotifier extends ChangeNotifier {
-  GachaPoolSelectorNotifier(this._uid, this._repository) {
+  GachaPoolSelectorNotifier(this._userOption, this._repository) {
     _get();
   }
 
-  final Option<Uid> _uid;
+  final Option<User> _userOption;
   final GachaRepository _repository;
 
   final _pools = <String>[];
@@ -39,11 +43,11 @@ class GachaPoolSelectorNotifier extends ChangeNotifier {
   void refresh() => _get();
 
   Future<void> _get() async {
-    _uid.fold(
+    _userOption.fold(
       () {},
-      (uid) async {
+      (user) async {
         final failureOrPools = await _repository.getPools(
-          uid: uid,
+          uid: user.uid,
           includeRuleTypes: GachaRuleType.independentGuarantee,
         );
         failureOrPools.fold(

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +7,8 @@ import 'package:time/time.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/game_data/game_data_provider.dart';
+import '../../application/game_data/states/gacha_pool_state.dart';
 import '../../application/splash/splash_provider.dart';
-import '../../core/exceptions/app_failure.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../core/resources/images.dart';
@@ -81,12 +80,11 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
   }
 
   void _listenState(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<Unit>>(
+    ref.listen<GachaPoolState>(
       gachaPoolProvider,
       (_, next) => next.maybeWhen<void>(
-        data: (_) => ref.read(splashProvider.notifier).fetched(context),
-        error: (error, _) {
-          final failure = error as AppFailure;
+        success: () => ref.read(splashProvider.notifier).fetched(context),
+        failure: (failure) {
           AppFlushBar.show(
             context,
             message: failure.localizedMessage,

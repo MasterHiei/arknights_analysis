@@ -14,14 +14,11 @@ import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/params/get_gacha_stats_params.dart';
-import '../../../application/gacha/states/gacha_state.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
-import '../../../domain/user/user.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_error_view.dart';
-import '../../core/common/widgets/app_flush_bar.dart';
 import '../../core/routing/route_params.dart';
 import '../../core/routing/router.dart';
 
@@ -30,18 +27,11 @@ final _selectedPool = Provider.autoDispose(
 );
 
 class GachaStatsView extends ConsumerWidget {
-  const GachaStatsView(this.user, {super.key});
-
-  final User user;
-
-  AutoDisposeStateNotifierProvider<GachaNotifier, GachaState>
-      get _gachaProvider => gachaProvider(user);
+  const GachaStatsView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    _listenState(context, ref);
-
-    return ref.watch(_gachaProvider).map(
+    return ref.watch(gachaProvider).map(
           fetching: (state) {
             late final double? value;
             final total = state.total ?? 0;
@@ -74,25 +64,6 @@ class GachaStatsView extends ConsumerWidget {
           ],
         ),
       );
-
-  void _listenState(BuildContext context, WidgetRef ref) {
-    ref.listen<GachaState>(
-      _gachaProvider,
-      (_, next) => next.maybeWhen<void>(
-        success: () => AppFlushBar.show(
-          context,
-          message: '数据已更新。',
-          severity: FlushBarSeverity.success,
-        ),
-        failure: (failure) => AppFlushBar.show(
-          context,
-          message: failure.localizedMessage,
-          severity: FlushBarSeverity.error,
-        ),
-        orElse: () {},
-      ),
-    );
-  }
 }
 
 class _StatsView extends ConsumerStatefulWidget {
@@ -464,6 +435,7 @@ class _PieChart extends StatelessWidget {
     await showCustomModalBottomSheet<void>(
       context: context,
       builder: (_) => Container(
+        color: Colors.white,
         height: 540.h,
         padding: EdgeInsets.only(left: 12.w, top: 16.h, right: 12.w),
         child: dataTable,

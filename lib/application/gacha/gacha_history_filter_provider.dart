@@ -2,29 +2,33 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/rarity.dart';
-import '../../domain/user/value_objects/uid.dart';
+import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/uid_provider.dart';
+import '../user/user_provider.dart';
 import 'states/gacha_history_filter_state.dart';
 
 final gachaHistoryFilterProvider = StateNotifierProvider.autoDispose<
     GachaHistoryFilterNotifier, GachaHistoryFilterState>(
   (ref) => GachaHistoryFilterNotifier(
-    ref.watch(uidProvider),
+    ref.watch(userProvider),
     ref.watch(gachaRepositoryProvider),
   ),
+  dependencies: [
+    userProvider,
+    gachaRepositoryProvider,
+  ],
 );
 
 class GachaHistoryFilterNotifier
     extends StateNotifier<GachaHistoryFilterState> {
   GachaHistoryFilterNotifier(
-    this._uid,
+    this._userOption,
     this._repository,
   ) : super(GachaHistoryFilterState.init()) {
     _getPools();
   }
 
-  final Option<Uid> _uid;
+  final Option<User> _userOption;
   final GachaRepository _repository;
 
   void onRarityChanged(Rarity value, {bool? checked}) {
@@ -52,16 +56,15 @@ class GachaHistoryFilterNotifier
     state = state.copyWith(selectedPools: oldPools..remove(value));
   }
 
-  Future<void> _getPools() async {
-    _uid.fold(
-      () {},
-      (uid) async {
-        final failureOrPools = await _repository.getPools(uid: uid);
-        failureOrPools.fold(
-          (_) {},
-          (pools) => state = state.copyWith(pools: pools),
-        );
-      },
-    );
-  }
+  Future<void> _getPools() async => _userOption.fold(
+        () {},
+        (user) async {
+          final uid = user.uid;
+          final failureOrPools = await _repository.getPools(uid: uid);
+          failureOrPools.fold(
+            (_) {},
+            (pools) => state = state.copyWith(pools: pools),
+          );
+        },
+      );
 }

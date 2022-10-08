@@ -39,7 +39,7 @@ enum Routes {
       case Routes.portal:
         return _buildFadeTransitionPage(
           this,
-          pageBuilder: (_, state) => PortalPage(state.extra! as PortalParams),
+          pageBuilder: (_, __) => const PortalPage(),
         );
 
       case Routes.webview:

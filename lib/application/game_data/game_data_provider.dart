@@ -1,24 +1,24 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:time/time.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../infrastructure/game_data/game_data_repository.dart';
 import '../../infrastructure/game_data_api/game_data_api_repository.dart';
+import 'states/gacha_pool_state.dart';
 
 final gachaPoolProvider =
-    StateNotifierProvider.autoDispose<GachaPoolNotifier, AsyncValue<Unit>>(
+    StateNotifierProvider.autoDispose<GachaPoolNotifier, GachaPoolState>(
   (ref) => GachaPoolNotifier(
     ref.watch(gameDataApiRepositoryProvider),
     ref.watch(gameDataRepositoryProvider),
   ),
 );
 
-class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
+class GachaPoolNotifier extends StateNotifier<GachaPoolState> {
   GachaPoolNotifier(
     this._apiRepository,
     this._repository,
-  ) : super(const AsyncValue.loading()) {
+  ) : super(const GachaPoolState.fetching()) {
     _fetch();
   }
 
@@ -57,31 +57,31 @@ class GachaPoolNotifier extends StateNotifier<AsyncValue<Unit>> {
     await 1200.milliseconds.delay;
 
     if (await _isNewest()) {
-      state = const AsyncValue.data(unit);
+      state = const GachaPoolState.success();
       return;
     }
 
-    state = const AsyncValue.loading();
+    state = const GachaPoolState.fetching();
     final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
     state = await failureOrSuccess.fold(
-      (failure) async {
-        final errorMessage = failure.localizedMessage;
-        late final AppFailure error;
+      (f) async {
+        final errorMessage = f.localizedMessage;
+        late final AppFailure failure;
         if (await _hasData()) {
-          error = AppFailure.localizedError(
+          failure = AppFailure.localizedError(
             '游戏数据获取失败，即将加载本地数据源...\n$errorMessage',
           );
         } else {
-          error = const AppFailure.unexpectedError(
+          failure = const AppFailure.unexpectedError(
             '游戏数据获取失败，即将重新尝试获取...\n'
             '如果问题仍然存在，请检查网络连接或与开发人员联系。',
           );
         }
-        return AsyncValue.error(error);
+        return GachaPoolState.failure(failure);
       },
       (_) async {
         await _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());
-        return AsyncValue.data(_);
+        return const GachaPoolState.success();
       },
     );
   }

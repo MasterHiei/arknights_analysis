@@ -7,36 +7,42 @@ import 'package:path_provider/path_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
-import '../../domain/user/value_objects/uid.dart';
+import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/uid_provider.dart';
+import '../user/user_provider.dart';
 import 'states/gacha_history_persistence_state.dart';
 
 final gachaHistoryPersistenceProvider = StateNotifierProvider.autoDispose<
     GachaHistoryPersistenceNotifier, GachaHistoryPersistenceState>(
   (ref) => GachaHistoryPersistenceNotifier(
+    ref.watch(userProvider),
     ref.watch(filePickerProvider),
-    ref.watch(uidProvider.notifier),
     ref.watch(gachaRepositoryProvider),
   ),
+  dependencies: [
+    userProvider,
+    filePickerProvider,
+    gachaRepositoryProvider,
+  ],
 );
 
 class GachaHistoryPersistenceNotifier
     extends StateNotifier<GachaHistoryPersistenceState> {
   GachaHistoryPersistenceNotifier(
+    this._userOption,
     this._filePicker,
-    this._uidProvider,
     this._repository,
   ) : super(const GachaHistoryPersistenceState.init());
 
   final FilePicker _filePicker;
-  final StateController<Option<Uid>> _uidProvider;
+  final Option<User> _userOption;
   final GachaRepository _repository;
 
   Future<void> export() async {
-    _uidProvider.state.fold(
+    _userOption.fold(
       () {},
-      (uid) async {
+      (user) async {
+        final uid = user.uid;
         final directory = await getApplicationDocumentsDirectory();
         final fileName = '${uid.getOrCrash()}_$gachaHistoryExportFileName.json';
         final path = await _filePicker.saveFile(
@@ -58,9 +64,10 @@ class GachaHistoryPersistenceNotifier
   }
 
   Future<void> import() async {
-    _uidProvider.state.fold(
+    _userOption.fold(
       () {},
-      (uid) async {
+      (user) async {
+        final uid = user.uid;
         final directory = await getApplicationDocumentsDirectory();
         final pickedFiles = await _filePicker.pickFiles(
           initialDirectory: directory.path,

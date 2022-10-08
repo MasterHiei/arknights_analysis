@@ -6,46 +6,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../application/gacha/gacha_history_provider.dart';
-import '../../application/user/user_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../domain/gacha/gacha_char.dart';
-import '../../domain/user/value_objects/token.dart';
-import '../../domain/user/value_objects/uid.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
 import 'widgets/index.dart';
 
-final _userProvider = Provider.autoDispose.family(
-  (ref, Token token) => ref.watch(userProvider(token)).userOption,
-);
-
-class GachaHistoryPage extends ConsumerWidget {
-  const GachaHistoryPage(this.token, {super.key});
-
-  final Token token;
+class GachaHistoryPage extends StatelessWidget {
+  const GachaHistoryPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userOption = ref.watch(_userProvider(token));
-    return userOption.fold(
-      () => _progressBar,
-      (user) => Scaffold(
-        body: Column(
-          children: [
-            const GachaHistoryFilter(),
-            Expanded(child: _buildDataTable(context, user.uid)),
-          ],
-        ),
-        backgroundColor: FluentTheme.of(context).scaffoldBackgroundColor,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          const GachaHistoryFilter(),
+          Expanded(child: _buildDataTable(context)),
+        ],
       ),
+      backgroundColor: FluentTheme.of(context).scaffoldBackgroundColor,
     );
   }
 
   Widget get _progressBar =>
       const SizedBox.expand(child: Center(child: ProgressBar()));
 
-  Widget _buildDataTable(BuildContext context, Uid uid) {
+  Widget _buildDataTable(BuildContext context) {
     DataColumn2 buildColumn(
       String label, {
       ColumnSize size = ColumnSize.M,
@@ -62,7 +49,7 @@ class GachaHistoryPage extends ConsumerWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(gachaHistoryProvider(uid)).when(
+        return ref.watch(gachaHistoryProvider).when(
               data: (chars) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),

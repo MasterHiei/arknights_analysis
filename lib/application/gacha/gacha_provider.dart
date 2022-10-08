@@ -1,32 +1,38 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
 import '../ak_login/ak_login_type_provider.dart';
+import '../user/user_provider.dart';
 import 'states/gacha_state.dart';
 
 final gachaProvider =
-    StateNotifierProvider.autoDispose.family<GachaNotifier, GachaState, User>(
-  (ref, User user) => GachaNotifier(
-    user,
+    StateNotifierProvider.autoDispose<GachaNotifier, GachaState>(
+  (ref) => GachaNotifier(
+    ref.watch(userProvider),
     ref.watch(akLoginTypeProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [akLoginTypeProvider],
+  dependencies: [
+    userProvider,
+    akLoginTypeProvider,
+    gachaRepositoryProvider,
+  ],
 );
 
 class GachaNotifier extends StateNotifier<GachaState> {
   GachaNotifier(
-    this._user,
-    this._loginTypeOption,
+    this._userOption,
+    this._loginType,
     this._repository,
   ) : super(const GachaState.fetching(current: 1)) {
-    _fetchAndSave(_user);
+    _userOption.fold(() {}, _fetchAndSave);
   }
 
-  final User _user;
-  final AkLoginType _loginTypeOption;
+  final Option<User> _userOption;
+  final AkLoginType _loginType;
   final GachaRepository _repository;
 
   Future<void> _fetchAndSave(
@@ -40,7 +46,7 @@ class GachaNotifier extends StateNotifier<GachaState> {
       user.token,
       uid: user.uid,
       page: page,
-      loginType: _loginTypeOption,
+      loginType: _loginType,
     );
     return failureOrPagination.fold(
       (failure) => state = GachaState.failure(failure),

@@ -7,8 +7,7 @@ import '../../../application/gacha/gacha_history_persistence_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/gacha/states/gacha_history_persistence_state.dart';
-import '../../../application/user/user_provider.dart';
-import '../../../domain/user/value_objects/token.dart';
+import '../../../application/user/user_fetch_provider.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
@@ -24,9 +23,7 @@ final _isProcessing = Provider.autoDispose(
 );
 
 class GachaExtraPanel extends ConsumerWidget {
-  const GachaExtraPanel(this.token, {super.key});
-
-  final Token token;
+  const GachaExtraPanel({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,9 +103,9 @@ class GachaExtraPanel extends ConsumerWidget {
   Widget _buildRefreshButton() {
     return Consumer(
       builder: (context, ref, _) {
-        final userNotifier = userProvider(token).notifier;
         return FilledButton(
-          onPressed: () => ref.read(userNotifier).refresh(context),
+          onPressed: () =>
+              ref.read(userFetchProvider.notifier).refresh(context),
           child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
         );
       },

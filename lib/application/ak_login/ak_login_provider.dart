@@ -12,8 +12,8 @@ import '../../core/exceptions/app_failure.dart';
 import '../../core/types/types.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
-import '../../presentation/core/routing/route_params.dart';
 import '../../presentation/core/routing/router.dart';
+import '../user/token_provider.dart';
 import '../webview/webview_provider.dart';
 import 'ak_login_type_provider.dart';
 import 'states/ak_login_state.dart';
@@ -25,6 +25,7 @@ final akLoginProvider =
     return AkLoginNotifier(
       ref.watch(webviewProvider(initialUrl)).controller,
       ref.watch(akLoginTypeProvider.notifier),
+      ref.watch(tokenProvider.notifier),
     );
   },
 );
@@ -33,18 +34,16 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
   AkLoginNotifier(
     this._controller,
     this._loginTypeProvider,
+    this._tokenProvider,
   ) : super(const AkLoginState.init()) {
     _startListening();
   }
 
   final WebviewController _controller;
   final StateController<AkLoginType> _loginTypeProvider;
+  final StateController<Option<Token>> _tokenProvider;
 
-  late final Token _token;
-  void go(BuildContext context) => Routes.portal.go(
-        context,
-        extra: RouteParams.portal(token: _token),
-      );
+  void go(BuildContext context) => Routes.portal.go(context);
 
   void _startListening() {
     _controller.url.listen(_listenUrl);
@@ -82,7 +81,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       case 0:
         final token = (json?['data'] as Json?)?['content'] as String? ?? '';
         if (token.isNotEmpty) {
-          _token = Token(token);
+          _tokenProvider.state = optionOf(Token(token));
           state = const AkLoginState.loggedIn();
         }
         break;
