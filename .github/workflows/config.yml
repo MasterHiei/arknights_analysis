@@ -6,8 +6,8 @@ on:
       - master
 
 env:
-  FLUTTER_VERSION: 3.3.4
-  RELEASE_FILE_NAME: arknights-analysis
+  flutter_version: 3.3.4
+  release_file_name: arknights-analysis
 
 jobs:
   analyze-and-test:
@@ -18,10 +18,10 @@ jobs:
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
-          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
+          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.flutter_version }}
 
       - name: Cache pubspec
         id: cache-pubspec
@@ -76,10 +76,10 @@ jobs:
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.flutter_version }}
           channel: 'stable'
           cache: true
-          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
+          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.flutter_version }}
 
       - name: Cache pubspec
         id: cache-pubspec
@@ -118,19 +118,19 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: '${{ env.RELEASE_FILE_NAME }}-windwos.zip'
+          filename: '${{ env.release_file_name }}-windwos.zip'
           directory: build/windows/runner/Release
 
       - name: Set tag name
         run: |
           flutter pub global activate pubspec_version
-          export TAG_NAME=v$(pubver -d ../. get)
+          echo "tag_name=v$(pubver -d ../. get)" >> $GITHUB_ENV
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ env.TAG_NAME }}
+          tag_name: ${{ env.tag_name }}
           files: |
-            build/windows/runner/Release/${{ env.RELEASE_FILE_NAME }}-windwos.zip
+            build/windows/runner/Release/${{ env.release_file_name }}-windwos.zip
