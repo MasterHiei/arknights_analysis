@@ -15,21 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache flutter
-        id: cache-flutter
-        uses: actions/cache@v3
-        with:
-          path: /opt/hostedtoolcache/flutter/
-          key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-sdk-v
-
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
+          cache: true
+          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
 
       - name: Cache pubspec
         id: cache-pubspec
@@ -81,21 +74,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache flutter
-        id: cache-flutter
-        uses: actions/cache@v3
-        with:
-          path: /opt/hostedtoolcache/flutter/
-          key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-sdk-v
-
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
+          cache: true
+          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
 
       - name: Cache pubspec
         id: cache-pubspec
