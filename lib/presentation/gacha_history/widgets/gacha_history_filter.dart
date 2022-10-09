@@ -45,11 +45,11 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('寻访记录', style: TextStyle(fontSize: 20.sp)),
+          Text('寻访记录', style: TextStyle(fontSize: 24.sp)),
           SizedBox(height: 24.h),
           Expander(
             header: Row(
@@ -60,7 +60,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
                   color: Colors.grey[140],
                 ),
                 SizedBox(width: 8.w),
-                Text('数据过滤', style: TextStyle(fontSize: 14.sp)),
+                Text('数据过滤', style: TextStyle(fontSize: 15.sp)),
               ],
             ),
             content: Column(

@@ -1,8 +1,9 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../ak_login/ak_login_page.dart';
+import '../../license/license_page.dart';
 import '../../portal/portal_page.dart';
 import '../../splash/splash_page.dart';
 import '../../webview/webview_page.dart';
@@ -12,7 +13,8 @@ enum Routes {
   splash(name: 'splash', path: '/'),
   akLogin(name: 'akLogin', path: '/akLogin'),
   portal(name: 'portal', path: '/portal'),
-  webview(name: 'webview', path: '/webview');
+  webview(name: 'webview', path: '/webview'),
+  license(name: 'license', path: '/license');
 
   const Routes({
     required this.name,
@@ -45,8 +47,15 @@ enum Routes {
       case Routes.webview:
         return _buildFadeTransitionPage(
           this,
-          pageBuilder: (_, state) => WebviewPage(state.extra! as WebviewParams),
           fullscreenDialog: true,
+          pageBuilder: (_, state) => WebviewPage(state.extra! as WebviewParams),
+        );
+
+      case Routes.license:
+        return _buildFadeTransitionPage(
+          this,
+          fullscreenDialog: true,
+          pageBuilder: (_, __) => const LicensePage(),
         );
     }
   }

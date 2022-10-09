@@ -13,7 +13,7 @@ class GachaStatsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(userFetchProvider).when(
           data: (_) => Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
             child: Column(
               children: [
                 _header,

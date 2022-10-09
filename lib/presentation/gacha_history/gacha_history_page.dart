@@ -22,8 +22,10 @@ class GachaHistoryPage extends StatelessWidget {
       color: FluentTheme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
-          const GachaHistoryFilter(),
-          SizedBox(height: 12.h),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            child: const GachaHistoryFilter(),
+          ),
           Expanded(child: material.Material(child: _buildDataTable(context))),
         ],
       ),

@@ -13,6 +13,7 @@ import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
+import '../settings/settings_page.dart';
 
 class PortalPage extends ConsumerStatefulWidget {
   const PortalPage({super.key});
@@ -72,6 +73,11 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           ),
         ],
         footerItems: [
+          PaneItem(
+            icon: const Icon(FluentIcons.settings),
+            body: const SettingsPage(),
+            title: const Text('设置'),
+          ),
           PaneItemSeparator(),
           PaneItemAction(
             icon: const Icon(FluentIcons.sign_out),

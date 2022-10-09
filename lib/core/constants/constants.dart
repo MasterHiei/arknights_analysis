@@ -1,5 +1,8 @@
 const appName = 'Arknights Analysis';
 
+const licenseUrl =
+    'https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md';
+
 const dbName = 'arknights_analysis.db';
 
 const gitHub = 'https://github.com/MasterHiei/arknights_analysis';
