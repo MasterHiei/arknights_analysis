@@ -17,7 +17,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
       - name: Prepare for test
         run: |
@@ -58,7 +58,7 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: '${{ RELEASE_FILE_NAME }}-windwos.zip'
+          filename: '${{ env.RELEASE_FILE_NAME }}-windwos.zip'
           directory: build/windows/runner/Release
       - name: Publish release
         uses: softprops/action-gh-release@v1
@@ -66,4 +66,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: build/windows/runner/Release/${{ RELEASE_FILE_NAME }}-windwos.zip
+          files: build/windows/runner/Release/${{ env.RELEASE_FILE_NAME }}-windwos.zip
