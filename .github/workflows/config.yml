@@ -27,13 +27,13 @@ jobs:
       - name: Run analyze
         run: flutter analyze --fatal-infos
       - name: Run test
-        run: flutter test --machine > reports/flutter-report.json
+        run: flutter test --machine > test-report.json
       - name: Archive report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
           name: Flutter Tests
-          path: reports/flutter-report.json
+          path: test-report.json
           reporter: flutter-json
           fail-on-error: true
 
