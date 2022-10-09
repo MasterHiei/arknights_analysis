@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Cache flutter
         id: cache-flutter
         uses: actions/cache@v3
@@ -22,12 +23,14 @@ jobs:
           key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-flutter-sdk-v
+
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
+
       - name: Cache pubspec
         id: cache-pubspec
         uses: actions/cache@v3
@@ -40,8 +43,10 @@ jobs:
           key: pubspec-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             pubspec-
+
       - name: Run pub get
         run: flutter pub get
+
       - name: Cache build_runner
         id: cache-build-runner
         uses: actions/cache@v3
@@ -51,12 +56,16 @@ jobs:
           key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             build-runner-
+
       - name: Run build_runner
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
+
       - name: Run analyze
         run: flutter analyze --fatal-infos
+
       - name: Run test
         run: flutter test --machine > test-report.json
+
       - name: Archive report
         uses: dorny/test-reporter@v1
         if: success() || failure()
@@ -71,6 +80,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Cache flutter
         id: cache-flutter
         uses: actions/cache@v3
@@ -79,16 +89,32 @@ jobs:
           key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-flutter-sdk-v
+
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
+
+      - name: Cache pubspec
+        id: cache-pubspec
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.FLUTTER_HOME }}/.pub-cache
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: pubspec-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pubspec-
+
       - name: Run pub get
         run: flutter pub get
+
       - name: Cache build_runner
-        id: cache-flutter
+        id: cache-build-runner
         uses: actions/cache@v3
         with:
           path: |
@@ -96,18 +122,21 @@ jobs:
           key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             build-runner-
+
       - name: Run build_runner
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - name: Build windows
         run: |
           flutter config --enable-windows-desktop
           flutter build windows --release
+
       - name: Archive release
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
           filename: '${{ env.RELEASE_FILE_NAME }}-windwos.zip'
           directory: build/windows/runner/Release
+
       - name: Publish release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
