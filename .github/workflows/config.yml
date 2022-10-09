@@ -19,7 +19,6 @@ jobs:
         with:
           flutter-version: $FLUTTER_VERSION
           channel: 'stable'
-        run: flutter doctor -v
       - name: Prepare for test
         run: flutter pub get
         run: flutter pub global activate junitreport
@@ -47,7 +46,6 @@ jobs:
         with:
           flutter-version: $FLUTTER_VERSION
           channel: 'stable'
-        run: flutter doctor -v
       - name: Prepare for build
         run: flutter pub get
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
