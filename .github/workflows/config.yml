@@ -138,7 +138,7 @@ jobs:
           directory: build/windows/runner/Release
 
       - name: Set tag name
-      - run: |
+        run: |
           pub global activate pubspec_version
           export TAG_NAME=v$(pubver -d ../. get)
 
