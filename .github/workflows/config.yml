@@ -130,7 +130,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ env.tag_name }}
           files: |
             build/windows/runner/Release/${{ env.release_file_name }}-windwos.zip
+          token: ${{ secrets.RELEASE_TOKEN }}
