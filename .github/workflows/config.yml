@@ -58,7 +58,7 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: '${{RELEASE_FILE_NAME}}-windwos.zip'
+          filename: '$RELEASE_FILE_NAME-windwos.zip'
           directory: build/windows/runner/Release
       - name: Publish release
         uses: softprops/action-gh-release@v1
@@ -66,4 +66,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: build/windows/runner/Release/${{RELEASE_FILE_NAME}}-windwos.zip
+          files: build/windows/runner/Release/$RELEASE_FILE_NAME-windwos.zip
