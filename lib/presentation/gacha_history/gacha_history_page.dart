@@ -30,9 +30,6 @@ class GachaHistoryPage extends StatelessWidget {
     );
   }
 
-  Widget get _progressBar =>
-      const SizedBox.expand(child: Center(child: ProgressBar()));
-
   Widget _buildDataTable(BuildContext context) {
     DataColumn2 buildColumn(
       String label, {
@@ -73,7 +70,7 @@ class GachaHistoryPage extends StatelessWidget {
                 empty: const Center(child: Text('暂无数据')),
               ),
               error: (_, __) => const SizedBox(),
-              loading: () => _progressBar,
+              loading: () => const Center(child: ProgressBar()),
             );
       },
     );
