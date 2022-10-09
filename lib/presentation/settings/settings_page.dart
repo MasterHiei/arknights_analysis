@@ -87,6 +87,32 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _SectionViewItem(
+              title: '感谢您使用本软件',
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                      text:
+                          '$appName 是一项非盈利的开源社区项目，专注于为各位博士提供方便快捷安全的游戏数据统计和查询服务。\n'
+                          '由于尚处于开发阶段，在您的使用途中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。\n'
+                          '同时，我们也欢迎任何小伙伴为我们提供力所能及的帮助。\n',
+                    ),
+                    const TextSpan(text: '欢迎前往我们的'),
+                    TextSpan(
+                      text: ' GitHub ',
+                      style: TextStyle(color: Colors.blue.normal),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => launchUrlString(projectUrl),
+                    ),
+                    const TextSpan(
+                      text: '为我们点亮 Star、提交 Issues 以及 Pull Requests。',
+                    ),
+                  ],
+                ),
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
             const _SectionViewItem(
               title: '免责声明',
               child: Text(

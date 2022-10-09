@@ -1,13 +1,13 @@
 const appName = 'Arknights Analysis';
 
+const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
+
 const licenseUrl =
     'https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md';
 
-const dbName = 'arknights_analysis.db';
-
-const gitHub = 'https://github.com/MasterHiei/arknights_analysis';
-
 const prts = 'https://prts.wiki';
+
+const dbName = 'arknights_analysis.db';
 
 const dbVersion = 1;
 

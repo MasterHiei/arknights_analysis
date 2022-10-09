@@ -24,7 +24,7 @@ class GachaStatsPage extends ConsumerWidget {
           ),
           error: (_, __) => const AppErrorView(),
           loading: () => const SizedBox.expand(
-            child: Center(child: ProgressBar()),
+            child: Center(child: ProgressRing()),
           ),
         );
   }
