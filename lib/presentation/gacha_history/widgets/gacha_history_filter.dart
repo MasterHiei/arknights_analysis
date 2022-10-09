@@ -45,7 +45,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

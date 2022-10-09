@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Scaffold, DataTableSource, DataCell;
+import 'package:flutter/material.dart' show Material, DataTableSource, DataCell;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,14 +18,15 @@ class GachaHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return ColoredBox(
+      color: FluentTheme.of(context).scaffoldBackgroundColor,
+      child: Column(
         children: [
           const GachaHistoryFilter(),
-          Expanded(child: _buildDataTable(context)),
+          SizedBox(height: 12.h),
+          Expanded(child: Material(child: _buildDataTable(context))),
         ],
       ),
-      backgroundColor: FluentTheme.of(context).scaffoldBackgroundColor,
     );
   }
 
