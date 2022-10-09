@@ -123,7 +123,7 @@ jobs:
 
       - name: Set tag name
         run: |
-          pub global activate pubspec_version
+          flutter pub global activate pubspec_version
           export TAG_NAME=v$(pubver -d ../. get)
 
       - name: Publish release
