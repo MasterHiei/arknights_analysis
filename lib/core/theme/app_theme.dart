@@ -4,21 +4,19 @@ import 'package:flutter/material.dart' as material;
 class AppTheme {
   const AppTheme._();
 
-  static const fontFamily = 'SourceHanSC';
+  static final light = _themeData.copyWith(brightness: Brightness.light);
 
-  static final light = ThemeData(
-    brightness: Brightness.light,
-    fontFamily: fontFamily,
-  );
-
-  static final dark = ThemeData(
-    brightness: Brightness.dark,
-    fontFamily: fontFamily,
-  );
+  static final dark = _themeData.copyWith(brightness: Brightness.dark);
 
   static material.ThemeData materialOf(BuildContext context) =>
       material.ThemeData(
         brightness: FluentTheme.of(context).brightness,
-        fontFamily: fontFamily,
+        fontFamily: _fontFamily,
       );
+
+  static const _fontFamily = 'SourceHanSC';
+
+  static final _themeData = ThemeData(
+    fontFamily: _fontFamily,
+  );
 }
