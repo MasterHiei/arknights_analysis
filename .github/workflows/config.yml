@@ -57,9 +57,9 @@ jobs:
       - name: Archive release
         uses: thedoctor0/zip-release@main
         with:
-        type: 'zip'
-        filename: '${{RELEASE_FILE_NAME}}-windwos.zip'
-        directory: build/windows/runner/Release
+          type: 'zip'
+          filename: '${{RELEASE_FILE_NAME}}-windwos.zip'
+          directory: build/windows/runner/Release
       - name: Publish release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
