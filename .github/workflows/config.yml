@@ -18,19 +18,41 @@ jobs:
         id: cache-flutter
         uses: actions/cache@v3
         with:
-          path: /cache/flutter
+          path: /opt/hostedtoolcache/flutter/
           key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-sdk-v
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
-      - name: Prepare for test
-        run: |
-          flutter pub get
-          flutter pub global activate junitreport
-          flutter packages pub run build_runner build --delete-conflicting-outputs
+      - name: Cache pubspec
+        id: cache-pubspec
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.FLUTTER_HOME }}/.pub-cache
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: pubspec-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pubspec-
+      - name: Run pub get
+        run: flutter pub get
+      - name: Cache build_runner
+        id: cache-build-runner
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/.dart_tool/build
+          key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            build-runner-
+      - name: Run build_runner
+        run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - name: Run analyze
         run: flutter analyze --fatal-infos
       - name: Run test
@@ -53,21 +75,33 @@ jobs:
         id: cache-flutter
         uses: actions/cache@v3
         with:
-          path: /cache/flutter
+          path: /opt/hostedtoolcache/flutter/
           key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-sdk-v
       - name: Install flutter
         if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
-      - name: Prepare for build
-        run: |
-          flutter pub get
-          flutter packages pub run build_runner build --delete-conflicting-outputs
-          flutter config --enable-windows-desktop
+      - name: Run pub get
+        run: flutter pub get
+      - name: Cache build_runner
+        id: cache-flutter
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/.dart_tool/build
+          key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            build-runner-
+      - name: Run build_runner
+        run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - name: Build windows
-        run: flutter build windows --release
+        run: |
+          flutter config --enable-windows-desktop
+          flutter build windows --release
       - name: Archive release
         uses: thedoctor0/zip-release@main
         with:
