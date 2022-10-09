@@ -110,7 +110,7 @@ jobs:
       - name: Bump build number
         run: |
           flutter pub global activate cider
-          cider bump build ${{ github.run_number }}
+          cider bump build
 
       - name: Run build_runner
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
