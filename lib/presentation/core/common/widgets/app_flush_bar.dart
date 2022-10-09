@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Icons;
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum FlushBarSeverity {
@@ -10,7 +10,7 @@ enum FlushBarSeverity {
 
   error(FluentIcons.critical_error_solid, Colors.errorPrimaryColor),
 
-  success(Icons.check_circle, Colors.successPrimaryColor);
+  success(material.Icons.check_circle, Colors.successPrimaryColor);
 
   const FlushBarSeverity(this.icon, this.color);
 

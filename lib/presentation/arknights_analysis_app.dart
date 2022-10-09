@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/constants/constants.dart';
 import '../core/enums/i18n.dart';
+import '../core/theme/app_theme.dart';
 import 'core/routing/router.dart';
 
 class ArknightsAnalysisApp extends StatelessWidget {
@@ -30,14 +31,9 @@ class _MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp.router(
-      theme: ThemeData(
-        brightness: Brightness.light,
-        fontFamily: 'SourceHanSC',
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: 'SourceHanSC',
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.light,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,

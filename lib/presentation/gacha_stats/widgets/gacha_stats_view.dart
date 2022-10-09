@@ -4,7 +4,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' show Material, DataCell;
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -361,7 +361,8 @@ class _PieChart extends StatelessWidget {
       const DataColumn2(label: Text('获取时间'), size: ColumnSize.L),
     ];
 
-    DataCell buildTextCell(String text, {TextStyle? style}) => DataCell(
+    material.DataCell buildTextCell(String text, {TextStyle? style}) =>
+        material.DataCell(
           DefaultTextStyle.merge(
             style: style ??
                 TextStyle(
@@ -383,7 +384,7 @@ class _PieChart extends StatelessWidget {
               '${index + 1}',
               style: TextStyle(color: Colors.grey[80], fontSize: 14.sp),
             ),
-            DataCell(
+            material.DataCell(
               Badge(
                 badgeContent: Text(
                   'NEW',
@@ -447,7 +448,7 @@ class _PieChart extends StatelessWidget {
               vertical: 24.h,
               horizontal: 480.w,
             ),
-            child: Material(
+            child: material.Material(
               clipBehavior: Clip.antiAlias,
               borderRadius: BorderRadius.circular(8),
               child: child,

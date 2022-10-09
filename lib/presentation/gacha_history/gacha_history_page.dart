@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Material, DataTableSource, DataCell;
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +24,7 @@ class GachaHistoryPage extends StatelessWidget {
         children: [
           const GachaHistoryFilter(),
           SizedBox(height: 12.h),
-          Expanded(child: Material(child: _buildDataTable(context))),
+          Expanded(child: material.Material(child: _buildDataTable(context))),
         ],
       ),
     );
@@ -77,7 +77,7 @@ class GachaHistoryPage extends StatelessWidget {
   }
 }
 
-class _DataTableSource extends DataTableSource {
+class _DataTableSource extends material.DataTableSource {
   _DataTableSource(this.context, this.chars);
 
   final BuildContext context;
@@ -90,7 +90,7 @@ class _DataTableSource extends DataTableSource {
       index: index,
       cells: [
         _buildTextCell('${index + 1}'),
-        DataCell(
+        material.DataCell(
           Badge(
             badgeContent: Text(
               'NEW',
@@ -136,7 +136,7 @@ class _DataTableSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 
-  DataCell _buildTextCell(String text) => DataCell(
+  material.DataCell _buildTextCell(String text) => material.DataCell(
         DefaultTextStyle.merge(
           style: TextStyle(
             color: Colors.grey[120],
