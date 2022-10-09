@@ -107,6 +107,11 @@ jobs:
           restore-keys: |
             build-runner-
 
+      - name: Bump build number
+        run: |
+          flutter pub global activate cider
+          cider bump build ${{ github.run_number }}
+
       - name: Run build_runner
         run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - name: Build windows
@@ -122,10 +127,7 @@ jobs:
           directory: build/windows/runner/Release
 
       - name: Set tag name
-        run: |
-          flutter pub global activate cider
-          cider bump build ${{ github.run_number }}
-          echo "tag_name=v$(cider version)" >> $GITHUB_ENV
+        run: echo "tag_name=v$(cider version)" >> $GITHUB_ENV
 
       - name: Publish release
         uses: ncipollo/release-action@v1
