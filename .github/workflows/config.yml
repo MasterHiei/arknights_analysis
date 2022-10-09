@@ -14,7 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache flutter
+        id: cache-flutter
+        uses: actions/cache@v3
+        with:
+          path: /cache/flutter
+          key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
       - name: Install flutter
+        if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -42,7 +49,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Flutter
+      - name: Cache flutter
+        id: cache-flutter
+        uses: actions/cache@v3
+        with:
+          path: /cache/flutter
+          key: ${{ runner.os }}-flutter-sdk-v${{ env.FLUTTER_VERSION }}
+      - name: Install flutter
+        if: ${{ steps.cache-flutter.outputs.cache-hit != 'true' }}
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
