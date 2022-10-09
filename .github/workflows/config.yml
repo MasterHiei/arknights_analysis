@@ -20,9 +20,10 @@ jobs:
           flutter-version: $FLUTTER_VERSION
           channel: 'stable'
       - name: Prepare for test
-        run: flutter pub get
-        run: flutter pub global activate junitreport
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+        run: |
+          flutter pub get
+          flutter pub global activate junitreport
+          flutter packages pub run build_runner build --delete-conflicting-outputs
       - name: Run analyze
         run: flutter analyze --fatal-infos
       - name: Run test
@@ -47,9 +48,10 @@ jobs:
           flutter-version: $FLUTTER_VERSION
           channel: 'stable'
       - name: Prepare for build
-        run: flutter pub get
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
-        run: flutter config --enable-windows-desktop
+        run: |
+          flutter pub get
+          flutter packages pub run build_runner build --delete-conflicting-outputs
+          flutter config --enable-windows-desktop
       - name: Build windows
         run: flutter build windows --release
       - name: Archive release
