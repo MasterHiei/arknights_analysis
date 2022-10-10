@@ -21,9 +21,8 @@ import 'states/ak_login_state.dart';
 final akLoginProvider =
     StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
   (ref) {
-    final initialUrl = optionOf(akLoginPage);
     return AkLoginNotifier(
-      ref.watch(webviewProvider(initialUrl)).controller,
+      ref.watch(webviewProvider(akLoginPage)).controller,
       ref.watch(akLoginTypeProvider.notifier),
       ref.watch(tokenProvider.notifier),
     );

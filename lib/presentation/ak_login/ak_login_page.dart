@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
@@ -39,8 +38,7 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    final initialUrl = optionOf(akLoginPage);
-    final controller = ref.watch(webviewProvider(initialUrl)).controller;
+    final controller = ref.watch(webviewProvider(akLoginPage)).controller;
     final isInitialized = controller.value.isInitialized;
     if (isInitialized) {
       _listenState(context, ref);
