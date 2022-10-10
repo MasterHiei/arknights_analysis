@@ -2,8 +2,8 @@ name: test
 
 on:
   push:
-    tags-ignore:
-      - "*"
+    branches:
+      - '**'
 
 env:
   flutter_version: 3.3.4
