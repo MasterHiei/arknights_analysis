@@ -1,6 +1,6 @@
 # Arknights Analysis
 
-[![Release Build](https://github.com/MasterHiei/arknights_analysis/actions/workflows/config.yml/badge.svg)](https://github.com/MasterHiei/arknights_analysis/actions/workflows/config.yml)
+[![build](https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml/badge.svg)](https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml)
 
 An application can help you collect game data more easily via offcial api of HyperGryph.
 
