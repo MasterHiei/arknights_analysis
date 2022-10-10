@@ -1,6 +1,13 @@
 # Arknights Analysis
 
-[![build](https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml/badge.svg)](https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml)
+<p>
+<a title="build" href="https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml" >
+  <img src="https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml/badge.svg" alt="Build">
+</a>
+<a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui">
+  <img src="https://img.shields.io/badge/fluent-design-blue?style=flat-square&color=gray&labelColor=0078D7">
+</a>
+</p>
 
 An application can help you collect game data more easily via offcial api of HyperGryph.
 
