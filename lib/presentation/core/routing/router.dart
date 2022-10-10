@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -90,6 +91,7 @@ enum Routes {
 final router = GoRouter(
   routes: Routes.values.map((route) => route.route).toList(),
   debugLogDiagnostics: kDebugMode,
+  observers: [BotToastNavigatorObserver()],
 );
 
 GoRoute _buildFadeTransitionPage(
