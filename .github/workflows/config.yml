@@ -117,7 +117,7 @@ jobs:
       - name: Bump build number
         run: |
           flutter pub global activate cider
-          cider bump build ${{ github.run_number }}
+          cider bump build --build=${{ github.run_number }}
 
       - name: Build windows
         run: |
