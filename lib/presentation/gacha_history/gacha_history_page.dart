@@ -9,6 +9,7 @@ import '../../application/gacha/gacha_history_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../domain/gacha/gacha_char.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../core/common/widgets/app_empty_view.dart';
 import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
 import 'widgets/index.dart';
@@ -26,7 +27,12 @@ class GachaHistoryPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20.h),
             child: const GachaHistoryFilter(),
           ),
-          Expanded(child: material.Material(child: _buildDataTable(context))),
+          Expanded(
+            child: material.Material(
+              textStyle: DefaultTextStyle.of(context).style,
+              child: _buildDataTable(context),
+            ),
+          ),
         ],
       ),
     );
@@ -69,9 +75,9 @@ class GachaHistoryPage extends StatelessWidget {
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
                 source: _DataTableSource(context, chars),
-                empty: const Center(child: Text('暂无数据')),
+                empty: const AppEmptyView(),
               ),
-              error: (_, __) => const SizedBox(),
+              error: (_, __) => const SizedBox.shrink(),
               loading: () => const Center(child: ProgressBar()),
             );
       },

@@ -18,7 +18,7 @@ enum FlushBarSeverity {
   final Color color;
 }
 
-class AppFlushBar extends StatelessWidget {
+class AppFlushBar {
   const AppFlushBar._();
 
   static Future<void> show(
@@ -39,10 +39,5 @@ class AppFlushBar extends StatelessWidget {
       duration: duration,
     );
     return flushBar.show(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
   }
 }

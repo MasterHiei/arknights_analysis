@@ -97,7 +97,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
     final poolSelector = Consumer(
       builder: (_, ref, __) {
         if (ref.watch(_showAllPools)) {
-          return const SizedBox();
+          return const SizedBox.shrink();
         }
 
         final selectedPools = ref.watch(_selectedPools);
@@ -116,7 +116,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
         final isCompleted = selectablePools.isEmpty;
         if (isCompleted) {
           items.add(
-            MenuFlyoutItem(text: const SizedBox(), onPressed: () {}),
+            MenuFlyoutItem(text: const SizedBox.shrink(), onPressed: () {}),
           );
         }
         return DropDownButton(
@@ -133,7 +133,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
     final selectedChips = Consumer(
       builder: (_, ref, __) {
         if (ref.watch(_showAllPools)) {
-          return const SizedBox();
+          return const SizedBox.shrink();
         }
 
         final children = ref.watch(_selectedPools).map(

@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +14,7 @@ class WebviewPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initialUrl = optionOf(params.initialUrl);
-    final controller = ref.watch(webviewProvider(initialUrl)).controller;
+    final controller = ref.watch(webviewProvider(params.initialUrl)).controller;
     final isInitialized = controller.value.isInitialized;
     final hasNavigationBar = isInitialized && params.enableNavigationBar;
     return NavigationView(
