@@ -1,6 +1,10 @@
-name: Release Build
+name: build windows
 
-on: push
+on:
+  workflow_run:
+    workflows: [test]
+    types: [completed]
+    branches: [master]
 
 env:
   flutter_version: 3.3.4
@@ -11,67 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  analyze-and-test:
-    if: github.event_name != 'release'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.flutter_version }}
-          channel: 'stable'
-          cache: true
-          cache-key: ${{ runner.os }}-flutter-sdk-v${{ env.flutter_version }}
-
-      - name: Cache pubspec
-        id: cache-pubspec
-        uses: actions/cache@v3
-        with:
-          path: |
-            ${{ env.FLUTTER_HOME }}/.pub-cache
-            **/.flutter-plugins
-            **/.flutter-plugin-dependencies
-            **/.dart_tool/package_config.json
-          key: pubspec-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            pubspec-
-
-      - name: Run pub get
-        run: flutter pub get
-
-      - name: Cache build_runner
-        id: cache-build-runner
-        uses: actions/cache@v3
-        with:
-          path: |
-            **/.dart_tool/build
-          key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            build-runner-
-
-      - name: Run build_runner
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
-
-      - name: Run analyze
-        run: flutter analyze --fatal-infos
-
-      - name: Run test
-        run: flutter test --machine > test-report.json
-
-      - name: Archive report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Flutter Tests
-          path: test-report.json
-          reporter: flutter-json
-          fail-on-error: true
-
-  build-windows-release:
-    if: github.ref == 'refs/heads/master'
-    needs: analyze-and-test
+  build-windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
