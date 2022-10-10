@@ -1,9 +1,6 @@
 name: Release Build
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 env:
   flutter_version: 3.3.4
@@ -71,7 +68,8 @@ jobs:
           reporter: flutter-json
           fail-on-error: true
 
-  build-windows:
+  build-windows-release:
+    if: github.ref == 'refs/heads/master'
     needs: analyze-and-test
     runs-on: windows-latest
     steps:
