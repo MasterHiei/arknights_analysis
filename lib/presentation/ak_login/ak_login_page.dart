@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
@@ -43,8 +44,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
     if (isInitialized) {
       _listenState(context, ref);
     }
-    return ScaffoldPage(
-      content: Stack(
+    return material.Scaffold(
+      body: Stack(
         children: [
           if (isInitialized) Positioned.fill(child: Webview(controller)),
           if (!isInitialized)
