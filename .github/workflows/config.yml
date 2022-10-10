@@ -135,6 +135,8 @@ jobs:
       - name: Publish release
         uses: ncipollo/release-action@v1
         with:
-          tag: "${{ env.tag_name }}"
+          allowUpdates: true
           artifacts: build/windows/runner/Release/${{ env.release_file_name }}-windwos.zip
+          generateReleaseNotes: true
+          tag: "${{ env.tag_name }}"
           token: ${{ secrets.RELEASE_TOKEN }}
