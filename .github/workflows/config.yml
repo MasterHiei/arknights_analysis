@@ -9,6 +9,10 @@ env:
   flutter_version: 3.3.4
   release_file_name: arknights-analysis
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   analyze-and-test:
     runs-on: ubuntu-latest
