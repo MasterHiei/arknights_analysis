@@ -2,9 +2,12 @@ name: build windows
 
 on:
   workflow_run:
-    workflows: [test]
-    types: [completed]
-    branches: [master]
+    workflows:
+      - test
+    types:
+      - completed
+    branches:
+      - master
 
 env:
   flutter_version: 3.3.4
