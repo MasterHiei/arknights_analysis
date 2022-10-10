@@ -18,6 +18,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../../core/common/widgets/app_empty_view.dart';
 import '../../core/common/widgets/app_error_view.dart';
 import '../../core/routing/route_params.dart';
 import '../../core/routing/router.dart';
@@ -76,8 +77,8 @@ class _StatsView extends ConsumerStatefulWidget {
 class _StatsViewState extends ConsumerState<_StatsView> {
   @override
   void initState() {
-    Future.delayed(Duration.zero, _fetch);
     super.initState();
+    Future.delayed(Duration.zero, _fetch);
   }
 
   @override
@@ -88,7 +89,7 @@ class _StatsViewState extends ConsumerState<_StatsView> {
     return ref.watch(gachaStatsProvider).when(
           data: (stats) => _PieChart(pool, stats),
           error: (_, __) => const AppErrorView(),
-          loading: () => const SizedBox(),
+          loading: () => const SizedBox.shrink(),
         );
   }
 
@@ -215,6 +216,10 @@ class _PieChart extends StatelessWidget {
   Widget get _chart => Consumer(
         builder: (context, ref, _) {
           final sources = stats.statsPerRarity;
+          if (sources.isEmpty) {
+            return const AppEmptyView();
+          }
+
           final sections = stats.statsPerRarity.map((pair) {
             final rarity = pair.first;
             final stats = pair.second;
@@ -245,7 +250,7 @@ class _PieChart extends StatelessWidget {
       );
 
   Widget get _pullDateRangeLabel => Text(
-        stats.dateRange,
+        stats.dateRange ?? '',
         style: TextStyle(color: Colors.grey[100], fontSize: 14.sp),
       );
 
@@ -297,7 +302,7 @@ class _PieChart extends StatelessWidget {
         (rarity) {
           final total = stats.filter(rarity).length;
           if (total == 0) {
-            return const SizedBox();
+            return const SizedBox.shrink();
           }
           final details = Row(
             children: [
@@ -354,7 +359,7 @@ class _PieChart extends StatelessWidget {
 
   Future<void> _showCharsTable(BuildContext context, Rarity rarity) async {
     final columns = [
-      DataColumn2(label: const SizedBox(), fixedWidth: 80.w),
+      DataColumn2(label: const SizedBox.shrink(), fixedWidth: 80.w),
       const DataColumn2(label: Text('干员'), size: ColumnSize.L),
       const DataColumn2(label: Text('抽数'), size: ColumnSize.S),
       const DataColumn2(label: Text('寻访'), size: ColumnSize.L),

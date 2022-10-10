@@ -25,8 +25,8 @@ class PortalPage extends ConsumerStatefulWidget {
 class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    windowManager.addListener(this);
   }
 
   @override

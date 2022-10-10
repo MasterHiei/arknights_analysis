@@ -10,7 +10,7 @@ class UserInfoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(userProvider).fold(
-          () => const SizedBox(),
+          () => const SizedBox.shrink(),
           (user) => Column(
             children: [
               Text(

@@ -20,8 +20,8 @@ class AkLoginPage extends ConsumerStatefulWidget {
 class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    windowManager.addListener(this);
   }
 
   @override
