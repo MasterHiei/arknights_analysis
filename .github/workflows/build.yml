@@ -54,7 +54,7 @@ jobs:
             build-runner-
 
       - name: Run build_runner
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+        run: flutter packages pub run build_runner build -d
 
       - name: Run analyze
         run: flutter analyze --fatal-infos
@@ -113,7 +113,7 @@ jobs:
             build-runner-
 
       - name: Run build_runner
-        run: flutter packages pub run build_runner build --delete-conflicting-outputs
+        run: flutter packages pub run build_runner build -d
 
       - name: Bump build number
         run: |
