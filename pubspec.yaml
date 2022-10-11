@@ -1,5 +1,6 @@
 name: arknights_analysis
-description: A new Flutter project.
+description: An application can help you collect game data more easily via
+  offcial api of HyperGryph.
 
 publish_to: "none"
 
@@ -71,4 +72,3 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
-
