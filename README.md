@@ -7,30 +7,27 @@
 <a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui">
   <img src="https://img.shields.io/badge/fluent-design-blue?style=flat-square&color=gray&labelColor=0078D7">
 </a>
+<a title="License" href="https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/MasterHiei/arknights_analysis">
+</a>
 </p>
 
 An application can help you collect game data more easily via offcial api of HyperGryph.
 
 ## System Requirements
 
-:white_check_mark:Windows 10 1809+
+:white_check_mark: Windows 10 Version 1809 for x64
 
 ## Getting Started
 
 ### Installation
 
-1. Download latest release.
+1. Download the latest release of `arknights-analysis-windwos.zip`.
 
-2. (if is an .exe file)Follow the instructions to install the software.
+2. Open the zip file, then copy the contents to another folder that you create.
 
 3. Locate and double-click the `arknights_analysis.exe` file.
 
 ### Uninstallation
 
-#### From .exe file
-1. Locate and double-click the `unins000.exe` file.
-
-2. Follow the instructions to uninstall the software.
-
-#### From .zip file
 Locate and move the applicaion folder to trash.
