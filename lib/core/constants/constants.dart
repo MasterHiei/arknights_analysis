@@ -5,6 +5,8 @@ const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
 const licenseUrl =
     'https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md';
 
+const gameDataResourceUrl = 'https://github.com/Kengxxiao/ArknightsGameData';
+
 const prts = 'https://prts.wiki';
 
 const dbName = 'arknights_analysis.db';
