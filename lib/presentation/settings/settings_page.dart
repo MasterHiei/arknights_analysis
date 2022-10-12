@@ -95,8 +95,7 @@ class SettingsPage extends StatelessWidget {
                     const TextSpan(
                       text:
                           '$appName 是一项非盈利的个人开源项目，专注于为各位博士提供方便快捷安全的游戏数据统计和查询服务。\n'
-                          '由于尚处于开发阶段，在您的使用途中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。\n'
-                          '同时，我们也欢迎任何小伙伴为我们提供力所能及的帮助。\n',
+                          '由于尚处于开发阶段，在您的使用途中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。\n',
                     ),
                     const TextSpan(text: '欢迎前往我们的'),
                     TextSpan(
@@ -132,6 +131,10 @@ class SettingsPage extends StatelessWidget {
                           '其相关版权均属于鹰角网络游戏软件和/或鹰角网络游戏服务的提供方，'
                           '即上海鹰角网络科技有限公司及其关联公司所有。\n',
                     ),
+                    const TextSpan(
+                      text: '部分来源于网络的内容，其版权归原作者及网站所有，'
+                          '如认为内容侵权，请立即联系我们删除。\n',
+                    ),
                     const TextSpan(text: '除非另有声明，本软件其他内容遵守'),
                     TextSpan(
                       text: ' BSD 3-Clause "New" or "Revised" License ',
@@ -140,6 +143,23 @@ class SettingsPage extends StatelessWidget {
                         ..onTap = () => launchUrlString(licenseUrl),
                     ),
                     const TextSpan(text: '开源许可协议。'),
+                  ],
+                ),
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+            _SectionViewItem(
+              title: '鸣谢',
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(text: '游戏数据：'),
+                    TextSpan(
+                      text: ' Kengxxiao/ArknightsGameData ',
+                      style: TextStyle(color: Colors.blue.normal),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => launchUrlString(gameDataResourceUrl),
+                    ),
                   ],
                 ),
                 style: const TextStyle(color: Colors.black),
