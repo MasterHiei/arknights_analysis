@@ -1,6 +1,9 @@
 name: build
 
 on:
+  push:
+    barnches:
+      - 'master'
   pull_request:
     branches:
       - '**'
