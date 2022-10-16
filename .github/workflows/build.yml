@@ -5,16 +5,17 @@ on:
     branches:
       - '**'
 
-env:
-  flutter_version: 3.3.4
-  release_file_name: arknights-analysis
-
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  flutter_version: 3.3.4
+  release_file_name: arknights-analysis
+
 jobs:
   analyze-and-test:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
