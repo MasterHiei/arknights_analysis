@@ -13,9 +13,6 @@ import 'utils/file_manager.dart';
 final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(
     BaseOptions(
-      connectTimeout: httpTimeout,
-      receiveTimeout: httpTimeout,
-      sendTimeout: httpTimeout,
       baseUrl: baseUrl,
       validateStatus: (code) => code != null && 200 <= code && code < 400,
     ),
@@ -24,6 +21,8 @@ final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   return dio;
 });
 
+final dioProvider = _dioProvider('');
+
 final akDioProvider = _dioProvider(akBaseUrl);
 
 final asDioProvider = _dioProvider(asBaseUrl);
@@ -31,6 +30,8 @@ final asDioProvider = _dioProvider(asBaseUrl);
 final gdDioProvider = _dioProvider(gameDataBaseUrl);
 
 final gdApiDioProvider = _dioProvider(gameDataApiBaseUrl);
+
+final rdApiDioProvider = _dioProvider(repoDataBaseUrl);
 
 final dbProvider = Provider((ref) {
   final db = AppDatabase();

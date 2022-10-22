@@ -13,8 +13,6 @@ class GachaHistoryFilterState with _$GachaHistoryFilterState {
     required List<Rarity> selectedRarities,
   }) = _GachaHistoryFilterState;
 
-  const GachaHistoryFilterState._();
-
   factory GachaHistoryFilterState.init() => const GachaHistoryFilterState(
         pools: [],
         showAllPools: true,

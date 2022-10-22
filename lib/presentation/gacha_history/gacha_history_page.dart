@@ -9,6 +9,7 @@ import '../../application/gacha/gacha_history_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../domain/gacha/gacha_char.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../core/common/widgets/app_badge.dart';
 import '../core/common/widgets/app_empty_view.dart';
 import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
@@ -99,7 +100,9 @@ class _DataTableSource extends material.DataTableSource {
       cells: [
         _buildTextCell('${index + 1}'),
         material.DataCell(
-          Badge(
+          AppBadge(
+            showBadge: char.isNew,
+            position: BadgePosition.topEnd(top: 4.h, end: -34.w),
             badgeContent: Text(
               'NEW',
               style: DefaultTextStyle.of(context).style.copyWith(
@@ -107,11 +110,6 @@ class _DataTableSource extends material.DataTableSource {
                     fontSize: 9.sp,
                   ),
             ),
-            position: BadgePosition.topEnd(top: 4.h, end: -34.w),
-            shape: BadgeShape.square,
-            padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
-            borderRadius: BorderRadius.circular(4.w),
-            showBadge: char.isNew,
             child: Text(
               char.name,
               style: DefaultTextStyle.of(context).style.copyWith(

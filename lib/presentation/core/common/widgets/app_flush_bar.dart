@@ -28,7 +28,13 @@ class AppFlushBar {
     Duration duration = const Duration(seconds: 3),
   }) {
     final flushBar = Flushbar<void>(
-      messageText: SelectableText(message, style: TextStyle(fontSize: 16.sp)),
+      messageText: SelectableText(
+        message,
+        style: TextStyle(
+          fontSize: 16.sp,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
       icon: Icon(severity.icon, size: 24.w, color: severity.color),
       shouldIconPulse: false,
       maxWidth: ScreenUtil().screenWidth * 0.3,
