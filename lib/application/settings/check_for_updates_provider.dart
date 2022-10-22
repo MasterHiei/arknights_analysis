@@ -31,7 +31,7 @@ class CheckForUpdatesNotifier extends StateNotifier<CheckForUpdatesState> {
       (failure) => CheckForUpdatesState.failure(failure),
       (latest) {
         if (currentVersion == latest.version) {
-          return const CheckForUpdatesState.latest();
+          return CheckForUpdatesState.latest(latest);
         }
         return CheckForUpdatesState.canUpdate(latest);
       },

@@ -1,7 +1,7 @@
 # Arknights Analysis
 
 <p>
-<a title="build" href="https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml" >
+<a title="Build" href="https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml" >
   <img src="https://github.com/MasterHiei/arknights_analysis/actions/workflows/build.yml/badge.svg" alt="Build">
 </a>
 <a title="Made with Fluent Design" href="https://github.com/bdlukaa/fluent_ui">
@@ -10,7 +10,7 @@
 <a title="License" href="https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md">
   <img src="https://img.shields.io/github/license/MasterHiei/arknights_analysis">
 </a>
-<a title="License" href="https://github.com/MasterHiei/arknights_analysis/releases">
+<a title="Release" href="https://github.com/MasterHiei/arknights_analysis/releases">
   <img src="https://img.shields.io/github/v/release/MasterHiei/arknights_analysis?sort=semver">
 </a>
 </p>
