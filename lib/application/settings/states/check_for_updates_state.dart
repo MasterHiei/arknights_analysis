@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/exceptions/app_failure.dart';
@@ -7,19 +8,24 @@ part 'check_for_updates_state.freezed.dart';
 
 @freezed
 class CheckForUpdatesState with _$CheckForUpdatesState {
-  const factory CheckForUpdatesState.init() = _Init;
+  const factory CheckForUpdatesState({
+    required bool isChecking,
+    required String currentVersion,
+    required Option<LatestRelease> latestReleaseOption,
+    required Option<AppFailure> failureOption,
+  }) = _CheckForUpdatesState;
 
-  const factory CheckForUpdatesState.checking() = _Checking;
+  factory CheckForUpdatesState.init() => CheckForUpdatesState(
+        isChecking: false,
+        currentVersion: '',
+        latestReleaseOption: none(),
+        failureOption: none(),
+      );
 
-  const factory CheckForUpdatesState.latest(
-    LatestRelease latest,
-  ) = _Latest;
+  const CheckForUpdatesState._();
 
-  const factory CheckForUpdatesState.canUpdate(
-    LatestRelease latest,
-  ) = _CanUpdate;
-
-  const factory CheckForUpdatesState.failure(
-    AppFailure failure,
-  ) = _Failure;
+  bool get hasNewVersion => latestReleaseOption.fold(
+        () => false,
+        (latest) => latest.version != currentVersion,
+      );
 }

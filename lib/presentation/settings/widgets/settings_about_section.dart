@@ -13,16 +13,16 @@ import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
 
 final _currentVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider.notifier).currentVersion,
+  (ref) => ref.watch(checkForUpdatesProvider).currentVersion,
 );
 
-final _latestVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).maybeMap(
-        latest: (state) => state.latest.version,
-        canUpdate: (state) => state.latest.version,
-        orElse: () => '',
-      ),
-);
+final _latestVersion = Provider.autoDispose((ref) {
+  final state = ref.watch(checkForUpdatesProvider);
+  return state.latestReleaseOption.fold(
+    () => '',
+    (latest) => latest.version,
+  );
+});
 
 final _isDownloadingUpdates = Provider.autoDispose(
   (ref) => ref.watch(downloadNewVersionProvider).maybeMap(
@@ -33,10 +33,7 @@ final _isDownloadingUpdates = Provider.autoDispose(
 );
 
 final _isCheckingOrDownloading = Provider.autoDispose((ref) {
-  final isChecking = ref.watch(checkForUpdatesProvider).maybeMap(
-        checking: (_) => true,
-        orElse: () => false,
-      );
+  final isChecking = ref.watch(checkForUpdatesProvider).isChecking;
   final isDownloading = ref.watch(_isDownloadingUpdates);
   return isChecking || isDownloading;
 });
