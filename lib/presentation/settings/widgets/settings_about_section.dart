@@ -18,6 +18,7 @@ final _currentVersion = Provider.autoDispose(
 
 final _latestVersion = Provider.autoDispose(
   (ref) => ref.watch(checkForUpdatesProvider).maybeMap(
+        latest: (state) => state.latest.version,
         canUpdate: (state) => state.latest.version,
         orElse: () => '',
       ),

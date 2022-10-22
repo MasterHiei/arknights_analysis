@@ -166,7 +166,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         checkForUpdatesProvider,
         (_, next) {
           next.maybeWhen(
-            latest: () => AppFlushBar.show(
+            latest: (_) => AppFlushBar.show(
               context,
               message: '您的软件是最新版本。',
               severity: FlushBarSeverity.success,

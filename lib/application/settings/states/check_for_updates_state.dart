@@ -11,7 +11,9 @@ class CheckForUpdatesState with _$CheckForUpdatesState {
 
   const factory CheckForUpdatesState.checking() = _Checking;
 
-  const factory CheckForUpdatesState.latest() = _Latest;
+  const factory CheckForUpdatesState.latest(
+    LatestRelease latest,
+  ) = _Latest;
 
   const factory CheckForUpdatesState.canUpdate(
     LatestRelease latest,
