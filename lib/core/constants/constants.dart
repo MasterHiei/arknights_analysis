@@ -13,8 +13,6 @@ const dbName = 'arknights_analysis.db';
 
 const dbVersion = 1;
 
-const httpTimeout = 30 * 1000;
-
 const asBaseUrl = 'https://as.hypergryph.com';
 
 const akBaseUrl = 'https://ak.hypergryph.com';
@@ -24,6 +22,9 @@ const gameDataApiBaseUrl =
 
 const gameDataBaseUrl =
     'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
+
+const repoDataBaseUrl =
+    'https://api.github.com/repos/MasterHiei/arknights_analysis';
 
 const akLoginPage = 'https://ak.hypergryph.com/user/login';
 

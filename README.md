@@ -10,6 +10,9 @@
 <a title="License" href="https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md">
   <img src="https://img.shields.io/github/license/MasterHiei/arknights_analysis">
 </a>
+<a title="License" href="https://github.com/MasterHiei/arknights_analysis/releases">
+  <img src="https://img.shields.io/github/v/release/MasterHiei/arknights_analysis?sort=semver">
+</a>
 </p>
 
 An application can help you collect game data more easily via offcial api of HyperGryph.

@@ -18,6 +18,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../../core/common/widgets/app_badge.dart';
 import '../../core/common/widgets/app_empty_view.dart';
 import '../../core/common/widgets/app_error_view.dart';
 import '../../core/routing/route_params.dart';
@@ -390,7 +391,9 @@ class _PieChart extends StatelessWidget {
               style: TextStyle(color: Colors.grey[80], fontSize: 14.sp),
             ),
             material.DataCell(
-              Badge(
+              AppBadge(
+                showBadge: char.isNew,
+                position: BadgePosition.topEnd(top: 4.h, end: -34.w),
                 badgeContent: Text(
                   'NEW',
                   style: DefaultTextStyle.of(context).style.copyWith(
@@ -398,11 +401,6 @@ class _PieChart extends StatelessWidget {
                         fontSize: 9.sp,
                       ),
                 ),
-                position: BadgePosition.topEnd(top: 4.h, end: -34.w),
-                shape: BadgeShape.square,
-                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
-                borderRadius: BorderRadius.circular(4.w),
-                showBadge: char.isNew,
                 child: Text.rich(
                   TextSpan(
                     text: char.name,
