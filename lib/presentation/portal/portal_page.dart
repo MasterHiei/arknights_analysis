@@ -18,13 +18,18 @@ import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 import '../settings/settings_page.dart';
 
-final _hasNewVersion = Provider.autoDispose((ref) {
-  final isLatestVersion = ref.watch(checkForUpdatesProvider).isLatestVersion;
-  return !isLatestVersion;
-});
+final _hasNewVersion = Provider.autoDispose(
+  (ref) => ref.watch(checkForUpdatesProvider).maybeMap(
+        canUpdate: (_) => true,
+        orElse: () => false,
+      ),
+);
 
 final _browserDownloadUrl = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).downloadUrl,
+  (ref) => ref.watch(checkForUpdatesProvider).maybeMap(
+        canUpdate: (state) => state.latest.browserDownloadUrl,
+        orElse: () => '',
+      ),
 );
 
 class PortalPage extends ConsumerStatefulWidget {
@@ -160,37 +165,29 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   void _listenVersionState() => ref.listen(
         checkForUpdatesProvider,
         (_, next) {
-          if (next.isChecking) {
-            return;
-          }
-
-          next.failureOption.fold(
-            () {},
-            (failure) => AppFlushBar.show(
-              context,
-              message: failure.localizedMessage,
-            ),
-          );
-
-          if (next.isLatestVersion) {
-            AppFlushBar.show(
+          next.maybeWhen(
+            latest: () => AppFlushBar.show(
               context,
               message: '您的软件是最新版本。',
               severity: FlushBarSeverity.success,
-            );
-          } else {
-            AppDialog.promptForUpdate(
+            ),
+            canUpdate: (latest) => AppDialog.promptForUpdate(
               context,
               browserDownloadUrl: ref.read(_browserDownloadUrl),
               onDownloadButtonTap: () {
                 Navigator.pop(context);
                 ref.read(downloadNewVersionProvider.notifier).download(
-                      next.downloadUrl,
-                      fileName: next.assetName,
+                      latest.browserDownloadUrl,
+                      fileName: latest.assetName,
                     );
               },
-            );
-          }
+            ),
+            failure: (failure) => AppFlushBar.show(
+              context,
+              message: failure.localizedMessage,
+            ),
+            orElse: () {},
+          );
         },
       );
 

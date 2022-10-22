@@ -13,22 +13,29 @@ import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
 
 final _currentVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).currentVersion,
+  (ref) => ref.watch(checkForUpdatesProvider.notifier).currentVersion,
 );
 
 final _latestVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).latestVersion,
+  (ref) => ref.watch(checkForUpdatesProvider).maybeMap(
+        canUpdate: (state) => state.latest.version,
+        orElse: () => '',
+      ),
 );
 
 final _isDownloadingUpdates = Provider.autoDispose(
   (ref) => ref.watch(downloadNewVersionProvider).maybeMap(
+        beginDownload: (_) => true,
         downloading: (_) => true,
         orElse: () => false,
       ),
 );
 
 final _isCheckingOrDownloading = Provider.autoDispose((ref) {
-  final isChecking = ref.watch(checkForUpdatesProvider).isChecking;
+  final isChecking = ref.watch(checkForUpdatesProvider).maybeMap(
+        checking: (_) => true,
+        orElse: () => false,
+      );
   final isDownloading = ref.watch(_isDownloadingUpdates);
   return isChecking || isDownloading;
 });
