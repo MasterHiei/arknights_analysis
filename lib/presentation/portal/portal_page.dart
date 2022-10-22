@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
@@ -7,6 +8,8 @@ import '../../application/ak_logout/states/ak_logout_state.dart';
 import '../../application/gacha/gacha_provider.dart';
 import '../../application/gacha/states/gacha_state.dart';
 import '../../application/pane/pane_provider.dart';
+import '../../application/settings/check_for_updates_provider.dart';
+import '../../application/settings/download_new_version_provider.dart';
 import '../../application/user/user_fetch_provider.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../core/common/widgets/app_dialog.dart';
@@ -14,6 +17,15 @@ import '../core/common/widgets/app_flush_bar.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 import '../settings/settings_page.dart';
+
+final _hasNewVersion = Provider.autoDispose((ref) {
+  final isLatestVersion = ref.watch(checkForUpdatesProvider).isLatestVersion;
+  return !isLatestVersion;
+});
+
+final _browserDownloadUrl = Provider.autoDispose(
+  (ref) => ref.watch(checkForUpdatesProvider).downloadUrl,
+);
 
 class PortalPage extends ConsumerStatefulWidget {
   const PortalPage({super.key});
@@ -45,20 +57,13 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   Widget build(BuildContext context) {
     _listenUserState();
     _listenGachaState();
+    _listenVersionState();
+    _listenDownloadState();
     _listenLogoutState();
 
-    final index = ref.watch(paneProvider).selectedIndex;
     return NavigationView(
-      pane: _buildPane(index),
-      transitionBuilder: (child, animation) => DrillInPageTransition(
-        animation: animation,
-        child: child,
-      ),
-    );
-  }
-
-  NavigationPane _buildPane(int selected) => NavigationPane(
-        selected: selected,
+      pane: NavigationPane(
+        selected: ref.watch(paneProvider).selectedIndex,
         onChanged: ref.read(paneProvider.notifier).select,
         items: [
           PaneItem(
@@ -77,6 +82,14 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             icon: const Icon(FluentIcons.settings),
             body: const SettingsPage(),
             title: const Text('设置'),
+            infoBadge: Consumer(
+              builder: (_, ref, __) {
+                if (ref.watch(_hasNewVersion)) {
+                  return InfoBadge(color: Colors.red.normal);
+                }
+                return const SizedBox.shrink();
+              },
+            ),
           ),
           PaneItemSeparator(),
           PaneItemAction(
@@ -95,7 +108,13 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           ),
         ],
         displayMode: PaneDisplayMode.compact,
-      );
+      ),
+      transitionBuilder: (child, animation) => DrillInPageTransition(
+        animation: animation,
+        child: child,
+      ),
+    );
+  }
 
   void _listenUserState() {
     ref.listen<AsyncValue<void>>(
@@ -137,6 +156,68 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
       ),
     );
   }
+
+  void _listenVersionState() => ref.listen(
+        checkForUpdatesProvider,
+        (_, next) {
+          if (next.isChecking) {
+            return;
+          }
+
+          next.failureOption.fold(
+            () {},
+            (failure) => AppFlushBar.show(
+              context,
+              message: failure.localizedMessage,
+            ),
+          );
+
+          if (next.isLatestVersion) {
+            AppFlushBar.show(
+              context,
+              message: '您的软件是最新版本。',
+              severity: FlushBarSeverity.success,
+            );
+          } else {
+            AppDialog.promptForUpdate(
+              context,
+              browserDownloadUrl: ref.read(_browserDownloadUrl),
+              onDownloadButtonTap: () {
+                Navigator.pop(context);
+                ref.read(downloadNewVersionProvider.notifier).download(
+                      next.downloadUrl,
+                      fileName: next.assetName,
+                    );
+              },
+            );
+          }
+        },
+      );
+
+  void _listenDownloadState() => ref.listen(
+        downloadNewVersionProvider,
+        (_, next) {
+          next.maybeWhen(
+            beginDownload: () => AppFlushBar.show(
+              context,
+              message: '开始下载新版本。',
+            ),
+            success: (file) {
+              launchUrl(file.absolute.parent.uri);
+              AppFlushBar.show(
+                context,
+                message: '新版本下载完成。',
+                severity: FlushBarSeverity.success,
+              );
+            },
+            failure: (failure) => AppFlushBar.show(
+              context,
+              message: failure.localizedMessage,
+            ),
+            orElse: () {},
+          );
+        },
+      );
 
   void _listenLogoutState() {
     ref.listen<AkLogoutState>(
