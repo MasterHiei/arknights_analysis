@@ -17,7 +17,7 @@ dependencies:
   connectivity_plus: 3.0.2
   dartx: 1.1.0
   dartz: 0.10.1
-  data_table_2: 2.3.7
+  data_table_2: 2.3.8
   dio: 4.0.6
   drift: 2.2.0
   easy_localization: 3.0.1
@@ -53,8 +53,8 @@ dev_dependencies:
   drift_dev: 2.2.0+1
   flutter_test:
     sdk: flutter
-  freezed: 2.2.0
-  json_serializable: 6.5.3
+  freezed: 2.2.1
+  json_serializable: 6.5.4
   lint: 1.10.0
   retrofit_generator: 4.2.0
 
