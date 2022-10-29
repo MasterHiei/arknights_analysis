@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:time/time.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
@@ -41,7 +42,7 @@ class GachaNotifier extends StateNotifier<GachaState> {
     int? total,
   }) async {
     state = GachaState.fetching(current: page, total: total);
-
+    await 500.milliseconds.delay;
     final failureOrPagination = await _repository.fetchAndSave(
       user.token,
       uid: user.uid,
