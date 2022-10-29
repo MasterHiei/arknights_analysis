@@ -16,11 +16,13 @@ const _tables = [
   Users,
   GachaPools,
   GachaRecords,
+  DiamondRecords,
 ];
 const _daos = [
   UsersDao,
   GachaPoolsDao,
   GachaRecordsDao,
+  DiamondRecordsDao,
 ];
 
 @DriftDatabase(tables: _tables, daos: _daos)
