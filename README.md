@@ -21,6 +21,8 @@ An application can help you collect game data more easily via offcial api of Hyp
 
 :white_check_mark: Windows 10 Version 1809 for x64
 
+:white_check_mark: [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+
 ## Getting Started
 
 ### Installation

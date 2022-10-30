@@ -86,20 +86,10 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
   }) =>
       execute(
         () async {
-          late final String? channelId;
-          switch (loginType) {
-            case AkLoginType.official:
-              channelId = null;
-              break;
-
-            case AkLoginType.bilibili:
-              channelId = '2';
-              break;
-          }
           final response = await _remoteDataSource.fetch(
             token: token.getOrCrash(),
             page: page,
-            channelId: channelId,
+            channelId: loginType.channelId,
           );
           final dto = response.data;
           if (dto == null) {

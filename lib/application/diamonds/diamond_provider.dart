@@ -4,44 +4,44 @@ import 'package:time/time.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
-import '../../infrastructure/gacha/gacha_repository.dart';
+import '../../infrastructure/diamonds/diamond_repository.dart';
 import '../ak_login/ak_login_type_provider.dart';
 import '../user/user_provider.dart';
-import 'states/gacha_state.dart';
+import 'states/diamond_state.dart';
 
-final gachaProvider =
-    StateNotifierProvider.autoDispose<GachaNotifier, GachaState>(
-  (ref) => GachaNotifier(
+final diamondProvider =
+    StateNotifierProvider.autoDispose<DiamondNotifier, DiamondState>(
+  (ref) => DiamondNotifier(
     ref.watch(userProvider),
     ref.watch(akLoginTypeProvider),
-    ref.watch(gachaRepositoryProvider),
+    ref.watch(diamondRepositoryProvider),
   ),
   dependencies: [
     userProvider,
     akLoginTypeProvider,
-    gachaRepositoryProvider,
+    diamondRepositoryProvider,
   ],
 );
 
-class GachaNotifier extends StateNotifier<GachaState> {
-  GachaNotifier(
+class DiamondNotifier extends StateNotifier<DiamondState> {
+  DiamondNotifier(
     this._userOption,
     this._loginType,
     this._repository,
-  ) : super(const GachaState.fetching(current: 1)) {
+  ) : super(const DiamondState.fetching(current: 1)) {
     _userOption.fold(() {}, _fetchAndSave);
   }
 
   final Option<User> _userOption;
   final AkLoginType _loginType;
-  final GachaRepository _repository;
+  final DiamondRepository _repository;
 
   Future<void> _fetchAndSave(
     User user, {
     int page = 1,
     int? total,
   }) async {
-    state = GachaState.fetching(current: page, total: total);
+    state = DiamondState.fetching(current: page, total: total);
     await 500.milliseconds.delay;
     final failureOrPagination = await _repository.fetchAndSave(
       user.token,
@@ -50,10 +50,10 @@ class GachaNotifier extends StateNotifier<GachaState> {
       loginType: _loginType,
     );
     return failureOrPagination.fold(
-      (failure) => state = GachaState.failure(failure),
+      (failure) => state = DiamondState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {
-          state = const GachaState.success();
+          state = const DiamondState.success();
           return;
         }
 
