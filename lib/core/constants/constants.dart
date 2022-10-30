@@ -11,7 +11,7 @@ const prts = 'https://prts.wiki';
 
 const dbName = 'arknights_analysis.db';
 
-const dbVersion = 1;
+const dbVersion = 2;
 
 const asBaseUrl = 'https://as.hypergryph.com';
 

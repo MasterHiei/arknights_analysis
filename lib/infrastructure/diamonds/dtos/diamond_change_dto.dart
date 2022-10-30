@@ -20,7 +20,9 @@ class DiamondChangeDto with _$DiamondChangeDto {
 
   const DiamondChangeDto._();
 
-  DiamondChange toDomain({required Ts ts}) => DiamondChange(
+  DiamondChange toDomain({required String operation, required Ts ts}) =>
+      DiamondChange(
+        operation: operation,
         type: type,
         before: before,
         after: after,

@@ -26,7 +26,9 @@ class DiamondRecordDto with _$DiamondRecordDto {
   DiamondRecord toDomain() => DiamondRecord(
         ts: _ts,
         operation: operation,
-        changes: changes.map((change) => change.toDomain(ts: _ts)).toList(),
+        changes: changes
+            .map((change) => change.toDomain(operation: operation, ts: _ts))
+            .toList(),
         uid: Uid(uid),
       );
 

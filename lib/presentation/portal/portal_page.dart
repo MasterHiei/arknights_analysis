@@ -14,6 +14,7 @@ import '../../application/user/user_fetch_provider.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
+import '../diamond_history/diamond_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 import '../settings/settings_page.dart';
@@ -86,6 +87,11 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             icon: const Icon(FluentIcons.full_history),
             body: const GachaHistoryPage(),
             title: const Text('寻访记录'),
+          ),
+          PaneItem(
+            icon: const Icon(FluentIcons.diamond_user),
+            body: const DiamondHistoryPage(),
+            title: const Text('源石记录'),
           ),
         ],
         footerItems: [
