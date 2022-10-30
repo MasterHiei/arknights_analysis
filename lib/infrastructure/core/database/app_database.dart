@@ -16,11 +16,13 @@ const _tables = [
   Users,
   GachaPools,
   GachaRecords,
+  DiamondRecords,
 ];
 const _daos = [
   UsersDao,
   GachaPoolsDao,
   GachaRecordsDao,
+  DiamondRecordsDao,
 ];
 
 @DriftDatabase(tables: _tables, daos: _daos)
@@ -32,7 +34,12 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        onCreate: (Migrator migrator) => migrator.createAll(),
+        onCreate: (m) => m.createAll(),
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            await m.createTable(diamondRecords);
+          }
+        },
       );
 }
 
