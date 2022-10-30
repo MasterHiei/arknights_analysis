@@ -7,6 +7,7 @@ import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../infrastructure/core/mixins/debounce_mixin.dart';
+import '../../infrastructure/core/mixins/request_limit_mixin.dart';
 import '../../infrastructure/user/user_repository.dart';
 import '../../presentation/core/common/widgets/app_flush_bar.dart';
 import '../ak_login/ak_login_type_provider.dart';
@@ -29,7 +30,7 @@ final userFetchProvider =
 );
 
 class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
-    with DebounceMixin {
+    with DebounceMixin, RequestLimitMixin {
   UserFetchNotifier(
     this._tokenOption,
     this._loginTypeOption,
@@ -44,27 +45,20 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
   final StateController<Option<User>> _userProvider;
   final UserRepository _repository;
 
-  DateTime? _lastRequestDateTime;
-
   @override
   void dispose() {
     cancelDebounce();
     super.dispose();
   }
 
-  void refresh(BuildContext context) {
-    final limitedUntil = _lastRequestDateTime?.add(minRequestInterval);
-    final canRefresh = limitedUntil?.isBefore(DateTime.now()) ?? true;
-    if (canRefresh) {
-      debounce(_fetchAndUpdate);
-    } else {
-      AppFlushBar.show(
-        context,
-        message: '太快了吧！这还不到${minRequestInterval.inMinutes}分钟呢！',
-        severity: FlushBarSeverity.warning,
+  void refresh(BuildContext context) => requestWithLimit(
+        () => debounce(_fetchAndUpdate),
+        onFailure: () => AppFlushBar.show(
+          context,
+          message: '太快了吧！这还不到${minRequestInterval.inMinutes}分钟呢！',
+          severity: FlushBarSeverity.warning,
+        ),
       );
-    }
-  }
 
   Future<void> _fetchAndUpdate() async {
     _tokenOption.fold(
@@ -78,7 +72,10 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
         state = await AsyncValue.guard(
           () => failureOrSuccess.fold(
             (failure) => throw failure,
-            (_) => _get(token),
+            (_) {
+              notifyRequestComplete();
+              return _get(token);
+            },
           ),
         );
       },
@@ -89,10 +86,7 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
     final failureOrUser = await _repository.get(token);
     return failureOrUser.fold(
       (failure) => throw failure,
-      (user) {
-        _lastRequestDateTime = DateTime.now();
-        _userProvider.state = optionOf(user);
-      },
+      (user) => _userProvider.state = optionOf(user),
     );
   }
 }
