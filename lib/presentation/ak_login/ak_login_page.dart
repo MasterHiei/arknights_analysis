@@ -58,13 +58,13 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
   void _listenState(BuildContext context, WidgetRef ref) =>
       ref.listen<AkLoginState>(
         akLoginProvider,
-        (_, next) => next.maybeWhen(
+        (_, next) => next.maybeWhen<void>(
           failed: (failure) => AppFlushBar.show(
             context,
             message: failure.localizedMessage,
           ),
           loggedIn: () => ref.read(akLoginProvider.notifier).go(context),
-          orElse: () => null,
+          orElse: () {},
         ),
       );
 }

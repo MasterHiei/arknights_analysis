@@ -207,27 +207,25 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
   void _listenDownloadState() => ref.listen(
         downloadNewVersionProvider,
-        (_, next) {
-          next.maybeWhen(
-            beginDownload: () => AppFlushBar.show(
+        (_, next) => next.maybeWhen<void>(
+          beginDownload: () => AppFlushBar.show(
+            context,
+            message: '开始下载新版本。',
+          ),
+          success: (file) {
+            launchUrl(file.absolute.parent.uri);
+            AppFlushBar.show(
               context,
-              message: '开始下载新版本。',
-            ),
-            success: (file) {
-              launchUrl(file.absolute.parent.uri);
-              AppFlushBar.show(
-                context,
-                message: '新版本下载完成。',
-                severity: FlushBarSeverity.success,
-              );
-            },
-            failure: (failure) => AppFlushBar.show(
-              context,
-              message: failure.localizedMessage,
-            ),
-            orElse: () {},
-          );
-        },
+              message: '新版本下载完成。',
+              severity: FlushBarSeverity.success,
+            );
+          },
+          failure: (failure) => AppFlushBar.show(
+            context,
+            message: failure.localizedMessage,
+          ),
+          orElse: () {},
+        ),
       );
 
   void _listenLogoutState() {
