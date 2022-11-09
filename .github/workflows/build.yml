@@ -11,6 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  windows_sdk: 22621
   flutter_version: 3.3.7
   release_file_name: arknights-analysis
 
@@ -79,6 +80,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1.8
+        with:
+          sdk-version: ${{ env.windows_sdk }}
+
+      - name: Build windows SDK
+        shell: bash
+        run: |
+          cmake -DCMAKE_SYSTEM_VERSION=10.0.${{ env.windows_sdk }}.0
+          cmake --build .
+
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
@@ -142,5 +153,5 @@ jobs:
           allowUpdates: true
           artifacts: build/windows/runner/Release/${{ env.release_file_name }}-windwos.zip
           generateReleaseNotes: true
-          tag: "${{ env.tag_name }}"
+          tag: ${{ env.tag_name }}
           token: ${{ secrets.RELEASE_TOKEN }}
