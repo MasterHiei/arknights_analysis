@@ -129,7 +129,7 @@ jobs:
       - name: Build windows
         run: |
           flutter config --enable-windows-desktop
-          flutter build windows --release
+          flutter build windows --release -v
 
       - name: Archive release
         uses: thedoctor0/zip-release@main
