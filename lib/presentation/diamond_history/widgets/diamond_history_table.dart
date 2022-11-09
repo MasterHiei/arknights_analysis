@@ -97,7 +97,7 @@ class _DataTableSource extends material.DataTableSource {
       cells: [
         _buildTextCell('${index + 1}'),
         _buildTextCell(change.type),
-        _buildTextCell(change.description),
+        _buildTextCell(change.description, color: change.textColor),
         _buildTextCell(change.after.toString()),
         _buildTextCell(change.operation),
         _buildTextCell(change.ts.dateTime.yMMMdHmsString),
@@ -114,10 +114,14 @@ class _DataTableSource extends material.DataTableSource {
   @override
   int get selectedRowCount => 0;
 
-  material.DataCell _buildTextCell(String text) => material.DataCell(
+  material.DataCell _buildTextCell(
+    String text, {
+    Color? color,
+  }) =>
+      material.DataCell(
         DefaultTextStyle.merge(
           style: TextStyle(
-            color: Colors.grey[120],
+            color: color ?? Colors.grey[120],
             fontSize: 15.sp,
           ),
           child: Text(text),

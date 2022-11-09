@@ -103,10 +103,17 @@ class GachaExtraPanel extends ConsumerWidget {
   Widget _buildRefreshButton() {
     return Consumer(
       builder: (context, ref, _) {
-        return FilledButton(
-          onPressed: () =>
-              ref.read(userFetchProvider.notifier).refresh(context),
-          child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
+        final lastRefreshTime =
+            ref.watch(userFetchProvider.notifier).lastRequestDateTimeString;
+        final message =
+            lastRefreshTime == null ? null : '上次更新于: $lastRefreshTime';
+        return Tooltip(
+          message: message,
+          child: FilledButton(
+            onPressed: () =>
+                ref.read(userFetchProvider.notifier).refresh(context),
+            child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
+          ),
         );
       },
     );

@@ -5,6 +5,8 @@ import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
 import '../../application/ak_logout/states/ak_logout_state.dart';
+import '../../application/diamonds/diamond_provider.dart';
+import '../../application/diamonds/states/diamond_state.dart';
 import '../../application/gacha/gacha_provider.dart';
 import '../../application/gacha/states/gacha_state.dart';
 import '../../application/pane/pane_provider.dart';
@@ -69,6 +71,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   Widget build(BuildContext context) {
     _listenUserState();
     _listenGachaState();
+    _listenDiamondState();
     _listenVersionState();
     _listenDownloadState();
     _listenLogoutState();
@@ -164,6 +167,20 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           message: '数据已更新。',
           severity: FlushBarSeverity.success,
         ),
+        failure: (failure) => AppFlushBar.show(
+          context,
+          message: failure.localizedMessage,
+          severity: FlushBarSeverity.error,
+        ),
+        orElse: () {},
+      ),
+    );
+  }
+
+  void _listenDiamondState() {
+    ref.listen<DiamondState>(
+      diamondProvider,
+      (_, next) => next.maybeWhen<void>(
         failure: (failure) => AppFlushBar.show(
           context,
           message: failure.localizedMessage,
