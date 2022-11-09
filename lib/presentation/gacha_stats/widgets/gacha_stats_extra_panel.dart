@@ -3,27 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../application/gacha/gacha_history_persistence_provider.dart';
+import '../../../application/diamonds/diamond_history_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
-import '../../../application/gacha/states/gacha_history_persistence_state.dart';
+import '../../../application/persistence/persistence_provider.dart';
+import '../../../application/persistence/states/persistence_state.dart';
 import '../../../application/user/user_fetch_provider.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
-final _isProcessing = Provider.autoDispose(
-  (ref) {
-    final state = ref.watch(gachaHistoryPersistenceProvider);
-    return state.maybeMap(
-      processing: (_) => true,
-      orElse: () => false,
-    );
-  },
-  dependencies: [gachaHistoryPersistenceProvider],
-);
-
-class GachaExtraPanel extends ConsumerWidget {
-  const GachaExtraPanel({super.key});
+class GachaStatsExtraPanel extends ConsumerWidget {
+  const GachaStatsExtraPanel({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,11 +33,8 @@ class GachaExtraPanel extends ConsumerWidget {
   Widget _buildImportButton(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        final onPressed = ref.watch(_isProcessing)
-            ? null
-            : ref.read(gachaHistoryPersistenceProvider.notifier).import;
         return FilledButton(
-          onPressed: onPressed,
+          onPressed: ref.read(persistenceProvider.notifier).import,
           style: ButtonStyle(
             backgroundColor: ButtonState.resolveWith(
               (states) {
@@ -73,11 +60,8 @@ class GachaExtraPanel extends ConsumerWidget {
   Widget _buildExportButton(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        final onPressed = ref.watch(_isProcessing)
-            ? null
-            : ref.read(gachaHistoryPersistenceProvider.notifier).export;
         return FilledButton(
-          onPressed: onPressed,
+          onPressed: ref.read(persistenceProvider.notifier).export,
           style: ButtonStyle(
             backgroundColor: ButtonState.resolveWith(
               (states) {
@@ -120,8 +104,8 @@ class GachaExtraPanel extends ConsumerWidget {
   }
 
   void _listenPersistenceState(BuildContext context, WidgetRef ref) {
-    ref.listen<GachaHistoryPersistenceState>(
-      gachaHistoryPersistenceProvider,
+    ref.listen<PersistenceState>(
+      persistenceProvider,
       (_, next) {
         next.maybeWhen(
           processing: AppLoadingIndicator.show,
@@ -131,6 +115,7 @@ class GachaExtraPanel extends ConsumerWidget {
           importSuccess: (_) {
             ref.read(gachaPoolSelectorProvider.notifier).refresh();
             ref.read(gachaStatsProvider.notifier).refresh();
+            ref.invalidate(diamondHistoryProvider);
             return '导入成功。';
           },
           importFailure: (state) => state.failure.localizedMessage,

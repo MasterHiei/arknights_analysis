@@ -35,7 +35,7 @@ class GachaStatsPage extends ConsumerWidget {
           const Spacer(),
           const GachaPoolSelector(),
           SizedBox(width: 80.w),
-          const GachaExtraPanel(),
+          const GachaStatsExtraPanel(),
         ],
       );
 }
