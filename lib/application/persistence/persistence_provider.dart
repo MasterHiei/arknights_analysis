@@ -8,43 +8,54 @@ import '../../core/constants/constants.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/user/user.dart';
-import '../../infrastructure/gacha/gacha_repository.dart';
+import '../../infrastructure/core/mixins/debounce_mixin.dart';
+import '../../infrastructure/persistence/persistence_repository.dart';
 import '../user/user_provider.dart';
-import 'states/gacha_history_persistence_state.dart';
+import 'states/persistence_state.dart';
 
-final gachaHistoryPersistenceProvider = StateNotifierProvider.autoDispose<
-    GachaHistoryPersistenceNotifier, GachaHistoryPersistenceState>(
-  (ref) => GachaHistoryPersistenceNotifier(
+final persistenceProvider =
+    StateNotifierProvider.autoDispose<PersistenceNotifier, PersistenceState>(
+  (ref) => PersistenceNotifier(
     ref.watch(userProvider),
     ref.watch(filePickerProvider),
-    ref.watch(gachaRepositoryProvider),
+    ref.watch(persistenceRepositoryProvider),
   ),
   dependencies: [
     userProvider,
     filePickerProvider,
-    gachaRepositoryProvider,
+    persistenceRepositoryProvider,
   ],
 );
 
-class GachaHistoryPersistenceNotifier
-    extends StateNotifier<GachaHistoryPersistenceState> {
-  GachaHistoryPersistenceNotifier(
+class PersistenceNotifier extends StateNotifier<PersistenceState>
+    with DebounceMixin {
+  PersistenceNotifier(
     this._userOption,
     this._filePicker,
     this._repository,
-  ) : super(const GachaHistoryPersistenceState.init());
+  ) : super(const PersistenceState.idle());
 
   final FilePicker _filePicker;
   final Option<User> _userOption;
-  final GachaRepository _repository;
+  final PersistenceRepository _repository;
 
-  Future<void> export() async {
+  @override
+  void dispose() {
+    cancelDebounce();
+    super.dispose();
+  }
+
+  void export() => debounce(_export);
+
+  void import() => debounce(_import);
+
+  Future<void> _export() async {
     _userOption.fold(
       () {},
       (user) async {
         final uid = user.uid;
         final directory = await getApplicationDocumentsDirectory();
-        final fileName = '${uid.getOrCrash()}_$gachaHistoryExportFileName.json';
+        final fileName = '${uid.getOrCrash()}_$persistenceFileName';
         final path = await _filePicker.saveFile(
           fileName: fileName,
           initialDirectory: directory.path,
@@ -53,17 +64,17 @@ class GachaHistoryPersistenceNotifier
           return;
         }
 
-        state = const GachaHistoryPersistenceState.processing();
+        state = const PersistenceState.processing();
         final failureOrFile = await _repository.export(uid, path: path);
         state = failureOrFile.fold(
-          (failure) => GachaHistoryPersistenceState.exportFailure(failure),
-          (file) => GachaHistoryPersistenceState.exportSuccess(file),
+          (failure) => PersistenceState.exportFailure(failure),
+          (file) => PersistenceState.exportSuccess(file),
         );
       },
     );
   }
 
-  Future<void> import() async {
+  Future<void> _import() async {
     _userOption.fold(
       () {},
       (user) async {
@@ -78,18 +89,18 @@ class GachaHistoryPersistenceNotifier
           return;
         }
 
-        state = const GachaHistoryPersistenceState.processing();
+        state = const PersistenceState.processing();
 
         if (!path.endsWith('.json')) {
           const failure = AppFailure.localizedError('文件格式不正确。');
-          state = const GachaHistoryPersistenceState.exportFailure(failure);
+          state = const PersistenceState.exportFailure(failure);
           return;
         }
 
         final failureOrFile = await _repository.import(uid, path: path);
         state = failureOrFile.fold(
-          (failure) => GachaHistoryPersistenceState.importFailure(failure),
-          (file) => const GachaHistoryPersistenceState.importSuccess(),
+          (failure) => PersistenceState.importFailure(failure),
+          (file) => const PersistenceState.importSuccess(),
         );
       },
     );

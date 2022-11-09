@@ -17,6 +17,11 @@ class DiamondDto with _$DiamondDto {
 
   factory DiamondDto.fromJson(Json json) => _$DiamondDtoFromJson(json);
 
+  factory DiamondDto.fromRecords(List<DiamondRecordDto> records) => DiamondDto(
+        list: records,
+        pagination: PaginationDto.empty(),
+      );
+
   const DiamondDto._();
 
   Diamond toDomain() => Diamond(

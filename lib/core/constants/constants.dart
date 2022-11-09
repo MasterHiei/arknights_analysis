@@ -45,4 +45,4 @@ const debouceDuration = Duration(milliseconds: 300);
 
 const minRequestInterval = Duration(minutes: 1);
 
-const gachaHistoryExportFileName = 'arknights_gacha_data';
+const persistenceFileName = 'arknights_analysis_data.json';
