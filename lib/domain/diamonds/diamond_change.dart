@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../core/common/value_objects/ts.dart';
@@ -22,5 +23,15 @@ class DiamondChange with _$DiamondChange {
       return '+$diff';
     }
     return diff.toString();
+  }
+
+  Color? get textColor {
+    if (description.startsWith('+')) {
+      return Colors.successPrimaryColor;
+    }
+    if (description.startsWith('-')) {
+      return Colors.errorPrimaryColor;
+    }
+    return null;
   }
 }
