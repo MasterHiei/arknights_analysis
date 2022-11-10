@@ -84,6 +84,12 @@ jobs:
         with:
           sdk-version: ${{ env.windows_sdk }}
 
+      - name: Setup windows SDK
+        run: |
+          cd windows
+          cmake -DCMAKE_SYSTEM_VERSION=10.0.${{ env.windows_sdk }}.0
+          cd ..
+
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
