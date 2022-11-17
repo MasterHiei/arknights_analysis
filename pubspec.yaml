@@ -30,12 +30,12 @@ dependencies:
   flutter_screenutil: 5.6.0
   font_awesome_flutter: 10.2.1
   freezed_annotation: 2.2.0
-  go_router: 5.1.5
+  go_router: 5.1.9
   intl: 0.17.0
   json_annotation: 4.7.0
   logger: 1.1.0
   modal_bottom_sheet: 2.1.2
-  package_info_plus: 3.0.1
+  package_info_plus: 3.0.2
   path: 1.8.2
   path_provider: 2.0.11
   pretty_dio_logger: 1.2.0-beta-1
