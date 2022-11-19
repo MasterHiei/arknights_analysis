@@ -130,7 +130,7 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: '${{ env.release_file_name }}-windwos.zip'
+          filename: '${{ env.release_file_name }}-${{ env.tag_name }}-windwos.zip'
           directory: build/windows/runner/Release
 
       - name: Set tag name
