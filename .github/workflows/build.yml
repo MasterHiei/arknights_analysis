@@ -124,7 +124,7 @@ jobs:
       - name: Build windows
         run: |
           flutter config --enable-windows-desktop
-          flutter build windows --release -v
+          flutter build windows --release
 
       - name: Archive release
         uses: thedoctor0/zip-release@main
@@ -140,7 +140,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: build/windows/runner/Release/${{ env.release_file_name }}-windwos.zip
+          artifacts: build/windows/runner/Release/${{ env.release_file_name }}-${{ env.tag_name }}-windwos.zip
           generateReleaseNotes: true
           tag: ${{ env.tag_name }}
           token: ${{ secrets.RELEASE_TOKEN }}

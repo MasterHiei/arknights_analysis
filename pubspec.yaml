@@ -72,5 +72,6 @@ flutter:
           weight: 700
 
   assets:
+    - assets/dependencies/
     - assets/images/
     - assets/translations/

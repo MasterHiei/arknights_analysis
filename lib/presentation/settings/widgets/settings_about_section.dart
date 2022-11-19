@@ -64,7 +64,7 @@ class SettingsAboutSection extends StatelessWidget {
                   const TextSpan(
                     text:
                         '$appName 是一项非盈利的个人开源项目，专注于为各位博士提供方便快捷安全的游戏数据统计和查询服务。\n'
-                        '由于尚处于开发阶段，在您的使用途中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。\n',
+                        '由于尚处于开发阶段，在您的使用过程中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。\n',
                   ),
                   const TextSpan(text: '欢迎前往我们的'),
                   TextSpan(
