@@ -103,37 +103,36 @@ class GachaStatsExtraPanel extends ConsumerWidget {
     );
   }
 
-  void _listenPersistenceState(BuildContext context, WidgetRef ref) {
-    ref.listen<PersistenceState>(
-      persistenceProvider,
-      (_, next) {
-        next.maybeWhen(
-          processing: AppLoadingIndicator.show,
-          orElse: AppLoadingIndicator.dismiss,
-        );
-        final message = next.maybeMap(
-          importSuccess: (_) {
-            ref.read(gachaPoolSelectorProvider.notifier).refresh();
-            ref.read(gachaStatsProvider.notifier).refresh();
-            ref.invalidate(diamondHistoryProvider);
-            return '导入成功。';
-          },
-          importFailure: (state) => state.failure.localizedMessage,
-          exportSuccess: (state) {
-            launchUrl(state.file.absolute.parent.uri);
-            return '导出成功。';
-          },
-          exportFailure: (state) => state.failure.localizedMessage,
-          orElse: () {},
-        );
-        if (message != null) {
-          AppFlushBar.show(
-            context,
-            message: message,
-            severity: FlushBarSeverity.success,
+  void _listenPersistenceState(BuildContext context, WidgetRef ref) =>
+      ref.listen<PersistenceState>(
+        persistenceProvider,
+        (_, next) {
+          next.maybeWhen(
+            processing: AppLoadingIndicator.show,
+            orElse: AppLoadingIndicator.dismiss,
           );
-        }
-      },
-    );
-  }
+          final message = next.maybeMap(
+            importSuccess: (_) {
+              ref.read(gachaPoolSelectorProvider.notifier).refresh();
+              ref.read(gachaStatsProvider.notifier).refresh();
+              ref.invalidate(diamondHistoryProvider);
+              return '导入成功。';
+            },
+            importFailure: (state) => state.failure.localizedMessage,
+            exportSuccess: (state) {
+              launchUrl(state.file.absolute.parent.uri);
+              return '导出成功。';
+            },
+            exportFailure: (state) => state.failure.localizedMessage,
+            orElse: () {},
+          );
+          if (message != null) {
+            AppFlushBar.show(
+              context,
+              message: message,
+              severity: FlushBarSeverity.success,
+            );
+          }
+        },
+      );
 }
