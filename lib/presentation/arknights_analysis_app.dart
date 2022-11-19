@@ -21,7 +21,7 @@ class ArknightsAnalysisApp extends StatelessWidget {
         fallbackLocale: I18n.defaultLocal,
         child: const _MainApp(),
       ),
-      designSize: const Size(1920, 1080),
+      designSize: defaultWindowSize,
     );
   }
 }

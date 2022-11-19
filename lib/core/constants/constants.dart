@@ -1,4 +1,10 @@
+import 'package:flutter/material.dart';
+
 const appName = 'Arknights Analysis';
+
+const defaultWindowSize = Size(1920, 1080);
+
+const minWindowSize = Size(1280, 720);
 
 const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
 
