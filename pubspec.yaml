@@ -4,7 +4,7 @@ description: An application can help you collect game data more easily via
 
 publish_to: "none"
 
-version: 0.0.4+1
+version: 0.0.5+1
 
 environment:
   sdk: ">=2.18.1 <3.0.0"
