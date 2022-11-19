@@ -27,9 +27,9 @@
 
 - :white_check_mark: [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
 
-  应用每次启动时都会检测系统是否支持 `WebView2 Runtime` 组件。
+  应用每次启动时都会检测 `WebView2 Runtime` 组件是否可用。
 
-  如果并未检测到该组件，应用将会自动运行相应的安装程序，请耐心等待安装完成（如下图所示）。
+  如果您的系统不支持该组件，应用将会自动为您下载安装，请您耐心等待（如下图所示）。
 
   ![webview2_installer](https://user-images.githubusercontent.com/20240686/202844227-8d20f794-1e5d-4e7e-a44f-f0d620a28d36.png)
 
