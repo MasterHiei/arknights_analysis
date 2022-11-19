@@ -15,24 +15,55 @@
 </a>
 </p>
 
-An application can help you collect game data more easily via offcial api of HyperGryph.
+本应用是一项非盈利的个人开源项目，专注于为各位博士提供方便快捷安全的游戏数据统计和查询服务。
 
-## System Requirements
+由于尚处于开发阶段，在您的使用过程中不可避免地会出现一些问题，请您及时向我们反馈以便给您带来更好的使用体验。
 
-:white_check_mark: Windows 10 Version 1809 for x64
+## 系统需求
 
-:white_check_mark: [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+- :white_check_mark: Windows 10 Version 1809 for x64
 
-## Getting Started
+  请确保您的Windows系统为 `Windows 10 版本 1809` 或更高版本。
 
-### Installation
+- :white_check_mark: [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
 
-1. Download the latest release of `arknights-analysis-windwos.zip`.
+  应用每次启动时都会检测系统是否支持 `WebView2 Runtime` 组件。
 
-2. Open the zip file, then copy the contents to another folder that you create.
+  如果并未检测到该组件，应用将会自动运行相应的安装程序，请耐心等待安装完成（如下图所示）。
 
-3. Locate and double-click the `arknights_analysis.exe` file.
+  ![webview2_installer](https://user-images.githubusercontent.com/20240686/202844227-8d20f794-1e5d-4e7e-a44f-f0d620a28d36.png)
 
-### Uninstallation
+## 使用指南
 
-Locate and move the applicaion folder to trash.
+### 安装
+
+1. 访问 [最新下载页面](https://github.com/MasterHiei/arknights_analysis/releases/latest) 并直接点击 `arknights-analysis-[版本号]-windwos.zip` 下载。
+
+2. 将已下载的压缩包解压缩至任意文件夹内（如已存在旧版本，可以选择直接覆盖）。
+
+3. 双击运行 `arknights_analysis.exe` 文件。
+
+### 卸载
+
+1. 删除 `Arknights Analysis` 文件夹。
+
+2. （可选）删除 `C:\Users\USER_NAME\AppData\Roaming\club.kimomiya` 文件夹。
+
+## 基本功能
+
+### 卡池查询
+
+![gacha_stats](https://user-images.githubusercontent.com/20240686/202844998-cb5c28fc-fcde-4e1c-aa71-8870189c7dc8.png)
+
+![gacha_stats_2](https://user-images.githubusercontent.com/20240686/202845139-1eef841d-fad7-458f-88fd-42921d44a601.png)
+
+![gacha_history](https://user-images.githubusercontent.com/20240686/202845039-9390ed54-f664-49cb-9dc9-97fb4a3959d3.png)
+
+
+### 源石查询
+
+![diamond_history](https://user-images.githubusercontent.com/20240686/202845087-969ee0c8-7423-4480-aacc-8cc2836845bb.png)
+
+
+*更多功能正在开发中，敬请期待...*
+
