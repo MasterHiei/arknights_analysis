@@ -126,15 +126,15 @@ jobs:
           flutter config --enable-windows-desktop
           flutter build windows --release
 
+      - name: Set tag name
+        run: echo "tag_name=v$(cider version)" >> $env:GITHUB_ENV
+
       - name: Archive release
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
           filename: '${{ env.release_file_name }}-${{ env.tag_name }}-windwos.zip'
           directory: build/windows/runner/Release
-
-      - name: Set tag name
-        run: echo "tag_name=v$(cider version)" >> $env:GITHUB_ENV
 
       - name: Publish release
         uses: ncipollo/release-action@v1
