@@ -9,7 +9,7 @@ class DebounceMixin {
     if (_timer != null) {
       _timer?.cancel();
     }
-    _timer = Timer(debouceDuration, action);
+    _timer = Timer(Constants.debouceDuration, action);
   }
 
   void cancelDebounce() {

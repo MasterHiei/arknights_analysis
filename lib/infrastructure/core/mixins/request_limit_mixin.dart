@@ -9,7 +9,8 @@ class RequestLimitMixin {
     void Function() request, {
     void Function()? onFailure,
   }) {
-    final limitedUntil = _lastRequestDateTime?.add(minRequestInterval);
+    final limitedUntil =
+        _lastRequestDateTime?.add(Constants.minRequestInterval);
     final canRequest = limitedUntil?.isBefore(DateTime.now()) ?? true;
     if (canRequest) {
       request();

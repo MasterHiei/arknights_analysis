@@ -2,15 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:time/time.dart';
 
 import '../../core/exceptions/app_failure.dart';
-import '../../infrastructure/game_data/game_data_repository.dart';
 import '../../infrastructure/game_data_api/game_data_api_repository.dart';
+import '../../infrastructure/game_data_raw/game_data_raw_repository.dart';
 import 'states/gacha_pool_state.dart';
 
 final gachaPoolProvider =
     StateNotifierProvider.autoDispose<GachaPoolNotifier, GachaPoolState>(
   (ref) => GachaPoolNotifier(
     ref.watch(gameDataApiRepositoryProvider),
-    ref.watch(gameDataRepositoryProvider),
+    ref.watch(gameDataRawRepositoryProvider),
   ),
 );
 
@@ -23,7 +23,7 @@ class GachaPoolNotifier extends StateNotifier<GachaPoolState> {
   }
 
   final GameDataApiRepository _apiRepository;
-  final GameDataRepository _repository;
+  final GameDataRawRepository _repository;
 
   Future<DateTime?> _getLastUpdateDateTime() async {
     final failureOrDateTime =

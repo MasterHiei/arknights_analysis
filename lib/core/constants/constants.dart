@@ -1,54 +1,67 @@
 import 'package:flutter/material.dart';
 
-const appName = 'Arknights Analysis';
+abstract class Constants {
+  //* System Settings
+  static const appName = 'Arknights Analysis';
 
-const defaultWindowSize = Size(1920, 1080);
+  static const dbName = 'arknights_analysis.db';
 
-const minWindowSize = Size(1280, 720);
+  static const dbVersion = 2;
 
-const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
+  static const defaultWindowSize = Size(1920, 1080);
 
-const licenseUrl =
-    'https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md';
+  static const minWindowSize = Size(1280, 720);
 
-const gameDataResourceUrl = 'https://github.com/Kengxxiao/ArknightsGameData';
+  //* Runtime Settings
 
-const prts = 'https://prts.wiki';
+  static const pageSize = 10;
 
-const dbName = 'arknights_analysis.db';
+  static const debouceDuration = Duration(milliseconds: 300);
 
-const dbVersion = 2;
+  static const minRequestInterval = Duration(minutes: 1);
 
-const asBaseUrl = 'https://as.hypergryph.com';
+  static const persistenceFileName = 'arknights_analysis_data.json';
 
-const akBaseUrl = 'https://ak.hypergryph.com';
+  //* URLs
+  static const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
 
-const gameDataApiBaseUrl =
-    'https://api.github.com/repos/Kengxxiao/ArknightsGameData';
+  static const licenseUrl =
+      'https://github.com/MasterHiei/arknights_analysis/blob/master/LICENSE.md';
 
-const gameDataBaseUrl =
-    'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
+  static const gameDataRepoUrl =
+      'https://github.com/Kengxxiao/ArknightsGameData';
 
-const repoDataBaseUrl =
-    'https://api.github.com/repos/MasterHiei/arknights_analysis';
+  static const prts = 'https://prts.wiki';
 
-const akLoginPage = 'https://ak.hypergryph.com/user/login';
+  static const charAvatarBaseUrl =
+      'https://web.hycdn.cn/arknights/is/assets/img/static/avatars';
 
-const akHomePageOfficial = 'https://ak.hypergryph.com/user/home';
+  static const asBaseUrl = 'https://as.hypergryph.com';
 
-const akHomePageBilibili = 'https://ak.hypergryph.com/user/bilibili/home';
+  static const akBaseUrl = 'https://ak.hypergryph.com';
 
-const akHomePageBilibiliRedirect =
-    'https://ak.hypergryph.com/user/bilibili/home?auth=bilibili';
+  static const gameDataApiBaseUrl =
+      'https://api.github.com/repos/Kengxxiao/ArknightsGameData';
 
-const asGetTokenOfficial = 'https://web-api.hypergryph.com/account/info/hg';
+  static const gameDataRawBaseUrl =
+      'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
 
-const asGetTokenBilibili = 'https://web-api.hypergryph.com/account/info/ak-b';
+  static const repoDataApiBaseUrl =
+      'https://api.github.com/repos/MasterHiei/arknights_analysis';
 
-const pageSize = 10;
+  static const akLoginPage = 'https://ak.hypergryph.com/user/login';
 
-const debouceDuration = Duration(milliseconds: 300);
+  static const akHomePageOfficial = 'https://ak.hypergryph.com/user/home';
 
-const minRequestInterval = Duration(minutes: 1);
+  static const akHomePageBilibili =
+      'https://ak.hypergryph.com/user/bilibili/home';
 
-const persistenceFileName = 'arknights_analysis_data.json';
+  static const akHomePageBilibiliRedirect =
+      'https://ak.hypergryph.com/user/bilibili/home?auth=bilibili';
+
+  static const asGetTokenOfficial =
+      'https://web-api.hypergryph.com/account/info/hg';
+
+  static const asGetTokenBilibili =
+      'https://web-api.hypergryph.com/account/info/ak-b';
+}

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-import '../../../game_data/dtos/gacha_table_dto.dart';
+import '../../../game_data_raw/dtos/gacha_table_dto.dart';
 import '../app_database.dart';
 import '../tables/gacha_pools.dart';
 
@@ -10,13 +10,6 @@ part 'gacha_pools_dao.g.dart';
 class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaPoolsDaoMixin {
   GachaPoolsDao(super.db);
-
-  Future<int> count() async {
-    final countColumn = countAll();
-    final query = selectOnly(gachaPools)..addColumns([countColumn]);
-    final result = await query.getSingle();
-    return result.read(countColumn) ?? 0;
-  }
 
   Future<List<int>> replaceInto(GachaTableDto gachaTable) async {
     final futures = gachaTable.gachaPoolClient.map((pool) {

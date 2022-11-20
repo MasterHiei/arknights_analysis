@@ -66,9 +66,9 @@ class DiamondHistoryTable extends StatelessWidget {
                 showCheckboxColumn: false,
                 showFirstLastButtons: true,
                 availableRowsPerPage: const [
-                  pageSize,
-                  pageSize * 2,
-                  pageSize * 5,
+                  Constants.pageSize,
+                  Constants.pageSize * 2,
+                  Constants.pageSize * 5,
                 ],
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,

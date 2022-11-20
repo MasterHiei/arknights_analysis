@@ -69,9 +69,9 @@ class GachaHistoryPage extends StatelessWidget {
                 showCheckboxColumn: false,
                 showFirstLastButtons: true,
                 availableRowsPerPage: const [
-                  pageSize,
-                  pageSize * 2,
-                  pageSize * 5,
+                  Constants.pageSize,
+                  Constants.pageSize * 2,
+                  Constants.pageSize * 5,
                 ],
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
@@ -127,7 +127,7 @@ class _DataTableSource extends material.DataTableSource {
       onTap: () => Routes.webview.push(
         context,
         extra: WebviewParams(
-          initialUrl: '$prts/w/${char.encodeName}',
+          initialUrl: '${Constants.prts}/w/${char.encodeName}',
         ),
       ),
     );

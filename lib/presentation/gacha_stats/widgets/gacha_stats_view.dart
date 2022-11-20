@@ -408,7 +408,8 @@ class _PieChart extends StatelessWidget {
                       ..onTap = () => Routes.webview.push(
                             context,
                             extra: WebviewParams(
-                              initialUrl: '$prts/w/${char.encodeName}',
+                              initialUrl:
+                                  '${Constants.prts}/w/${char.encodeName}',
                             ),
                           ),
                   ),
