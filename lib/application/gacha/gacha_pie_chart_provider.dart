@@ -3,15 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/rarity.dart';
 
-final gachaPieChartProvider = ChangeNotifierProvider.autoDispose.family(
-  (_, String title) => GachaPieChartNotifier(title),
+final gachaPieChartProvider = ChangeNotifierProvider.autoDispose(
+  (_) => GachaPieChartNotifier(),
 );
 
 class GachaPieChartNotifier extends ChangeNotifier {
-  GachaPieChartNotifier(this.title);
-
-  final String title;
-
   Rarity? _touchedRarity;
 
   void touch(Rarity? rarity) {

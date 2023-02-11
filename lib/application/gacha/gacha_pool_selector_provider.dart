@@ -18,6 +18,10 @@ final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
   ],
 );
 
+final selectedGachaPoolProvider = Provider.autoDispose(
+  (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
+);
+
 class GachaPoolSelectorNotifier extends ChangeNotifier {
   GachaPoolSelectorNotifier(this._userOption, this._repository) {
     _get();

@@ -5,38 +5,56 @@ import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
 import '../user/user_provider.dart';
+import 'gacha_pool_selector_provider.dart';
 import 'params/get_gacha_stats_params.dart';
 
 final gachaStatsProvider = StateNotifierProvider.autoDispose<GachaStatsNotifier,
     AsyncValue<GachaStats>>(
   (ref) => GachaStatsNotifier(
-    ref.watch(userProvider.notifier),
+    ref.watch(userProvider),
+    ref.watch(selectedGachaPoolProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [gachaRepositoryProvider],
+  dependencies: [
+    userProvider,
+    selectedGachaPoolProvider,
+    gachaRepositoryProvider,
+  ],
 );
 
 class GachaStatsNotifier extends StateNotifier<AsyncValue<GachaStats>> {
   GachaStatsNotifier(
-    this._userProvider,
+    this._userOption,
+    this._selectedPool,
     this._repository,
-  ) : super(const AsyncValue.loading());
+  ) : super(const AsyncValue.loading()) {
+    _get();
+  }
 
-  final StateController<Option<User>> _userProvider;
+  final Option<User> _userOption;
+  final String? _selectedPool;
   final GachaRepository _repository;
 
-  late GetGachaStatsParams _cachedParams;
+  late GetGachaStatsParams _params;
 
-  Future<void> get(GetGachaStatsParams params) async {
-    _userProvider.state.fold(
+  Future<void> _get() async {
+    final pool = _selectedPool;
+    if (pool == null) {
+      // 标准寻访
+      _params = GetGachaStatsParams.normal();
+    } else {
+      // 指定寻访
+      _params = GetGachaStatsParams.pool(pool);
+    }
+    _userOption.fold(
       () {},
       (user) async {
         state = const AsyncValue.loading();
         final failureOrStats = await _repository.getStats(
           user.uid,
-          pool: params.pool,
-          includeRuleTypes: params.includeRuleTypes,
-          excludeRuleTypes: params.excludeRuleTypes,
+          pool: _params.pool,
+          includeRuleTypes: _params.includeRuleTypes,
+          excludeRuleTypes: _params.excludeRuleTypes,
         );
         state = await AsyncValue.guard(
           () async => failureOrStats.fold(
@@ -44,10 +62,9 @@ class GachaStatsNotifier extends StateNotifier<AsyncValue<GachaStats>> {
             (stats) => stats,
           ),
         );
-        _cachedParams = params;
       },
     );
   }
 
-  Future<void> refresh() => get(_cachedParams);
+  Future<void> refresh() => _get();
 }

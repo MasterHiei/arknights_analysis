@@ -13,7 +13,6 @@ import '../../../application/gacha/gacha_pie_chart_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
-import '../../../application/gacha/params/get_gacha_stats_params.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
@@ -23,10 +22,6 @@ import '../../core/common/widgets/app_empty_view.dart';
 import '../../core/common/widgets/app_error_view.dart';
 import '../../core/routing/route_params.dart';
 import '../../core/routing/router.dart';
-
-final _selectedPool = Provider.autoDispose(
-  (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
-);
 
 class GachaStatsView extends ConsumerWidget {
   const GachaStatsView({super.key});
@@ -68,62 +63,23 @@ class GachaStatsView extends ConsumerWidget {
       );
 }
 
-class _StatsView extends ConsumerStatefulWidget {
+class _StatsView extends ConsumerWidget {
   const _StatsView();
 
   @override
-  ConsumerState<_StatsView> createState() => _StatsViewState();
-}
-
-class _StatsViewState extends ConsumerState<_StatsView> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, _fetch);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    _listenState();
-
-    final pool = ref.watch(_selectedPool);
+  Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(gachaStatsProvider).when(
-          data: (stats) => _PieChart(pool, stats),
+          data: (stats) => _PieChart(stats),
           error: (_, __) => const AppErrorView(),
           loading: () => const SizedBox.shrink(),
         );
   }
-
-  void _fetch({String? pool}) {
-    late final GetGachaStatsParams params;
-    if (pool == null) {
-      // 标准寻访
-      params = GetGachaStatsParams.normal();
-    } else {
-      // 指定寻访
-      params = GetGachaStatsParams.pool(pool);
-    }
-    ref.read(gachaStatsProvider.notifier).get(params);
-  }
-
-  void _listenState() {
-    ref.listen(
-      _selectedPool,
-      (_, pool) => _fetch(pool: pool),
-    );
-  }
 }
 
 class _PieChart extends StatelessWidget {
-  const _PieChart(this.pool, this.stats);
+  const _PieChart(this.stats);
 
-  final String? pool;
   final GachaStats stats;
-
-  String get title => pool ?? '标准寻访';
-
-  AutoDisposeChangeNotifierProvider<GachaPieChartNotifier>
-      get _gachaPieChartProvider => gachaPieChartProvider(title);
 
   @override
   Widget build(BuildContext context) {
@@ -153,13 +109,18 @@ class _PieChart extends StatelessWidget {
     );
   }
 
-  Widget get _titleLabel => Text(
-        title,
-        style: TextStyle(
-          color: Colors.grey[150],
-          fontSize: 22.sp,
-          fontWeight: FontWeight.bold,
-        ),
+  Widget get _titleLabel => Consumer(
+        builder: (_, ref, __) {
+          final selectedPool = ref.watch(selectedGachaPoolProvider);
+          return Text(
+            selectedPool ?? '标准寻访',
+            style: TextStyle(
+              color: Colors.grey[150],
+              fontSize: 22.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        },
       );
 
   Widget get _indicators {
@@ -170,7 +131,7 @@ class _PieChart extends StatelessWidget {
           final indicator = Consumer(
             builder: (_, ref, __) {
               final isTouched =
-                  ref.watch(_gachaPieChartProvider).isTouched(rarity);
+                  ref.watch(gachaPieChartProvider).isTouched(rarity);
               final alpha = isTouched ? 180 : 255;
               return Container(
                 width: indicatorSize.width,
@@ -193,8 +154,8 @@ class _PieChart extends StatelessWidget {
           );
           final divider = SizedBox(width: 12.w);
           return MouseRegion(
-            onEnter: (_) => ref.read(_gachaPieChartProvider).touch(rarity),
-            onExit: (_) => ref.read(_gachaPieChartProvider).touch(null),
+            onEnter: (_) => ref.read(gachaPieChartProvider).touch(rarity),
+            onExit: (_) => ref.read(gachaPieChartProvider).touch(null),
             child: Row(
               children: [
                 indicator,
@@ -225,7 +186,7 @@ class _PieChart extends StatelessWidget {
             final rarity = pair.first;
             final stats = pair.second;
             final isTouched =
-                ref.watch(_gachaPieChartProvider).isTouched(rarity);
+                ref.watch(gachaPieChartProvider).isTouched(rarity);
             final radius = isTouched ? 130.w : 120.w;
             final fontSize = isTouched ? 14.sp : 12.sp;
             return PieChartSectionData(
@@ -345,12 +306,12 @@ class _PieChart extends StatelessWidget {
     final isInterestedForInteractions = event.isInterestedForInteractions;
     final touchedSection = response?.touchedSection;
     if (!isInterestedForInteractions || touchedSection == null) {
-      ref.read(_gachaPieChartProvider).touch(null);
+      ref.read(gachaPieChartProvider).touch(null);
       return;
     }
     final index = touchedSection.touchedSectionIndex;
     final rarity = sources.elementAtOrNull(index)?.first;
-    ref.read(_gachaPieChartProvider).touch(rarity);
+    ref.read(gachaPieChartProvider).touch(rarity);
 
     //* Tap
     if (event is FlTapUpEvent && rarity != null) {

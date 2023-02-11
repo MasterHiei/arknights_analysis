@@ -16,7 +16,7 @@ class AppTheme {
 
   static const _fontFamily = 'SourceHanSC';
 
-  static final _themeData = ThemeData(
+  static final _themeData = FluentThemeData(
     fontFamily: _fontFamily,
   );
 }

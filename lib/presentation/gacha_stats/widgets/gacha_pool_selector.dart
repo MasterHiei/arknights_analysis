@@ -29,14 +29,6 @@ class GachaPoolSelector extends ConsumerWidget {
         provider.selectedPool ?? '标准寻访',
         style: TextStyle(fontSize: 16.sp),
       ),
-      buttonStyle: ButtonStyle(
-        padding: ButtonState.resolveWith(
-          (_) => const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 12,
-          ),
-        ),
-      ),
     );
   }
 }

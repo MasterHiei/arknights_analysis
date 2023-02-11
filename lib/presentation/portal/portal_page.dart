@@ -7,6 +7,7 @@ import '../../application/ak_logout/ak_logout_provider.dart';
 import '../../application/ak_logout/states/ak_logout_state.dart';
 import '../../application/diamonds/diamond_provider.dart';
 import '../../application/diamonds/states/diamond_state.dart';
+import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
 import '../../application/gacha/states/gacha_state.dart';
 import '../../application/pane/pane_provider.dart';
@@ -70,7 +71,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     _listenUserState();
-    _listenGachaState();
+    _listenGachaStates();
     _listenDiamondState();
     _listenVersionState();
     _listenDownloadState();
@@ -157,22 +158,25 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         ),
       );
 
-  void _listenGachaState() => ref.listen<GachaState>(
-        gachaProvider,
-        (_, next) => next.maybeWhen<void>(
-          success: () => AppFlushBar.show(
-            context,
-            message: '数据已更新。',
-            severity: FlushBarSeverity.success,
-          ),
-          failure: (failure) => AppFlushBar.show(
-            context,
-            message: failure.localizedMessage,
-            severity: FlushBarSeverity.error,
-          ),
-          orElse: () {},
+  void _listenGachaStates() {
+    ref.listen(gachaPoolSelectorProvider, (_, __) {});
+    ref.listen<GachaState>(
+      gachaProvider,
+      (_, next) => next.maybeWhen<void>(
+        success: () => AppFlushBar.show(
+          context,
+          message: '数据已更新。',
+          severity: FlushBarSeverity.success,
         ),
-      );
+        failure: (failure) => AppFlushBar.show(
+          context,
+          message: failure.localizedMessage,
+          severity: FlushBarSeverity.error,
+        ),
+        orElse: () {},
+      ),
+    );
+  }
 
   void _listenDiamondState() => ref.listen<DiamondState>(
         diamondProvider,
