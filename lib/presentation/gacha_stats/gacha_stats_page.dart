@@ -31,7 +31,6 @@ class GachaStatsPage extends ConsumerWidget {
 
   Widget get _header => Row(
         children: [
-          const UserInfoView(),
           const Spacer(),
           const GachaPoolSelector(),
           SizedBox(width: 80.w),

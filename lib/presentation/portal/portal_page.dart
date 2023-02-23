@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -10,7 +11,7 @@ import '../../application/diamonds/states/diamond_state.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
 import '../../application/gacha/states/gacha_state.dart';
-import '../../application/pane/pane_provider.dart';
+import '../../application/portal/pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
 import '../../application/user/user_fetch_provider.dart';
@@ -21,6 +22,11 @@ import '../diamond_history/diamond_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 import '../settings/settings_page.dart';
+import 'widgets/index.dart';
+
+final _selectedPaneIndex = Provider.autoDispose(
+  (ref) => ref.watch(paneProvider).selectedIndex,
+);
 
 final _hasNewVersion = Provider.autoDispose(
   (ref) => ref.watch(checkForUpdatesProvider).hasNewVersion,
@@ -79,21 +85,22 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
     return NavigationView(
       pane: NavigationPane(
-        selected: ref.watch(paneProvider).selectedIndex,
+        selected: ref.watch(_selectedPaneIndex),
         onChanged: ref.read(paneProvider.notifier).select,
+        header: const PaneHeaderView(),
         items: [
           PaneItem(
-            icon: const Icon(FluentIcons.chart),
+            icon: const Icon(FontAwesomeIcons.chartLine),
             body: const GachaStatsPage(),
             title: const Text('寻访统计'),
           ),
           PaneItem(
-            icon: const Icon(FluentIcons.full_history),
+            icon: const Icon(FontAwesomeIcons.listUl),
             body: const GachaHistoryPage(),
             title: const Text('寻访记录'),
           ),
           PaneItem(
-            icon: const Icon(FluentIcons.diamond_user),
+            icon: const Icon(FontAwesomeIcons.gem),
             body: const DiamondHistoryPage(),
             title: const Text('源石记录'),
           ),
