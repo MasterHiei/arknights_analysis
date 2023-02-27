@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-abstract class Constants {
+class Constants {
+  const Constants._();
+
   //* System Settings
   static const appName = 'Arknights Analysis';
 
