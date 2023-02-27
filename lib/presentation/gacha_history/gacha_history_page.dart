@@ -126,9 +126,7 @@ class _DataTableSource extends material.DataTableSource {
       ],
       onTap: () => Routes.webview.push(
         context,
-        extra: WebviewParams(
-          initialUrl: '${Constants.prts}/w/${char.encodeName}',
-        ),
+        extra: WebviewParams(initialUrl: char.prtsUrl),
       ),
     );
   }

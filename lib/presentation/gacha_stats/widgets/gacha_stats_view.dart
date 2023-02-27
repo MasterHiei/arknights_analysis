@@ -13,7 +13,6 @@ import '../../../application/gacha/gacha_pie_chart_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
-import '../../../core/constants/constants.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
@@ -368,10 +367,7 @@ class _PieChart extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () => Routes.webview.push(
                             context,
-                            extra: WebviewParams(
-                              initialUrl:
-                                  '${Constants.prts}/w/${char.encodeName}',
-                            ),
+                            extra: WebviewParams(initialUrl: char.prtsUrl),
                           ),
                   ),
                   style: DefaultTextStyle.of(context).style.copyWith(
