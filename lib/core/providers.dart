@@ -14,7 +14,6 @@ final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
-      contentType: Headers.jsonContentType,
       validateStatus: (code) => code != null && 200 <= code && code < 400,
     ),
   );
