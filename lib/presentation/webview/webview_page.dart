@@ -6,6 +6,7 @@ import 'package:webview_windows/webview_windows.dart';
 
 import '../../application/webview/webview_provider.dart';
 import '../core/routing/route_params.dart';
+import '../core/routing/router.dart';
 
 class WebviewPage extends ConsumerWidget {
   const WebviewPage(this.params, {super.key});
@@ -82,7 +83,7 @@ class _NavigationBar extends StatelessWidget {
             _NavigationBarItem(
               tooltip: '关闭页面',
               icon: FluentIcons.chrome_close,
-              onPressed: () => Navigator.pop(context),
+              onPressed: router.pop,
             ),
           ],
         ),

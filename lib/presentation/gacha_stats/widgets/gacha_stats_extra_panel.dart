@@ -9,6 +9,7 @@ import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
 import '../../../application/persistence/states/persistence_state.dart';
 import '../../../application/user/user_fetch_provider.dart';
+import '../../../core/enums/gacha_data_management_type.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
@@ -23,76 +24,18 @@ class GachaStatsExtraPanel extends ConsumerWidget {
       children: [
         _buildRefreshButton(),
         SizedBox(width: 16.w),
-        _buildImportButton(context),
-        SizedBox(width: 16.w),
-        _buildExportButton(context),
+        const _DataManagementMenuFlyout(),
       ],
-    );
-  }
-
-  Widget _buildImportButton(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, __) {
-        return FilledButton(
-          onPressed: ref.read(persistenceProvider.notifier).import,
-          style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
-              (states) {
-                if (states.isNone) {
-                  return Colors.green.normal;
-                }
-                if (states.isPressing) {
-                  return Colors.green.lighter;
-                }
-                if (states.isHovering) {
-                  return Colors.green.light;
-                }
-                return null;
-              },
-            ),
-          ),
-          child: Text('导入', style: TextStyle(fontSize: 16.sp)),
-        );
-      },
-    );
-  }
-
-  Widget _buildExportButton(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, __) {
-        return FilledButton(
-          onPressed: ref.read(persistenceProvider.notifier).export,
-          style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
-              (states) {
-                if (states.isNone) {
-                  return Colors.green.normal;
-                }
-                if (states.isPressing) {
-                  return Colors.green.lighter;
-                }
-                if (states.isHovering) {
-                  return Colors.green.light;
-                }
-                return null;
-              },
-            ),
-          ),
-          child: Text('导出', style: TextStyle(fontSize: 16.sp)),
-        );
-      },
     );
   }
 
   Widget _buildRefreshButton() {
     return Consumer(
       builder: (context, ref, _) {
-        final lastRefreshTime =
+        final lastFetchTime =
             ref.watch(userFetchProvider.notifier).lastRequestDateTimeString;
-        final message =
-            lastRefreshTime == null ? null : '上次更新于: $lastRefreshTime';
         return Tooltip(
-          message: message,
+          message: lastFetchTime == null ? null : '上次更新于: $lastFetchTime',
           child: FilledButton(
             onPressed: () =>
                 ref.read(userFetchProvider.notifier).refresh(context),
@@ -135,4 +78,50 @@ class GachaStatsExtraPanel extends ConsumerWidget {
           }
         },
       );
+}
+
+class _DataManagementMenuFlyout extends ConsumerStatefulWidget {
+  const _DataManagementMenuFlyout();
+
+  @override
+  ConsumerState<_DataManagementMenuFlyout> createState() =>
+      _DataManagementMenuFlyoutState();
+}
+
+class _DataManagementMenuFlyoutState
+    extends ConsumerState<_DataManagementMenuFlyout> {
+  final _controller = FlyoutController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FlyoutTarget(
+      controller: _controller,
+      child: FilledButton(
+        onPressed: () => _controller.showFlyout<void>(
+          builder: (_) {
+            return MenuFlyout(
+              items: GachaDataManagementType.values
+                  .map(
+                    (item) => MenuFlyoutItem(
+                      text: Text(item.label),
+                      onPressed: () => item.onPressed(ref),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+          autoModeConfiguration: FlyoutAutoConfiguration(
+            preferredMode: FlyoutPlacementMode.bottomCenter,
+          ),
+        ),
+        child: Text('数据管理', style: TextStyle(fontSize: 16.sp)),
+      ),
+    );
+  }
 }

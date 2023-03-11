@@ -15,9 +15,12 @@ class GachaStatsPage extends ConsumerWidget {
           data: (_) => Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Text('寻访统计', style: TextStyle(fontSize: 24.sp)),
+                SizedBox(height: 20.h),
                 _header,
-                SizedBox(height: 48.h),
+                SizedBox(height: 20.h),
                 const Expanded(child: GachaStatsView()),
               ],
             ),
@@ -30,8 +33,8 @@ class GachaStatsPage extends ConsumerWidget {
   }
 
   Widget get _header => Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Spacer(),
           const GachaPoolSelector(),
           SizedBox(width: 80.w),
           const GachaStatsExtraPanel(),

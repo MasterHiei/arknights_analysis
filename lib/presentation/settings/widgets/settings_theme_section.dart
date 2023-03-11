@@ -57,7 +57,7 @@ class SettingsThemeSection extends StatelessWidget {
                       '简体中文',
                       style: DefaultTextStyle.of(context).style,
                     ),
-                    onPressed: () {},
+                    onPressed: null,
                   ),
                 ],
                 title: const Text('简体中文'),

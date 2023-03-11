@@ -18,6 +18,7 @@ import '../../application/user/user_fetch_provider.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
+import '../core/routing/router.dart';
 import '../diamond_history/diamond_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
@@ -217,7 +218,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
               context,
               browserDownloadUrl: ref.read(_browserDownloadUrl),
               onDownloadButtonTap: () {
-                Navigator.pop(context);
+                router.pop();
                 ref.read(downloadNewVersionProvider.notifier).download(
                       ref.read(_browserDownloadUrl),
                       fileName: ref.read(_assetName),

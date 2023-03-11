@@ -3,6 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../routing/router.dart';
+
 class AppDialog extends StatelessWidget {
   const AppDialog({
     super.key,
@@ -104,7 +106,7 @@ class AppDialog extends StatelessWidget {
           onConfirmButtonTap: onConfirmButtonTap,
           closeButtonText: closeButtonText ?? '取消',
           closeButtonColor: closeButtonColor ?? Colors.grey[80],
-          onCloseButtonTap: onCloseButtonTap ?? () => Navigator.pop(context),
+          onCloseButtonTap: onCloseButtonTap ?? router.pop,
         ),
       );
 
