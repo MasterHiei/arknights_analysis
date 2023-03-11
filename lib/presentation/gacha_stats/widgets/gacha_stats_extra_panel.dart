@@ -10,6 +10,7 @@ import '../../../application/persistence/persistence_provider.dart';
 import '../../../application/persistence/states/persistence_state.dart';
 import '../../../application/user/user_fetch_provider.dart';
 import '../../../core/enums/gacha_data_management_type.dart';
+import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
@@ -22,26 +23,39 @@ class GachaStatsExtraPanel extends ConsumerWidget {
 
     return Row(
       children: [
-        _buildRefreshButton(),
+        _buildRefreshButton(context),
         SizedBox(width: 16.w),
         const _DataManagementMenuFlyout(),
       ],
     );
   }
 
-  Widget _buildRefreshButton() {
+  Widget _buildRefreshButton(BuildContext context) {
     return Consumer(
-      builder: (context, ref, _) {
-        final lastFetchTime =
-            ref.watch(userFetchProvider.notifier).lastRequestDateTimeString;
-        return Tooltip(
-          message: lastFetchTime == null ? null : '上次更新于: $lastFetchTime',
-          child: FilledButton(
-            onPressed: () =>
-                ref.read(userFetchProvider.notifier).refresh(context),
-            child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
-          ),
+      builder: (_, ref, __) {
+        final button = FilledButton(
+          onPressed: () =>
+              ref.read(userFetchProvider.notifier).refresh(context),
+          child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
         );
+        return ref.watch(userFetchProvider).maybeWhen(
+              data: (_) {
+                final lastFetchTime = ref
+                    .read(userFetchProvider.notifier)
+                    .lastRequestDateTime!
+                    .yMMMdHmsString;
+                return Tooltip(
+                  message: '上次更新于: $lastFetchTime',
+                  useMousePosition: false,
+                  child: FilledButton(
+                    onPressed: () =>
+                        ref.read(userFetchProvider.notifier).refresh(context),
+                    child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
+                  ),
+                );
+              },
+              orElse: () => button,
+            );
       },
     );
   }

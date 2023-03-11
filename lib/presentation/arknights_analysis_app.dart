@@ -41,7 +41,7 @@ class _MainApp extends StatelessWidget {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
-      builder: (context, child) {
+      builder: (_, child) {
         child = virtualWindowFrameBuilder(context, child);
         child = botToastBuilder(context, child);
         return child;
