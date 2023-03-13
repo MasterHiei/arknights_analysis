@@ -16,7 +16,7 @@ final gachaLocalDataSourceProvider = Provider.autoDispose<GachaLocalDataSource>(
 abstract class GachaLocalDataSource {
   Future<List<int>> save(GachaDto dto);
 
-  Future<List<String>> getPools({
+  Future<List<String>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
@@ -50,12 +50,12 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
       _db.gachaRecordsDao.replaceInto(gacha);
 
   @override
-  Future<List<String>> getPools({
+  Future<List<String>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
-      _db.gachaRecordsDao.getPools(
+      _db.gachaPoolsDao.getRecorded(
         uid: uid,
         includeRuleTypes: includeRuleTypes,
         excludeRuleTypes: excludeRuleTypes,

@@ -194,7 +194,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
                 .read(gachaHistoryFilterProvider.notifier)
                 .onRarityChanged(rarity, checked: checked),
             content: Text(
-              rarity.title,
+              rarity.label,
               style: TextStyle(fontSize: 15.sp),
             ),
           );

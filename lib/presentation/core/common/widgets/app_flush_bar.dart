@@ -30,10 +30,10 @@ class AppFlushBar {
     final flushBar = Flushbar<void>(
       messageText: SelectableText(
         message,
-        style: TextStyle(
-          fontSize: 16.sp,
-          overflow: TextOverflow.ellipsis,
-        ),
+        style: DefaultTextStyle.of(context).style.copyWith(
+              fontSize: 16.sp,
+              overflow: TextOverflow.ellipsis,
+            ),
       ),
       icon: Icon(severity.icon, size: 24.w, color: severity.color),
       shouldIconPulse: false,

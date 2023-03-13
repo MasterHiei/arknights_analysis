@@ -33,7 +33,7 @@ abstract class GachaRepository {
     required AkLoginType loginType,
   });
 
-  Future<Either<AppFailure, List<String>>> getPools({
+  Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
@@ -96,13 +96,13 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<String>>> getPools({
+  Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
       execute(
-        () => _localDataSource.getPools(
+        () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
@@ -119,11 +119,10 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       execute(
         () async {
           final showAllPools = pool == null;
-          final pools = showAllPools ? <String>[] : [pool];
           final dtos = await _localDataSource.getRecords(
             uid,
             showAllPools: showAllPools,
-            pools: pools,
+            pools: showAllPools ? [] : [pool],
             includeRuleTypes: includeRuleTypes,
             excludeRuleTypes: excludeRuleTypes,
           );

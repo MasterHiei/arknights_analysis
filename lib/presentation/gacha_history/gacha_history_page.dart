@@ -120,7 +120,7 @@ class _DataTableSource extends DataTableSource {
             ),
           ),
         ),
-        _buildTextCell(char.rarity.title),
+        _buildTextCell(char.rarity.label),
         _buildTextCell(char.pool),
         _buildTextCell(char.ts.dateTime.yMMMdHmsString),
       ],

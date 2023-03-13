@@ -70,8 +70,8 @@ class GachaStatsExtraPanel extends ConsumerWidget {
           );
           final message = next.maybeMap(
             importSuccess: (_) {
-              ref.read(gachaPoolSelectorProvider.notifier).refresh();
-              ref.read(gachaStatsProvider.notifier).refresh();
+              ref.invalidate(gachaPoolSelectorProvider);
+              ref.invalidate(gachaStatsProvider(null));
               ref.invalidate(diamondHistoryProvider);
               return '导入成功。';
             },

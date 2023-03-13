@@ -23,11 +23,11 @@ class GachaPoolDto with _$GachaPoolDto {
   const GachaPoolDto._();
 
   GachaPool toDomain() => GachaPool(
-        gachaPoolId: gachaPoolId,
-        gachaIndex: gachaIndex,
+        id: gachaPoolId,
+        index: gachaIndex,
         openTime: openTime,
         endTime: endTime,
-        gachaPoolName: gachaPoolName,
-        gachaRuleType: gachaRuleType,
+        name: gachaPoolName,
+        ruleType: gachaRuleType,
       );
 }

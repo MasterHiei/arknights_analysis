@@ -17,7 +17,7 @@ enum GachaRuleType {
 
   final String value;
 
-  String get title {
+  String get label {
     switch (this) {
       case GachaRuleType.normal:
         return '标准寻访';

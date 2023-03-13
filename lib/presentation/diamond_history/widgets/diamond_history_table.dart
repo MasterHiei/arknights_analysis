@@ -98,7 +98,7 @@ class _DataTableSource extends material.DataTableSource {
         _buildTextCell('${index + 1}'),
         _buildTextCell(change.type),
         _buildTextCell(change.description, color: change.textColor),
-        _buildTextCell(change.after.toString()),
+        _buildTextCell('${change.after}'),
         _buildTextCell(change.operation),
         _buildTextCell(change.ts.dateTime.yMMMdHmsString),
       ],

@@ -1,8 +1,6 @@
-import 'package:dartx/dartx.dart';
 import 'package:drift/drift.dart';
 
 import '../../../../core/enums/gacha_rule_type.dart';
-import '../../../../domain/user/value_objects/uid.dart';
 import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
@@ -15,42 +13,6 @@ part 'gacha_records_dao.g.dart';
 class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     with _$GachaRecordsDaoMixin {
   GachaRecordsDao(super.db);
-
-  Future<List<String>> getPools({
-    required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-  }) async {
-    final query = select(gachaRecords)
-      ..where((tbl) => tbl.uid.equals(uid.getOrCrash()));
-
-    if (includeRuleTypes != null) {
-      final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([gachaPools.gachaPoolName])
-        ..where(
-          gachaPools.gachaRuleType.isIn(
-            includeRuleTypes.map((type) => type.value),
-          ),
-        );
-      query.where((tbl) => tbl.pool.isInQuery(poolNameQuery));
-    }
-
-    if (excludeRuleTypes != null) {
-      final poolNameQuery = selectOnly(gachaPools)
-        ..addColumns([gachaPools.gachaPoolName])
-        ..where(
-          gachaPools.gachaRuleType.isIn(
-            excludeRuleTypes.map((type) => type.value),
-          ),
-        );
-      query.where((tbl) => tbl.pool.isNotInQuery(poolNameQuery));
-    }
-
-    final pool = gachaRecords.pool;
-    final pools =
-        await query.addColumns([pool]).map((row) => row.read(pool)).get();
-    return pools.toSet().filterNotNull().toList();
-  }
 
   Future<List<GachaRecordDto>> get(
     String uid, {
@@ -68,25 +30,25 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     }
 
     if (includeRuleTypes != null) {
-      final poolNameQuery = selectOnly(gachaPools)
+      final isInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             includeRuleTypes.map((type) => type.value),
           ),
         );
-      query.where((tbl) => tbl.pool.isInQuery(poolNameQuery));
+      query.where((tbl) => tbl.pool.isInQuery(isInQuery));
     }
 
     if (excludeRuleTypes != null) {
-      final poolNameQuery = selectOnly(gachaPools)
+      final isNotInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(
           gachaPools.gachaRuleType.isIn(
             excludeRuleTypes.map((type) => type.value),
           ),
         );
-      query.where((tbl) => tbl.pool.isNotInQuery(poolNameQuery));
+      query.where((tbl) => tbl.pool.isNotInQuery(isNotInQuery));
     }
 
     final records = await query.get();
