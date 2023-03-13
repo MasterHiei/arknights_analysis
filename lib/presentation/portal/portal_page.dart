@@ -123,7 +123,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           PaneItemSeparator(),
           PaneItemAction(
             icon: const Icon(FluentIcons.sign_out),
-            onTap: () => AppDialog.show<void>(
+            onTap: () => AppDialog.show(
               context,
               title: const Text('确认'),
               content: const Text('确定退出登录吗？'),

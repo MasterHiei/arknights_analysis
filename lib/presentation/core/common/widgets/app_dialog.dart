@@ -85,7 +85,7 @@ class AppDialog extends StatelessWidget {
     );
   }
 
-  static Future<T?> show<T>(
+  static Future<void> show(
     BuildContext context, {
     Widget? title,
     required Widget content,
@@ -114,7 +114,7 @@ class AppDialog extends StatelessWidget {
     BuildContext context, {
     required WindowManager windowManager,
   }) =>
-      AppDialog.show<void>(
+      AppDialog.show(
         context,
         title: const Text('确认'),
         content: const Text('确定关闭本程序吗？'),
@@ -130,7 +130,7 @@ class AppDialog extends StatelessWidget {
     required String browserDownloadUrl,
     required void Function() onDownloadButtonTap,
   }) =>
-      AppDialog.show<void>(
+      AppDialog.show(
         context,
         title: const Text('更新'),
         content: Text.rich(

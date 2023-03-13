@@ -106,39 +106,34 @@ class _StatsView extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer(
-            builder: (_, ref, __) {
-              return ref.watch(gachaPoolFilterProvider(poolName)).maybeWhen(
-                    data: (pool) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          pool?.name ?? poolName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+            builder: (_, ref, __) =>
+                ref.watch(gachaPoolFilterProvider(poolName)).maybeWhen(
+                      data: (pool) => Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            pool?.name ?? poolName,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        if (pool != null)
-                          Padding(
-                            padding: EdgeInsets.only(left: 2.w),
-                            child: Text(
-                              '※${pool.ruleType.label}',
-                              style: TextStyle(
-                                color: Colors.purple.lightest,
-                                fontSize: 12.sp,
+                          if (pool != null)
+                            Padding(
+                              padding: EdgeInsets.only(left: 2.w),
+                              child: Text(
+                                '※${pool.ruleType.label}',
+                                style: TextStyle(
+                                  color: Colors.purple.lightest,
+                                  fontSize: 12.sp,
+                                ),
                               ),
                             ),
-                          ),
-                      ],
-                    ),
-                    orElse: () => Text(
-                      poolName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                        ],
+                      ),
+                      orElse: () => Text(
+                        poolName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                  );
-            },
           ),
           SizedBox(height: 2.h),
           Row(
@@ -168,9 +163,7 @@ class _StatsView extends ConsumerWidget {
                   const TextSpan(text: ' 已累计'),
                   TextSpan(
                     text: ' ${stats.sinceLastPull(rarity)} ',
-                    style: TextStyle(
-                      color: Colors.green.lighter,
-                    ),
+                    style: TextStyle(color: Colors.green.lighter),
                   ),
                   const TextSpan(text: '抽未出'),
                 ],
@@ -222,9 +215,7 @@ class _StatsView extends ConsumerWidget {
                   ),
                   TextSpan(
                     text: stats.caclAvgPulls(rarity),
-                    style: TextStyle(
-                      color: Colors.green.lighter,
-                    ),
+                    style: TextStyle(color: Colors.green.lighter),
                   ),
                 ],
               ),
@@ -239,9 +230,7 @@ class _StatsView extends ConsumerWidget {
                     const TextSpan(text: '最欧 '),
                     TextSpan(
                       text: stats.caclMinPulls(Rarity.six),
-                      style: TextStyle(
-                        color: Colors.yellow.darkest,
-                      ),
+                      style: TextStyle(color: Colors.yellow.darkest),
                     ),
                   ],
                 ),
@@ -253,9 +242,7 @@ class _StatsView extends ConsumerWidget {
                     const TextSpan(text: '最非 '),
                     TextSpan(
                       text: stats.caclMaxPulls(Rarity.six),
-                      style: TextStyle(
-                        color: Colors.blue.darkest,
-                      ),
+                      style: TextStyle(color: Colors.blue.darkest),
                     ),
                   ],
                 ),
