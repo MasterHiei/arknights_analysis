@@ -156,8 +156,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
                 severity: FlushBarSeverity.error,
               );
               failure.maybeWhen(
-                invalidToken: () =>
-                    ref.read(akLogoutProvider.notifier).logout(),
+                invalidToken: ref.read(akLogoutProvider.notifier).logout,
                 orElse: () {},
               );
             }

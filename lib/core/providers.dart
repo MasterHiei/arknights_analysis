@@ -35,7 +35,7 @@ final rdApiDioProvider = _dioProvider(Constants.repoDataApiBaseUrl);
 
 final dbProvider = Provider((ref) {
   final db = AppDatabase();
-  ref.onDispose(() => db.close());
+  ref.onDispose(db.close);
   return db;
 });
 
