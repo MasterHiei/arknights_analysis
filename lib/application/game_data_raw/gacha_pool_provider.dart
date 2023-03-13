@@ -31,8 +31,6 @@ class GachaPoolNotifier extends StateNotifier<GachaPoolState> {
     return failureOrDateTime.fold((_) => null, (dateTime) => dateTime);
   }
 
-  Future<void> retry() => _fetch();
-
   Future<bool> _isNewest() async {
     final failureOrCommitDate =
         await _apiRepository.fetchLastGachaTableCommitDate();

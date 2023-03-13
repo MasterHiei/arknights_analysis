@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/gacha/gacha_pool_filter_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
@@ -101,14 +102,43 @@ class _StatsView extends ConsumerWidget {
     );
   }
 
-  Widget _buildOverview(String pool, GachaStats stats) => Column(
+  Widget _buildOverview(String poolName, GachaStats stats) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            pool,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+          Consumer(
+            builder: (_, ref, __) {
+              return ref.watch(gachaPoolFilterProvider(poolName)).maybeWhen(
+                    data: (pool) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          pool?.name ?? poolName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (pool != null)
+                          Padding(
+                            padding: EdgeInsets.only(left: 2.w),
+                            child: Text(
+                              '※${pool.ruleType.label}',
+                              style: TextStyle(
+                                color: Colors.purple.lightest,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    orElse: () => Text(
+                      poolName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+            },
           ),
           SizedBox(height: 2.h),
           Row(

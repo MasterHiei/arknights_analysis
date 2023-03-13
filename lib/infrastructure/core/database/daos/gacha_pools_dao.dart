@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 
 import '../../../../core/enums/gacha_rule_type.dart';
 import '../../../../domain/user/value_objects/uid.dart';
+import '../../../game_data_raw/dtos/gacha_pool_dto.dart';
 import '../../../game_data_raw/dtos/gacha_table_dto.dart';
 import '../app_database.dart';
 import '../tables/gacha_pools.dart';
@@ -59,5 +60,15 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
         .map((row) => row.read(pool))
         .get();
     return pools.toSet().filterNotNull().toList();
+  }
+
+  Future<GachaPoolDto?> getByName(String name) async {
+    final query = select(gachaPools)
+      ..where((tbl) => tbl.gachaPoolName.equals(name));
+    final pool = await query.getSingleOrNull();
+    if (pool == null) {
+      return null;
+    }
+    return GachaPoolDto.fromJson(pool.toJson());
   }
 }

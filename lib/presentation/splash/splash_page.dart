@@ -67,7 +67,7 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
             failure.maybeWhen(
               unexpectedError: (_) async {
                 await 3.seconds.delay;
-                ref.read(gachaPoolProvider.notifier).retry();
+                ref.invalidate(gachaPoolProvider);
               },
               orElse: () {},
             );

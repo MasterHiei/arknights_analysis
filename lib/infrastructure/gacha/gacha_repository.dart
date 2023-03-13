@@ -10,6 +10,7 @@ import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/core/common/pagination.dart';
 import '../../domain/gacha/gacha_char.dart';
+import '../../domain/gacha/gacha_pool.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
@@ -38,6 +39,8 @@ abstract class GachaRepository {
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   });
+
+  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
 
   Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
@@ -107,6 +110,14 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
         ),
+      );
+
+  @override
+  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name) => execute(
+        () async {
+          final dto = await _localDataSource.getPoolByName(name);
+          return dto?.toDomain();
+        },
       );
 
   @override
