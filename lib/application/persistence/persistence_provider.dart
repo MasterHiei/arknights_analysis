@@ -55,7 +55,7 @@ class PersistenceNotifier extends StateNotifier<PersistenceState>
       (user) async {
         final uid = user.uid;
         final directory = await getApplicationDocumentsDirectory();
-        final fileName = '${uid.getOrCrash()}_$persistenceFileName';
+        final fileName = '${uid.getOrCrash()}_${Constants.persistenceFileName}';
         final path = await _filePicker.saveFile(
           fileName: fileName,
           initialDirectory: directory.path,

@@ -60,7 +60,7 @@ class GachaHistoryFilterNotifier
         () {},
         (user) async {
           final uid = user.uid;
-          final failureOrPools = await _repository.getPools(uid: uid);
+          final failureOrPools = await _repository.getRecordedPools(uid: uid);
           failureOrPools.fold(
             (_) {},
             (pools) => state = state.copyWith(pools: pools),

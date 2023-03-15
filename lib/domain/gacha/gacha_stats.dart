@@ -8,10 +8,6 @@ import 'gacha_char.dart';
 
 part 'gacha_stats.freezed.dart';
 
-typedef StatsPerPool = Map<String, GachaStats>;
-
-typedef CharsPerRarity = Pair<Rarity, GachaStats>;
-
 typedef CharWithPulls = Pair<GachaChar, int>;
 
 @freezed
@@ -25,30 +21,11 @@ class GachaStats with _$GachaStats {
 
   //* Properties
 
-  StatsPerPool get statsPerPool => chars
-      .groupBy((char) => char.pool)
-      .mapValues((entry) => GachaStats(uid: uid, chars: entry.value));
+  String? get startDateTime =>
+      chars.minBy((char) => char.ts.dateTime)?.ts.dateTime.yMMMdHmsString;
 
-  List<CharsPerRarity> get statsPerRarity => chars
-      .groupBy((char) => char.rarity)
-      .mapEntries(
-        (entry) => CharsPerRarity(
-          entry.key,
-          GachaStats(uid: uid, chars: entry.value),
-        ),
-      )
-      .toList();
-
-  String? get dateRange {
-    final start =
-        chars.minBy((char) => char.ts.dateTime)?.ts.dateTime.yMMMdString;
-    final end =
-        chars.maxBy((char) => char.ts.dateTime)?.ts.dateTime.yMMMdString;
-    if (start == null || start == end) {
-      return start;
-    }
-    return '$start ~ $end';
-  }
+  String? get endDateTime =>
+      chars.maxBy((char) => char.ts.dateTime)?.ts.dateTime.yMMMdHmsString;
 
   //* Methods
 
@@ -63,7 +40,7 @@ class GachaStats with _$GachaStats {
     return index == -1 ? chars.length : index;
   }
 
-  List<CharWithPulls> filterWithPulls(Rarity rarity) {
+  List<CharWithPulls> filterCharWithPulls(Rarity rarity) {
     final pairs = <Pair<GachaChar, int>>[];
     final splittedChars = chars.splitWhen(
       (_, next) => next.rarity == rarity,
@@ -81,8 +58,30 @@ class GachaStats with _$GachaStats {
   }
 
   String caclAvgPulls(Rarity rarity) {
-    final sources = filterWithPulls(rarity).map((pair) => pair.second);
-    final amount = sources.reduce((v, e) => v + e);
-    return (amount / sources.length).toStringAsFixed(2);
+    final pulls = _filterPulls(rarity);
+    if (pulls.isEmpty) {
+      return '0';
+    }
+    final amount = pulls.reduce((v, e) => v + e);
+    return (amount / pulls.length).toStringAsFixed(2);
   }
+
+  String caclMinPulls(Rarity rarity) {
+    final min = _filterPulls(rarity).min();
+    if (min == null) {
+      return '0';
+    }
+    return '$min';
+  }
+
+  String caclMaxPulls(Rarity rarity) {
+    final max = _filterPulls(rarity).max();
+    if (max == null) {
+      return '0';
+    }
+    return '$max';
+  }
+
+  Iterable<int> _filterPulls(Rarity rarity) =>
+      filterCharWithPulls(rarity).map((pair) => pair.second);
 }

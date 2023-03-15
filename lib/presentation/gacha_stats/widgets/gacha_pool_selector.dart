@@ -10,12 +10,11 @@ class GachaPoolSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(gachaPoolSelectorProvider);
-    final pools = [null, ...provider.pools];
-    final items = pools
+    final items = [null, ...provider.pools]
         .map(
           (pool) => MenuFlyoutItem(
             text: Text(
-              pool ?? '标准寻访',
+              pool ?? '全部寻访',
               style: DefaultTextStyle.of(context).style,
             ),
             onPressed: () => provider.select(pool),
@@ -24,18 +23,9 @@ class GachaPoolSelector extends ConsumerWidget {
         .toList();
     return DropDownButton(
       items: items,
-      leading: Icon(FluentIcons.filter, size: 16.w),
       title: Text(
-        provider.selectedPool ?? '标准寻访',
+        provider.selectedPool ?? '全部寻访',
         style: TextStyle(fontSize: 16.sp),
-      ),
-      buttonStyle: ButtonStyle(
-        padding: ButtonState.resolveWith(
-          (_) => const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 12,
-          ),
-        ),
       ),
     );
   }

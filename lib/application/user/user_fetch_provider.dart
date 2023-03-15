@@ -55,7 +55,7 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
         () => debounce(_fetchAndUpdate),
         onFailure: () => AppFlushBar.show(
           context,
-          message: '太快了吧！这还不到${minRequestInterval.inMinutes}分钟呢！',
+          message: '太快了吧！这还不到${Constants.minRequestInterval.inMinutes}分钟呢！',
           severity: FlushBarSeverity.warning,
         ),
       );

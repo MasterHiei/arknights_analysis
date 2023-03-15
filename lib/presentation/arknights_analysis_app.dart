@@ -21,7 +21,7 @@ class ArknightsAnalysisApp extends StatelessWidget {
         fallbackLocale: I18n.defaultLocal,
         child: const _MainApp(),
       ),
-      designSize: defaultWindowSize,
+      designSize: Constants.defaultWindowSize,
     );
   }
 }
@@ -41,12 +41,12 @@ class _MainApp extends StatelessWidget {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
-      builder: (context, child) {
+      builder: (_, child) {
         child = virtualWindowFrameBuilder(context, child);
         child = botToastBuilder(context, child);
         return child;
       },
-      title: appName,
+      title: Constants.appName,
       color: Colors.red,
       locale: context.locale,
       localizationsDelegates: context.localizationDelegates,

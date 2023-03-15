@@ -8,41 +8,35 @@ import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../core/types/types.dart';
 import '../core/mixins/error_handler_mixin.dart';
-import 'data_sources/game_data_local_data_source.dart';
-import 'data_sources/game_data_remote_data_source.dart';
+import 'data_sources/game_data_raw_local_data_source.dart';
+import 'data_sources/game_data_raw_remote_data_source.dart';
 import 'dtos/gacha_table_dto.dart';
 
-final gameDataRepositoryProvider = Provider.autoDispose<GameDataRepository>(
-  (ref) => GameDataRepositoryImpl(
+final gameDataRawRepositoryProvider =
+    Provider.autoDispose<GameDataRawRepository>(
+  (ref) => GameDataRawRepositoryImpl(
     ref.watch(connectivityProvider),
-    ref.watch(gameDataLocalDataSourceProvider),
-    ref.watch(gameDataRemoteDataSourceProvider),
+    ref.watch(gameDataRawLocalDataSourceProvider),
+    ref.watch(gameDataRawRemoteDataSourceProvider),
   ),
 );
 
-abstract class GameDataRepository {
-  Future<Either<AppFailure, int>> count();
-
+abstract class GameDataRawRepository {
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable();
 }
 
-class GameDataRepositoryImpl
+class GameDataRawRepositoryImpl
     with ErrorHandlerMixin
-    implements GameDataRepository {
-  const GameDataRepositoryImpl(
+    implements GameDataRawRepository {
+  const GameDataRawRepositoryImpl(
     this._connectivity,
     this._localDataSource,
     this._remoteDataSource,
   );
 
   final Connectivity _connectivity;
-  final GameDataLocalDataSource _localDataSource;
-  final GameDataRemoteDataSource _remoteDataSource;
-
-  @override
-  Future<Either<AppFailure, int>> count() => execute(
-        () => _localDataSource.count(),
-      );
+  final GameDataRawLocalDataSource _localDataSource;
+  final GameDataRawRemoteDataSource _remoteDataSource;
 
   @override
   Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable() => execute(

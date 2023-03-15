@@ -23,19 +23,19 @@ final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
 
 final dioProvider = _dioProvider('');
 
-final akDioProvider = _dioProvider(akBaseUrl);
+final akDioProvider = _dioProvider(Constants.akBaseUrl);
 
-final asDioProvider = _dioProvider(asBaseUrl);
+final asDioProvider = _dioProvider(Constants.asBaseUrl);
 
-final gdDioProvider = _dioProvider(gameDataBaseUrl);
+final gdDioProvider = _dioProvider(Constants.gameDataRawBaseUrl);
 
-final gdApiDioProvider = _dioProvider(gameDataApiBaseUrl);
+final gdApiDioProvider = _dioProvider(Constants.gameDataApiBaseUrl);
 
-final rdApiDioProvider = _dioProvider(repoDataBaseUrl);
+final rdApiDioProvider = _dioProvider(Constants.repoDataApiBaseUrl);
 
 final dbProvider = Provider((ref) {
   final db = AppDatabase();
-  ref.onDispose(() => db.close());
+  ref.onDispose(db.close);
   return db;
 });
 

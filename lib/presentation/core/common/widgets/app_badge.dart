@@ -1,5 +1,5 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppBadge extends StatelessWidget {
@@ -21,13 +21,15 @@ class AppBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Badge(
-      position: position,
-      shape: BadgeShape.square,
-      padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
-      borderRadius: BorderRadius.circular(4.w),
-      showBadge: showBadge,
-      badgeColor: badgeColor,
       badgeContent: badgeContent,
+      badgeStyle: BadgeStyle(
+        shape: BadgeShape.square,
+        borderRadius: BorderRadius.circular(4.w),
+        badgeColor: badgeColor,
+        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
+      ),
+      position: position,
+      showBadge: showBadge,
       child: child,
     );
   }

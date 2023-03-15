@@ -30,7 +30,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => dbVersion;
+  int get schemaVersion => Constants.dbVersion;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -45,6 +45,6 @@ class AppDatabase extends _$AppDatabase {
 
 LazyDatabase _openConnection() => LazyDatabase(() async {
       final dir = await getApplicationSupportDirectory();
-      final file = File(join(dir.path, dbName));
+      final file = File(join(dir.path, Constants.dbName));
       return NativeDatabase(file);
     });

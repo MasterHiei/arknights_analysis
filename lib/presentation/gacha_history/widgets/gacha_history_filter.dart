@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../application/gacha/gacha_history_filter_provider.dart';
 import '../../../core/enums/rarity.dart';
@@ -116,7 +117,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
         final isCompleted = selectablePools.isEmpty;
         if (isCompleted) {
           items.add(
-            MenuFlyoutItem(text: const SizedBox.shrink(), onPressed: () {}),
+            MenuFlyoutItem(text: const SizedBox.shrink(), onPressed: null),
           );
         }
         return DropDownButton(
@@ -139,14 +140,20 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
         final children = ref.watch(_selectedPools).map(
               (pool) => Chip(
                 text: Tooltip(
-                  message: '移除该寻访',
+                  message: '点击以取消选择',
                   useMousePosition: false,
-                  child: Row(
-                    children: [
-                      const Icon(FluentIcons.check_mark, size: 14),
-                      const SizedBox(width: 2),
-                      Text(pool),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      children: [
+                        const Icon(FontAwesomeIcons.check, size: 14),
+                        const SizedBox(width: 4),
+                        Text(
+                          pool,
+                          style: DefaultTextStyle.of(context).style,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 onPressed: () => ref
@@ -187,7 +194,7 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
                 .read(gachaHistoryFilterProvider.notifier)
                 .onRarityChanged(rarity, checked: checked),
             content: Text(
-              rarity.title,
+              rarity.label,
               style: TextStyle(fontSize: 15.sp),
             ),
           );

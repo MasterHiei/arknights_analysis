@@ -10,6 +10,7 @@ import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/core/common/pagination.dart';
 import '../../domain/gacha/gacha_char.dart';
+import '../../domain/gacha/gacha_pool.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
@@ -33,11 +34,13 @@ abstract class GachaRepository {
     required AkLoginType loginType,
   });
 
-  Future<Either<AppFailure, List<String>>> getPools({
+  Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   });
+
+  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
 
   Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
@@ -96,17 +99,25 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<String>>> getPools({
+  Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
       execute(
-        () => _localDataSource.getPools(
+        () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
         ),
+      );
+
+  @override
+  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name) => execute(
+        () async {
+          final dto = await _localDataSource.getPoolByName(name);
+          return dto?.toDomain();
+        },
       );
 
   @override
@@ -119,11 +130,10 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
       execute(
         () async {
           final showAllPools = pool == null;
-          final pools = showAllPools ? <String>[] : [pool];
           final dtos = await _localDataSource.getRecords(
             uid,
             showAllPools: showAllPools,
-            pools: pools,
+            pools: showAllPools ? [] : [pool],
             includeRuleTypes: includeRuleTypes,
             excludeRuleTypes: excludeRuleTypes,
           );

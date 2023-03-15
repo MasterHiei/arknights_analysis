@@ -39,7 +39,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    final controller = ref.watch(webviewProvider(akLoginPage)).controller;
+    final controller =
+        ref.watch(webviewProvider(Constants.akLoginPage)).controller;
     final isInitialized = controller.value.isInitialized;
     if (isInitialized) {
       _listenState(context, ref);

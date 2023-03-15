@@ -1,15 +1,15 @@
 import '../../../core/constants/constants.dart';
-import '../extensions/date_time_formatter.dart';
 
 class RequestLimitMixin {
   DateTime? _lastRequestDateTime;
-  String? get lastRequestDateTimeString => _lastRequestDateTime?.yMMMdHmsString;
+  DateTime? get lastRequestDateTime => _lastRequestDateTime;
 
   void requestWithLimit(
     void Function() request, {
     void Function()? onFailure,
   }) {
-    final limitedUntil = _lastRequestDateTime?.add(minRequestInterval);
+    final limitedUntil =
+        _lastRequestDateTime?.add(Constants.minRequestInterval);
     final canRequest = limitedUntil?.isBefore(DateTime.now()) ?? true;
     if (canRequest) {
       request();

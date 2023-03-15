@@ -12,11 +12,13 @@ class GetGachaStatsParams with _$GetGachaStatsParams {
     List<GachaRuleType>? excludeRuleTypes,
   }) = _GetGachaStatsParams;
 
+  factory GetGachaStatsParams.all() => const GetGachaStatsParams();
+
   factory GetGachaStatsParams.normal() => GetGachaStatsParams(
         excludeRuleTypes: GachaRuleType.independentGuarantee,
       );
 
-  factory GetGachaStatsParams.pool(String pool) => GetGachaStatsParams(
+  factory GetGachaStatsParams.specific(String pool) => GetGachaStatsParams(
         pool: pool,
       );
 }
