@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' as material;
+import 'package:flutter/material.dart' hide Colors;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,7 +29,7 @@ class GachaHistoryPage extends StatelessWidget {
             child: const GachaHistoryFilter(),
           ),
           Expanded(
-            child: material.Material(
+            child: Material(
               textStyle: DefaultTextStyle.of(context).style,
               child: _buildDataTable(context),
             ),
@@ -69,9 +69,9 @@ class GachaHistoryPage extends StatelessWidget {
                 showCheckboxColumn: false,
                 showFirstLastButtons: true,
                 availableRowsPerPage: const [
-                  pageSize,
-                  pageSize * 2,
-                  pageSize * 5,
+                  Constants.pageSize,
+                  Constants.pageSize * 2,
+                  Constants.pageSize * 5,
                 ],
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
@@ -86,7 +86,7 @@ class GachaHistoryPage extends StatelessWidget {
   }
 }
 
-class _DataTableSource extends material.DataTableSource {
+class _DataTableSource extends DataTableSource {
   _DataTableSource(this.context, this.chars);
 
   final BuildContext context;
@@ -99,7 +99,7 @@ class _DataTableSource extends material.DataTableSource {
       index: index,
       cells: [
         _buildTextCell('${index + 1}'),
-        material.DataCell(
+        DataCell(
           AppBadge(
             showBadge: char.isNew,
             position: BadgePosition.topEnd(top: 4.h, end: -34.w),
@@ -120,15 +120,13 @@ class _DataTableSource extends material.DataTableSource {
             ),
           ),
         ),
-        _buildTextCell(char.rarity.title),
+        _buildTextCell(char.rarity.label),
         _buildTextCell(char.pool),
         _buildTextCell(char.ts.dateTime.yMMMdHmsString),
       ],
       onTap: () => Routes.webview.push(
         context,
-        extra: WebviewParams(
-          initialUrl: '$prts/w/${char.encodeName}',
-        ),
+        extra: WebviewParams(initialUrl: char.prtsUrl),
       ),
     );
   }
@@ -142,7 +140,7 @@ class _DataTableSource extends material.DataTableSource {
   @override
   int get selectedRowCount => 0;
 
-  material.DataCell _buildTextCell(String text) => material.DataCell(
+  DataCell _buildTextCell(String text) => DataCell(
         DefaultTextStyle.merge(
           style: TextStyle(
             color: Colors.grey[120],

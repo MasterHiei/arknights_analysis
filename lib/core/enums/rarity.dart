@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 enum Rarity {
@@ -24,9 +24,32 @@ enum Rarity {
 
   final Color color;
 
-  String get title => '${index + 1}星';
+  String get label {
+    switch (index) {
+      case 0:
+        return '一星';
 
-  String get fullTitle => '$title干员';
+      case 1:
+        return '二星';
+
+      case 2:
+        return '三星';
+
+      case 3:
+        return '四星';
+
+      case 4:
+        return '五星';
+
+      case 5:
+        return '六星';
+
+      default:
+        return '${index + 1}星';
+    }
+  }
+
+  String get fullLabel => '$label干员';
 
   static List<Rarity> get rares => [Rarity.six, Rarity.five];
 
@@ -36,4 +59,20 @@ enum Rarity {
         Rarity.five,
         Rarity.six,
       ];
+
+  static Color exploreYourFate(int pull) {
+    if (pull <= 10) {
+      return Colors.green.lightest;
+    }
+    if (pull <= 25) {
+      return Colors.green.light;
+    }
+    if (pull <= 45) {
+      return Colors.blue.normal;
+    }
+    if (pull <= 65) {
+      return Colors.purple.normal;
+    }
+    return Colors.red.darkest;
+  }
 }

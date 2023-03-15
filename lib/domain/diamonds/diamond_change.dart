@@ -22,7 +22,7 @@ class DiamondChange with _$DiamondChange {
     if (diff > 0) {
       return '+$diff';
     }
-    return diff.toString();
+    return '$diff';
   }
 
   Color? get textColor {

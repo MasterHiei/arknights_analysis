@@ -4,6 +4,7 @@ import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/providers.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/database/app_database.dart';
+import '../../game_data_raw/dtos/gacha_pool_dto.dart';
 import '../dtos/gacha_dto.dart';
 import '../dtos/gacha_record_dto.dart';
 
@@ -16,11 +17,13 @@ final gachaLocalDataSourceProvider = Provider.autoDispose<GachaLocalDataSource>(
 abstract class GachaLocalDataSource {
   Future<List<int>> save(GachaDto dto);
 
-  Future<List<String>> getPools({
+  Future<List<String>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   });
+
+  Future<GachaPoolDto?> getPoolByName(String name);
 
   Future<List<GachaRecordDto>> getRecords(
     Uid uid, {
@@ -50,16 +53,20 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
       _db.gachaRecordsDao.replaceInto(gacha);
 
   @override
-  Future<List<String>> getPools({
+  Future<List<String>> getRecordedPools({
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
   }) =>
-      _db.gachaRecordsDao.getPools(
+      _db.gachaPoolsDao.getRecorded(
         uid: uid,
         includeRuleTypes: includeRuleTypes,
         excludeRuleTypes: excludeRuleTypes,
       );
+
+  @override
+  Future<GachaPoolDto?> getPoolByName(String name) =>
+      _db.gachaPoolsDao.getByName(name);
 
   @override
   Future<List<GachaRecordDto>> getRecords(

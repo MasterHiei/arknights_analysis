@@ -8,7 +8,7 @@ import '../../core/utils/logger.dart';
 final webviewProvider = ChangeNotifierProvider.autoDispose.family(
   (ref, String initialUrl) {
     final controller = WebviewController();
-    ref.onDispose(() => controller.dispose());
+    ref.onDispose(controller.dispose);
     return WebviewNotifier(controller, initialUrl);
   },
 );

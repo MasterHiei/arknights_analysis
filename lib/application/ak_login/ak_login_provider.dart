@@ -22,7 +22,7 @@ final akLoginProvider =
     StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
   (ref) {
     return AkLoginNotifier(
-      ref.watch(webviewProvider(akLoginPage)).controller,
+      ref.watch(webviewProvider(Constants.akLoginPage)).controller,
       ref.watch(akLoginTypeProvider.notifier),
       ref.watch(tokenProvider.notifier),
     );
@@ -47,24 +47,27 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
   void _startListening() {
     _controller.url.listen(_listenUrl);
     _controller.webMessage.listen(_onTokenRecieved);
-    _controller.loadUrl(akLoginPage);
+    _controller.loadUrl(Constants.akLoginPage);
   }
 
   Future<void> _listenUrl(String url) async {
-    final isOfficial = url == akHomePageOfficial;
+    final isOfficial = url == Constants.akHomePageOfficial;
     if (isOfficial) {
-      await _controller.loadUrl(asGetTokenOfficial);
+      await _controller.loadUrl(Constants.asGetTokenOfficial);
       _loginTypeProvider.state = AkLoginType.official;
     }
-    final isBilibili =
-        [akHomePageBilibili, akHomePageBilibiliRedirect].contains(url);
+    final isBilibili = [
+      Constants.akHomePageBilibili,
+      Constants.akHomePageBilibiliRedirect,
+    ].contains(url);
     if (isBilibili) {
       await 1.seconds.delay;
-      await _controller.loadUrl(asGetTokenBilibili);
+      await _controller.loadUrl(Constants.asGetTokenBilibili);
       _loginTypeProvider.state = AkLoginType.bilibili;
     }
 
-    final isTokenPage = url == asGetTokenOfficial || url == asGetTokenBilibili;
+    final isTokenPage = url == Constants.asGetTokenOfficial ||
+        url == Constants.asGetTokenBilibili;
     if (isTokenPage) {
       AppLoadingIndicator.show();
       const data = 'document.getElementsByTagName("pre")[0].innerHTML';
@@ -93,7 +96,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
           _controller.clearCache(),
           _controller.clearCookies(),
         ]);
-        await _controller.loadUrl(akLoginPage);
+        await _controller.loadUrl(Constants.akLoginPage);
         break;
     }
     AppLoadingIndicator.dismiss();

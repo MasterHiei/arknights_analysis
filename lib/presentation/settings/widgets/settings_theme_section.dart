@@ -57,19 +57,10 @@ class SettingsThemeSection extends StatelessWidget {
                       '简体中文',
                       style: DefaultTextStyle.of(context).style,
                     ),
-                    onPressed: () {},
+                    onPressed: null,
                   ),
                 ],
                 title: const Text('简体中文'),
-                buttonStyle: ButtonStyle(
-                  padding: ButtonState.resolveWith(
-                    (states) => EdgeInsets.symmetric(
-                      vertical: 8.h,
-                      horizontal: 12.w,
-                    ),
-                  ),
-                ),
-                placement: FlyoutPlacement.start,
               ),
             );
           },

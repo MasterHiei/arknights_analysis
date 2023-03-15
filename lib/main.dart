@@ -21,9 +21,9 @@ Future<Widget> _initializeApp() async {
   if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
     await windowManager.ensureInitialized();
     const options = WindowOptions(
-      size: defaultWindowSize,
+      size: Constants.defaultWindowSize,
       center: true,
-      minimumSize: minWindowSize,
+      minimumSize: Constants.minWindowSize,
       skipTaskbar: false,
       title: 'Arknights Analysis',
     );

@@ -8,25 +8,24 @@ class AppErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 400.w,
-      child: Column(
-        children: [
-          const Spacer(),
-          Image.asset(Images.horse.path, fit: BoxFit.contain),
-          SizedBox(height: 24.h),
-          Text(
-            '1 + 1 = 3',
-            style: TextStyle(
-              color: Colors.grey[120],
-              fontSize: 32.sp,
-              fontWeight: FontWeight.bold,
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          Images.horse.path,
+          width: 400.w,
+          fit: BoxFit.contain,
+        ),
+        SizedBox(height: 24.h),
+        Text(
+          '1 + 1 = 3',
+          style: TextStyle(
+            color: Colors.grey[120],
+            fontSize: 32.sp,
+            fontWeight: FontWeight.bold,
           ),
-          const Spacer(),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

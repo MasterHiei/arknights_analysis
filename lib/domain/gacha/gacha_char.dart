@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../core/constants/constants.dart';
 import '../../core/enums/rarity.dart';
 import '../core/common/value_objects/ts.dart';
 
@@ -17,5 +18,5 @@ class GachaChar with _$GachaChar {
 
   const GachaChar._();
 
-  String get encodeName => Uri.encodeComponent(name);
+  String get prtsUrl => '${Constants.prts}/w/${Uri.encodeComponent(name)}';
 }

@@ -51,16 +51,17 @@
 
 ## 基本功能
 
-### 卡池查询
+### 寻访统计
 
-![gacha_stats](https://user-images.githubusercontent.com/20240686/202844998-cb5c28fc-fcde-4e1c-aa71-8870189c7dc8.png)
+![gacha_stats](https://user-images.githubusercontent.com/20240686/225358199-67f32d0d-7269-44d3-8e7c-01c02947fb66.png)
 
-![gacha_stats_2](https://user-images.githubusercontent.com/20240686/202845139-1eef841d-fad7-458f-88fd-42921d44a601.png)
+
+### 寻访记录
 
 ![gacha_history](https://user-images.githubusercontent.com/20240686/202845039-9390ed54-f664-49cb-9dc9-97fb4a3959d3.png)
 
 
-### 源石查询
+### 源石记录
 
 ![diamond_history](https://user-images.githubusercontent.com/20240686/202845087-969ee0c8-7423-4480-aacc-8cc2836845bb.png)
 

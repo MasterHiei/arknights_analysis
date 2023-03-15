@@ -3,6 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../routing/router.dart';
+
 class AppDialog extends StatelessWidget {
   const AppDialog({
     super.key,
@@ -83,7 +85,7 @@ class AppDialog extends StatelessWidget {
     );
   }
 
-  static Future<T?> show<T>(
+  static Future<void> show(
     BuildContext context, {
     Widget? title,
     required Widget content,
@@ -104,7 +106,7 @@ class AppDialog extends StatelessWidget {
           onConfirmButtonTap: onConfirmButtonTap,
           closeButtonText: closeButtonText ?? '取消',
           closeButtonColor: closeButtonColor ?? Colors.grey[80],
-          onCloseButtonTap: onCloseButtonTap ?? () => Navigator.pop(context),
+          onCloseButtonTap: onCloseButtonTap ?? router.pop,
         ),
       );
 
@@ -112,7 +114,7 @@ class AppDialog extends StatelessWidget {
     BuildContext context, {
     required WindowManager windowManager,
   }) =>
-      AppDialog.show<void>(
+      AppDialog.show(
         context,
         title: const Text('确认'),
         content: const Text('确定关闭本程序吗？'),
@@ -128,7 +130,7 @@ class AppDialog extends StatelessWidget {
     required String browserDownloadUrl,
     required void Function() onDownloadButtonTap,
   }) =>
-      AppDialog.show<void>(
+      AppDialog.show(
         context,
         title: const Text('更新'),
         content: Text.rich(

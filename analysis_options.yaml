@@ -1,4 +1,4 @@
-include: package:lint/analysis_options.yaml
+include: package:lint/strict.yaml
 
 analyzer:
   strong-mode:
@@ -20,7 +20,11 @@ analyzer:
 
 linter:
   rules:
+    always_put_required_named_parameters_first: false
+    always_specify_types: false
     always_use_package_imports: false
+    prefer_double_quotes: false
     prefer_relative_imports: true
+    prefer_single_quotes: true
     sort_constructors_first: true
     use_key_in_widget_constructors: true

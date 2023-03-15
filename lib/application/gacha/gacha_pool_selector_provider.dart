@@ -18,35 +18,40 @@ final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
   ],
 );
 
+final selectedGachaPoolProvider = Provider.autoDispose(
+  (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
+);
+
 class GachaPoolSelectorNotifier extends ChangeNotifier {
   GachaPoolSelectorNotifier(this._userOption, this._repository) {
-    _get();
+    _getAll();
   }
 
   final Option<User> _userOption;
   final GachaRepository _repository;
 
   final _pools = <String>[];
-  List<String> get pools => _pools;
+  List<String> get pools => [
+        GachaRuleType.normal.label,
+        ..._pools,
+      ];
 
   String? _selectedPool;
   String? get selectedPool => _selectedPool;
 
-  void select(String? pool) {
-    if (pool == _selectedPool) {
+  void select(String? value) {
+    if (value == _selectedPool) {
       return;
     }
-    _selectedPool = pool;
+    _selectedPool = value;
     notifyListeners();
   }
 
-  void refresh() => _get();
-
-  Future<void> _get() async {
+  Future<void> _getAll() async {
     _userOption.fold(
       () {},
       (user) async {
-        final failureOrPools = await _repository.getPools(
+        final failureOrPools = await _repository.getRecordedPools(
           uid: user.uid,
           includeRuleTypes: GachaRuleType.independentGuarantee,
         );

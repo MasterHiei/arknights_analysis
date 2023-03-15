@@ -9,6 +9,8 @@ import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
 import '../../../application/persistence/states/persistence_state.dart';
 import '../../../application/user/user_fetch_provider.dart';
+import '../../../core/enums/gacha_data_management_type.dart';
+import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 
@@ -21,84 +23,39 @@ class GachaStatsExtraPanel extends ConsumerWidget {
 
     return Row(
       children: [
-        _buildRefreshButton(),
+        _buildRefreshButton(context),
         SizedBox(width: 16.w),
-        _buildImportButton(context),
-        SizedBox(width: 16.w),
-        _buildExportButton(context),
+        const _DataManagementMenuFlyout(),
       ],
     );
   }
 
-  Widget _buildImportButton(BuildContext context) {
+  Widget _buildRefreshButton(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        return FilledButton(
-          onPressed: ref.read(persistenceProvider.notifier).import,
-          style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
-              (states) {
-                if (states.isNone) {
-                  return Colors.green.normal;
-                }
-                if (states.isPressing) {
-                  return Colors.green.lighter;
-                }
-                if (states.isHovering) {
-                  return Colors.green.light;
-                }
-                return null;
+        final button = FilledButton(
+          onPressed: () =>
+              ref.read(userFetchProvider.notifier).refresh(context),
+          child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
+        );
+        return ref.watch(userFetchProvider).maybeWhen(
+              data: (_) {
+                final lastFetchTime = ref
+                    .read(userFetchProvider.notifier)
+                    .lastRequestDateTime!
+                    .yMMMdHmsString;
+                return Tooltip(
+                  message: '上次更新于: $lastFetchTime',
+                  useMousePosition: false,
+                  child: FilledButton(
+                    onPressed: () =>
+                        ref.read(userFetchProvider.notifier).refresh(context),
+                    child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
+                  ),
+                );
               },
-            ),
-          ),
-          child: Text('导入', style: TextStyle(fontSize: 16.sp)),
-        );
-      },
-    );
-  }
-
-  Widget _buildExportButton(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, __) {
-        return FilledButton(
-          onPressed: ref.read(persistenceProvider.notifier).export,
-          style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
-              (states) {
-                if (states.isNone) {
-                  return Colors.green.normal;
-                }
-                if (states.isPressing) {
-                  return Colors.green.lighter;
-                }
-                if (states.isHovering) {
-                  return Colors.green.light;
-                }
-                return null;
-              },
-            ),
-          ),
-          child: Text('导出', style: TextStyle(fontSize: 16.sp)),
-        );
-      },
-    );
-  }
-
-  Widget _buildRefreshButton() {
-    return Consumer(
-      builder: (context, ref, _) {
-        final lastRefreshTime =
-            ref.watch(userFetchProvider.notifier).lastRequestDateTimeString;
-        final message =
-            lastRefreshTime == null ? null : '上次更新于: $lastRefreshTime';
-        return Tooltip(
-          message: message,
-          child: FilledButton(
-            onPressed: () =>
-                ref.read(userFetchProvider.notifier).refresh(context),
-            child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
-          ),
-        );
+              orElse: () => button,
+            );
       },
     );
   }
@@ -113,8 +70,8 @@ class GachaStatsExtraPanel extends ConsumerWidget {
           );
           final message = next.maybeMap(
             importSuccess: (_) {
-              ref.read(gachaPoolSelectorProvider.notifier).refresh();
-              ref.read(gachaStatsProvider.notifier).refresh();
+              ref.invalidate(gachaPoolSelectorProvider);
+              ref.invalidate(gachaStatsProvider(null));
               ref.invalidate(diamondHistoryProvider);
               return '导入成功。';
             },
@@ -135,4 +92,50 @@ class GachaStatsExtraPanel extends ConsumerWidget {
           }
         },
       );
+}
+
+class _DataManagementMenuFlyout extends ConsumerStatefulWidget {
+  const _DataManagementMenuFlyout();
+
+  @override
+  ConsumerState<_DataManagementMenuFlyout> createState() =>
+      _DataManagementMenuFlyoutState();
+}
+
+class _DataManagementMenuFlyoutState
+    extends ConsumerState<_DataManagementMenuFlyout> {
+  final _controller = FlyoutController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FlyoutTarget(
+      controller: _controller,
+      child: FilledButton(
+        onPressed: () => _controller.showFlyout<void>(
+          builder: (_) {
+            return MenuFlyout(
+              items: GachaDataManagementType.values
+                  .map(
+                    (item) => MenuFlyoutItem(
+                      text: Text(item.label),
+                      onPressed: () => item.onPressed(ref),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+          autoModeConfiguration: FlyoutAutoConfiguration(
+            preferredMode: FlyoutPlacementMode.bottomCenter,
+          ),
+        ),
+        child: Text('数据管理', style: TextStyle(fontSize: 16.sp)),
+      ),
+    );
+  }
 }
