@@ -53,17 +53,17 @@
 
 ### 寻访统计
 
-![gacha_stats](https://user-images.githubusercontent.com/20240686/225358199-67f32d0d-7269-44d3-8e7c-01c02947fb66.png)
+![gacha_stats](https://user-images.githubusercontent.com/20240686/225361025-2570c157-024f-4196-8900-3423a7b0351a.png)
 
 
 ### 寻访记录
 
-![gacha_history](https://user-images.githubusercontent.com/20240686/202845039-9390ed54-f664-49cb-9dc9-97fb4a3959d3.png)
+![gacha_history](https://user-images.githubusercontent.com/20240686/225360671-1c60c74e-1644-4018-9cbf-6ec69c6c5426.png)
 
 
 ### 源石记录
 
-![diamond_history](https://user-images.githubusercontent.com/20240686/202845087-969ee0c8-7423-4480-aacc-8cc2836845bb.png)
+![diamond_history](https://user-images.githubusercontent.com/20240686/225360853-8a0ae4ed-c6b7-4c80-bb8e-32373cba97f5.png)
 
 
 *更多功能正在开发中，敬请期待...*
