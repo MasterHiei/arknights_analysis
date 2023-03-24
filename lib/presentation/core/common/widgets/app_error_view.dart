@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../resources/images.dart';
+import '../../../../core/gen/assets.gen.dart';
 
 class AppErrorView extends StatelessWidget {
   const AppErrorView({super.key});
@@ -11,8 +11,7 @@ class AppErrorView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          Images.horse.path,
+        Assets.images.horse.image(
           width: 400.w,
           fit: BoxFit.contain,
         ),

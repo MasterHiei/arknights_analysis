@@ -1,6 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 
+import '../gen/fonts.gen.dart';
+
 class AppTheme {
   const AppTheme._();
 
@@ -11,12 +13,10 @@ class AppTheme {
   static material.ThemeData materialOf(BuildContext context) =>
       material.ThemeData(
         brightness: FluentTheme.of(context).brightness,
-        fontFamily: _fontFamily,
+        fontFamily: FontFamily.sourceHanSC,
       );
 
-  static const _fontFamily = 'SourceHanSC';
-
   static final _themeData = FluentThemeData(
-    fontFamily: _fontFamily,
+    fontFamily: FontFamily.sourceHanSC,
   );
 }

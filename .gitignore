@@ -56,3 +56,4 @@ installers/
 # Generator related
 *.freezed.dart
 *.g.dart
+*.gen.dart
