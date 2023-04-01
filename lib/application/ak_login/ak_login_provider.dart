@@ -42,7 +42,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
   final StateController<AkLoginType> _loginTypeProvider;
   final StateController<Option<Token>> _tokenProvider;
 
-  void go(BuildContext context) => Routes.portal.go(context);
+  void go(BuildContext context) => const PortalRoute().go(context);
 
   void _startListening() {
     _controller.url.listen(_listenUrl);

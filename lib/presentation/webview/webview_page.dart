@@ -5,19 +5,23 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../application/webview/webview_provider.dart';
-import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
 
 class WebviewPage extends ConsumerWidget {
-  const WebviewPage(this.params, {super.key});
+  const WebviewPage(
+    this.initialUrl, {
+    super.key,
+    this.useNavigationBar = true,
+  });
 
-  final WebviewParams params;
+  final String initialUrl;
+  final bool useNavigationBar;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(webviewProvider(params.initialUrl)).controller;
+    final controller = ref.watch(webviewProvider(initialUrl)).controller;
     final isInitialized = controller.value.isInitialized;
-    final hasNavigationBar = isInitialized && params.enableNavigationBar;
+    final hasNavigationBar = isInitialized && useNavigationBar;
     return NavigationView(
       content: Stack(
         children: [

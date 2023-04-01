@@ -11,7 +11,6 @@ import '../../domain/gacha/gacha_char.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../core/common/widgets/app_badge.dart';
 import '../core/common/widgets/app_empty_view.dart';
-import '../core/routing/route_params.dart';
 import '../core/routing/router.dart';
 import 'widgets/index.dart';
 
@@ -124,10 +123,7 @@ class _DataTableSource extends DataTableSource {
         _buildTextCell(char.pool),
         _buildTextCell(char.ts.dateTime.yMMMdHmsString),
       ],
-      onTap: () => Routes.webview.push(
-        context,
-        extra: WebviewParams(initialUrl: char.prtsUrl),
-      ),
+      onTap: () => WebviewRoute(char.prtsUrl).push(context),
     );
   }
 
