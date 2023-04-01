@@ -18,7 +18,7 @@ void main() async {
   runApp(await _initializeApp());
 }
 
-Future<Widget> _initializeApp() async {
+Future<ProviderScope> _initializeApp() async {
   if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
     await windowManager.ensureInitialized();
     const options = WindowOptions(
