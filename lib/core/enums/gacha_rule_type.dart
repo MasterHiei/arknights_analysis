@@ -11,7 +11,13 @@ enum GachaRuleType {
   linkage('LINKAGE'),
 
   @JsonValue('ATTAIN')
-  attain('ATTAIN');
+  attain('ATTAIN'),
+
+  @JsonValue('SINGLE')
+  single('SINGLE'),
+
+  @JsonValue('CLASSIC')
+  classic('CLASSIC');
 
   const GachaRuleType(this.value);
 
@@ -20,6 +26,7 @@ enum GachaRuleType {
   String get label {
     switch (this) {
       case GachaRuleType.normal:
+      case GachaRuleType.single:
         return '标准寻访';
 
       case GachaRuleType.limited:
@@ -30,6 +37,9 @@ enum GachaRuleType {
 
       case GachaRuleType.attain:
         return '必NEW寻访';
+
+      case GachaRuleType.classic:
+        return '中坚寻访';
     }
   }
 
@@ -37,5 +47,6 @@ enum GachaRuleType {
         limited,
         linkage,
         attain,
+        classic,
       ];
 }
