@@ -17,7 +17,7 @@ class AkLogoutNotifier extends StateNotifier<AkLogoutState> {
 
   final WebviewController _controller;
 
-  void go(BuildContext context) => Routes.splash.go(context);
+  void go(BuildContext context) => const SplashRoute().go(context);
 
   Future<void> logout() async {
     await _controller.initialize();

@@ -1,114 +1,114 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../ak_login/ak_login_page.dart';
-import '../../license/license_page.dart';
 import '../../portal/portal_page.dart';
 import '../../splash/splash_page.dart';
 import '../../webview/webview_page.dart';
-import 'route_params.dart';
 
-enum Routes {
-  splash(name: 'splash', path: '/'),
-  akLogin(name: 'akLogin', path: '/akLogin'),
-  portal(name: 'portal', path: '/portal'),
-  webview(name: 'webview', path: '/webview'),
-  license(name: 'license', path: '/license');
+part 'router.g.dart';
 
-  const Routes({
-    required this.name,
-    required this.path,
+@TypedGoRoute<SplashRoute>(path: '/')
+@immutable
+class SplashRoute extends GoRouteData {
+  const SplashRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      _buildFadeTransitionPage(
+        context,
+        state,
+        child: const SplashPage(),
+      );
+}
+
+@TypedGoRoute<AkLoginRoute>(path: '/akLogin')
+@immutable
+class AkLoginRoute extends GoRouteData {
+  const AkLoginRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      _buildFadeTransitionPage(
+        context,
+        state,
+        child: const AkLoginPage(),
+      );
+}
+
+@TypedGoRoute<PortalRoute>(path: '/portal')
+@immutable
+class PortalRoute extends GoRouteData {
+  const PortalRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      _buildFadeTransitionPage(
+        context,
+        state,
+        child: const PortalPage(),
+      );
+}
+
+@TypedGoRoute<WebviewRoute>(path: '/webview/:initialUrl')
+@immutable
+class WebviewRoute extends GoRouteData {
+  const WebviewRoute(
+    this.initialUrl, {
+    this.useNavigationBar = true,
   });
 
-  final String name;
-  final String path;
+  final String initialUrl;
+  final bool useNavigationBar;
 
-  GoRoute get route {
-    switch (this) {
-      case Routes.splash:
-        return _buildFadeTransitionPage(
-          this,
-          pageBuilder: (_, __) => const SplashPage(),
-        );
-
-      case Routes.akLogin:
-        return _buildFadeTransitionPage(
-          this,
-          pageBuilder: (_, __) => const AkLoginPage(),
-        );
-
-      case Routes.portal:
-        return _buildFadeTransitionPage(
-          this,
-          pageBuilder: (_, __) => const PortalPage(),
-        );
-
-      case Routes.webview:
-        return _buildFadeTransitionPage(
-          this,
-          fullscreenDialog: true,
-          pageBuilder: (_, state) => WebviewPage(state.extra! as WebviewParams),
-        );
-
-      case Routes.license:
-        return _buildFadeTransitionPage(
-          this,
-          fullscreenDialog: true,
-          pageBuilder: (_, __) => const LicensePage(),
-        );
-    }
-  }
-
-  void go(
-    BuildContext context, {
-    Map<String, String> params = const <String, String>{},
-    Map<String, String> queryParams = const <String, String>{},
-    Object? extra,
-  }) =>
-      context.goNamed(
-        name,
-        params: params,
-        queryParams: queryParams,
-        extra: extra,
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      _buildFadeTransitionPage(
+        context,
+        state,
+        fullscreenDialog: true,
+        child: WebviewPage(
+          initialUrl,
+          useNavigationBar: useNavigationBar,
+        ),
       );
+}
 
-  void push(
-    BuildContext context, {
-    Map<String, String> params = const <String, String>{},
-    Map<String, String> queryParams = const <String, String>{},
-    Object? extra,
-  }) =>
-      context.pushNamed(
-        name,
-        params: params,
-        queryParams: queryParams,
-        extra: extra,
+@TypedGoRoute<LicenseRoute>(path: '/license')
+@immutable
+class LicenseRoute extends GoRouteData {
+  const LicenseRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      _buildFadeTransitionPage(
+        context,
+        state,
+        fullscreenDialog: true,
+        child: const LicensePage(),
       );
 }
 
 final router = GoRouter(
-  routes: Routes.values.map((route) => route.route).toList(),
+  routes: $appRoutes,
   debugLogDiagnostics: kDebugMode,
   observers: [BotToastNavigatorObserver()],
 );
 
-GoRoute _buildFadeTransitionPage(
-  Routes route, {
+Page<void> _buildFadeTransitionPage(
+  BuildContext context,
+  GoRouterState state, {
   bool fullscreenDialog = false,
-  required Widget Function(BuildContext, GoRouterState) pageBuilder,
+  required Widget child,
 }) =>
-    GoRoute(
-      name: route.name,
-      path: route.path,
-      pageBuilder: (context, state) => CustomTransitionPage<void>(
-        key: state.pageKey,
-        transitionsBuilder: (_, animation, __, child) => FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-        fullscreenDialog: fullscreenDialog,
-        child: pageBuilder(context, state),
+    CustomTransitionPage<void>(
+      key: state.pageKey,
+      transitionsBuilder: (_, animation, __, child) => FadeTransition(
+        opacity: animation,
+        child: child,
       ),
+      fullscreenDialog: fullscreenDialog,
+      child: child,
     );

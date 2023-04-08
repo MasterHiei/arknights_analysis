@@ -3,9 +3,9 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../core/gen/assets.gen.dart';
 import '../../core/providers.dart';
 import '../../core/theme/app_theme.dart';
-import '../core/resources/images.dart';
 
 class LicensePage extends ConsumerWidget {
   const LicensePage({super.key});
@@ -16,8 +16,7 @@ class LicensePage extends ConsumerWidget {
       data: AppTheme.materialOf(context),
       child: material.LicensePage(
         applicationIcon: ClipOval(
-          child: Image.asset(
-            Images.logo.path,
+          child: Assets.images.logo.image(
             width: 88.w,
             height: 88.w,
             fit: BoxFit.contain,

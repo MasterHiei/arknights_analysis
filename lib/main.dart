@@ -9,6 +9,7 @@ import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'core/constants/constants.dart';
+import 'core/gen/assets.gen.dart';
 import 'core/providers.dart';
 import 'presentation/arknights_analysis_app.dart';
 
@@ -17,7 +18,7 @@ void main() async {
   runApp(await _initializeApp());
 }
 
-Future<Widget> _initializeApp() async {
+Future<ProviderScope> _initializeApp() async {
   if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
     await windowManager.ensureInitialized();
     const options = WindowOptions(
@@ -36,9 +37,9 @@ Future<Widget> _initializeApp() async {
 
   await EasyLocalization.ensureInitialized();
 
-  if (!await _isWebView2Avaliable()) {
+  if (Platform.isWindows && !await _isWebView2Avaliable()) {
     await Process.run(
-      'assets/dependencies/MicrosoftEdgeWebview2Setup.exe',
+      Assets.dependencies.microsoftEdgeWebview2Setup,
       ['/install'],
     );
   }
