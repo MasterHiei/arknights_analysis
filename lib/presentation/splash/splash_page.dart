@@ -69,6 +69,10 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
                 await 3.seconds.delay;
                 ref.invalidate(gachaPoolProvider);
               },
+              localizedError: (_) => Future.delayed(
+                3.seconds,
+                () => ref.read(splashProvider.notifier).fetched(context),
+              ),
               orElse: () {},
             );
           },

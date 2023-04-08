@@ -33,7 +33,7 @@ class SplashNotifier extends ChangeNotifier {
     }
   }
 
-  void _go(BuildContext context) => Routes.akLogin.go(context);
+  void _go(BuildContext context) => const AkLoginRoute().go(context);
 
   Future<void> _startAnimation() async {
     await 200.milliseconds.delay;
