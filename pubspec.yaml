@@ -14,7 +14,7 @@ dependencies:
   badges: 3.1.1
   bot_toast: 4.0.3
   collection: 1.17.0
-  connectivity_plus: 3.0.4
+  connectivity_plus: 3.0.6
   dartx: 1.1.0
   dartz: 0.10.1
   data_table_2: 2.4.2
@@ -22,20 +22,20 @@ dependencies:
   drift: 2.7.0
   easy_localization: 3.0.1
   ffi: 2.0.1
-  file_picker: 5.2.10
+  file_picker: 5.2.11
   fluent_ui: 4.5.0
   flutter:
     sdk: flutter
-  flutter_riverpod: 2.3.5
+  flutter_riverpod: 2.3.6
   flutter_screenutil: 5.7.0
   font_awesome_flutter: 10.4.0
   freezed_annotation: 2.2.0
-  go_router: 6.5.7
+  go_router: 6.5.9
   intl: 0.17.0
   json_annotation: 4.8.0
   logger: 1.3.0
   modal_bottom_sheet: 3.0.0-pre
-  package_info_plus: 3.1.0
+  package_info_plus: 3.1.2
   path: 1.8.2
   path_provider: 2.0.14
   pretty_dio_logger: 1.3.1
@@ -45,7 +45,7 @@ dependencies:
   time: 2.1.3
   url_launcher: 6.1.10
   webview_windows: 0.2.1
-  win32: 3.1.4
+  win32: 4.1.3
   window_manager: 0.3.2
 
 dev_dependencies:
@@ -57,11 +57,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: 2.3.2
-  go_router_builder: 1.2.1
+  go_router_builder: 1.2.2
   json_serializable: 6.6.1
   lint: 2.0.1
-  retrofit_generator: 6.0.0+2
-  riverpod_lint: 1.3.0
+  retrofit_generator: 6.0.0+3
+  riverpod_lint: 1.3.1
 
 flutter_gen:
   output: lib/core/gen
