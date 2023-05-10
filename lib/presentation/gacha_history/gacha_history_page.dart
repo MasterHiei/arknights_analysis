@@ -123,7 +123,7 @@ class _DataTableSource extends DataTableSource {
         _buildTextCell(char.pool),
         _buildTextCell(char.ts.dateTime.yMMMdHmsString),
       ],
-      onTap: () => WebviewRoute(char.prtsUrl).push(context),
+      onTap: () => WebviewRoute(char.prtsUrl).push<void>(context),
     );
   }
 

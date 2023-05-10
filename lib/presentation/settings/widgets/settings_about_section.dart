@@ -184,7 +184,7 @@ class SettingsAboutSection extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 SettingsActionButton(
-                  onPressed: () => const LicenseRoute().push(context),
+                  onPressed: () => const LicenseRoute().push<void>(context),
                   child: const Text('查看开源许可列表'),
                 ),
               ],
