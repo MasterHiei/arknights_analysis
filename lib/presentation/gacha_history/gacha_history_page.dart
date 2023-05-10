@@ -137,12 +137,12 @@ class _DataTableSource extends DataTableSource {
   int get selectedRowCount => 0;
 
   DataCell _buildTextCell(String text) => DataCell(
-        DefaultTextStyle.merge(
-          style: TextStyle(
-            color: Colors.grey[120],
-            fontSize: 15.sp,
-          ),
-          child: Text(text),
+        Text(
+          text,
+          style: DefaultTextStyle.of(context).style.copyWith(
+                color: Colors.grey[120],
+                fontSize: 15.sp,
+              ),
         ),
       );
 }
