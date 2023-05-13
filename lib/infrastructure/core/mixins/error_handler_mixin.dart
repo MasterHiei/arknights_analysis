@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../core/exceptions/app_failure.dart';
 import '../../../core/utils/logger.dart';
 
-class ErrorHandlerMixin {
+mixin ErrorHandlerMixin {
   Future<Either<AppFailure, T>> execute<T>(
     Future<T> Function() run, {
     Connectivity? connectivity,

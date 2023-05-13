@@ -1,6 +1,6 @@
 import '../../../core/constants/constants.dart';
 
-class RequestLimitMixin {
+mixin RequestLimitMixin {
   DateTime? _lastRequestDateTime;
   DateTime? get lastRequestDateTime => _lastRequestDateTime;
 
