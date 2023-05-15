@@ -55,7 +55,9 @@
 
 1. 删除 `Arknights Analysis` 文件夹。
 
-2. （可选）删除 `C:\Users\USER_NAME\AppData\Roaming\club.kimomiya` 文件夹。
+2. （可选）删除 `C:\Users\用户名\AppData\Roaming\club.kimomiya` 文件夹。
+
+    - :warning: 如有需要，请在删除前备份您的使用数据
 
 ## 基本功能
 
