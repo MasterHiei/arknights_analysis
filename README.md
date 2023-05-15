@@ -43,6 +43,14 @@
 
 3. 双击运行 `arknights_analysis.exe` 文件。
 
+### 更新
+
+1. 访问 [最新下载页面](https://github.com/MasterHiei/arknights_analysis/releases/latest) 并直接点击 `arknights-analysis-[版本号]-windwos.zip` 下载。
+
+2. （可选）在本软件的设置页面点击 `检查更新` 按钮进行下载。
+
+3. 将已下载的压缩包解压缩至任意文件夹内（如已存在旧版本，可以选择直接覆盖）。
+
 ### 卸载
 
 1. 删除 `Arknights Analysis` 文件夹。
