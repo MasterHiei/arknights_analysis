@@ -22,12 +22,10 @@ enum GachaDataManagementType {
       case GachaDataManagementType.import:
         router.pop();
         ref.read(persistenceProvider.notifier).import();
-        break;
 
       case GachaDataManagementType.export:
         router.pop();
         ref.read(persistenceProvider.notifier).export();
-        break;
     }
   }
 }

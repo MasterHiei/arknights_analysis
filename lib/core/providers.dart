@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -14,6 +16,7 @@ final _dioProvider = Provider.autoDispose.family((_, String baseUrl) {
   final dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
+      contentType: ContentType.json.toString(),
       validateStatus: (code) => code != null && 200 <= code && code < 400,
     ),
   );

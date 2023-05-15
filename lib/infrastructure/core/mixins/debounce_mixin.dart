@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '../../../core/constants/constants.dart';
 
-class DebounceMixin {
+mixin DebounceMixin {
   Timer? _timer;
 
   void debounce(void Function() action) {

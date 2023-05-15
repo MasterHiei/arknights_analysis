@@ -26,9 +26,9 @@ class GachaStatsPage extends StatelessWidget {
     );
   }
 
-  Widget get _header => Row(
+  Widget get _header => const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           GachaPoolSelector(),
           GachaStatsExtraPanel(),
         ],

@@ -17,7 +17,10 @@ enum GachaRuleType {
   single('SINGLE'),
 
   @JsonValue('CLASSIC')
-  classic('CLASSIC');
+  classic('CLASSIC'),
+
+  @JsonValue('FESCLASSIC')
+  fesClassic('FESCLASSIC');
 
   const GachaRuleType(this.value);
 
@@ -40,6 +43,9 @@ enum GachaRuleType {
 
       case GachaRuleType.classic:
         return '中坚寻访';
+
+      case GachaRuleType.fesClassic:
+        return '中坚甄选';
     }
   }
 

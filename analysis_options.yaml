@@ -1,9 +1,6 @@
 include: package:lint/strict.yaml
 
 analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
   errors:
     invalid_annotation_target: ignore
     missing_required_param: warning
