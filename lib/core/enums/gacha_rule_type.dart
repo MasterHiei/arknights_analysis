@@ -54,5 +54,6 @@ enum GachaRuleType {
         linkage,
         attain,
         classic,
+        fesClassic,
       ];
 }
