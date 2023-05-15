@@ -119,12 +119,12 @@ class _DataTableSource extends material.DataTableSource {
     Color? color,
   }) =>
       material.DataCell(
-        DefaultTextStyle.merge(
-          style: TextStyle(
-            color: color ?? Colors.grey[120],
-            fontSize: 15.sp,
-          ),
-          child: Text(text),
+        Text(
+          text,
+          style: DefaultTextStyle.of(context).style.copyWith(
+                color: color ?? Colors.grey[120],
+                fontSize: 15.sp,
+              ),
         ),
       );
 }

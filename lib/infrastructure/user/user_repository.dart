@@ -62,12 +62,10 @@ class UserRepositoryImpl with ErrorHandlerMixin implements UserRepository {
             case AkLoginType.official:
               final body = TokenBodyOfficialDto(token: token.getOrCrash());
               response = await _remoteDataSource.requestOfficial(body);
-              break;
 
             case AkLoginType.bilibili:
               final body = TokenBodyBilibiliDto(token: token.getOrCrash());
               response = await _remoteDataSource.requestBilibili(body);
-              break;
           }
           final dto = response.data!.copyWith(token: token.getOrCrash());
           await _localDataSource.save(dto);

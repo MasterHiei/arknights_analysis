@@ -86,7 +86,6 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
           _tokenProvider.state = optionOf(Token(token));
           state = const AkLoginState.loggedIn();
         }
-        break;
 
       default:
         final message =
@@ -97,7 +96,6 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
           _controller.clearCookies(),
         ]);
         await _controller.loadUrl(Constants.akLoginPage);
-        break;
     }
     AppLoadingIndicator.dismiss();
   }
