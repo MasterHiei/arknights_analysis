@@ -2,7 +2,7 @@ name: arknights_analysis
 description: An application can help you collect game data more easily via
   offcial api of HyperGryph.
 
-publish_to: ‘none‘
+publish_to: none
 
 version: 0.1.1+1
 
