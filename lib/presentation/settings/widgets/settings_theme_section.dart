@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/enums/i18n.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
@@ -48,19 +50,20 @@ class SettingsThemeSection extends StatelessWidget {
         title: '显示语言',
         child: Consumer(
           builder: (_, ref, __) {
+            final items = I18n.values.map(
+              (i18n) => MenuFlyoutItem(
+                text: Text(
+                  i18n.language,
+                  style: DefaultTextStyle.of(context).style,
+                ),
+                onPressed: () => i18n.enable(context),
+              ),
+            );
             return SizedBox(
               width: 160.w,
               child: DropDownButton(
-                items: [
-                  MenuFlyoutItem(
-                    text: Text(
-                      '简体中文',
-                      style: DefaultTextStyle.of(context).style,
-                    ),
-                    onPressed: null,
-                  ),
-                ],
-                title: const Text('简体中文'),
+                items: items.toList(),
+                title: const Text('language').tr(),
               ),
             );
           },

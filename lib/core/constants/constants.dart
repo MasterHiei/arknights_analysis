@@ -20,7 +20,7 @@ class Constants {
 
   static const debouceDuration = Duration(milliseconds: 300);
 
-  static const minRequestInterval = Duration(minutes: 1);
+  static const minRequestInterval = Duration(minutes: 5);
 
   static const persistenceFileName = 'arknights_analysis_data.json';
 

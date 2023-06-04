@@ -48,7 +48,7 @@ class GameDataRepositoryImpl
               _localDataSource.getLastGachaTableUpdateDateTime();
           final dateTime = DateTime.tryParse(formattedString ?? '');
           if (dateTime == null) {
-            throw const AppFailure.localDataEmpty();
+            throw const AppFailure.emptyLocalData();
           }
           return dateTime;
         },

@@ -42,6 +42,7 @@
     "**/.fvm": true,
     "*.freezed.dart": true,
     "*.g.dart": true,
+    "*.gen.dart": true,
     "*.json": true
   },
   // Remove from file watching

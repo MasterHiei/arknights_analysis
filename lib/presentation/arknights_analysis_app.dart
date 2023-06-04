@@ -19,6 +19,7 @@ class ArknightsAnalysisApp extends StatelessWidget {
         supportedLocales: I18n.locales,
         path: 'assets/translations',
         fallbackLocale: I18n.defaultLocal,
+        useOnlyLangCode: true,
         child: const _MainApp(),
       ),
       designSize: Constants.defaultWindowSize,
