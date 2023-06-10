@@ -1,9 +1,11 @@
 {
   "language": "日本語",
-  "unexpectedError": "未知のエラーが発生しました。",
-  "networkUnreachable": "ネットワークエラーが発生しました。猫が光ケーブルを噛んでないことを確認しましょう。",
-  "remoteServerError": "サーバーの情緒不安定です。しばらくたってから再度お試しください。",
-  "localDataError": "无法加载本地数据，请稍后重试。",
-  "emptyLocalData": "本地数据不存在，请尝试重新获取数据。",
-  "invalidToken": "令牌错误或已失效，请重新登录获取最新的访问令牌。"
+  "error": {
+    "unexpectedError": "未知のエラーが発生しました。",
+    "networkUnreachable": "ネットワークエラーが発生しました。猫が光ケーブルを噛んでないことを確認しましょう。",
+    "remoteServerError": "サーバーの情緒不安定です。しばらくたってから再度お試しください。",
+    "localDataError": "データの読み込みに失敗しました。しばらくたってから再度お試しください。",
+    "emptyLocalData": "データは存在しません。しばらくたってから再度取得してください。",
+    "invalidToken": "トークンは無効です。再度ログインしてください。"
+  }
 }

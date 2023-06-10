@@ -26,15 +26,15 @@ class AppFailure with _$AppFailure {
 
   String get localizedMessage => map(
         localizedError: (f) => f.message,
-        unexpectedError: (f) => '${'unexpectedError'.tr()}\n ${f.e}',
-        networkUnreachable: (_) => 'networkUnreachable'.tr(),
+        unexpectedError: (f) => '${'error.unexpectedError'.tr()}\n ${f.e}',
+        networkUnreachable: (_) => 'error.networkUnreachable'.tr(),
         remoteServerError: (f) {
           final status = f.code == null ? '' : '[${f.code}]';
-          final message = f.message ?? 'remoteServerError'.tr();
+          final message = f.message ?? 'error.remoteServerError'.tr();
           return '$status$message';
         },
-        localDataError: (f) => '${'localDataError'.tr()}\n${f.e}',
-        emptyLocalData: (_) => 'emptyLocalData'.tr(),
-        invalidToken: (_) => 'invalidToken'.tr(),
+        localDataError: (f) => '${'error.localDataError'.tr()}\n${f.e}',
+        emptyLocalData: (_) => 'error.emptyLocalData'.tr(),
+        invalidToken: (_) => 'error.invalidToken'.tr(),
       );
 }
