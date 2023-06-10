@@ -32,9 +32,6 @@ class _MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final virtualWindowFrameBuilder = VirtualWindowFrameInit();
-    final botToastBuilder = BotToastInit();
-
     return FluentApp.router(
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
@@ -43,8 +40,8 @@ class _MainApp extends StatelessWidget {
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
       builder: (_, child) {
-        child = virtualWindowFrameBuilder(context, child);
-        child = botToastBuilder(context, child);
+        child = VirtualWindowFrameInit()(context, child);
+        child = BotToastInit()(context, child);
         return child;
       },
       title: Constants.appName,

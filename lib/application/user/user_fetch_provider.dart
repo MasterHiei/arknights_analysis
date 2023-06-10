@@ -86,7 +86,7 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
     final failureOrUser = await _repository.get(token);
     return failureOrUser.fold(
       (failure) => throw failure,
-      (user) => _userProvider.state = optionOf(user),
+      (user) => _userProvider.update((_) => optionOf(user)),
     );
   }
 }
