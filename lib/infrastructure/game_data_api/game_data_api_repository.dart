@@ -20,7 +20,7 @@ final gameDataApiRepositoryProvider =
 abstract class GameDataApiRepository {
   Future<Either<AppFailure, DateTime>> getLastGachaTableUpdateDateTime();
 
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDate();
+  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime();
 
   Future<Either<AppFailure, Unit>> setLastGachaTableUpdateDateTime(
     DateTime value,
@@ -55,7 +55,7 @@ class GameDataRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDate() =>
+  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime() =>
       execute(
         () async {
           final dtos = await _remoteDataSource.fetchLastGachaTableCommit();
