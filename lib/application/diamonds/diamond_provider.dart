@@ -53,9 +53,7 @@ class DiamondNotifier extends StateNotifier<DiamondState> {
       (failure) => state = DiamondState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {
-          if (!mounted) {
-            state = const DiamondState.success();
-          }
+          state = const DiamondState.success();
           return;
         }
 

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/game_data_api_local_data_source.dart';
 import 'data_sources/game_data_api_remote_data_source.dart';
 
@@ -28,7 +28,7 @@ abstract class GameDataApiRepository {
 }
 
 class GameDataRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements GameDataApiRepository {
   const GameDataRepositoryImpl(
     this._connectivity,

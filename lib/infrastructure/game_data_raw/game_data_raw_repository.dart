@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../core/types/types.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/game_data_raw_local_data_source.dart';
 import 'data_sources/game_data_raw_remote_data_source.dart';
 import 'dtos/gacha_table_dto.dart';
@@ -26,7 +26,7 @@ abstract class GameDataRawRepository {
 }
 
 class GameDataRawRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements GameDataRawRepository {
   const GameDataRawRepositoryImpl(
     this._connectivity,

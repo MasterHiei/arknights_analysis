@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../core/exceptions/app_failure.dart';
 import '../../../core/utils/logger.dart';
 
-mixin ErrorHandlerMixin {
+mixin APIErrorHandlerMixin {
   Future<Either<AppFailure, T>> execute<T>(
     Future<T> Function() run, {
     Connectivity? connectivity,
@@ -19,7 +19,7 @@ mixin ErrorHandlerMixin {
       return right(await run());
     } on AppFailure catch (e) {
       return left(e);
-    } on DioError catch (e, stackTrace) {
+    } on DioException catch (e, stackTrace) {
       logger.e(e, e, stackTrace);
 
       final code = e.response?.statusCode;

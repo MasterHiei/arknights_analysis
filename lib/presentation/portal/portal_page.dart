@@ -5,12 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
-import '../../application/ak_logout/states/ak_logout_state.dart';
 import '../../application/diamonds/diamond_provider.dart';
-import '../../application/diamonds/states/diamond_state.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
-import '../../application/gacha/states/gacha_state.dart';
 import '../../application/portal/pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
@@ -145,7 +142,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenUserState() => ref.listen<AsyncValue<void>>(
+  void _listenUserState() => ref.listen(
         userFetchProvider,
         (_, next) => next.maybeWhen(
           error: (failure, _) async {
@@ -167,7 +164,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
   void _listenGachaStates() {
     ref.listen(gachaPoolSelectorProvider, (_, __) {});
-    ref.listen<GachaState>(
+    ref.listen(
       gachaProvider,
       (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
@@ -185,7 +182,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenDiamondState() => ref.listen<DiamondState>(
+  void _listenDiamondState() => ref.listen(
         diamondProvider,
         (_, next) => next.maybeWhen<void>(
           failure: (failure) => AppFlushBar.show(
@@ -251,7 +248,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         ),
       );
 
-  void _listenLogoutState() => ref.listen<AkLogoutState>(
+  void _listenLogoutState() => ref.listen(
         akLogoutProvider,
         (_, next) => next.maybeWhen<void>(
           loggedOut: () => ref.read(akLogoutProvider.notifier).go(context),

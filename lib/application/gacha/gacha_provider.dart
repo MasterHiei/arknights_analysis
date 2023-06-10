@@ -53,9 +53,7 @@ class GachaNotifier extends StateNotifier<GachaState> {
       (failure) => state = GachaState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {
-          if (!mounted) {
-            state = const GachaState.success();
-          }
+          state = const GachaState.success();
           return;
         }
 
