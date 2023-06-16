@@ -36,7 +36,6 @@
     // strings. This setting will prevent that.
     "editor.wordBasedSuggestions": false,
   },
-  "dart.flutterSdkPath": ".fvm/flutter_sdk",
   // Remove .fvm files from search
   "search.exclude": {
     "**/.fvm": true,
