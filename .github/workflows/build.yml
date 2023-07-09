@@ -55,7 +55,9 @@ jobs:
             build-runner-
 
       - name: Run build_runner
-        run: flutter packages pub run build_runner build -d
+        run: |
+          dart run build_runner build -d
+          dart run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
 
       - name: Run analyze
         run: flutter analyze --fatal-infos
@@ -114,7 +116,9 @@ jobs:
             build-runner-
 
       - name: Run build_runner
-        run: flutter packages pub run build_runner build -d
+        run: |
+          dart run build_runner build -d
+          dart run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
 
       - name: Bump build number
         run: |

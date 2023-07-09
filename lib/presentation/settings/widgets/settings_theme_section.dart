@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/enums/i18n.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
 import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
@@ -14,7 +15,7 @@ class SettingsThemeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsSectionView(
-      title: '外观',
+      title: LocaleKeys.settings_theme_title.tr(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,12 +27,12 @@ class SettingsThemeSection extends StatelessWidget {
   }
 
   Widget _buildDarkModeSwitch(BuildContext context) => SettingsSectionItemView(
-        title: '夜间模式',
+        title: LocaleKeys.settings_theme_darkMode_title.tr(),
         child: Consumer(
           builder: (_, ref, __) {
             return ToggleSwitch(
               checked: false,
-              content: const Text('关'),
+              content: const Text(LocaleKeys.settings_theme_darkMode_off).tr(),
               style: const ToggleSwitchThemeData(margin: EdgeInsets.zero),
               onChanged: (_) {
                 // TODO: waiting for implementation
@@ -47,13 +48,13 @@ class SettingsThemeSection extends StatelessWidget {
 
   Widget _buildLanguageSelector(BuildContext context) =>
       SettingsSectionItemView(
-        title: '显示语言',
+        title: LocaleKeys.settings_theme_language.tr(),
         child: Consumer(
           builder: (_, ref, __) {
             final items = I18n.values.map(
               (i18n) => MenuFlyoutItem(
                 text: Text(
-                  i18n.language,
+                  i18n.name,
                   style: DefaultTextStyle.of(context).style,
                 ),
                 onPressed: () => i18n.enable(context),
@@ -63,7 +64,7 @@ class SettingsThemeSection extends StatelessWidget {
               width: 160.w,
               child: DropDownButton(
                 items: items.toList(),
-                title: const Text('language').tr(),
+                title: const Text(LocaleKeys.language).tr(),
               ),
             );
           },

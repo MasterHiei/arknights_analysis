@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../generated/locale_keys.g.dart';
+
 part 'app_failure.freezed.dart';
 
 @freezed
@@ -26,15 +28,17 @@ class AppFailure with _$AppFailure {
 
   String get localizedMessage => map(
         localizedError: (f) => f.message,
-        unexpectedError: (f) => '${'error.unexpectedError'.tr()}\n ${f.e}',
-        networkUnreachable: (_) => 'error.networkUnreachable'.tr(),
+        unexpectedError: (f) =>
+            '${LocaleKeys.error_unexpectedError.tr()}\n${f.e}',
+        networkUnreachable: (_) => LocaleKeys.error_networkUnreachable.tr(),
         remoteServerError: (f) {
           final status = f.code == null ? '' : '[${f.code}]';
-          final message = f.message ?? 'error.remoteServerError'.tr();
+          final message = f.message ?? LocaleKeys.error_remoteServerError.tr();
           return '$status$message';
         },
-        localDataError: (f) => '${'error.localDataError'.tr()}\n${f.e}',
-        emptyLocalData: (_) => 'error.emptyLocalData'.tr(),
-        invalidToken: (_) => 'error.invalidToken'.tr(),
+        localDataError: (f) =>
+            '${LocaleKeys.error_localDataError.tr()}\n${f.e}',
+        emptyLocalData: (_) => LocaleKeys.error_emptyLocalData.tr(),
+        invalidToken: (_) => LocaleKeys.error_invalidToken.tr(),
       );
 }

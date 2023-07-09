@@ -25,5 +25,8 @@ class LatestRelease with _$LatestRelease {
 
   String get assetName => assets.firstOrNull?.name ?? '';
 
-  String get browserDownloadUrl => assets.firstOrNull?.browserDownloadUrl ?? '';
+  String get browserDownloadUrl =>
+      assets.firstOrNull?.browserDownloadUrl
+          .replaceFirst('github.com', 'download.fgit.ml') ??
+      '';
 }

@@ -10,22 +10,43 @@ part 'check_for_updates_state.freezed.dart';
 class CheckForUpdatesState with _$CheckForUpdatesState {
   const factory CheckForUpdatesState({
     required bool isChecking,
+    required bool isManually,
     required String currentVersion,
-    required Option<LatestRelease> latestReleaseOption,
-    required Option<AppFailure> failureOption,
+    required Option<Either<AppFailure, LatestRelease>>
+        failureOrLatestReleaseOption,
   }) = _CheckForUpdatesState;
 
   factory CheckForUpdatesState.init() => CheckForUpdatesState(
         isChecking: false,
+        isManually: false,
         currentVersion: '',
-        latestReleaseOption: none(),
-        failureOption: none(),
+        failureOrLatestReleaseOption: none(),
       );
 
   const CheckForUpdatesState._();
 
-  bool get hasNewVersion => latestReleaseOption.fold(
+  Option<AppFailure> get failureOption => failureOrLatestReleaseOption.fold(
+        () => none(),
+        (failureOrLatest) => failureOrLatest.fold(
+          (failure) => optionOf(failure),
+          (_) => none(),
+        ),
+      );
+
+  Option<LatestRelease> get latestReleaseOption =>
+      failureOrLatestReleaseOption.fold(
+        () => none(),
+        (failureOrLatest) => failureOrLatest.fold(
+          (_) => none(),
+          (latest) => optionOf(latest),
+        ),
+      );
+
+  bool get hasNewVersion => failureOrLatestReleaseOption.fold(
         () => false,
-        (latest) => latest.version != currentVersion,
+        (failureOrLatest) => failureOrLatest.fold(
+          (_) => false,
+          (latest) => latest.version != currentVersion,
+        ),
       );
 }

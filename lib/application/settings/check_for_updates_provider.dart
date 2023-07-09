@@ -25,21 +25,22 @@ class CheckForUpdatesNotifier extends StateNotifier<CheckForUpdatesState> {
   final PackageInfo _packageInfo;
   final SettingsRepository _repository;
 
-  Future<void> checkForUpdates() async {
+  Future<void> checkForUpdates({bool isManually = false}) async {
     state = state.copyWith(
       isChecking: true,
+      isManually: isManually,
       currentVersion: 'v${_packageInfo.version}',
-      failureOption: none(),
+      failureOrLatestReleaseOption: none(),
     );
     final failureOrLatest = await _repository.fetchLatestRelease();
     state = failureOrLatest.fold(
       (failure) => state.copyWith(
         isChecking: false,
-        failureOption: optionOf(failure),
+        failureOrLatestReleaseOption: optionOf(left(failure)),
       ),
       (latest) => state.copyWith(
         isChecking: false,
-        latestReleaseOption: optionOf(latest),
+        failureOrLatestReleaseOption: optionOf(right(latest)),
       ),
     );
   }

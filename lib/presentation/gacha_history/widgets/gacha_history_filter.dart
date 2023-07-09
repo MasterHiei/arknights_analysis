@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../application/gacha/gacha_history_filter_provider.dart';
 import '../../../core/enums/rarity.dart';
+import '../../../generated/locale_keys.g.dart';
 
 final _isRaritySelected = Provider.autoDispose.family((ref, Rarity rarity) {
   final provider = ref.watch(gachaHistoryFilterProvider);
@@ -50,7 +52,10 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('寻访记录', style: TextStyle(fontSize: 24.sp)),
+          Text(
+            LocaleKeys.features_gachaHistory_title,
+            style: TextStyle(fontSize: 24.sp),
+          ).tr(),
           SizedBox(height: 24.h),
           Expander(
             header: Row(
@@ -138,8 +143,8 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
         }
 
         final children = ref.watch(_selectedPools).map(
-              (pool) => Chip(
-                text: Tooltip(
+              (pool) => Button(
+                child: Tooltip(
                   message: '点击以取消选择',
                   useMousePosition: false,
                   child: Padding(

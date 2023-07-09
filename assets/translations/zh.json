@@ -7,5 +7,81 @@
     "localDataError": "无法加载本地数据，请稍后重试。",
     "emptyLocalData": "本地数据不存在，请尝试重新获取数据。",
     "invalidToken": "令牌错误或已失效，请重新登录获取最新的访问令牌。"
+  },
+  "dialog": {
+    "title": "确认",
+    "confirm": "确定",
+    "cancel": "取消"
+  },
+  "app": {
+    "close": {
+      "dialog": {
+        "content": "确定关闭本程序吗？",
+        "confirm": "关闭"
+      }
+    },
+    "update": {
+      "check": "检查更新",
+      "isNewest": "您的软件是最新版本。",
+      "begin": "开始下载新版本。",
+      "prepare": "准备开始下载...",
+      "done": "新版本下载完成。",
+      "dialog": {
+        "title": "更新",
+        "hasNewVersion": "检测到新版本。",
+        "automatically": "您可以点击下载更新，或从",
+        "urlPlaceholder": "此处",
+        "manually": "手动下载。",
+        "confirm": "下载更新"
+      }
+    },
+    "logout": {
+      "title": "退出登录",
+      "dialog": {
+        "content": "确定退出登录吗？",
+        "confirm": "退出"
+      }
+    }
+  },
+  "features": {
+    "gachaStats": {
+      "title": "寻访统计",
+      "updated": "数据已更新。",
+      "updateTooFrequently": "太快了吧！这还不到{minutes}分钟呢！"
+    },
+    "gachaHistory": {
+      "title": "寻访记录"
+    },
+    "diamondHistory": {
+      "title": "源石记录"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "theme": {
+      "title": "外观",
+      "darkMode": {
+        "title": "夜间模式",
+        "on": "开",
+        "off": "关"
+      },
+      "language": "显示语言"
+    },
+    "about": {
+      "title": "关于",
+      "information": "感谢您使用本软件",
+      "disclaimer": "免责声明",
+      "copyrightNotice": "版权声明",
+      "version": {
+        "title": "版本",
+        "current": "当前版本: ",
+        "latest": "最新版本: "
+      },
+      "acknowledgement": {
+        "title": "鸣谢",
+        "gameData": "游戏数据: ",
+        "licenses": "查看开源许可列表"
+      }
+    }
   }
 }
