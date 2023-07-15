@@ -66,15 +66,26 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
                   color: Colors.grey[140],
                 ),
                 SizedBox(width: 8.w),
-                Text('数据过滤', style: TextStyle(fontSize: 15.sp)),
+                Text(
+                  LocaleKeys.features_gachaHistory_filter_title,
+                  style: TextStyle(fontSize: 15.sp),
+                ).tr(),
               ],
             ),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _FilterItem(label: '寻访名', child: _poolFilter),
+                _FilterItem(
+                  label:
+                      LocaleKeys.features_gachaHistory_filter_labels_gacha.tr(),
+                  child: _poolFilter,
+                ),
                 SizedBox(height: 12.h),
-                _FilterItem(label: '稀有度', child: _rarityFilter),
+                _FilterItem(
+                  label: LocaleKeys.features_gachaHistory_filter_labels_rarity
+                      .tr(),
+                  child: _rarityFilter,
+                ),
               ],
             ),
           ),
@@ -85,19 +96,16 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
 
   Widget get _poolFilter {
     final showAllSwitch = Consumer(
-      builder: (_, ref, __) {
-        final checked = ref.watch(_showAllPools);
-        return ToggleSwitch(
-          checked: checked,
-          onChanged: (value) => ref
-              .read(gachaHistoryFilterProvider.notifier)
-              .switchShowAllPools(value: value),
-          content: Text(
-            checked ? '全部寻访' : '部分寻访',
-            style: TextStyle(fontSize: 15.sp),
-          ),
-        );
-      },
+      builder: (_, ref, __) => ToggleSwitch(
+        checked: ref.watch(_showAllPools),
+        onChanged: (value) => ref
+            .read(gachaHistoryFilterProvider.notifier)
+            .switchShowAllPools(value: value),
+        content: Text(
+          LocaleKeys.gacha_type_all,
+          style: TextStyle(fontSize: 15.sp),
+        ).tr(),
+      ),
     );
 
     final poolSelector = Consumer(
@@ -128,9 +136,11 @@ class _GachaHistoryFilterState extends State<GachaHistoryFilter> {
         return DropDownButton(
           items: items,
           title: Text(
-            isCompleted ? '无剩余寻访' : '可选择寻访',
+            isCompleted
+                ? LocaleKeys.features_gachaHistory_filter_labels_noRemaining
+                : LocaleKeys.features_gachaHistory_filter_labels_selectable,
             style: TextStyle(fontSize: 15.sp),
-          ),
+          ).tr(),
           disabled: selectablePools.isEmpty,
         );
       },

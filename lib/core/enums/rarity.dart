@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../generated/locale_keys.g.dart';
 
 enum Rarity {
   @JsonValue(0)
@@ -24,30 +27,7 @@ enum Rarity {
 
   final Color color;
 
-  String get label {
-    switch (index) {
-      case 0:
-        return '一星';
-
-      case 1:
-        return '二星';
-
-      case 2:
-        return '三星';
-
-      case 3:
-        return '四星';
-
-      case 4:
-        return '五星';
-
-      case 5:
-        return '六星';
-
-      default:
-        return '${index + 1}星';
-    }
-  }
+  String get label => LocaleKeys.gacha_rarity.plural(index + 1);
 
   String get fullLabel => '$label干员';
 

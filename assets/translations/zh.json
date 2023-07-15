@@ -50,11 +50,32 @@
       "updateTooFrequently": "太快了吧！这还不到{minutes}分钟呢！"
     },
     "gachaHistory": {
-      "title": "寻访记录"
+      "title": "寻访记录",
+      "filter": {
+        "title": "数据过滤",
+        "labels": {
+          "gacha": "寻访名",
+          "rarity": "稀有度",
+          "selectable": "可选择寻访",
+          "noRemaining": "无剩余寻访"
+        }
+      }
     },
     "diamondHistory": {
       "title": "源石记录"
     }
+  },
+  "gacha": {
+    "type": {
+      "all": "全部寻访",
+      "normal": "标准寻访",
+      "limited": "限定寻访",
+      "linkage": "联动寻访",
+      "attain": "跨年寻访",
+      "classic": "中坚寻访",
+      "fesClassic": "中坚甄选"
+    },
+    "rarity": "{}星"
   },
   "settings": {
     "title": "设置",

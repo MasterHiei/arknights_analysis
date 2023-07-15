@@ -208,9 +208,7 @@ class _StatsView extends ConsumerWidget {
                     text: rarity.label,
                     style: TextStyle(color: rarity.color),
                   ),
-                  const TextSpan(
-                    text: ' 平均出货次数 ',
-                  ),
+                  const TextSpan(text: ' 平均出货次数 '),
                   TextSpan(
                     text: stats.caclAvgPulls(rarity),
                     style: TextStyle(color: Colors.green.lighter),

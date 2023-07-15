@@ -50,11 +50,32 @@
       "updateTooFrequently": "早すぎる！まだ{minutes}分も経ってないよ！"
     },
     "gachaHistory": {
-      "title": "ガチャ履歴"
+      "title": "ガチャ履歴",
+      "filter": {
+        "title": "フィルタ",
+        "labels": {
+          "gacha": "ガチャ",
+          "rarity": "レア度",
+          "selectable": "ガチャを選ぶ",
+          "noRemaining": "残りなし"
+        }
+      }
     },
     "diamondHistory": {
       "title": "源石履歴"
     }
+  },
+  "gacha": {
+    "type": {
+      "all": "すべて",
+      "normal": "スタンダード",
+      "limited": "リミテッド",
+      "linkage": "コラボ",
+      "attain": "スペシャル",
+      "classic": "中坚寻访",
+      "fesClassic": "中坚甄选"
+    },
+    "rarity": "星{}"
   },
   "settings": {
     "title": "設定",

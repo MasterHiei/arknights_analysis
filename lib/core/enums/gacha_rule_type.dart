@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../generated/locale_keys.g.dart';
 
 enum GachaRuleType {
   @JsonValue('NORMAL')
@@ -30,22 +33,22 @@ enum GachaRuleType {
     switch (this) {
       case GachaRuleType.normal:
       case GachaRuleType.single:
-        return '标准寻访';
+        return LocaleKeys.gacha_type_normal.tr();
 
       case GachaRuleType.limited:
-        return '限定寻访';
+        return LocaleKeys.gacha_type_limited.tr();
 
       case GachaRuleType.linkage:
-        return '联动寻访';
+        return LocaleKeys.gacha_type_linkage.tr();
 
       case GachaRuleType.attain:
-        return '必NEW寻访';
+        return LocaleKeys.gacha_type_attain.tr();
 
       case GachaRuleType.classic:
-        return '中坚寻访';
+        return LocaleKeys.gacha_type_classic.tr();
 
       case GachaRuleType.fesClassic:
-        return '中坚甄选';
+        return LocaleKeys.gacha_type_fesClassic.tr();
     }
   }
 
