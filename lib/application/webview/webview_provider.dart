@@ -30,7 +30,7 @@ class WebviewNotifier extends ChangeNotifier {
       ]);
       await controller.loadUrl(initialUrl);
     } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
       AppFailure.unexpectedError(e);
     } finally {
       notifyListeners();

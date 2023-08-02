@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../application/settings/check_for_updates_provider.dart';
 import '../../../application/settings/download_new_version_provider.dart';
 import '../../../core/constants/constants.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../core/routing/router.dart';
 import 'settings_action_button.dart';
 import 'settings_section_item_view.dart';
@@ -25,11 +27,7 @@ final _latestVersion = Provider.autoDispose((ref) {
 });
 
 final _isDownloadingUpdates = Provider.autoDispose(
-  (ref) => ref.watch(downloadNewVersionProvider).maybeMap(
-        beginDownload: (_) => true,
-        downloading: (_) => true,
-        orElse: () => false,
-      ),
+  (ref) => ref.watch(downloadNewVersionProvider).isDownloading,
 );
 
 final _isCheckingOrDownloading = Provider.autoDispose((ref) {
@@ -39,11 +37,7 @@ final _isCheckingOrDownloading = Provider.autoDispose((ref) {
 });
 
 final _downloadProgress = Provider.autoDispose(
-  (ref) => ref.watch(downloadNewVersionProvider).maybeMap(
-        beginDownload: (_) => '准备开始下载...',
-        downloading: (state) => state.progress,
-        orElse: () => '',
-      ),
+  (ref) => ref.watch(downloadNewVersionProvider).downloadProgress,
 );
 
 class SettingsAboutSection extends StatelessWidget {
@@ -52,12 +46,12 @@ class SettingsAboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsSectionView(
-      title: '关于',
+      title: LocaleKeys.settings_about_title.tr(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SettingsSectionItemView(
-            title: '感谢您使用本软件',
+            title: LocaleKeys.settings_about_information.tr(),
             child: Text.rich(
               TextSpan(
                 children: [
@@ -81,9 +75,9 @@ class SettingsAboutSection extends StatelessWidget {
               style: const TextStyle(color: Colors.black),
             ),
           ),
-          const SettingsSectionItemView(
-            title: '免责声明',
-            child: Text(
+          SettingsSectionItemView(
+            title: LocaleKeys.settings_about_disclaimer.tr(),
+            child: const Text(
               '本软件不会以任何方式获取和储存您的明日方舟游戏帐号（包括手机号、邮箱）和密码。\n'
               '您应该妥善保管您的帐号信息，不应在非明日方舟/鹰角网络网站输入游戏帐号、密码、验证码信息，'
               '不应通过非官方渠道下载本软件，否则可能导致您的帐号泄露及财产受损。\n'
@@ -91,7 +85,7 @@ class SettingsAboutSection extends StatelessWidget {
             ),
           ),
           SettingsSectionItemView(
-            title: '内容声明',
+            title: LocaleKeys.settings_about_copyrightNotice.tr(),
             child: Text.rich(
               TextSpan(
                 children: [
@@ -118,13 +112,13 @@ class SettingsAboutSection extends StatelessWidget {
             ),
           ),
           SettingsSectionItemView(
-            title: '版本',
+            title: LocaleKeys.settings_about_version_title.tr(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const Text('当前版本：'),
+                    const Text(LocaleKeys.settings_about_version_current).tr(),
                     SizedBox(width: 8.w),
                     Consumer(
                       builder: (_, ref, __) => Text(
@@ -135,7 +129,7 @@ class SettingsAboutSection extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Text('最新版本：'),
+                    const Text(LocaleKeys.settings_about_version_latest).tr(),
                     SizedBox(width: 8.w),
                     Consumer(
                       builder: (_, ref, __) => Text(
@@ -149,13 +143,13 @@ class SettingsAboutSection extends StatelessWidget {
                   builder: (_, ref, __) => SettingsActionButton(
                     onPressed: ref.watch(_isCheckingOrDownloading)
                         ? null
-                        : ref
+                        : () => ref
                             .read(checkForUpdatesProvider.notifier)
-                            .checkForUpdates,
+                            .checkForUpdates(isManually: true),
                     child: Text(
                       ref.watch(_isDownloadingUpdates)
                           ? ref.watch(_downloadProgress)
-                          : '检查更新',
+                          : LocaleKeys.app_update_check.tr(),
                     ),
                   ),
                 ),
@@ -163,14 +157,17 @@ class SettingsAboutSection extends StatelessWidget {
             ),
           ),
           SettingsSectionItemView(
-            title: '鸣谢',
+            title: LocaleKeys.settings_about_acknowledgement_title.tr(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text.rich(
                   TextSpan(
                     children: [
-                      const TextSpan(text: '游戏数据：'),
+                      TextSpan(
+                        text: LocaleKeys.settings_about_acknowledgement_gameData
+                            .tr(),
+                      ),
                       TextSpan(
                         text: ' Kengxxiao/ArknightsGameData ',
                         style: TextStyle(color: Colors.blue.normal),
@@ -185,7 +182,9 @@ class SettingsAboutSection extends StatelessWidget {
                 SizedBox(height: 8.h),
                 SettingsActionButton(
                   onPressed: () => const LicenseRoute().push<void>(context),
-                  child: const Text('查看开源许可列表'),
+                  child: const Text(
+                    LocaleKeys.settings_about_acknowledgement_licenses,
+                  ).tr(),
                 ),
               ],
             ),

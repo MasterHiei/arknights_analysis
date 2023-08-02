@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../application/settings/check_for_updates_provider.dart';
+import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import 'widgets/index.dart';
 
@@ -14,7 +16,7 @@ class SettingsPage extends ConsumerWidget {
     _listenVersionState(context, ref);
 
     final items = [
-      Text('设置', style: TextStyle(fontSize: 24.sp)),
+      Text(LocaleKeys.settings_title, style: TextStyle(fontSize: 24.sp)).tr(),
       const SettingsThemeSection(),
       const SettingsAboutSection(),
     ];
@@ -32,21 +34,24 @@ class SettingsPage extends ConsumerWidget {
             return;
           }
 
-          next.failureOption.fold(
+          next.failureOrLatestReleaseOption.fold(
             () {},
-            (failure) => AppFlushBar.show(
-              context,
-              message: failure.localizedMessage,
+            (failureOrLatest) => failureOrLatest.fold(
+              (failure) => AppFlushBar.show(
+                context,
+                message: failure.localizedMessage,
+              ),
+              (_) {
+                if (next.isManually && !next.hasNewVersion) {
+                  AppFlushBar.show(
+                    context,
+                    message: LocaleKeys.app_update_isNewest.tr(),
+                    severity: FlushBarSeverity.success,
+                  );
+                }
+              },
             ),
           );
-
-          if (!next.hasNewVersion) {
-            AppFlushBar.show(
-              context,
-              message: '您的软件是最新版本。',
-              severity: FlushBarSeverity.success,
-            );
-          }
         },
       );
 }

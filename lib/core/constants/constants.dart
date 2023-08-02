@@ -20,7 +20,7 @@ class Constants {
 
   static const debouceDuration = Duration(milliseconds: 300);
 
-  static const minRequestInterval = Duration(minutes: 1);
+  static const minRequestInterval = Duration(minutes: 5);
 
   static const persistenceFileName = 'arknights_analysis_data.json';
 
@@ -46,7 +46,7 @@ class Constants {
       'https://api.github.com/repos/Kengxxiao/ArknightsGameData';
 
   static const gameDataRawBaseUrl =
-      'https://raw.fastgit.org/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
+      'https://raw.gitmirror.com/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata';
 
   static const repoDataApiBaseUrl =
       'https://api.github.com/repos/MasterHiei/arknights_analysis';

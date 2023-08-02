@@ -76,24 +76,22 @@ class _StatsView extends ConsumerWidget {
       itemBuilder: (_, index) {
         final pool = pools[index];
         return ref.watch(gachaStatsProvider(pool)).maybeWhen(
-              data: (stats) {
-                return Card(
-                  child: DefaultTextStyle.merge(
-                    style: TextStyle(
-                      color: Colors.grey[120],
-                      fontSize: 14.sp,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(child: _buildOverview(pool, stats)),
-                        Expanded(child: _buildProbability(stats)),
-                        Expanded(flex: 6, child: _buildChars(stats)),
-                      ],
-                    ),
+              data: (stats) => Card(
+                child: DefaultTextStyle.merge(
+                  style: TextStyle(
+                    color: Colors.grey[120],
+                    fontSize: 14.sp,
                   ),
-                );
-              },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: _buildOverview(pool, stats)),
+                      Expanded(child: _buildProbability(stats)),
+                      Expanded(flex: 6, child: _buildChars(stats)),
+                    ],
+                  ),
+                ),
+              ),
               orElse: () => const SizedBox.shrink(),
             );
       },
@@ -210,9 +208,7 @@ class _StatsView extends ConsumerWidget {
                     text: rarity.label,
                     style: TextStyle(color: rarity.color),
                   ),
-                  const TextSpan(
-                    text: ' 平均出货次数 ',
-                  ),
+                  const TextSpan(text: ' 平均出货次数 '),
                   TextSpan(
                     text: stats.caclAvgPulls(rarity),
                     style: TextStyle(color: Colors.green.lighter),

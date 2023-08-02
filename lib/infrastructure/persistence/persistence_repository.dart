@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/persistence_local_data_source.dart';
 
 final persistenceRepositoryProvider =
@@ -28,7 +28,7 @@ abstract class PersistenceRepository {
 }
 
 class PersistenceRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements PersistenceRepository {
   const PersistenceRepositoryImpl(this._localDataSource);
 

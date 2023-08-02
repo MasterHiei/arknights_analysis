@@ -40,7 +40,7 @@ class DownloadNewVersionNotifier
       return;
     }
 
-    state = const DownloadNewVersionState.beginDownload();
+    state = const DownloadNewVersionState.preparing();
     try {
       await _dio.download(
         url,

@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../core/exceptions/app_failure.dart';
 import '../../../core/utils/logger.dart';
 
-mixin ErrorHandlerMixin {
+mixin APIErrorHandlerMixin {
   Future<Either<AppFailure, T>> execute<T>(
     Future<T> Function() run, {
     Connectivity? connectivity,
@@ -19,8 +19,8 @@ mixin ErrorHandlerMixin {
       return right(await run());
     } on AppFailure catch (e) {
       return left(e);
-    } on DioError catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+    } on DioException catch (e, stackTrace) {
+      logger.e(e, error: e, stackTrace: stackTrace);
 
       final code = e.response?.statusCode;
       if (code == HttpStatus.unauthorized) {
@@ -29,7 +29,7 @@ mixin ErrorHandlerMixin {
       final message = e.response?.statusMessage ?? e.message;
       return left(AppFailure.remoteServerError(message: message, code: code));
     } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
       return left(AppFailure.unexpectedError(e));
     }
   }

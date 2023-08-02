@@ -9,7 +9,7 @@ import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../core/common/dtos/token_body_bilibili_dto.dart';
 import '../core/common/dtos/token_body_official_dto.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/user_local_data_source.dart';
 import 'data_sources/user_remote_data_source.dart';
 import 'dtos/user_response_dto.dart';
@@ -31,7 +31,7 @@ abstract class UserRepository {
   });
 }
 
-class UserRepositoryImpl with ErrorHandlerMixin implements UserRepository {
+class UserRepositoryImpl with APIErrorHandlerMixin implements UserRepository {
   const UserRepositoryImpl(
     this._connectivity,
     this._localDataSource,

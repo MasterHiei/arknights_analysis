@@ -14,7 +14,7 @@ import '../../domain/gacha/gacha_pool.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/gacha_local_data_source.dart';
 import 'data_sources/gacha_remote_data_source.dart';
 
@@ -38,6 +38,7 @@ abstract class GachaRepository {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    bool includeNew2023 = true,
   });
 
   Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
@@ -57,7 +58,7 @@ abstract class GachaRepository {
   });
 }
 
-class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
+class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
   const GachaRepositoryImpl(
     this._connectivity,
     this._localDataSource,
@@ -103,12 +104,14 @@ class GachaRepositoryImpl with ErrorHandlerMixin implements GachaRepository {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    bool includeNew2023 = true,
   }) =>
       execute(
         () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
+          includeNew2023: includeNew2023,
         ),
       );
 

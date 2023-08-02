@@ -10,7 +10,7 @@ import '../../domain/core/common/pagination.dart';
 import '../../domain/diamonds/diamond_change.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/diamond_local_data_source.dart';
 import 'data_sources/diamond_remote_data_source.dart';
 
@@ -34,7 +34,7 @@ abstract class DiamondRepository {
 }
 
 class DiamondRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements DiamondRepository {
   const DiamondRepositoryImpl(
     this._connectivity,

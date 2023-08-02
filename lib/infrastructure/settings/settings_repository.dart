@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
 import '../../domain/settings/latest_release.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/settings_remote_data_source.dart';
 
 final settingsRepositoryProvider = Provider.autoDispose<SettingsRepository>(
@@ -20,7 +20,7 @@ abstract class SettingsRepository {
 }
 
 class SettingsRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements SettingsRepository {
   const SettingsRepositoryImpl(
     this._connectivity,

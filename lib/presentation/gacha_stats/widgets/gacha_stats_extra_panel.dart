@@ -7,7 +7,6 @@ import '../../../application/diamonds/diamond_history_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
-import '../../../application/persistence/states/persistence_state.dart';
 import '../../../application/user/user_fetch_provider.dart';
 import '../../../core/enums/gacha_data_management_type.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
@@ -61,7 +60,7 @@ class GachaStatsExtraPanel extends ConsumerWidget {
   }
 
   void _listenPersistenceState(BuildContext context, WidgetRef ref) =>
-      ref.listen<PersistenceState>(
+      ref.listen(
         persistenceProvider,
         (_, next) {
           next.maybeWhen(

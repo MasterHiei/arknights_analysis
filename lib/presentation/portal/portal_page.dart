@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,17 +6,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
-import '../../application/ak_logout/states/ak_logout_state.dart';
 import '../../application/diamonds/diamond_provider.dart';
-import '../../application/diamonds/states/diamond_state.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
-import '../../application/gacha/states/gacha_state.dart';
 import '../../application/portal/pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
 import '../../application/user/user_fetch_provider.dart';
 import '../../core/exceptions/app_failure.dart';
+import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../core/routing/router.dart';
@@ -93,24 +92,24 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           PaneItem(
             icon: const Icon(FontAwesomeIcons.chartLine),
             body: const GachaStatsPage(),
-            title: const Text('寻访统计'),
+            title: const Text(LocaleKeys.features_gachaStats_title).tr(),
           ),
           PaneItem(
             icon: const Icon(FontAwesomeIcons.listUl),
             body: const GachaHistoryPage(),
-            title: const Text('寻访记录'),
+            title: const Text(LocaleKeys.features_gachaHistory_title).tr(),
           ),
           PaneItem(
             icon: const Icon(FontAwesomeIcons.gem),
             body: const DiamondHistoryPage(),
-            title: const Text('源石记录'),
+            title: const Text(LocaleKeys.features_diamondHistory_title).tr(),
           ),
         ],
         footerItems: [
           PaneItem(
             icon: const Icon(FluentIcons.settings),
             body: const SettingsPage(),
-            title: const Text('设置'),
+            title: const Text(LocaleKeys.settings_title).tr(),
             infoBadge: Consumer(
               builder: (_, ref, __) {
                 if (ref.watch(_hasNewVersion)) {
@@ -123,17 +122,8 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
           PaneItemSeparator(),
           PaneItemAction(
             icon: const Icon(FluentIcons.sign_out),
-            onTap: () => AppDialog.show(
-              context,
-              title: const Text('确认'),
-              content: const Text('确定退出登录吗？'),
-              confirmButtonText: '退出',
-              confirmButtonColor: Colors.red,
-              onConfirmButtonTap: ref.read(akLogoutProvider.notifier).logout,
-              closeButtonText: '取消',
-              closeButtonColor: Colors.blue,
-            ),
-            title: const Text('退出登录'),
+            onTap: () => AppDialog.logout(context, ref),
+            title: const Text(LocaleKeys.app_logout_title).tr(),
           ),
         ],
         displayMode: PaneDisplayMode.compact,
@@ -145,7 +135,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenUserState() => ref.listen<AsyncValue<void>>(
+  void _listenUserState() => ref.listen(
         userFetchProvider,
         (_, next) => next.maybeWhen(
           error: (failure, _) async {
@@ -167,12 +157,12 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
   void _listenGachaStates() {
     ref.listen(gachaPoolSelectorProvider, (_, __) {});
-    ref.listen<GachaState>(
+    ref.listen(
       gachaProvider,
       (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
           context,
-          message: '数据已更新。',
+          message: LocaleKeys.features_gachaStats_updated.tr(),
           severity: FlushBarSeverity.success,
         ),
         failure: (failure) => AppFlushBar.show(
@@ -185,7 +175,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenDiamondState() => ref.listen<DiamondState>(
+  void _listenDiamondState() => ref.listen(
         diamondProvider,
         (_, next) => next.maybeWhen<void>(
           failure: (failure) => AppFlushBar.show(
@@ -231,15 +221,15 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   void _listenDownloadState() => ref.listen(
         downloadNewVersionProvider,
         (_, next) => next.maybeWhen<void>(
-          beginDownload: () => AppFlushBar.show(
+          preparing: () => AppFlushBar.show(
             context,
-            message: '开始下载新版本。',
+            message: LocaleKeys.app_update_begin.tr(),
           ),
           success: (file) {
             launchUrl(file.absolute.parent.uri);
             AppFlushBar.show(
               context,
-              message: '新版本下载完成。',
+              message: LocaleKeys.app_update_done.tr(),
               severity: FlushBarSeverity.success,
             );
           },
@@ -251,7 +241,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         ),
       );
 
-  void _listenLogoutState() => ref.listen<AkLogoutState>(
+  void _listenLogoutState() => ref.listen(
         akLogoutProvider,
         (_, next) => next.maybeWhen<void>(
           loggedOut: () => ref.read(akLogoutProvider.notifier).go(context),

@@ -36,12 +36,12 @@
     // strings. This setting will prevent that.
     "editor.wordBasedSuggestions": false,
   },
-  "dart.flutterSdkPath": ".fvm/flutter_sdk",
   // Remove .fvm files from search
   "search.exclude": {
     "**/.fvm": true,
     "*.freezed.dart": true,
     "*.g.dart": true,
+    "*.gen.dart": true,
     "*.json": true
   },
   // Remove from file watching
