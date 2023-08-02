@@ -22,7 +22,7 @@ class FileManager {
       final contents = await file.readAsString();
       return jsonDecode(contents) as Json;
     } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
       throw AppFailure.localizedError('读取文件错误。\n $path');
     }
   }
@@ -32,7 +32,7 @@ class FileManager {
       final contents = jsonEncode(json);
       return File(path).writeAsString(contents);
     } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
       throw AppFailure.localizedError('写入文件错误。\n $e');
     }
   }

@@ -20,7 +20,7 @@ mixin APIErrorHandlerMixin {
     } on AppFailure catch (e) {
       return left(e);
     } on DioException catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
 
       final code = e.response?.statusCode;
       if (code == HttpStatus.unauthorized) {
@@ -29,7 +29,7 @@ mixin APIErrorHandlerMixin {
       final message = e.response?.statusMessage ?? e.message;
       return left(AppFailure.remoteServerError(message: message, code: code));
     } catch (e, stackTrace) {
-      logger.e(e, e, stackTrace);
+      logger.e(e, error: e, stackTrace: stackTrace);
       return left(AppFailure.unexpectedError(e));
     }
   }
