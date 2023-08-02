@@ -56,7 +56,10 @@ enum GachaRuleType {
         limited,
         linkage,
         attain,
-        classic,
-        fesClassic,
+      ];
+
+  static List<String> get new2023 => [
+        '中坚寻访',
+        '中坚甄选',
       ];
 }

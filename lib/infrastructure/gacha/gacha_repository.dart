@@ -38,6 +38,7 @@ abstract class GachaRepository {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    bool includeNew2023 = true,
   });
 
   Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
@@ -103,12 +104,14 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    bool includeNew2023 = true,
   }) =>
       execute(
         () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
+          includeNew2023: includeNew2023,
         ),
       );
 

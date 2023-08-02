@@ -28,6 +28,7 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    required bool includeNew2023,
   }) async {
     final conditionQuery = select(gachaRecords)
       ..where((tbl) => tbl.uid.equals(uid.getOrCrash()))
@@ -40,7 +41,15 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
             includeRuleTypes.map((type) => type.value),
           ),
         );
-      conditionQuery.where((tbl) => tbl.pool.isInQuery(isInQuery));
+      conditionQuery.where(
+        (tbl) {
+          final expressions = [
+            tbl.pool.isInQuery(isInQuery),
+            if (includeNew2023) tbl.pool.isIn(GachaRuleType.new2023),
+          ];
+          return expressions.reduce((fst, snd) => fst | snd);
+        },
+      );
     }
 
     if (excludeRuleTypes != null) {
