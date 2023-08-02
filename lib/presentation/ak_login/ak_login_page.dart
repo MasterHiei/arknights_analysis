@@ -5,7 +5,6 @@ import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_login/ak_login_provider.dart';
-import '../../application/ak_login/states/ak_login_state.dart';
 import '../../application/webview/webview_provider.dart';
 import '../../core/constants/constants.dart';
 import '../core/common/widgets/app_dialog.dart';
@@ -56,8 +55,7 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
     );
   }
 
-  void _listenState(BuildContext context, WidgetRef ref) =>
-      ref.listen<AkLoginState>(
+  void _listenState(BuildContext context, WidgetRef ref) => ref.listen(
         akLoginProvider,
         (_, next) => next.maybeWhen<void>(
           failed: (failure) => AppFlushBar.show(

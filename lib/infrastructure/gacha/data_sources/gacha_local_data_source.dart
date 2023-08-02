@@ -21,6 +21,7 @@ abstract class GachaLocalDataSource {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    required bool includeNew2023,
   });
 
   Future<GachaPoolDto?> getPoolByName(String name);
@@ -57,11 +58,13 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
     required Uid uid,
     List<GachaRuleType>? includeRuleTypes,
     List<GachaRuleType>? excludeRuleTypes,
+    required bool includeNew2023,
   }) =>
       _db.gachaPoolsDao.getRecorded(
         uid: uid,
         includeRuleTypes: includeRuleTypes,
         excludeRuleTypes: excludeRuleTypes,
+        includeNew2023: includeNew2023,
       );
 
   @override

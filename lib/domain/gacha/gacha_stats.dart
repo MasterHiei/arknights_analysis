@@ -32,8 +32,12 @@ class GachaStats with _$GachaStats {
   List<GachaChar> filter(Rarity rarity) =>
       chars.filter((char) => char.rarity == rarity).toList();
 
-  String caclPullRate(Rarity rarity) =>
-      '${((filter(rarity).length / chars.length) * 100).toStringAsFixed(2)}%';
+  String caclPullRate(Rarity rarity) {
+    if (chars.isEmpty) {
+      return '${0.toStringAsFixed(2)}%';
+    }
+    return '${((filter(rarity).length / chars.length) * 100).toStringAsFixed(2)}%';
+  }
 
   int sinceLastPull(Rarity rarity) {
     final index = chars.indexWhere((char) => char.rarity == rarity);

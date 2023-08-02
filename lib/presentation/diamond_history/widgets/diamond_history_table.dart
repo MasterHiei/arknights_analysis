@@ -1,4 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../application/diamonds/diamond_history_provider.dart';
 import '../../../core/constants/constants.dart';
 import '../../../domain/diamonds/diamond_change.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_empty_view.dart';
 
@@ -22,7 +24,10 @@ class DiamondHistoryTable extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
-            child: Text('源石记录', style: TextStyle(fontSize: 24.sp)),
+            child: Text(
+              LocaleKeys.features_diamondHistory_title,
+              style: TextStyle(fontSize: 24.sp),
+            ).tr(),
           ),
           Expanded(
             child: material.Material(

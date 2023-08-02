@@ -1,0 +1,108 @@
+{
+  "language": "日本語",
+  "error": {
+    "unexpectedError": "未知のエラーが発生しました。",
+    "networkUnreachable": "ネットワークエラーが発生しました。猫が光ケーブルを噛んでないことを確認しましょう。",
+    "remoteServerError": "サーバーの情緒不安定です。しばらくたってから再度お試しください。",
+    "localDataError": "データの読み込みに失敗しました。しばらくたってから再度お試しください。",
+    "emptyLocalData": "データは存在しません。しばらくたってから再度取得してください。",
+    "invalidToken": "トークンは無効です。再度ログインしてください。"
+  },
+  "dialog": {
+    "title": "確認",
+    "confirm": "はい",
+    "cancel": "キャンセル"
+  },
+  "app": {
+    "close": {
+      "dialog": {
+        "content": "アプリを終了してもよろしいですか？",
+        "confirm": "終了"
+      }
+    },
+    "update": {
+      "check": "アップデート確認",
+      "isNewest": "アプリは最新の状態です。",
+      "begin": "最新バージョンをダウンロードしています。",
+      "preparing": "準備中…",
+      "done": "最新バージョンをダウンロードしました。",
+      "dialog": {
+        "title": "アップデートのお知らせ",
+        "hasNewVersion": "新しいバージョンのアプリが利用可能です。",
+        "automatically": "ボタンを押してダウンロード、または",
+        "urlPlaceholder": "こちら",
+        "manually": "から手動でダウンロードします。",
+        "confirm": "ダウンロード"
+      }
+    },
+    "logout": {
+      "title": "ログアウト",
+      "dialog": {
+        "content": "ログアウトてもよろしいですか？",
+        "confirm": "ログアウト"
+      }
+    }
+  },
+  "features": {
+    "gachaStats": {
+      "title": "ガチャ統計",
+      "updated": "データが更新されました。",
+      "updateTooFrequently": "早すぎる！まだ{minutes}分も経ってないよ！"
+    },
+    "gachaHistory": {
+      "title": "ガチャ履歴",
+      "filter": {
+        "title": "フィルタ",
+        "labels": {
+          "gacha": "ガチャ",
+          "rarity": "レア度",
+          "selectable": "ガチャを選ぶ",
+          "noRemaining": "残りなし"
+        }
+      }
+    },
+    "diamondHistory": {
+      "title": "源石履歴"
+    }
+  },
+  "gacha": {
+    "type": {
+      "all": "すべて",
+      "normal": "スタンダード",
+      "limited": "リミテッド",
+      "linkage": "コラボ",
+      "attain": "スペシャル",
+      "classic": "中坚寻访",
+      "fesClassic": "中坚甄选"
+    },
+    "rarity": "星{}"
+  },
+  "settings": {
+    "title": "設定",
+    "theme": {
+      "title": "テーマ",
+      "darkMode": {
+        "title": "ダークモード",
+        "on": "オン",
+        "off": "オフ"
+      },
+      "language": "表示言語"
+    },
+    "about": {
+      "title": "このアプリについて",
+      "information": "本アプリのご利用にあたって",
+      "disclaimer": "免責事項",
+      "copyrightNotice": "著作権表示",
+      "version": {
+        "title": "バージョン",
+        "current": "現行バージョン: ",
+        "latest": "最新バージョン: "
+      },
+      "acknowledgement": {
+        "title": "謝辞",
+        "gameData": "ゲームデータ: ",
+        "licenses": "OSSライセンス"
+      }
+    }
+  }
+}

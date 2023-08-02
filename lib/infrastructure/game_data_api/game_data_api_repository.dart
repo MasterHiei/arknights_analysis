@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
-import '../core/mixins/error_handler_mixin.dart';
+import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/game_data_api_local_data_source.dart';
 import 'data_sources/game_data_api_remote_data_source.dart';
 
@@ -20,7 +20,7 @@ final gameDataApiRepositoryProvider =
 abstract class GameDataApiRepository {
   Future<Either<AppFailure, DateTime>> getLastGachaTableUpdateDateTime();
 
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDate();
+  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime();
 
   Future<Either<AppFailure, Unit>> setLastGachaTableUpdateDateTime(
     DateTime value,
@@ -28,7 +28,7 @@ abstract class GameDataApiRepository {
 }
 
 class GameDataRepositoryImpl
-    with ErrorHandlerMixin
+    with APIErrorHandlerMixin
     implements GameDataApiRepository {
   const GameDataRepositoryImpl(
     this._connectivity,
@@ -48,14 +48,14 @@ class GameDataRepositoryImpl
               _localDataSource.getLastGachaTableUpdateDateTime();
           final dateTime = DateTime.tryParse(formattedString ?? '');
           if (dateTime == null) {
-            throw const AppFailure.localDataEmpty();
+            throw const AppFailure.emptyLocalData();
           }
           return dateTime;
         },
       );
 
   @override
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDate() =>
+  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime() =>
       execute(
         () async {
           final dtos = await _remoteDataSource.fetchLastGachaTableCommit();

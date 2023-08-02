@@ -1,8 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../../../application/ak_logout/ak_logout_provider.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../routing/router.dart';
 
 class AppDialog extends StatelessWidget {
@@ -99,12 +103,13 @@ class AppDialog extends StatelessWidget {
       showDialog(
         context: context,
         builder: (_) => AppDialog(
-          title: title,
+          title: title ?? const Text(LocaleKeys.dialog_title).tr(),
           content: content,
-          confirmButtonText: confirmButtonText ?? '确认',
+          confirmButtonText:
+              confirmButtonText ?? LocaleKeys.dialog_confirm.tr(),
           confirmButtonColor: confirmButtonColor ?? Colors.blue,
           onConfirmButtonTap: onConfirmButtonTap,
-          closeButtonText: closeButtonText ?? '取消',
+          closeButtonText: closeButtonText ?? LocaleKeys.dialog_cancel.tr(),
           closeButtonColor: closeButtonColor ?? Colors.grey[80],
           onCloseButtonTap: onCloseButtonTap ?? router.pop,
         ),
@@ -116,13 +121,19 @@ class AppDialog extends StatelessWidget {
   }) =>
       AppDialog.show(
         context,
-        title: const Text('确认'),
-        content: const Text('确定关闭本程序吗？'),
-        confirmButtonText: '关闭',
+        content: const Text(LocaleKeys.app_close_dialog_content).tr(),
+        confirmButtonText: LocaleKeys.app_close_dialog_confirm.tr(),
         confirmButtonColor: Colors.red,
         onConfirmButtonTap: windowManager.destroy,
-        closeButtonText: '取消',
-        closeButtonColor: Colors.blue,
+      );
+
+  static Future<void> logout(BuildContext context, WidgetRef ref) =>
+      AppDialog.show(
+        context,
+        content: const Text(LocaleKeys.app_logout_dialog_content).tr(),
+        confirmButtonText: LocaleKeys.app_logout_dialog_confirm.tr(),
+        confirmButtonColor: Colors.red,
+        onConfirmButtonTap: ref.read(akLogoutProvider.notifier).logout,
       );
 
   static Future<void> promptForUpdate(
@@ -132,23 +143,29 @@ class AppDialog extends StatelessWidget {
   }) =>
       AppDialog.show(
         context,
-        title: const Text('更新'),
+        title: const Text(LocaleKeys.app_update_dialog_title).tr(),
         content: Text.rich(
           TextSpan(
             children: [
-              const TextSpan(text: '检测到新版本。\n'),
-              const TextSpan(text: '您可以点击下载更新，或从'),
               TextSpan(
-                text: '此处',
+                text: '${LocaleKeys.app_update_dialog_hasNewVersion.tr()}\n',
+              ),
+              TextSpan(
+                text: LocaleKeys.app_update_dialog_automatically.tr(),
+              ),
+              TextSpan(
+                text: LocaleKeys.app_update_dialog_urlPlaceholder.tr(),
                 style: TextStyle(color: Colors.blue.normal),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => launchUrlString(browserDownloadUrl),
               ),
-              const TextSpan(text: '手动下载。'),
+              TextSpan(
+                text: LocaleKeys.app_update_dialog_manually.tr(),
+              ),
             ],
           ),
         ),
-        confirmButtonText: '下载更新',
+        confirmButtonText: LocaleKeys.app_update_dialog_confirm.tr(),
         onConfirmButtonTap: onDownloadButtonTap,
       );
 }

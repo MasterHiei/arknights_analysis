@@ -4,7 +4,6 @@ import 'package:time/time.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/game_data_raw/gacha_pool_provider.dart';
-import '../../application/game_data_raw/states/gacha_pool_state.dart';
 import '../../application/splash/splash_provider.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
@@ -53,8 +52,7 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
     );
   }
 
-  void _listenState(BuildContext context, WidgetRef ref) =>
-      ref.listen<GachaPoolState>(
+  void _listenState(BuildContext context, WidgetRef ref) => ref.listen(
         gachaPoolProvider,
         (_, next) => next.maybeWhen<void>(
           success: () => ref.read(splashProvider.notifier).fetched(context),

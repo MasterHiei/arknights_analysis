@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../application/user/user_fetch_provider.dart';
+import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_error_view.dart';
 import 'widgets/index.dart';
 
@@ -16,7 +18,10 @@ class GachaStatsPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('寻访统计', style: TextStyle(fontSize: 24.sp)),
+          Text(
+            LocaleKeys.features_gachaStats_title,
+            style: TextStyle(fontSize: 24.sp),
+          ).tr(),
           SizedBox(height: 20.h),
           _header,
           SizedBox(height: 20.h),

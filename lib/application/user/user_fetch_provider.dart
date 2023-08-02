@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,6 +7,7 @@ import '../../core/constants/constants.dart';
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
+import '../../generated/locale_keys.g.dart';
 import '../../infrastructure/core/mixins/debounce_mixin.dart';
 import '../../infrastructure/core/mixins/request_limit_mixin.dart';
 import '../../infrastructure/user/user_repository.dart';
@@ -55,7 +57,9 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
         () => debounce(_fetchAndUpdate),
         onFailure: () => AppFlushBar.show(
           context,
-          message: '太快了吧！这还不到${Constants.minRequestInterval.inMinutes}分钟呢！',
+          message: LocaleKeys.features_gachaStats_updateTooFrequently.tr(
+            namedArgs: {'minutes': '${Constants.minRequestInterval.inMinutes}'},
+          ),
           severity: FlushBarSeverity.warning,
         ),
       );
@@ -86,7 +90,7 @@ class UserFetchNotifier extends StateNotifier<AsyncValue<void>>
     final failureOrUser = await _repository.get(token);
     return failureOrUser.fold(
       (failure) => throw failure,
-      (user) => _userProvider.state = optionOf(user),
+      (user) => _userProvider.update((_) => optionOf(user)),
     );
   }
 }

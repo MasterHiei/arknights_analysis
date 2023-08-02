@@ -54,7 +54,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     final isOfficial = url == Constants.akHomePageOfficial;
     if (isOfficial) {
       await _controller.loadUrl(Constants.asGetTokenOfficial);
-      _loginTypeProvider.state = AkLoginType.official;
+      _loginTypeProvider.update((_) => AkLoginType.official);
     }
     final isBilibili = [
       Constants.akHomePageBilibili,
@@ -63,7 +63,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
     if (isBilibili) {
       await 1.seconds.delay;
       await _controller.loadUrl(Constants.asGetTokenBilibili);
-      _loginTypeProvider.state = AkLoginType.bilibili;
+      _loginTypeProvider.update((_) => AkLoginType.bilibili);
     }
 
     final isTokenPage = url == Constants.asGetTokenOfficial ||
@@ -83,7 +83,7 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
       case 0:
         final token = (json?['data'] as Json?)?['content'] as String? ?? '';
         if (token.isNotEmpty) {
-          _tokenProvider.state = optionOf(Token(token));
+          _tokenProvider.update((_) => optionOf(Token(token)));
           state = const AkLoginState.loggedIn();
         }
 
