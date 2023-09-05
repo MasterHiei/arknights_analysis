@@ -9,7 +9,6 @@ import 'package:webview_windows/webview_windows.dart';
 import '../../core/constants/constants.dart';
 import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
-import '../../core/types/types.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
 import '../../presentation/core/routing/router.dart';
@@ -70,32 +69,28 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
         url == Constants.asGetTokenBilibili;
     if (isTokenPage) {
       AppLoadingIndicator.show();
-      const data = 'document.getElementsByTagName("pre")[0].innerHTML';
-      const script = 'window.chrome.webview.postMessage(JSON.parse($data))';
+      const tokenString =
+          'document.getElementsByClassName("token-string")[0].innerHTML';
+      const script =
+          'window.chrome.webview.postMessage(JSON.parse($tokenString))';
       await _controller.executeScript(script);
     }
   }
 
   Future<void> _onTokenRecieved(dynamic data) async {
-    final json = data as Json?;
-    final code = json?['code'] as int?;
-    switch (code) {
-      case 0:
-        final token = (json?['data'] as Json?)?['content'] as String? ?? '';
-        if (token.isNotEmpty) {
-          _tokenProvider.update((_) => optionOf(Token(token)));
-          state = const AkLoginState.loggedIn();
-        }
-
-      default:
-        final message =
-            json?['msg'] as String? ?? '令牌获取失败，请稍后重试。如果问题仍然存在，请与开发人员联系。\n$data';
-        state = AkLoginState.failed(AppFailure.localizedError(message));
-        await Future.wait([
-          _controller.clearCache(),
-          _controller.clearCookies(),
-        ]);
-        await _controller.loadUrl(Constants.akLoginPage);
+    final token = data as String?;
+    if (token == null || token.isEmpty) {
+      state = const AkLoginState.failed(
+        AppFailure.localizedError('令牌获取失败，请稍后重试。如果问题仍然存在，请与开发人员联系。'),
+      );
+      await Future.wait([
+        _controller.clearCache(),
+        _controller.clearCookies(),
+      ]);
+      await _controller.loadUrl(Constants.akLoginPage);
+    } else {
+      _tokenProvider.update((_) => optionOf(Token(token)));
+      state = const AkLoginState.loggedIn();
     }
     AppLoadingIndicator.dismiss();
   }
