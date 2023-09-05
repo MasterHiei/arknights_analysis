@@ -5,7 +5,8 @@ import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
 import '../app_database.dart';
-import '../tables/index.dart';
+import '../tables/gacha_pools.dart';
+import '../tables/gacha_records.dart';
 
 part 'gacha_records_dao.g.dart';
 

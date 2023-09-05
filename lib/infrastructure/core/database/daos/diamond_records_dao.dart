@@ -4,7 +4,7 @@ import '../../../diamonds/dtos/diamond_dto.dart';
 import '../../../diamonds/dtos/diamond_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
 import '../app_database.dart';
-import '../tables/index.dart';
+import '../tables/diamond_records.dart';
 
 part 'diamond_records_dao.g.dart';
 

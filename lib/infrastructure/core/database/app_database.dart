@@ -6,9 +6,15 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/constants/constants.dart';
-import 'converters/index.dart';
-import 'daos/index.dart';
-import 'tables/index.dart';
+import 'converters/list_converter.dart';
+import 'daos/diamond_records_dao.dart';
+import 'daos/gacha_pools_dao.dart';
+import 'daos/gacha_records_dao.dart';
+import 'daos/users_dao.dart';
+import 'tables/diamond_records.dart';
+import 'tables/gacha_pools.dart';
+import 'tables/gacha_records.dart';
+import 'tables/users.dart';
 
 part 'app_database.g.dart';
 
