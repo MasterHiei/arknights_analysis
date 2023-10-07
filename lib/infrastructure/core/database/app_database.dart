@@ -7,14 +7,8 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../core/constants/constants.dart';
 import 'converters/list_converter.dart';
-import 'daos/diamond_records_dao.dart';
-import 'daos/gacha_pools_dao.dart';
-import 'daos/gacha_records_dao.dart';
-import 'daos/users_dao.dart';
-import 'tables/diamond_records.dart';
-import 'tables/gacha_pools.dart';
-import 'tables/gacha_records.dart';
-import 'tables/users.dart';
+import 'daos/index.dart';
+import 'tables/index.dart';
 
 part 'app_database.g.dart';
 
@@ -23,12 +17,14 @@ const _tables = [
   GachaPools,
   GachaRecords,
   DiamondRecords,
+  PaymentRecords,
 ];
 const _daos = [
   UsersDao,
   GachaPoolsDao,
   GachaRecordsDao,
   DiamondRecordsDao,
+  PaymentRecordsDao,
 ];
 
 @DriftDatabase(tables: _tables, daos: _daos)
