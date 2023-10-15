@@ -16,4 +16,8 @@ class PaymentRecord with _$PaymentRecord {
     required Ts payTime,
     required Uid uid,
   }) = _PaymentRecord;
+
+  const PaymentRecord._();
+
+  String get amountWithUnit => (amount / 100.00).toStringAsFixed(2);
 }

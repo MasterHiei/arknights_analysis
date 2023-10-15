@@ -61,6 +61,9 @@
         }
       }
     },
+    "paymentHistory": {
+      "title": "充值记录"
+    },
     "diamondHistory": {
       "title": "源石记录"
     }

@@ -11,21 +11,21 @@ part 'payment_dto.g.dart';
 @freezed
 class PaymentDto with _$PaymentDto {
   const factory PaymentDto({
-    required List<PaymentRecordDto> list,
+    required List<PaymentRecordDto> records,
     required PaginationDto pagination,
   }) = _PaymentDto;
 
   factory PaymentDto.fromJson(Json json) => _$PaymentDtoFromJson(json);
 
   factory PaymentDto.fromRecords(List<PaymentRecordDto> records) => PaymentDto(
-        list: records,
+        records: records,
         pagination: PaginationDto.empty(),
       );
 
   const PaymentDto._();
 
   Payment toDomain() => Payment(
-        list: list.map((record) => record.toDomain()).toList(),
+        records: records.map((record) => record.toDomain()).toList(),
         pagination: pagination.toDomain(),
       );
 }

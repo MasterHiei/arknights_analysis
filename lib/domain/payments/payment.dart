@@ -8,7 +8,7 @@ part 'payment.freezed.dart';
 @freezed
 class Payment with _$Payment {
   const factory Payment({
-    required List<PaymentRecord> list,
+    required List<PaymentRecord> records,
     required Pagination pagination,
   }) = _Payment;
 }

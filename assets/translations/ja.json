@@ -61,6 +61,9 @@
         }
       }
     },
+    "paymentHistory": {
+      "title": "購入履歴"
+    },
     "diamondHistory": {
       "title": "源石履歴"
     }

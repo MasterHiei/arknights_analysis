@@ -41,6 +41,9 @@ class AppDatabase extends _$AppDatabase {
           if (from < 2) {
             await m.createTable(diamondRecords);
           }
+          if (from < 3) {
+            await m.createTable(paymentRecords);
+          }
         },
       );
 }

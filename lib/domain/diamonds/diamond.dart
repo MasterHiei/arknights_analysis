@@ -8,7 +8,7 @@ part 'diamond.freezed.dart';
 @freezed
 class Diamond with _$Diamond {
   const factory Diamond({
-    required List<DiamondRecord> list,
+    required List<DiamondRecord> records,
     required Pagination pagination,
   }) = _Diamond;
 }

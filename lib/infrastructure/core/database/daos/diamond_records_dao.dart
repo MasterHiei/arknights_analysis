@@ -47,11 +47,11 @@ class DiamondRecordsDao extends DatabaseAccessor<AppDatabase>
     final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return DiamondDto(list: records, pagination: pagination);
+    return DiamondDto(records: records, pagination: pagination);
   }
 
   Future<List<int>> replaceInto(DiamondDto diamond) async {
-    final futures = diamond.list.map((record) {
+    final futures = diamond.records.map((record) {
       final entity = DiamondRecord.fromJson(record.toJson());
       return into(diamondRecords).insertOnConflictUpdate(entity);
     });

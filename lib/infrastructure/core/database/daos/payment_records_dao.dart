@@ -47,11 +47,11 @@ class PaymentRecordsDao extends DatabaseAccessor<AppDatabase>
     final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return PaymentDto(list: records, pagination: pagination);
+    return PaymentDto(records: records, pagination: pagination);
   }
 
   Future<List<int>> replaceInto(PaymentDto payment) async {
-    final futures = payment.list.map((record) {
+    final futures = payment.records.map((record) {
       final entity = PaymentRecord.fromJson(record.toJson());
       return into(paymentRecords).insertOnConflictUpdate(entity);
     });

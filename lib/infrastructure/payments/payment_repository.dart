@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers.dart';
-import '../../domain/core/common/pagination.dart';
 import '../../domain/payments/payment_record.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
@@ -23,7 +22,7 @@ final paymentRepositoryProvider = Provider.autoDispose<PaymentRepository>(
 );
 
 abstract class PaymentRepository {
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  Future<Either<AppFailure, Unit>> fetchAndSave(
     Token token, {
     required Uid uid,
   });
@@ -45,7 +44,7 @@ class PaymentRepositoryImpl
   final PaymentRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  Future<Either<AppFailure, Unit>> fetchAndSave(
     Token token, {
     required Uid uid,
   }) =>
@@ -58,7 +57,7 @@ class PaymentRepositoryImpl
           );
           final dto = PaymentDto.fromRecords(records.toList());
           await _localDataSource.save(dto);
-          return dto.pagination.toDomain();
+          return unit;
         },
         connectivity: _connectivity,
       );
