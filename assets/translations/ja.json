@@ -62,10 +62,20 @@
       }
     },
     "paymentHistory": {
-      "title": "購入履歴"
+      "title": "購入履歴",
+      "orderId": "注文番号",
+      "platform": "プラットフォーム",
+      "amount": "金額(CNY)",
+      "productName": "商品名",
+      "payTime": "購入日時"
     },
     "diamondHistory": {
-      "title": "源石履歴"
+      "title": "源石履歴",
+      "platform": "プラットフォーム",
+      "diff": "変動",
+      "stock": "残り",
+      "operation": "操作",
+      "ts": "取得日時"
     }
   },
   "gacha": {

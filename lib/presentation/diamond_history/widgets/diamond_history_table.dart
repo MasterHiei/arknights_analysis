@@ -61,11 +61,25 @@ class DiamondHistoryTable extends StatelessWidget {
               data: (changes) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),
-                  buildColumn('平台', size: ColumnSize.S),
-                  buildColumn('变更', size: ColumnSize.S),
-                  buildColumn('存量', size: ColumnSize.S),
-                  buildColumn('操作'),
-                  buildColumn('获取时间', size: ColumnSize.L),
+                  buildColumn(
+                    LocaleKeys.features_diamondHistory_platform.tr(),
+                    size: ColumnSize.S,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_diamondHistory_diff.tr(),
+                    size: ColumnSize.S,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_diamondHistory_stock.tr(),
+                    size: ColumnSize.S,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_diamondHistory_operation.tr(),
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_diamondHistory_ts.tr(),
+                    size: ColumnSize.L,
+                  ),
                 ],
                 columnSpacing: 60.h,
                 showCheckboxColumn: false,

@@ -62,10 +62,20 @@
       }
     },
     "paymentHistory": {
-      "title": "充值记录"
+      "title": "充值记录",
+      "orderId": "游戏订单号",
+      "platform": "平台",
+      "amount": "金额(¥)",
+      "productName": "商品名称",
+      "payTime": "交易时间"
     },
     "diamondHistory": {
-      "title": "源石记录"
+      "title": "源石记录",
+      "platform": "平台",
+      "diff": "变更",
+      "stock": "存量",
+      "operation": "操作",
+      "ts": "获取时间"
     }
   },
   "gacha": {

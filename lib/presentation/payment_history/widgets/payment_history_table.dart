@@ -61,11 +61,25 @@ class PaymentHistoryTable extends StatelessWidget {
               data: (records) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),
-                  buildColumn('游戏订单号', size: ColumnSize.L),
-                  buildColumn('平台', size: ColumnSize.S),
-                  buildColumn('金额(¥)', size: ColumnSize.S),
-                  buildColumn('商品名称'),
-                  buildColumn('交易时间', size: ColumnSize.L),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_orderId.tr(),
+                    size: ColumnSize.L,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_platform.tr(),
+                    size: ColumnSize.S,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_amount.tr(),
+                    size: ColumnSize.S,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_productName.tr(),
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_payTime.tr(),
+                    size: ColumnSize.L,
+                  ),
                 ],
                 columnSpacing: 60.h,
                 showCheckboxColumn: false,
