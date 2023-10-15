@@ -11,21 +11,21 @@ part 'gacha_dto.g.dart';
 @freezed
 class GachaDto with _$GachaDto {
   const factory GachaDto({
-    required List<GachaRecordDto> list,
+    @JsonKey(name: 'list') required List<GachaRecordDto> records,
     required PaginationDto pagination,
   }) = _GachaDto;
 
   factory GachaDto.fromJson(Json json) => _$GachaDtoFromJson(json);
 
   factory GachaDto.fromRecords(List<GachaRecordDto> records) => GachaDto(
-        list: records,
+        records: records,
         pagination: PaginationDto.empty(),
       );
 
   const GachaDto._();
 
   Gacha toDomain() => Gacha(
-        list: list.map((record) => record.toDomain()).toList(),
+        records: records.map((record) => record.toDomain()).toList(),
         pagination: pagination.toDomain(),
       );
 }

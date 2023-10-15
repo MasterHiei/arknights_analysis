@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/constants/constants.dart';
-import 'converters/index.dart';
+import 'converters/list_converter.dart';
 import 'daos/index.dart';
 import 'tables/index.dart';
 
@@ -17,12 +17,14 @@ const _tables = [
   GachaPools,
   GachaRecords,
   DiamondRecords,
+  PaymentRecords,
 ];
 const _daos = [
   UsersDao,
   GachaPoolsDao,
   GachaRecordsDao,
   DiamondRecordsDao,
+  PaymentRecordsDao,
 ];
 
 @DriftDatabase(tables: _tables, daos: _daos)
@@ -38,6 +40,9 @@ class AppDatabase extends _$AppDatabase {
         onUpgrade: (m, from, to) async {
           if (from < 2) {
             await m.createTable(diamondRecords);
+          }
+          if (from < 3) {
+            await m.createTable(paymentRecords);
           }
         },
       );

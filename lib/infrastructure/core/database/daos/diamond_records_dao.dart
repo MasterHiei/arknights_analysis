@@ -4,7 +4,7 @@ import '../../../diamonds/dtos/diamond_dto.dart';
 import '../../../diamonds/dtos/diamond_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
 import '../app_database.dart';
-import '../tables/index.dart';
+import '../tables/diamond_records.dart';
 
 part 'diamond_records_dao.g.dart';
 
@@ -47,11 +47,11 @@ class DiamondRecordsDao extends DatabaseAccessor<AppDatabase>
     final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return DiamondDto(list: records, pagination: pagination);
+    return DiamondDto(records: records, pagination: pagination);
   }
 
   Future<List<int>> replaceInto(DiamondDto diamond) async {
-    final futures = diamond.list.map((record) {
+    final futures = diamond.records.map((record) {
       final entity = DiamondRecord.fromJson(record.toJson());
       return into(diamondRecords).insertOnConflictUpdate(entity);
     });

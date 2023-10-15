@@ -11,21 +11,21 @@ part 'diamond_dto.g.dart';
 @freezed
 class DiamondDto with _$DiamondDto {
   const factory DiamondDto({
-    required List<DiamondRecordDto> list,
+    @JsonKey(name: 'list') required List<DiamondRecordDto> records,
     required PaginationDto pagination,
   }) = _DiamondDto;
 
   factory DiamondDto.fromJson(Json json) => _$DiamondDtoFromJson(json);
 
   factory DiamondDto.fromRecords(List<DiamondRecordDto> records) => DiamondDto(
-        list: records,
+        records: records,
         pagination: PaginationDto.empty(),
       );
 
   const DiamondDto._();
 
   Diamond toDomain() => Diamond(
-        list: list.map((record) => record.toDomain()).toList(),
+        records: records.map((record) => record.toDomain()).toList(),
         pagination: pagination.toDomain(),
       );
 }

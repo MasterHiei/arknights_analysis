@@ -5,7 +5,8 @@ import '../../../gacha/dtos/gacha_dto.dart';
 import '../../../gacha/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
 import '../app_database.dart';
-import '../tables/index.dart';
+import '../tables/gacha_pools.dart';
+import '../tables/gacha_records.dart';
 
 part 'gacha_records_dao.g.dart';
 
@@ -85,11 +86,11 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return GachaDto(list: records, pagination: pagination);
+    return GachaDto(records: records, pagination: pagination);
   }
 
   Future<List<int>> replaceInto(GachaDto gacha) async {
-    final futures = gacha.list.map((record) {
+    final futures = gacha.records.map((record) {
       final entity = GachaRecord.fromJson(record.toJson());
       return into(gachaRecords).insertOnConflictUpdate(entity);
     });

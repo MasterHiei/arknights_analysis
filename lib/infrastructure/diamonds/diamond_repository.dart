@@ -67,10 +67,10 @@ class DiamondRepositoryImpl
               code: response.code,
             );
           }
-          final list = dto.list.map(
+          final records = dto.records.map(
             (record) => record.copyWith(uid: uid.getOrCrash()),
           );
-          await _localDataSource.save(dto.copyWith(list: list.toList()));
+          await _localDataSource.save(dto.copyWith(records: records.toList()));
           return dto.pagination.toDomain();
         },
         connectivity: _connectivity,
