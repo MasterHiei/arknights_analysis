@@ -86,11 +86,11 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     final total = ((count ?? 0) / pageSize).ceil();
     final pagination = PaginationDto(current: page, total: total);
 
-    return GachaDto(list: records, pagination: pagination);
+    return GachaDto(records: records, pagination: pagination);
   }
 
   Future<List<int>> replaceInto(GachaDto gacha) async {
-    final futures = gacha.list.map((record) {
+    final futures = gacha.records.map((record) {
       final entity = GachaRecord.fromJson(record.toJson());
       return into(gachaRecords).insertOnConflictUpdate(entity);
     });

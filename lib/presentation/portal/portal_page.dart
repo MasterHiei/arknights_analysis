@@ -9,6 +9,7 @@ import '../../application/ak_logout/ak_logout_provider.dart';
 import '../../application/diamonds/diamond_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
+import '../../application/payments/payment_provider.dart';
 import '../../application/portal/pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
@@ -21,6 +22,7 @@ import '../core/routing/router.dart';
 import '../diamond_history/diamond_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
+import '../payment_history/payment_history_page.dart';
 import '../settings/settings_page.dart';
 import 'widgets/index.dart';
 
@@ -78,6 +80,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   Widget build(BuildContext context) {
     _listenUserState();
     _listenGachaStates();
+    _listenPaymentState();
     _listenDiamondState();
     _listenVersionState();
     _listenDownloadState();
@@ -98,6 +101,11 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             icon: const Icon(FontAwesomeIcons.listUl),
             body: const GachaHistoryPage(),
             title: const Text(LocaleKeys.features_gachaHistory_title).tr(),
+          ),
+          PaneItem(
+            icon: const Icon(FontAwesomeIcons.moneyCheck),
+            body: const PaymentHistoryPage(),
+            title: const Text(LocaleKeys.features_paymentHistory_title).tr(),
           ),
           PaneItem(
             icon: const Icon(FontAwesomeIcons.gem),
@@ -174,6 +182,22 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
       ),
     );
   }
+
+  void _listenPaymentState() => ref.listen(
+        fetchAndSavePaymentsProvider,
+        (_, next) => next.maybeWhen<void>(
+          error: (failure, _) async {
+            if (failure is AppFailure) {
+              await AppFlushBar.show(
+                context,
+                message: failure.localizedMessage,
+                severity: FlushBarSeverity.error,
+              );
+            }
+          },
+          orElse: () {},
+        ),
+      );
 
   void _listenDiamondState() => ref.listen(
         diamondProvider,

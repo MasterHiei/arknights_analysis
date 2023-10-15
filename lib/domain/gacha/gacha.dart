@@ -8,7 +8,7 @@ part 'gacha.freezed.dart';
 @freezed
 class Gacha with _$Gacha {
   const factory Gacha({
-    required List<GachaRecord> list,
+    required List<GachaRecord> records,
     required Pagination pagination,
   }) = _Gacha;
 }

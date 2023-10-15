@@ -5,15 +5,15 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/diamonds/diamond_history_provider.dart';
+import '../../../application/payments/payment_history_provider.dart';
 import '../../../core/constants/constants.dart';
-import '../../../domain/diamonds/diamond_change.dart';
+import '../../../domain/payments/payment_record.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_empty_view.dart';
 
-class DiamondHistoryTable extends StatelessWidget {
-  const DiamondHistoryTable({super.key});
+class PaymentHistoryTable extends StatelessWidget {
+  const PaymentHistoryTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DiamondHistoryTable extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
             child: Text(
-              LocaleKeys.features_diamondHistory_title,
+              LocaleKeys.features_paymentHistory_title,
               style: TextStyle(fontSize: 24.sp),
             ).tr(),
           ),
@@ -57,27 +57,27 @@ class DiamondHistoryTable extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(diamondHistoryProvider).when(
-              data: (changes) => PaginatedDataTable2(
+        return ref.watch(paymentHistoryProvider).when(
+              data: (records) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),
                   buildColumn(
-                    LocaleKeys.features_diamondHistory_platform.tr(),
+                    LocaleKeys.features_paymentHistory_orderId.tr(),
+                    size: ColumnSize.L,
+                  ),
+                  buildColumn(
+                    LocaleKeys.features_paymentHistory_platform.tr(),
                     size: ColumnSize.S,
                   ),
                   buildColumn(
-                    LocaleKeys.features_diamondHistory_diff.tr(),
+                    LocaleKeys.features_paymentHistory_amount.tr(),
                     size: ColumnSize.S,
                   ),
                   buildColumn(
-                    LocaleKeys.features_diamondHistory_stock.tr(),
-                    size: ColumnSize.S,
+                    LocaleKeys.features_paymentHistory_productName.tr(),
                   ),
                   buildColumn(
-                    LocaleKeys.features_diamondHistory_operation.tr(),
-                  ),
-                  buildColumn(
-                    LocaleKeys.features_diamondHistory_ts.tr(),
+                    LocaleKeys.features_paymentHistory_payTime.tr(),
                     size: ColumnSize.L,
                   ),
                 ],
@@ -91,7 +91,7 @@ class DiamondHistoryTable extends StatelessWidget {
                 ],
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
-                source: _DataTableSource(context, changes),
+                source: _DataTableSource(context, records),
                 empty: const AppEmptyView(),
               ),
               error: (_, __) => const SizedBox.shrink(),
@@ -103,23 +103,23 @@ class DiamondHistoryTable extends StatelessWidget {
 }
 
 class _DataTableSource extends material.DataTableSource {
-  _DataTableSource(this.context, this.changes);
+  _DataTableSource(this.context, this.records);
 
   final BuildContext context;
-  final List<DiamondChange> changes;
+  final List<PaymentRecord> records;
 
   @override
   DataRow2? getRow(int index) {
-    final change = changes[index];
+    final record = records[index];
     return DataRow2.byIndex(
       index: index,
       cells: [
         _buildTextCell('${index + 1}'),
-        _buildTextCell(change.type),
-        _buildTextCell(change.description, color: change.textColor),
-        _buildTextCell('${change.after}'),
-        _buildTextCell(change.operation),
-        _buildTextCell(change.ts.dateTime.yMMMdHmsString),
+        _buildTextCell(record.orderId),
+        _buildTextCell(record.platform.label),
+        _buildTextCell(record.amountWithUnit),
+        _buildTextCell(record.productName),
+        _buildTextCell(record.payTime.dateTime.yMMMdHmsString),
       ],
     );
   }
@@ -128,20 +128,16 @@ class _DataTableSource extends material.DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => changes.length;
+  int get rowCount => records.length;
 
   @override
   int get selectedRowCount => 0;
 
-  material.DataCell _buildTextCell(
-    String text, {
-    Color? color,
-  }) =>
-      material.DataCell(
+  material.DataCell _buildTextCell(String text) => material.DataCell(
         Text(
           text,
           style: DefaultTextStyle.of(context).style.copyWith(
-                color: color ?? Colors.grey[120],
+                color: Colors.grey[120],
                 fontSize: 15.sp,
               ),
         ),
