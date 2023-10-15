@@ -56,4 +56,5 @@ installers/
 # Generator related
 *.freezed.dart
 *.g.dart
+!locale_keys.g.dart
 *.gen.dart
