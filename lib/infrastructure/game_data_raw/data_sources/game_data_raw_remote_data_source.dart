@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/dio_provider.dart';
 
 part 'game_data_raw_remote_data_source.g.dart';
 

@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../core/constants/constants.dart';
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/file_picker_provider.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/core/mixins/debounce_mixin.dart';
 import '../../infrastructure/persistence/persistence_repository.dart';

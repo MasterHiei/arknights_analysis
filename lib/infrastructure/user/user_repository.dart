@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../core/common/dtos/token_body_bilibili_dto.dart';

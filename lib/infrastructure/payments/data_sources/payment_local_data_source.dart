@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/database_provider.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/database/app_database.dart';
 import '../dtos/payment_dto.dart';
@@ -8,7 +8,7 @@ import '../dtos/payment_record_dto.dart';
 
 final paymentLocalDataSourceProvider =
     Provider.autoDispose<PaymentLocalDataSource>(
-  (ref) => PaymentLocalDataSourceImpl(ref.watch(dbProvider)),
+  (ref) => PaymentLocalDataSourceImpl(ref.watch(databaseProvider)),
 );
 
 abstract class PaymentLocalDataSource {

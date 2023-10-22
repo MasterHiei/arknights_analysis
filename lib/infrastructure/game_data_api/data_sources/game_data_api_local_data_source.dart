@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/enums/prefs_key.dart';
-import '../../../core/providers.dart';
+import '../../../core/providers/prefs_provider.dart';
 
 final gameDataApiLocalDataSourceProvider =
     Provider.autoDispose<GameDataApiLocalDataSource>(

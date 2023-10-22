@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/database_provider.dart';
 import '../../../domain/user/value_objects/token.dart';
 import '../../core/database/app_database.dart';
 import '../dtos/user_dto.dart';
 
 final userLocalDataSourceProvider = Provider.autoDispose<UserLocalDataSource>(
-  (ref) => UserLocalDataSourceImpl(ref.watch(dbProvider)),
+  (ref) => UserLocalDataSourceImpl(ref.watch(databaseProvider)),
 );
 
 abstract class UserLocalDataSource {

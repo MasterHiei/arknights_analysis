@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../../domain/payments/payment_record.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';

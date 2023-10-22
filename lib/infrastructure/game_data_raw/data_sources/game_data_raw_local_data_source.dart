@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/database_provider.dart';
 import '../../core/database/app_database.dart';
 import '../dtos/gacha_table_dto.dart';
 
 final gameDataRawLocalDataSourceProvider =
     Provider.autoDispose<GameDataRawLocalDataSource>(
-  (ref) => GameDataRawLocalDataSourceImpl(ref.watch(dbProvider)),
+  (ref) => GameDataRawLocalDataSourceImpl(ref.watch(databaseProvider)),
 );
 
 abstract class GameDataRawLocalDataSource {

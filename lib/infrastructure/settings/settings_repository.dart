@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../../domain/settings/latest_release.dart';
 import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/settings_remote_data_source.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../../domain/core/common/pagination.dart';
 import '../../domain/diamonds/diamond_change.dart';
 import '../../domain/user/value_objects/token.dart';

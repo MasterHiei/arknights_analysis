@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../core/providers.dart';
+import '../../core/providers/package_info_provider.dart';
 import '../../infrastructure/settings/settings_repository.dart';
 import 'states/check_for_updates_state.dart';
 

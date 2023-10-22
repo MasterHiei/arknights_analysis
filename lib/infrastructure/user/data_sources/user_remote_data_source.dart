@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/dio_provider.dart';
 import '../../core/common/dtos/token_body_bilibili_dto.dart';
 import '../../core/common/dtos/token_body_official_dto.dart';
 import '../dtos/user_response_dto.dart';
