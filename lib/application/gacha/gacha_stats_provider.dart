@@ -5,7 +5,7 @@ import '../../core/enums/gacha_rule_type.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'params/get_gacha_stats_params.dart';
 
 final gachaStatsProvider = StateNotifierProvider.autoDispose
@@ -15,10 +15,6 @@ final gachaStatsProvider = StateNotifierProvider.autoDispose
     ref.watch(userProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    gachaRepositoryProvider,
-  ],
 );
 
 class GachaStatsNotifier extends StateNotifier<AsyncValue<GachaStats>> {

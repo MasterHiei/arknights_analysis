@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/gacha/gacha_char.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'gacha_history_filter_provider.dart';
 
 final gachaHistoryProvider = FutureProvider.autoDispose(
@@ -26,9 +26,4 @@ final gachaHistoryProvider = FutureProvider.autoDispose(
       },
     );
   },
-  dependencies: [
-    userProvider,
-    gachaHistoryFilterProvider,
-    gachaRepositoryProvider,
-  ],
 );

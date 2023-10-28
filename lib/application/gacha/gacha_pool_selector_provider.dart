@@ -5,17 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/enums/gacha_rule_type.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 
 final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
   (ref) => GachaPoolSelectorNotifier(
     ref.watch(userProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    gachaRepositoryProvider,
-  ],
 );
 
 final selectedGachaPoolProvider = Provider.autoDispose(

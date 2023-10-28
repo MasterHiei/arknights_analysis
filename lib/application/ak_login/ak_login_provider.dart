@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 import 'package:webview_windows/webview_windows.dart';
 
@@ -12,57 +11,49 @@ import '../../core/exceptions/app_failure.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
 import '../../presentation/core/routing/router.dart';
-import '../user/token_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import '../webview/webview_provider.dart';
-import 'ak_login_type_provider.dart';
 import 'states/ak_login_state.dart';
 
-final akLoginProvider =
-    StateNotifierProvider.autoDispose<AkLoginNotifier, AkLoginState>(
-  (ref) {
-    return AkLoginNotifier(
-      ref.watch(webviewProvider(Constants.akLoginPage)).controller,
-      ref.watch(akLoginTypeProvider.notifier),
-      ref.watch(tokenProvider.notifier),
-    );
-  },
-);
+part 'ak_login_provider.g.dart';
 
-class AkLoginNotifier extends StateNotifier<AkLoginState> {
-  AkLoginNotifier(
-    this._controller,
-    this._loginTypeProvider,
-    this._tokenProvider,
-  ) : super(const AkLoginState.init()) {
-    _startListening();
+@riverpod
+class AkLogin extends _$AkLogin {
+  @override
+  AkLoginState build() {
+    ref
+        .watch(webviewProvider(initialUrl: Constants.akLoginPage))
+        .whenData(_startListening);
+    return const AkLoginState.init();
   }
-
-  final WebviewController _controller;
-  final StateController<AkLoginType> _loginTypeProvider;
-  final StateController<Option<Token>> _tokenProvider;
 
   void go(BuildContext context) => const PortalRoute().go(context);
 
-  void _startListening() {
-    _controller.url.listen(_listenUrl);
-    _controller.webMessage.listen(_onTokenRecieved);
-    _controller.loadUrl(Constants.akLoginPage);
+  void _startListening(WebviewController controller) {
+    controller.url.listen((url) => _listenUrl(controller, url));
+    controller.webMessage.listen((data) => _onTokenRecieved(controller, data));
+    controller.loadUrl(Constants.akLoginPage);
   }
 
-  Future<void> _listenUrl(String url) async {
+  Future<void> _listenUrl(WebviewController controller, String url) async {
     final isOfficial = url == Constants.akHomePageOfficial;
     if (isOfficial) {
-      await _controller.loadUrl(Constants.asGetTokenOfficial);
-      _loginTypeProvider.update((_) => AkLoginType.official);
+      await controller.loadUrl(Constants.asGetTokenOfficial);
+      ref
+          .read(loggedInUserInfoProvider.notifier)
+          .updateLoginType(AkLoginType.official);
     }
+
     final isBilibili = [
       Constants.akHomePageBilibili,
       Constants.akHomePageBilibiliRedirect,
     ].contains(url);
     if (isBilibili) {
       await 1.seconds.delay;
-      await _controller.loadUrl(Constants.asGetTokenBilibili);
-      _loginTypeProvider.update((_) => AkLoginType.bilibili);
+      await controller.loadUrl(Constants.asGetTokenBilibili);
+      ref
+          .read(loggedInUserInfoProvider.notifier)
+          .updateLoginType(AkLoginType.bilibili);
     }
 
     final isTokenPage = url == Constants.asGetTokenOfficial ||
@@ -73,23 +64,28 @@ class AkLoginNotifier extends StateNotifier<AkLoginState> {
           'document.getElementsByClassName("token-string")[0].innerHTML';
       const script =
           'window.chrome.webview.postMessage(JSON.parse($tokenString))';
-      await _controller.executeScript(script);
+      await controller.executeScript(script);
     }
   }
 
-  Future<void> _onTokenRecieved(dynamic data) async {
+  Future<void> _onTokenRecieved(
+    WebviewController controller,
+    dynamic data,
+  ) async {
     final token = data as String?;
     if (token == null || token.isEmpty) {
       state = const AkLoginState.failed(
-        AppFailure.localizedError('令牌获取失败，请稍后重试。如果问题仍然存在，请与开发人员联系。'),
+        AppFailure.localizedError(
+          '令牌获取失败，请稍后重试。如果问题仍然存在，请与开发人员联系。',
+        ),
       );
       await Future.wait([
-        _controller.clearCache(),
-        _controller.clearCookies(),
+        controller.clearCache(),
+        controller.clearCookies(),
       ]);
-      await _controller.loadUrl(Constants.akLoginPage);
+      await controller.loadUrl(Constants.akLoginPage);
     } else {
-      _tokenProvider.update((_) => optionOf(Token(token)));
+      ref.read(loggedInUserInfoProvider.notifier).updateToken(Token(token));
       state = const AkLoginState.loggedIn();
     }
     AppLoadingIndicator.dismiss();

@@ -7,7 +7,7 @@ import '../../../application/diamonds/diamond_history_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
-import '../../../application/user/user_fetch_provider.dart';
+import '../../../application/user/fetch_user_provider.dart';
 import '../../../core/enums/gacha_data_management_type.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
@@ -34,13 +34,13 @@ class GachaStatsExtraPanel extends ConsumerWidget {
       builder: (_, ref, __) {
         final button = FilledButton(
           onPressed: () =>
-              ref.read(userFetchProvider.notifier).refresh(context),
+              ref.read(fetchUserProvider.notifier).refresh(context),
           child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
         );
-        return ref.watch(userFetchProvider).maybeWhen(
+        return ref.watch(fetchUserProvider).maybeWhen(
               data: (_) {
                 final lastFetchTime = ref
-                    .read(userFetchProvider.notifier)
+                    .read(fetchUserProvider.notifier)
                     .lastRequestDateTime!
                     .yMMMdHmsString;
                 return Tooltip(
@@ -48,7 +48,7 @@ class GachaStatsExtraPanel extends ConsumerWidget {
                   useMousePosition: false,
                   child: FilledButton(
                     onPressed: () =>
-                        ref.read(userFetchProvider.notifier).refresh(context),
+                        ref.read(fetchUserProvider.notifier).refresh(context),
                     child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
                   ),
                 );

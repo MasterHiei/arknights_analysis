@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/payments/payment_record.dart';
 import '../../infrastructure/payments/payment_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 
 final paymentHistoryProvider = FutureProvider.autoDispose(
   (ref) async => ref.watch(userProvider).fold(
@@ -16,8 +16,4 @@ final paymentHistoryProvider = FutureProvider.autoDispose(
       );
     },
   ),
-  dependencies: [
-    userProvider,
-    paymentRepositoryProvider,
-  ],
 );

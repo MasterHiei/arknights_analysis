@@ -5,22 +5,16 @@ import 'package:time/time.dart';
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/diamonds/diamond_repository.dart';
-import '../ak_login/ak_login_type_provider.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'states/diamond_state.dart';
 
 final diamondProvider =
     StateNotifierProvider.autoDispose<DiamondNotifier, DiamondState>(
   (ref) => DiamondNotifier(
     ref.watch(userProvider),
-    ref.watch(akLoginTypeProvider),
+    ref.watch(loginTypeProvider),
     ref.watch(diamondRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    akLoginTypeProvider,
-    diamondRepositoryProvider,
-  ],
 );
 
 class DiamondNotifier extends StateNotifier<DiamondState> {

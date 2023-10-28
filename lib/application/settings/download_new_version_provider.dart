@@ -14,7 +14,7 @@ final downloadNewVersionProvider = StateNotifierProvider.autoDispose<
     DownloadNewVersionNotifier, DownloadNewVersionState>(
   (ref) => DownloadNewVersionNotifier(
     ref.watch(filePickerProvider),
-    ref.watch(dioProvider),
+    ref.watch(dioProvider()),
   ),
 );
 

@@ -5,22 +5,16 @@ import 'package:time/time.dart';
 import '../../core/enums/ak_login_type.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../ak_login/ak_login_type_provider.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'states/gacha_state.dart';
 
 final gachaProvider =
     StateNotifierProvider.autoDispose<GachaNotifier, GachaState>(
   (ref) => GachaNotifier(
     ref.watch(userProvider),
-    ref.watch(akLoginTypeProvider),
+    ref.watch(loginTypeProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    akLoginTypeProvider,
-    gachaRepositoryProvider,
-  ],
 );
 
 class GachaNotifier extends StateNotifier<GachaState> {

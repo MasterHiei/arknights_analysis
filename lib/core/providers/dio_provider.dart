@@ -9,7 +9,25 @@ import '../interceptors/dio_interceptors.dart';
 part 'dio_provider.g.dart';
 
 @riverpod
-Dio _dio(_DioRef ref, {required String baseUrl}) {
+Dio akDio(AkDioRef ref) => ref.watch(dioProvider(baseUrl: Constants.akBaseUrl));
+
+@riverpod
+Dio asDio(AsDioRef ref) => ref.watch(dioProvider(baseUrl: Constants.asBaseUrl));
+
+@riverpod
+Dio gdDio(GdDioRef ref) =>
+    ref.watch(dioProvider(baseUrl: Constants.gameDataRawBaseUrl));
+
+@riverpod
+Dio gdApiDio(GdApiDioRef ref) =>
+    ref.watch(dioProvider(baseUrl: Constants.gameDataApiBaseUrl));
+
+@riverpod
+Dio rdApiDio(RdApiDioRef ref) =>
+    ref.watch(dioProvider(baseUrl: Constants.repoDataApiBaseUrl));
+
+@riverpod
+Dio dio(DioRef ref, {String baseUrl = ''}) {
   final dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
@@ -21,15 +39,3 @@ Dio _dio(_DioRef ref, {required String baseUrl}) {
   dio.interceptors.addAll(dioInterceptors);
   return dio;
 }
-
-final dioProvider = _DioProvider(baseUrl: '');
-
-final akDioProvider = _dioProvider(baseUrl: Constants.akBaseUrl);
-
-final asDioProvider = _dioProvider(baseUrl: Constants.asBaseUrl);
-
-final gdDioProvider = _dioProvider(baseUrl: Constants.gameDataRawBaseUrl);
-
-final gdApiDioProvider = _dioProvider(baseUrl: Constants.gameDataApiBaseUrl);
-
-final rdApiDioProvider = _dioProvider(baseUrl: Constants.repoDataApiBaseUrl);

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/enums/rarity.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'states/gacha_history_filter_state.dart';
 
 final gachaHistoryFilterProvider = StateNotifierProvider.autoDispose<
@@ -13,10 +13,6 @@ final gachaHistoryFilterProvider = StateNotifierProvider.autoDispose<
     ref.watch(userProvider),
     ref.watch(gachaRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    gachaRepositoryProvider,
-  ],
 );
 
 class GachaHistoryFilterNotifier

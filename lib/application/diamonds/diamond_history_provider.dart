@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/diamonds/diamond_change.dart';
 import '../../infrastructure/diamonds/diamond_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 
 final diamondHistoryProvider = FutureProvider.autoDispose(
   (ref) async {
@@ -19,8 +19,4 @@ final diamondHistoryProvider = FutureProvider.autoDispose(
       },
     );
   },
-  dependencies: [
-    userProvider,
-    diamondRepositoryProvider,
-  ],
 );

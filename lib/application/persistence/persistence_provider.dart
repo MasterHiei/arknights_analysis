@@ -10,7 +10,7 @@ import '../../core/providers/file_picker_provider.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/core/mixins/debounce_mixin.dart';
 import '../../infrastructure/persistence/persistence_repository.dart';
-import '../user/user_provider.dart';
+import '../user/logged_in_user_info_provider.dart';
 import 'states/persistence_state.dart';
 
 final persistenceProvider =
@@ -20,11 +20,6 @@ final persistenceProvider =
     ref.watch(filePickerProvider),
     ref.watch(persistenceRepositoryProvider),
   ),
-  dependencies: [
-    userProvider,
-    filePickerProvider,
-    persistenceRepositoryProvider,
-  ],
 );
 
 class PersistenceNotifier extends StateNotifier<PersistenceState>

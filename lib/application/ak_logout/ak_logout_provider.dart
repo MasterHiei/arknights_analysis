@@ -1,21 +1,22 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../presentation/core/routing/router.dart';
 import 'states/ak_logout_state.dart';
 
-final akLogoutProvider =
-    StateNotifierProvider.autoDispose<AkLogoutNotifier, AkLogoutState>((ref) {
-  final controller = WebviewController();
-  ref.onDispose(controller.dispose);
-  return AkLogoutNotifier(controller);
-});
+part 'ak_logout_provider.g.dart';
 
-class AkLogoutNotifier extends StateNotifier<AkLogoutState> {
-  AkLogoutNotifier(this._controller) : super(const AkLogoutState.init());
+@riverpod
+class AkLogout extends _$AkLogout {
+  late final WebviewController _controller;
 
-  final WebviewController _controller;
+  @override
+  AkLogoutState build() {
+    _controller = WebviewController();
+    ref.onDispose(_controller.dispose);
+    return const AkLogoutState.init();
+  }
 
   void go(BuildContext context) => const SplashRoute().go(context);
 
@@ -25,6 +26,7 @@ class AkLogoutNotifier extends StateNotifier<AkLogoutState> {
       _controller.clearCache(),
       _controller.clearCookies(),
     ]);
+
     state = const AkLogoutState.loggedOut();
   }
 }
