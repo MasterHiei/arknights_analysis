@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/enums/gacha_rule_type.dart';
 import '../../../core/providers/database_provider.dart';
@@ -8,11 +8,11 @@ import '../../game_data_raw/dtos/gacha_pool_dto.dart';
 import '../dtos/gacha_dto.dart';
 import '../dtos/gacha_record_dto.dart';
 
-final gachaLocalDataSourceProvider = Provider.autoDispose<GachaLocalDataSource>(
-  (ref) => GachaLocalDataSourceImpl(
-    ref.watch(databaseProvider),
-  ),
-);
+part 'gacha_local_data_source.g.dart';
+
+@riverpod
+GachaLocalDataSource gachaLocalDataSource(GachaLocalDataSourceRef ref) =>
+    GachaLocalDataSourceImpl(ref.watch(databaseProvider));
 
 abstract class GachaLocalDataSource {
   Future<List<int>> save(GachaDto dto);

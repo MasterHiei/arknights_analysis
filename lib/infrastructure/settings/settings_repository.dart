@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
@@ -8,12 +8,14 @@ import '../../domain/settings/latest_release.dart';
 import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/settings_remote_data_source.dart';
 
-final settingsRepositoryProvider = Provider.autoDispose<SettingsRepository>(
-  (ref) => SettingsRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(settingsRemoteDataSourceProvider),
-  ),
-);
+part 'settings_repository.g.dart';
+
+@riverpod
+SettingsRepository settingsRepository(SettingsRepositoryRef ref) =>
+    SettingsRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(settingsRemoteDataSourceProvider),
+    );
 
 abstract class SettingsRepository {
   Future<Either<AppFailure, LatestRelease>> fetchLatestRelease();

@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
@@ -13,13 +13,15 @@ import 'data_sources/payment_local_data_source.dart';
 import 'data_sources/payment_remote_data_source.dart';
 import 'dtos/payment_dto.dart';
 
-final paymentRepositoryProvider = Provider.autoDispose<PaymentRepository>(
-  (ref) => PaymentRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(paymentLocalDataSourceProvider),
-    ref.watch(paymentRemoteDataSourceProvider),
-  ),
-);
+part 'payment_repository.g.dart';
+
+@riverpod
+PaymentRepository paymentRepository(PaymentRepositoryRef ref) =>
+    PaymentRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(paymentLocalDataSourceProvider),
+      ref.watch(paymentRemoteDataSourceProvider),
+    );
 
 abstract class PaymentRepository {
   Future<Either<AppFailure, Unit>> fetchAndSave(

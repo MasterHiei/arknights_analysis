@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../core/enums/gacha_rule_type.dart';
@@ -18,13 +18,14 @@ import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/gacha_local_data_source.dart';
 import 'data_sources/gacha_remote_data_source.dart';
 
-final gachaRepositoryProvider = Provider.autoDispose<GachaRepository>(
-  (ref) => GachaRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(gachaLocalDataSourceProvider),
-    ref.watch(gachaRemoteDataSourceProvider),
-  ),
-);
+part 'gacha_repository.g.dart';
+
+@riverpod
+GachaRepository gachaRepository(GachaRepositoryRef ref) => GachaRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(gachaLocalDataSourceProvider),
+      ref.watch(gachaRemoteDataSourceProvider),
+    );
 
 abstract class GachaRepository {
   Future<Either<AppFailure, Pagination>> fetchAndSave(

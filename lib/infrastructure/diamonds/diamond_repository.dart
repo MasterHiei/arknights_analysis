@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
@@ -14,13 +14,15 @@ import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/diamond_local_data_source.dart';
 import 'data_sources/diamond_remote_data_source.dart';
 
-final diamondRepositoryProvider = Provider.autoDispose<DiamondRepository>(
-  (ref) => DiamondRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(diamondLocalDataSourceProvider),
-    ref.watch(diamondRemoteDataSourceProvider),
-  ),
-);
+part 'diamond_repository.g.dart';
+
+@riverpod
+DiamondRepository diamondRepository(DiamondRepositoryRef ref) =>
+    DiamondRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(diamondLocalDataSourceProvider),
+      ref.watch(diamondRemoteDataSourceProvider),
+    );
 
 abstract class DiamondRepository {
   Future<Either<AppFailure, Pagination>> fetchAndSave(

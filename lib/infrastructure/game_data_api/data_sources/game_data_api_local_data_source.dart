@@ -1,13 +1,16 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/enums/prefs_key.dart';
 import '../../../core/providers/prefs_provider.dart';
 
-final gameDataApiLocalDataSourceProvider =
-    Provider.autoDispose<GameDataApiLocalDataSource>(
-  (ref) => GameDataApiLocalDataSourceImpl(ref.watch(prefsProvider)),
-);
+part 'game_data_api_local_data_source.g.dart';
+
+@riverpod
+GameDataApiLocalDataSource gameDataApiLocalDataSource(
+  GameDataApiLocalDataSourceRef ref,
+) =>
+    GameDataApiLocalDataSourceImpl(ref.watch(prefsProvider));
 
 abstract class GameDataApiLocalDataSource {
   String? getLastGachaTableUpdateDateTime();
