@@ -1,34 +1,33 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 
 import '../../presentation/core/routing/router.dart';
+import 'states/splash_state.dart';
 
-final splashProvider = ChangeNotifierProvider.autoDispose(
-  (_) => SplashNotifier(),
-);
+part 'splash_provider.g.dart';
 
-class SplashNotifier extends ChangeNotifier {
-  SplashNotifier() {
+@riverpod
+class Splash extends _$Splash {
+  var _isAnimated = false;
+  var _isFetched = false;
+
+  @override
+  SplashState build() {
     _startAnimation();
+    return SplashState.init();
   }
 
-  var _opacity = 0.0;
-  double get opacity => _opacity;
-
-  var _animationFinished = false;
-  var _fetchingFinished = false;
-
-  void animated(BuildContext context) {
-    _animationFinished = true;
-    if (_fetchingFinished) {
+  void onAnimationEnd(BuildContext context) {
+    _isAnimated = true;
+    if (_isFetched) {
       _go(context);
     }
   }
 
-  void fetched(BuildContext context) {
-    _fetchingFinished = true;
-    if (_animationFinished) {
+  void onFetched(BuildContext context) {
+    _isFetched = true;
+    if (_isAnimated) {
       _go(context);
     }
   }
@@ -37,7 +36,6 @@ class SplashNotifier extends ChangeNotifier {
 
   Future<void> _startAnimation() async {
     await 200.milliseconds.delay;
-    _opacity = 1;
-    notifyListeners();
+    state = state.copyWith(opacity: 1);
   }
 }

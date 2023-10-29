@@ -1,49 +1,36 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/dio_provider.dart';
 import '../../core/providers/file_picker_provider.dart';
 import 'states/download_new_version_state.dart';
 
-final downloadNewVersionProvider = StateNotifierProvider.autoDispose<
-    DownloadNewVersionNotifier, DownloadNewVersionState>(
-  (ref) => DownloadNewVersionNotifier(
-    ref.watch(filePickerProvider),
-    ref.watch(dioProvider()),
-  ),
-);
+part 'download_new_version_provider.g.dart';
 
-class DownloadNewVersionNotifier
-    extends StateNotifier<DownloadNewVersionState> {
-  DownloadNewVersionNotifier(
-    this._filePicker,
-    this._dio,
-  ) : super(const DownloadNewVersionState.init());
-
-  final FilePicker _filePicker;
-  final Dio _dio;
+@riverpod
+class DownloadNewVersion extends _$DownloadNewVersion {
+  @override
+  DownloadNewVersionState build() => const DownloadNewVersionState.init();
 
   Future<void> download(
     String url, {
     required String fileName,
   }) async {
     final directory = await getDownloadsDirectory();
-    final destination = await _filePicker.saveFile(
-      fileName: fileName,
-      initialDirectory: directory?.path,
-    );
+    final destination = await ref.read(filePickerProvider).saveFile(
+          fileName: fileName,
+          initialDirectory: directory?.path,
+        );
     if (destination == null) {
       return;
     }
 
     state = const DownloadNewVersionState.preparing();
     try {
-      await _dio.download(
+      await ref.read(dioProvider()).download(
         url,
         destination,
         onReceiveProgress: (count, total) {

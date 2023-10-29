@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/constants/constants.dart';
 import '../../core/exceptions/app_failure.dart';
@@ -13,31 +13,21 @@ import '../../infrastructure/persistence/persistence_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
 import 'states/persistence_state.dart';
 
-final persistenceProvider =
-    StateNotifierProvider.autoDispose<PersistenceNotifier, PersistenceState>(
-  (ref) => PersistenceNotifier(
-    ref.watch(userProvider),
-    ref.watch(filePickerProvider),
-    ref.watch(persistenceRepositoryProvider),
-  ),
-);
+part 'persistence_provider.g.dart';
 
-class PersistenceNotifier extends StateNotifier<PersistenceState>
-    with DebounceMixin {
-  PersistenceNotifier(
-    this._userOption,
-    this._filePicker,
-    this._repository,
-  ) : super(const PersistenceState.idle());
+@riverpod
+class Persistence extends _$Persistence with DebounceMixin {
+  Option<User> get _userOption => ref.read(userProvider);
 
-  final FilePicker _filePicker;
-  final Option<User> _userOption;
-  final PersistenceRepository _repository;
+  FilePicker get _filePicker => ref.read(filePickerProvider);
+
+  PersistenceRepository get _repository =>
+      ref.read(persistenceRepositoryProvider);
 
   @override
-  void dispose() {
-    cancelDebounce();
-    super.dispose();
+  PersistenceState build() {
+    ref.onDispose(cancelDebounce);
+    return const PersistenceState.idle();
   }
 
   void export() => debounce(_export);

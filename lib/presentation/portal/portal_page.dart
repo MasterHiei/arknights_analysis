@@ -10,7 +10,7 @@ import '../../application/diamonds/diamond_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
 import '../../application/payments/payment_provider.dart';
-import '../../application/portal/pane_provider.dart';
+import '../../application/portal/portal_pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
 import '../../application/user/fetch_user_provider.dart';
@@ -26,10 +26,6 @@ import '../gacha_stats/gacha_stats_page.dart';
 import '../payment_history/payment_history_page.dart';
 import '../settings/settings_page.dart';
 import 'widgets/index.dart';
-
-final _selectedPaneIndex = Provider.autoDispose(
-  (ref) => ref.watch(paneProvider).selectedIndex,
-);
 
 final _hasNewVersion = Provider.autoDispose(
   (ref) => ref.watch(checkForUpdatesProvider).hasNewVersion,
@@ -95,8 +91,8 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
     return NavigationView(
       pane: NavigationPane(
-        selected: ref.watch(_selectedPaneIndex),
-        onChanged: ref.read(paneProvider.notifier).select,
+        selected: ref.watch(portalPaneProvider),
+        onChanged: ref.read(portalPaneProvider.notifier).select,
         header: const PaneHeaderView(),
         items: [
           PaneItem(
