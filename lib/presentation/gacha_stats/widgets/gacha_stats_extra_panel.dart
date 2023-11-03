@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../application/diamonds/diamond_history_provider.dart';
+import '../../../application/diamonds/fetch_diamond_history_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
@@ -71,7 +71,7 @@ class GachaStatsExtraPanel extends ConsumerWidget {
             importSuccess: (_) {
               ref.invalidate(gachaPoolSelectorProvider);
               ref.invalidate(gachaStatsProvider(null));
-              ref.invalidate(diamondHistoryProvider);
+              ref.invalidate(fetchDiamondHistoryProvider);
               return '导入成功。';
             },
             importFailure: (state) => state.failure.localizedMessage,

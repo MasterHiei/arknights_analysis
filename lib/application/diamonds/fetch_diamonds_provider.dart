@@ -4,16 +4,16 @@ import 'package:time/time.dart';
 import '../../domain/user/user.dart';
 import '../../infrastructure/diamonds/diamond_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
-import 'states/diamond_state.dart';
+import 'states/fetch_diamonds_state.dart';
 
 part 'fetch_diamonds_provider.g.dart';
 
 @riverpod
 class FetchDiamonds extends _$FetchDiamonds {
   @override
-  DiamondState build() {
+  FetchDiamondsState build() {
     ref.watch(userProvider).fold(() {}, _fetchAndSave);
-    return const DiamondState.init();
+    return const FetchDiamondsState.init();
   }
 
   Future<void> _fetchAndSave(
@@ -21,7 +21,7 @@ class FetchDiamonds extends _$FetchDiamonds {
     int page = 1,
     int? total,
   }) async {
-    state = DiamondState.fetching(current: page, total: total);
+    state = FetchDiamondsState.fetching(current: page, total: total);
     await 500.milliseconds.delay;
     final failureOrPagination =
         await ref.read(diamondRepositoryProvider).fetchAndSave(
@@ -31,10 +31,10 @@ class FetchDiamonds extends _$FetchDiamonds {
               loginType: ref.read(loginTypeProvider),
             );
     return failureOrPagination.fold(
-      (failure) => state = DiamondState.failure(failure),
+      (failure) => state = FetchDiamondsState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {
-          state = const DiamondState.success();
+          state = const FetchDiamondsState.success();
           return;
         }
 
