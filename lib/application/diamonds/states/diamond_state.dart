@@ -6,6 +6,8 @@ part 'diamond_state.freezed.dart';
 
 @freezed
 class DiamondState with _$DiamondState {
+  const factory DiamondState.init() = _Init;
+
   const factory DiamondState.fetching({
     required int current,
     int? total,

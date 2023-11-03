@@ -1,19 +1,21 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/payments/payment_record.dart';
 import '../../infrastructure/payments/payment_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
 
-final paymentHistoryProvider = FutureProvider.autoDispose(
-  (ref) async => ref.watch(userProvider).fold(
-    () async => <PaymentRecord>[],
-    (user) async {
-      final repository = ref.watch(paymentRepositoryProvider);
-      final failureOrRecords = await repository.getHistory(user.uid);
-      return failureOrRecords.fold(
-        (failure) => throw failure,
-        (records) => records,
-      );
-    },
-  ),
-);
+part 'payment_history_provider.g.dart';
+
+@riverpod
+Future<List<PaymentRecord>> paymentHistory(PaymentHistoryRef ref) =>
+    ref.watch(userProvider).fold(
+      () async => <PaymentRecord>[],
+      (user) async {
+        final failureOrRecords =
+            await ref.read(paymentRepositoryProvider).getHistory(user.uid);
+        return failureOrRecords.fold(
+          (failure) => throw failure,
+          (records) => records,
+        );
+      },
+    );

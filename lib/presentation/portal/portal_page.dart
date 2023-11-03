@@ -6,10 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
-import '../../application/diamonds/diamond_provider.dart';
+import '../../application/diamonds/fetch_diamonds_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../application/gacha/gacha_provider.dart';
-import '../../application/payments/payment_provider.dart';
+import '../../application/payments/fetch_payments_provider.dart';
 import '../../application/portal/portal_pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
@@ -188,7 +188,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   }
 
   void _listenPaymentState() => ref.listen(
-        fetchAndSavePaymentsProvider,
+        fetchPaymentsProvider,
         (_, next) => next.maybeWhen<void>(
           error: (failure, _) async {
             if (failure is AppFailure) {
@@ -204,7 +204,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
       );
 
   void _listenDiamondState() => ref.listen(
-        diamondProvider,
+        fetchDiamondsProvider,
         (_, next) => next.maybeWhen<void>(
           failure: (failure) => AppFlushBar.show(
             context,
