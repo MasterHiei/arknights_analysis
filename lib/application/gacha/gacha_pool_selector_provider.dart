@@ -1,64 +1,46 @@
-import 'package:dartz/dartz.dart';
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/gacha_rule_type.dart';
-import '../../domain/user/user.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
+import 'states/gacha_pool_selector_state.dart';
 
-final gachaPoolSelectorProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => GachaPoolSelectorNotifier(
-    ref.watch(userProvider),
-    ref.watch(gachaRepositoryProvider),
-  ),
-);
+part 'gacha_pool_selector_provider.g.dart';
 
-final selectedGachaPoolProvider = Provider.autoDispose(
-  (ref) => ref.watch(gachaPoolSelectorProvider).selectedPool,
-);
-
-class GachaPoolSelectorNotifier extends ChangeNotifier {
-  GachaPoolSelectorNotifier(this._userOption, this._repository) {
-    _getAll();
+@riverpod
+class GachaPoolSelector extends _$GachaPoolSelector {
+  @override
+  GachaPoolSelectorState build() {
+    _getAllPools();
+    return GachaPoolSelectorState.init();
   }
-
-  final Option<User> _userOption;
-  final GachaRepository _repository;
-
-  final _pools = <String>[];
-  List<String> get pools => [
-        GachaRuleType.normal.label,
-        ..._pools,
-      ];
-
-  String? _selectedPool;
-  String? get selectedPool => _selectedPool;
 
   void select(String? value) {
-    if (value == _selectedPool) {
+    if (value == state.value) {
       return;
     }
-    _selectedPool = value;
-    notifyListeners();
+    state = state.copyWith(value: value);
   }
 
-  Future<void> _getAll() async {
-    _userOption.fold(
-      () {},
-      (user) async {
-        final failureOrPools = await _repository.getRecordedPools(
-          uid: user.uid,
-          includeRuleTypes: GachaRuleType.independentGuarantee,
-        );
-        failureOrPools.fold(
-          (_) {},
-          (pools) => _pools
-            ..clear()
-            ..addAll(pools),
-        );
-        notifyListeners();
-      },
-    );
-  }
+  Future<void> _getAllPools() => ref.watch(userProvider).fold(
+        () async {},
+        (user) async {
+          final failureOrPools =
+              await ref.read(gachaRepositoryProvider).getRecordedPools(
+                    uid: user.uid,
+                    includeRuleTypes: GachaRuleType.independentGuarantee,
+                  );
+          failureOrPools.fold(
+            (_) {},
+            (pools) {
+              state = GachaPoolSelectorState.init(
+                source: [
+                  GachaRuleType.normal.label,
+                  ...pools,
+                ],
+              );
+            },
+          );
+        },
+      );
 }

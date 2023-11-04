@@ -5,7 +5,7 @@ import 'package:flutter/material.dart' hide Colors;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../application/gacha/gacha_history_provider.dart';
+import '../../application/gacha/fetch_gacha_history_provider.dart';
 import '../../core/constants/constants.dart';
 import '../../domain/gacha/gacha_char.dart';
 import '../../infrastructure/core/extensions/date_time_formatter.dart';
@@ -55,7 +55,7 @@ class GachaHistoryPage extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(gachaHistoryProvider).when(
+        return ref.watch(fetchGachaHistoryProvider).when(
               data: (chars) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),

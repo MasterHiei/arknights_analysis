@@ -4,7 +4,7 @@ import '../../infrastructure/core/database/app_database.dart';
 
 part 'database_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AppDatabase database(DatabaseRef ref) {
   final db = AppDatabase();
   ref.onDispose(db.close);

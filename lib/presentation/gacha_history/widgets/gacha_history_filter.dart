@@ -9,25 +9,31 @@ import '../../../application/gacha/gacha_history_filter_provider.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../generated/locale_keys.g.dart';
 
-final _isRaritySelected = Provider.autoDispose.family((ref, Rarity rarity) {
-  final provider = ref.watch(gachaHistoryFilterProvider);
-  return provider.selectedRarities.contains(rarity);
-});
+final _isRaritySelected = Provider.autoDispose.family(
+  (ref, Rarity rarity) => ref.watch(
+    gachaHistoryFilterProvider.select(
+      (state) => state.selectedRarities.contains(rarity),
+    ),
+  ),
+);
 
-final _showAllPools = Provider.autoDispose((ref) {
-  final provider = ref.watch(gachaHistoryFilterProvider);
-  return provider.showAllPools;
-});
+final _showAllPools = Provider.autoDispose(
+  (ref) => ref.watch(
+    gachaHistoryFilterProvider.select((state) => state.showAllPools),
+  ),
+);
 
-final _pools = Provider.autoDispose((ref) {
-  final provider = ref.watch(gachaHistoryFilterProvider);
-  return provider.pools;
-});
+final _pools = Provider.autoDispose(
+  (ref) => ref.watch(
+    gachaHistoryFilterProvider.select((state) => state.pools),
+  ),
+);
 
-final _selectedPools = Provider.autoDispose((ref) {
-  final provider = ref.watch(gachaHistoryFilterProvider);
-  return provider.selectedPools;
-});
+final _selectedPools = Provider.autoDispose(
+  (ref) => ref.watch(
+    gachaHistoryFilterProvider.select((state) => state.selectedPools),
+  ),
+);
 
 class GachaHistoryFilter extends StatefulWidget {
   const GachaHistoryFilter({super.key});

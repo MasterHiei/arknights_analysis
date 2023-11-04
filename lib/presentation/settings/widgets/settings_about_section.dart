@@ -15,29 +15,39 @@ import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
 
 final _currentVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).currentVersion,
+  (ref) => ref.watch(
+    checkForUpdatesProvider.select((state) => state.currentVersion),
+  ),
 );
 
 final _latestVersion = Provider.autoDispose((ref) {
-  final state = ref.watch(checkForUpdatesProvider);
-  return state.latestReleaseOption.fold(
+  final latestReleaseOption = ref.watch(
+    checkForUpdatesProvider.select((state) => state.latestReleaseOption),
+  );
+  return latestReleaseOption.fold(
     () => '',
     (latest) => latest.version,
   );
 });
 
 final _isDownloadingUpdates = Provider.autoDispose(
-  (ref) => ref.watch(downloadNewVersionProvider).isDownloading,
+  (ref) => ref.watch(
+    downloadNewVersionProvider.select((state) => state.isDownloading),
+  ),
 );
 
 final _isCheckingOrDownloading = Provider.autoDispose((ref) {
-  final isChecking = ref.watch(checkForUpdatesProvider).isChecking;
+  final isChecking = ref.watch(
+    checkForUpdatesProvider.select((state) => state.isChecking),
+  );
   final isDownloading = ref.watch(_isDownloadingUpdates);
   return isChecking || isDownloading;
 });
 
 final _downloadProgress = Provider.autoDispose(
-  (ref) => ref.watch(downloadNewVersionProvider).downloadProgress,
+  (ref) => ref.watch(
+    downloadNewVersionProvider.select((state) => state.downloadProgress),
+  ),
 );
 
 class SettingsAboutSection extends StatelessWidget {

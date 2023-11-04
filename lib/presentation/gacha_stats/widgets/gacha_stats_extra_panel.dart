@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../application/diamonds/fetch_diamond_history_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
-import '../../../application/gacha/gacha_stats_provider.dart';
+import '../../../application/gacha/get_gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
 import '../../../application/user/fetch_user_provider.dart';
 import '../../../core/enums/gacha_data_management_type.dart';
@@ -70,7 +70,7 @@ class GachaStatsExtraPanel extends ConsumerWidget {
           final message = next.maybeMap(
             importSuccess: (_) {
               ref.invalidate(gachaPoolSelectorProvider);
-              ref.invalidate(gachaStatsProvider(null));
+              ref.invalidate(getGachaStatsProvider());
               ref.invalidate(fetchDiamondHistoryProvider);
               return '导入成功。';
             },

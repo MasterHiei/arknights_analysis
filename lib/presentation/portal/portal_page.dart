@@ -7,8 +7,8 @@ import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
 import '../../application/diamonds/fetch_diamonds_provider.dart';
+import '../../application/gacha/fetch_gacha_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
-import '../../application/gacha/gacha_provider.dart';
 import '../../application/payments/fetch_payments_provider.dart';
 import '../../application/portal/portal_pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
@@ -28,27 +28,33 @@ import '../settings/settings_page.dart';
 import 'widgets/index.dart';
 
 final _hasNewVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).hasNewVersion,
+  (ref) => ref.watch(
+    checkForUpdatesProvider.select((state) => state.hasNewVersion),
+  ),
 );
 
 final _browserDownloadUrl = Provider.autoDispose((ref) {
-  final state = ref.watch(checkForUpdatesProvider);
-  return state.latestReleaseOption.fold(
+  final latestReleaseOption = ref.watch(
+    checkForUpdatesProvider.select((state) => state.latestReleaseOption),
+  );
+  return latestReleaseOption.fold(
     () => '',
     (latest) => latest.browserDownloadUrl,
   );
 });
 
 final _assetName = Provider.autoDispose((ref) {
-  final state = ref.watch(checkForUpdatesProvider);
-  return state.latestReleaseOption.fold(
+  final latestReleaseOption = ref.watch(
+    checkForUpdatesProvider.select((state) => state.latestReleaseOption),
+  );
+  return latestReleaseOption.fold(
     () => '',
     (latest) => latest.assetName,
   );
 });
 
 final _isOfficialUser = Provider.autoDispose(
-  (ref) => ref.watch(loginTypeProvider).isOfficial,
+  (ref) => ref.watch(loginTypeProvider.select((state) => state.isOfficial)),
 );
 
 class PortalPage extends ConsumerStatefulWidget {
@@ -170,7 +176,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   void _listenGachaStates() {
     ref.listen(gachaPoolSelectorProvider, (_, __) {});
     ref.listen(
-      gachaProvider,
+      fetchGachaProvider,
       (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
           context,
