@@ -1,21 +1,22 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/game_data_api_local_data_source.dart';
 import 'data_sources/game_data_api_remote_data_source.dart';
 
-final gameDataApiRepositoryProvider =
-    Provider.autoDispose<GameDataApiRepository>(
-  (ref) => GameDataRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(gameDataApiLocalDataSourceProvider),
-    ref.watch(gameDataApiRemoteDataSourceProvider),
-  ),
-);
+part 'game_data_api_repository.g.dart';
+
+@riverpod
+GameDataApiRepository gameDataApiRepository(GameDataApiRepositoryRef ref) =>
+    GameDataApiRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(gameDataApiLocalDataSourceProvider),
+      ref.watch(gameDataApiRemoteDataSourceProvider),
+    );
 
 abstract class GameDataApiRepository {
   Future<Either<AppFailure, DateTime>> getLastGachaTableUpdateDateTime();
@@ -27,10 +28,10 @@ abstract class GameDataApiRepository {
   );
 }
 
-class GameDataRepositoryImpl
+class GameDataApiRepositoryImpl
     with APIErrorHandlerMixin
     implements GameDataApiRepository {
-  const GameDataRepositoryImpl(
+  const GameDataApiRepositoryImpl(
     this._connectivity,
     this._localDataSource,
     this._remoteDataSource,

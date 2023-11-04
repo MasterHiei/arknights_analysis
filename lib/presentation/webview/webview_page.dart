@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_windows/webview_windows.dart';
 
-import '../../application/webview/webview_provider.dart';
+import '../../application/webview/webview_provider.dart' hide Webview;
+import '../core/common/widgets/app_error_view.dart';
 import '../core/routing/router.dart';
 
 class WebviewPage extends ConsumerWidget {
@@ -19,26 +20,31 @@ class WebviewPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(webviewProvider(initialUrl)).controller;
-    final isInitialized = controller.value.isInitialized;
-    final hasNavigationBar = isInitialized && useNavigationBar;
-    return NavigationView(
-      content: Stack(
-        children: [
-          if (isInitialized) Positioned.fill(child: Webview(controller)),
-          if (hasNavigationBar)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: _NavigationBar(controller),
-              ),
+    return ref.watch(webviewProvider(initialUrl: initialUrl)).when(
+          data: (controller) => NavigationView(
+            content: Stack(
+              children: [
+                Positioned.fill(child: Webview(controller)),
+                if (useNavigationBar)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 12.h),
+                      child: _NavigationBar(controller),
+                    ),
+                  ),
+              ],
             ),
-          if (!isInitialized)
-            const Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
-        ],
-      ),
-    );
+          ),
+          error: (_, __) => const AppErrorView(),
+          loading: () => const NavigationView(
+            content: Stack(
+              children: [
+                Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
+              ],
+            ),
+          ),
+        );
   }
 }
 

@@ -1,16 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/dio_provider.dart';
 import '../dtos/gacha_response_dto.dart';
 
 part 'gacha_remote_data_source.g.dart';
 
-final gachaRemoteDataSourceProvider =
-    Provider.autoDispose<GachaRemoteDataSource>(
-  (ref) => GachaRemoteDataSource(ref.watch(akDioProvider)),
-);
+@riverpod
+GachaRemoteDataSource gachaRemoteDataSource(GachaRemoteDataSourceRef ref) =>
+    GachaRemoteDataSource(ref.watch(akDioProvider));
 
 @RestApi()
 abstract class GachaRemoteDataSource {

@@ -3,7 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../application/user/user_fetch_provider.dart';
+import '../../application/user/fetch_user_provider.dart';
 import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_error_view.dart';
 import 'widgets/index.dart';
@@ -41,7 +41,7 @@ class GachaStatsPage extends StatelessWidget {
 
   Widget _buildStatesView() {
     return Consumer(
-      builder: (_, ref, __) => ref.watch(userFetchProvider).when(
+      builder: (_, ref, __) => ref.watch(fetchUserProvider).when(
             data: (_) => const GachaStatsView(),
             error: (_, __) => const AppErrorView(),
             loading: () => const SizedBox.expand(

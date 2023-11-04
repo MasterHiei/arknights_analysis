@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
-import '../../core/providers.dart';
+import '../../core/providers/connectivity_provider.dart';
 import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../core/common/dtos/token_body_bilibili_dto.dart';
@@ -14,13 +14,14 @@ import 'data_sources/user_local_data_source.dart';
 import 'data_sources/user_remote_data_source.dart';
 import 'dtos/user_response_dto.dart';
 
-final userRepositoryProvider = Provider.autoDispose<UserRepository>(
-  (ref) => UserRepositoryImpl(
-    ref.watch(connectivityProvider),
-    ref.watch(userLocalDataSourceProvider),
-    ref.watch(userRemoteDataSourceProvider),
-  ),
-);
+part 'user_repository.g.dart';
+
+@riverpod
+UserRepository userRepository(UserRepositoryRef ref) => UserRepositoryImpl(
+      ref.watch(connectivityProvider),
+      ref.watch(userLocalDataSourceProvider),
+      ref.watch(userRemoteDataSourceProvider),
+    );
 
 abstract class UserRepository {
   Future<Either<AppFailure, User>> get(Token token);

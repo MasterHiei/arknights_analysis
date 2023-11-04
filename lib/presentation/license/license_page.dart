@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/gen/assets.gen.dart';
-import '../../core/providers.dart';
+import '../../core/providers/package_info_provider.dart';
 import '../../core/theme/app_theme.dart';
 
 class LicensePage extends ConsumerWidget {

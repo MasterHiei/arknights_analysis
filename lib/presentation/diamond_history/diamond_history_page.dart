@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../application/diamonds/diamond_provider.dart';
+import '../../application/diamonds/fetch_diamonds_provider.dart';
 import '../core/common/widgets/app_error_view.dart';
 import 'widgets/index.dart';
 
@@ -11,7 +11,8 @@ class DiamondHistoryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(diamondProvider).map(
+    return ref.watch(fetchDiamondsProvider).map(
+          init: (_) => _buildProgressBar(),
           fetching: (state) {
             late final double? value;
             final total = state.total ?? 0;

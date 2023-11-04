@@ -2,18 +2,20 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/gacha/gacha_pool_filter_provider.dart';
+import '../../../application/gacha/fetch_gacha_provider.dart';
+import '../../../application/gacha/filter_gacha_pool_provider.dart';
 import '../../../application/gacha/gacha_pool_selector_provider.dart';
-import '../../../application/gacha/gacha_provider.dart';
-import '../../../application/gacha/gacha_stats_provider.dart';
+import '../../../application/gacha/get_gacha_stats_provider.dart';
 import '../../../core/enums/rarity.dart';
 import '../../../domain/gacha/gacha_stats.dart';
 import '../../core/common/widgets/app_error_view.dart';
 
-final _filteredPools = Provider.autoDispose((ref) {
-  final selectedPool = ref.watch(gachaPoolSelectorProvider).selectedPool;
+final _visiblePools = Provider.autoDispose((ref) {
+  final selectedPool = ref.watch(
+    gachaPoolSelectorProvider.select((state) => state.value),
+  );
   if (selectedPool == null) {
-    return ref.watch(gachaPoolSelectorProvider).pools;
+    return ref.watch(gachaPoolSelectorProvider.select((state) => state.source));
   }
   return [selectedPool];
 });
@@ -23,7 +25,8 @@ class GachaStatsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(gachaProvider).map(
+    return ref.watch(fetchGachaProvider).map(
+          init: (_) => _buildProgressBar(),
           fetching: (state) {
             late final double? value;
             final total = state.total ?? 0;
@@ -38,17 +41,9 @@ class GachaStatsView extends ConsumerWidget {
             );
           },
           failure: (_) => const AppErrorView(),
-          success: (_) => _contentView,
+          success: (_) => const _StatsView(),
         );
   }
-
-  Widget get _contentView => Consumer(
-        builder: (_, ref, __) => ref.watch(gachaStatsProvider(null)).when(
-              data: (_) => const _StatsView(),
-              error: (_, __) => const AppErrorView(),
-              loading: () => const SizedBox.shrink(),
-            ),
-      );
 
   Widget _buildProgressBar({
     double? value,
@@ -71,11 +66,11 @@ class _StatsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pools = ref.watch(_filteredPools);
+    final pools = ref.watch(_visiblePools);
     return ListView.separated(
       itemBuilder: (_, index) {
         final pool = pools[index];
-        return ref.watch(gachaStatsProvider(pool)).maybeWhen(
+        return ref.watch(getGachaStatsProvider(pool: pool)).maybeWhen(
               data: (stats) => Card(
                 child: DefaultTextStyle.merge(
                   style: TextStyle(
@@ -105,7 +100,7 @@ class _StatsView extends ConsumerWidget {
         children: [
           Consumer(
             builder: (_, ref, __) =>
-                ref.watch(gachaPoolFilterProvider(poolName)).maybeWhen(
+                ref.watch(filterGachaPoolProvider(byName: poolName)).maybeWhen(
                       data: (pool) => Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
