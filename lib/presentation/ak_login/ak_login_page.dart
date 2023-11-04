@@ -5,9 +5,10 @@ import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_login/ak_login_provider.dart';
-import '../../application/webview/webview_provider.dart';
+import '../../application/webview/webview_provider.dart' hide Webview;
 import '../../core/constants/constants.dart';
 import '../core/common/widgets/app_dialog.dart';
+import '../core/common/widgets/app_error_view.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 
 class AkLoginPage extends ConsumerStatefulWidget {
@@ -38,21 +39,20 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        ref.watch(webviewProvider(Constants.akLoginPage)).controller;
-    final isInitialized = controller.value.isInitialized;
-    if (isInitialized) {
-      _listenState(context, ref);
-    }
-    return material.Scaffold(
-      body: Stack(
-        children: [
-          if (isInitialized) Positioned.fill(child: Webview(controller)),
-          if (!isInitialized)
-            const Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
-        ],
-      ),
-    );
+    return ref.watch(webviewProvider(initialUrl: Constants.akLoginPage)).when(
+          data: (controller) {
+            _listenState(context, ref);
+            return material.Scaffold(body: Webview(controller));
+          },
+          error: (_, __) => const AppErrorView(),
+          loading: () => const material.Scaffold(
+            body: Stack(
+              children: [
+                Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
+              ],
+            ),
+          ),
+        );
   }
 
   void _listenState(BuildContext context, WidgetRef ref) => ref.listen(

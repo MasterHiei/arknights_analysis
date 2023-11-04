@@ -1,13 +1,15 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/database_provider.dart';
 import '../../../domain/user/value_objects/token.dart';
 import '../../core/database/app_database.dart';
 import '../dtos/user_dto.dart';
 
-final userLocalDataSourceProvider = Provider.autoDispose<UserLocalDataSource>(
-  (ref) => UserLocalDataSourceImpl(ref.watch(dbProvider)),
-);
+part 'user_local_data_source.g.dart';
+
+@riverpod
+UserLocalDataSource userLocalDataSource(UserLocalDataSourceRef ref) =>
+    UserLocalDataSourceImpl(ref.watch(databaseProvider));
 
 abstract class UserLocalDataSource {
   Future<UserDto> get(Token token);

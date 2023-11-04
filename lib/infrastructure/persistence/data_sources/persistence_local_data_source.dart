@@ -1,22 +1,25 @@
 import 'dart:io';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers.dart';
-import '../../../core/utils/file_manager.dart';
+import '../../../core/providers/database_provider.dart';
+import '../../../core/providers/file_manager_provider.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/database/app_database.dart';
 import '../../diamonds/dtos/diamond_dto.dart';
 import '../../gacha/dtos/gacha_dto.dart';
 import '../dtos/persistence_dto.dart';
 
-final persistenceLocalDataSourceProvider =
-    Provider.autoDispose<PersistenceLocalDataSource>(
-  (ref) => PersistenceLocalDataSourceImpl(
-    ref.watch(dbProvider),
-    ref.watch(fileManagerProvider),
-  ),
-);
+part 'persistence_local_data_source.g.dart';
+
+@riverpod
+PersistenceLocalDataSource persistenceLocalDataSource(
+  PersistenceLocalDataSourceRef ref,
+) =>
+    PersistenceLocalDataSourceImpl(
+      ref.watch(databaseProvider),
+      ref.watch(fileManagerProvider),
+    );
 
 abstract class PersistenceLocalDataSource {
   Future<File> export(

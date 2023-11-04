@@ -6,14 +6,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../application/ak_logout/ak_logout_provider.dart';
-import '../../application/diamonds/diamond_provider.dart';
+import '../../application/diamonds/fetch_diamonds_provider.dart';
+import '../../application/gacha/fetch_gacha_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
-import '../../application/gacha/gacha_provider.dart';
-import '../../application/payments/payment_provider.dart';
-import '../../application/portal/pane_provider.dart';
+import '../../application/payments/fetch_payments_provider.dart';
+import '../../application/portal/portal_pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
 import '../../application/settings/download_new_version_provider.dart';
-import '../../application/user/user_fetch_provider.dart';
+import '../../application/user/fetch_user_provider.dart';
+import '../../application/user/logged_in_user_info_provider.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_dialog.dart';
@@ -26,29 +27,35 @@ import '../payment_history/payment_history_page.dart';
 import '../settings/settings_page.dart';
 import 'widgets/index.dart';
 
-final _selectedPaneIndex = Provider.autoDispose(
-  (ref) => ref.watch(paneProvider).selectedIndex,
-);
-
 final _hasNewVersion = Provider.autoDispose(
-  (ref) => ref.watch(checkForUpdatesProvider).hasNewVersion,
+  (ref) => ref.watch(
+    checkForUpdatesProvider.select((state) => state.hasNewVersion),
+  ),
 );
 
 final _browserDownloadUrl = Provider.autoDispose((ref) {
-  final state = ref.watch(checkForUpdatesProvider);
-  return state.latestReleaseOption.fold(
+  final latestReleaseOption = ref.watch(
+    checkForUpdatesProvider.select((state) => state.latestReleaseOption),
+  );
+  return latestReleaseOption.fold(
     () => '',
     (latest) => latest.browserDownloadUrl,
   );
 });
 
 final _assetName = Provider.autoDispose((ref) {
-  final state = ref.watch(checkForUpdatesProvider);
-  return state.latestReleaseOption.fold(
+  final latestReleaseOption = ref.watch(
+    checkForUpdatesProvider.select((state) => state.latestReleaseOption),
+  );
+  return latestReleaseOption.fold(
     () => '',
     (latest) => latest.assetName,
   );
 });
+
+final _isOfficialUser = Provider.autoDispose(
+  (ref) => ref.watch(loginTypeProvider.select((state) => state.isOfficial)),
+);
 
 class PortalPage extends ConsumerStatefulWidget {
   const PortalPage({super.key});
@@ -78,9 +85,11 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    _listenUserState();
+    _listenFetchUserState();
     _listenGachaStates();
-    _listenPaymentState();
+    if (ref.watch(_isOfficialUser)) {
+      _listenPaymentState();
+    }
     _listenDiamondState();
     _listenVersionState();
     _listenDownloadState();
@@ -88,8 +97,8 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
 
     return NavigationView(
       pane: NavigationPane(
-        selected: ref.watch(_selectedPaneIndex),
-        onChanged: ref.read(paneProvider.notifier).select,
+        selected: ref.watch(portalPaneProvider),
+        onChanged: ref.read(portalPaneProvider.notifier).select,
         header: const PaneHeaderView(),
         items: [
           PaneItem(
@@ -102,11 +111,12 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             body: const GachaHistoryPage(),
             title: const Text(LocaleKeys.features_gachaHistory_title).tr(),
           ),
-          PaneItem(
-            icon: const Icon(FontAwesomeIcons.moneyCheck),
-            body: const PaymentHistoryPage(),
-            title: const Text(LocaleKeys.features_paymentHistory_title).tr(),
-          ),
+          if (ref.watch(_isOfficialUser))
+            PaneItem(
+              icon: const Icon(FontAwesomeIcons.moneyCheck),
+              body: const PaymentHistoryPage(),
+              title: const Text(LocaleKeys.features_paymentHistory_title).tr(),
+            ),
           PaneItem(
             icon: const Icon(FontAwesomeIcons.gem),
             body: const DiamondHistoryPage(),
@@ -143,8 +153,8 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenUserState() => ref.listen(
-        userFetchProvider,
+  void _listenFetchUserState() => ref.listen(
+        fetchUserProvider,
         (_, next) => next.maybeWhen(
           error: (failure, _) async {
             if (failure is AppFailure) {
@@ -166,7 +176,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   void _listenGachaStates() {
     ref.listen(gachaPoolSelectorProvider, (_, __) {});
     ref.listen(
-      gachaProvider,
+      fetchGachaProvider,
       (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
           context,
@@ -184,7 +194,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   }
 
   void _listenPaymentState() => ref.listen(
-        fetchAndSavePaymentsProvider,
+        fetchPaymentsProvider,
         (_, next) => next.maybeWhen<void>(
           error: (failure, _) async {
             if (failure is AppFailure) {
@@ -200,7 +210,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
       );
 
   void _listenDiamondState() => ref.listen(
-        diamondProvider,
+        fetchDiamondsProvider,
         (_, next) => next.maybeWhen<void>(
           failure: (failure) => AppFlushBar.show(
             context,

@@ -5,4 +5,8 @@ enum AkLoginType {
   const AkLoginType(this.channelId);
 
   final String channelId;
+
+  bool get isBilibili => this == AkLoginType.bilibili;
+
+  bool get isOfficial => this == AkLoginType.official;
 }

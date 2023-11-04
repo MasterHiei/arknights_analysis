@@ -10,7 +10,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'core/constants/constants.dart';
 import 'core/gen/assets.gen.dart';
-import 'core/providers.dart';
+import 'core/providers/eager_initialization.dart';
 import 'presentation/arknights_analysis_app.dart';
 
 void main() async {

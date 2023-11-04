@@ -5,7 +5,7 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/diamonds/diamond_history_provider.dart';
+import '../../../application/diamonds/fetch_diamond_history_provider.dart';
 import '../../../core/constants/constants.dart';
 import '../../../domain/diamonds/diamond_change.dart';
 import '../../../generated/locale_keys.g.dart';
@@ -57,7 +57,7 @@ class DiamondHistoryTable extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(diamondHistoryProvider).when(
+        return ref.watch(fetchDiamondHistoryProvider).when(
               data: (changes) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),

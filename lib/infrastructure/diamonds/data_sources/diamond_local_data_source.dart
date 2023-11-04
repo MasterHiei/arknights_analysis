@@ -1,15 +1,16 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers.dart';
+import '../../../core/providers/database_provider.dart';
 import '../../../domain/user/value_objects/uid.dart';
 import '../../core/database/app_database.dart';
 import '../dtos/diamond_dto.dart';
 import '../dtos/diamond_record_dto.dart';
 
-final diamondLocalDataSourceProvider =
-    Provider.autoDispose<DiamondLocalDataSource>(
-  (ref) => DiamondLocalDataSourceImpl(ref.watch(dbProvider)),
-);
+part 'diamond_local_data_source.g.dart';
+
+@riverpod
+DiamondLocalDataSource diamondLocalDataSource(DiamondLocalDataSourceRef ref) =>
+    DiamondLocalDataSourceImpl(ref.watch(databaseProvider));
 
 abstract class DiamondLocalDataSource {
   Future<List<int>> save(DiamondDto dto);

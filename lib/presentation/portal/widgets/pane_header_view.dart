@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/user/user_provider.dart';
+import '../../../application/user/logged_in_user_info_provider.dart';
 
 class PaneHeaderView extends ConsumerWidget {
   const PaneHeaderView({super.key});

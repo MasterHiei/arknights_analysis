@@ -1,9 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../exceptions/app_failure.dart';
 import '../types/types.dart';
-import 'logger.dart';
+import '../utils/logger.dart';
+
+part 'file_manager_provider.g.dart';
+
+@riverpod
+FileManager fileManager(FileManagerRef ref) => FileManager();
 
 class FileManager {
   factory FileManager() => _singleton ??= FileManager._();
