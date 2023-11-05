@@ -11,7 +11,6 @@ import '../core/common/dtos/token_body_official_dto.dart';
 import '../core/mixins/api_error_handler_mixin.dart';
 import 'data_sources/payment_local_data_source.dart';
 import 'data_sources/payment_remote_data_source.dart';
-import 'dtos/payment_dto.dart';
 
 part 'payment_repository.g.dart';
 
@@ -54,11 +53,16 @@ class PaymentRepositoryImpl
         () async {
           final body = TokenBodyOfficialDto(token: token.getOrCrash());
           final response = await _remoteDataSource.request(body);
+          if (response.code != 0) {
+            throw AppFailure.remoteServerError(
+              message: response.msg,
+              code: response.code,
+            );
+          }
           final records = response.data.map(
             (record) => record.copyWith(uid: uid.getOrCrash()),
           );
-          final dto = PaymentDto.fromRecords(records.toList());
-          await _localDataSource.save(dto);
+          await _localDataSource.save(records);
           return unit;
         },
         connectivity: _connectivity,

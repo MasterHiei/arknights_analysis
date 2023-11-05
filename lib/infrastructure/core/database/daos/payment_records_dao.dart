@@ -1,8 +1,6 @@
 import 'package:drift/drift.dart';
 
-import '../../../payments/dtos/payment_dto.dart';
 import '../../../payments/dtos/payment_record_dto.dart';
-import '../../common/dtos/pagination_dto.dart';
 import '../app_database.dart';
 import '../tables/payment_records.dart';
 
@@ -24,34 +22,8 @@ class PaymentRecordsDao extends DatabaseAccessor<AppDatabase>
         .toList();
   }
 
-  Future<PaymentDto> paginate(
-    String uid, {
-    required int page,
-    required int pageSize,
-  }) async {
-    final offset = (page - 1) * pageSize;
-    final query = select(paymentRecords)
-      ..where((tbl) => tbl.uid.equals(uid))
-      ..orderBy([(tbl) => OrderingTerm.desc(tbl.payTime)])
-      ..limit(pageSize, offset: offset);
-
-    final records = (await query.get())
-        .map((record) => PaymentRecordDto.fromJson(record.toJson()))
-        .toList();
-
-    final amount = countAll();
-    final count = await query
-        .addColumns([amount])
-        .map((row) => row.read(amount))
-        .getSingle();
-    final total = ((count ?? 0) / pageSize).ceil();
-    final pagination = PaginationDto(current: page, total: total);
-
-    return PaymentDto(records: records, pagination: pagination);
-  }
-
-  Future<List<int>> replaceInto(PaymentDto payment) async {
-    final futures = payment.records.map((record) {
+  Future<List<int>> replaceInto(Iterable<PaymentRecordDto> records) async {
+    final futures = records.map((record) {
       final entity = PaymentRecord.fromJson(record.toJson());
       return into(paymentRecords).insertOnConflictUpdate(entity);
     });

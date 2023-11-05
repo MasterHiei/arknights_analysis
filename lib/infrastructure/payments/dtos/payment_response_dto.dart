@@ -9,7 +9,7 @@ part 'payment_response_dto.g.dart';
 @freezed
 class PaymentResponseDto with _$PaymentResponseDto {
   const factory PaymentResponseDto({
-    int? status,
+    @JsonKey(name: 'status') int? code,
     @JsonKey(defaultValue: '') required String msg,
     @JsonKey(defaultValue: []) required List<PaymentRecordDto> data,
   }) = _PaymentResponseDto;
