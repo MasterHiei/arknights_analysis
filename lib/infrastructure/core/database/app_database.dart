@@ -18,6 +18,7 @@ const _tables = [
   GachaRecords,
   DiamondRecords,
   PaymentRecords,
+  GiftExchangeLogs,
 ];
 const _daos = [
   UsersDao,
@@ -25,6 +26,7 @@ const _daos = [
   GachaRecordsDao,
   DiamondRecordsDao,
   PaymentRecordsDao,
+  GiftExchangeLogsDao,
 ];
 
 @DriftDatabase(tables: _tables, daos: _daos)
@@ -43,6 +45,9 @@ class AppDatabase extends _$AppDatabase {
           }
           if (from < 3) {
             await m.createTable(paymentRecords);
+          }
+          if (from < 4) {
+            await m.createTable(giftExchangeLogs);
           }
         },
       );

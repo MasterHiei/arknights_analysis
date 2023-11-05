@@ -19,8 +19,8 @@ abstract class DiamondRemoteDataSource {
 
   @GET('/user/api/inquiry/diamond')
   Future<DiamondResponseDto> fetch({
-    @Query('token') required String token,
     @Query('page') required int page,
-    @Query('channelId') String? channelId,
+    @Query('token') required String token,
+    @Query('channelId') required String channelId,
   });
 }
