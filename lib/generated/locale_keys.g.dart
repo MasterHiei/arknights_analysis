@@ -63,6 +63,11 @@ abstract class  LocaleKeys {
   static const features_diamondHistory_operation = 'features.diamondHistory.operation';
   static const features_diamondHistory_ts = 'features.diamondHistory.ts';
   static const features_diamondHistory = 'features.diamondHistory';
+  static const features_exchangeHistory_title = 'features.exchangeHistory.title';
+  static const features_exchangeHistory_exchangeTime = 'features.exchangeHistory.exchangeTime';
+  static const features_exchangeHistory_name = 'features.exchangeHistory.name';
+  static const features_exchangeHistory_code = 'features.exchangeHistory.code';
+  static const features_exchangeHistory = 'features.exchangeHistory';
   static const features = 'features';
   static const gacha_type_all = 'gacha.type.all';
   static const gacha_type_normal = 'gacha.type.normal';

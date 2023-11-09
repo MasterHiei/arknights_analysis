@@ -8,7 +8,7 @@ class Constants {
 
   static const dbName = 'arknights_analysis.db';
 
-  static const dbVersion = 3;
+  static const dbVersion = 4;
 
   static const defaultWindowSize = Size(1920, 1080);
 

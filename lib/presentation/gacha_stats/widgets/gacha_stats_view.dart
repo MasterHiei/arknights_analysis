@@ -15,7 +15,9 @@ final _visiblePools = Provider.autoDispose((ref) {
     gachaPoolSelectorProvider.select((state) => state.value),
   );
   if (selectedPool == null) {
-    return ref.watch(gachaPoolSelectorProvider.select((state) => state.source));
+    return ref.watch(
+      gachaPoolSelectorProvider.select((state) => state.processedSource),
+    );
   }
   return [selectedPool];
 });

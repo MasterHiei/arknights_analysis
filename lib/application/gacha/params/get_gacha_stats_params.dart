@@ -7,9 +7,9 @@ part 'get_gacha_stats_params.freezed.dart';
 @freezed
 class GetGachaStatsParams with _$GetGachaStatsParams {
   const factory GetGachaStatsParams({
-    String? pool,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    @Default([]) List<String> pools,
+    @Default([]) List<GachaRuleType> includeRuleTypes,
+    @Default([]) List<GachaRuleType> excludeRuleTypes,
   }) = _GetGachaStatsParams;
 
   factory GetGachaStatsParams.all() => const GetGachaStatsParams();
@@ -19,6 +19,10 @@ class GetGachaStatsParams with _$GetGachaStatsParams {
       );
 
   factory GetGachaStatsParams.specific(String pool) => GetGachaStatsParams(
-        pool: pool,
+        pools: [pool],
+      );
+
+  factory GetGachaStatsParams.classics() => GetGachaStatsParams(
+        pools: GachaRuleType.classicPools,
       );
 }

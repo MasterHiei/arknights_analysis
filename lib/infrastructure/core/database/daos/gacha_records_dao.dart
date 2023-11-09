@@ -19,8 +19,8 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
     String uid, {
     bool showAllPools = true,
     required List<String> pools,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
   }) async {
     final query = select(gachaRecords)
       ..where((tbl) => tbl.uid.equals(uid))
@@ -30,7 +30,7 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
       query.where((tbl) => tbl.pool.isIn(pools));
     }
 
-    if (includeRuleTypes != null) {
+    if (includeRuleTypes.isNotEmpty) {
       final isInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(
@@ -41,7 +41,7 @@ class GachaRecordsDao extends DatabaseAccessor<AppDatabase>
       query.where((tbl) => tbl.pool.isInQuery(isInQuery));
     }
 
-    if (excludeRuleTypes != null) {
+    if (excludeRuleTypes.isNotEmpty) {
       final isNotInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(

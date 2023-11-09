@@ -9,6 +9,7 @@ import '../../application/ak_logout/ak_logout_provider.dart';
 import '../../application/diamonds/fetch_diamonds_provider.dart';
 import '../../application/gacha/fetch_gacha_provider.dart';
 import '../../application/gacha/gacha_pool_selector_provider.dart';
+import '../../application/gifts/fetch_exchange_logs_provider.dart';
 import '../../application/payments/fetch_payments_provider.dart';
 import '../../application/portal/portal_pane_provider.dart';
 import '../../application/settings/check_for_updates_provider.dart';
@@ -21,6 +22,7 @@ import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../core/routing/router.dart';
 import '../diamond_history/diamond_history_page.dart';
+import '../exchange_history/exchange_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
 import '../gacha_stats/gacha_stats_page.dart';
 import '../payment_history/payment_history_page.dart';
@@ -88,9 +90,10 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     _listenFetchUserState();
     _listenGachaStates();
     if (ref.watch(_isOfficialUser)) {
-      _listenPaymentState();
+      _listenPaymentsState();
     }
-    _listenDiamondState();
+    _listenDiamondsState();
+    _listenGiftsState();
     _listenVersionState();
     _listenDownloadState();
     _listenLogoutState();
@@ -121,6 +124,11 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             icon: const Icon(FontAwesomeIcons.gem),
             body: const DiamondHistoryPage(),
             title: const Text(LocaleKeys.features_diamondHistory_title).tr(),
+          ),
+          PaneItem(
+            icon: const Icon(FontAwesomeIcons.gift),
+            body: const ExchangeHistoryPage(),
+            title: const Text(LocaleKeys.features_exchangeHistory_title).tr(),
           ),
         ],
         footerItems: [
@@ -193,7 +201,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
     );
   }
 
-  void _listenPaymentState() => ref.listen(
+  void _listenPaymentsState() => ref.listen(
         fetchPaymentsProvider,
         (_, next) => next.maybeWhen<void>(
           error: (failure, _) async {
@@ -209,7 +217,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
         ),
       );
 
-  void _listenDiamondState() => ref.listen(
+  void _listenDiamondsState() => ref.listen(
         fetchDiamondsProvider,
         (_, next) => next.maybeWhen<void>(
           failure: (failure) => AppFlushBar.show(
@@ -217,6 +225,22 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             message: failure.localizedMessage,
             severity: FlushBarSeverity.error,
           ),
+          orElse: () {},
+        ),
+      );
+
+  void _listenGiftsState() => ref.listen(
+        fetchExchangeLogsProvider,
+        (_, next) => next.maybeWhen<void>(
+          error: (failure, _) async {
+            if (failure is AppFailure) {
+              await AppFlushBar.show(
+                context,
+                message: failure.localizedMessage,
+                severity: FlushBarSeverity.error,
+              );
+            }
+          },
           orElse: () {},
         ),
       );

@@ -8,7 +8,7 @@ import '../../../generated/locale_keys.g.dart';
 
 final _selectablePools = Provider.autoDispose((ref) {
   final sources = ref.watch(
-    gachaPoolSelectorProvider.select((state) => state.source),
+    gachaPoolSelectorProvider.select((state) => state.processedSource),
   );
   return [null, ...sources];
 });

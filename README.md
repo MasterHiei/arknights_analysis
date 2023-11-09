@@ -70,10 +70,17 @@
 
 ![gacha_history](https://user-images.githubusercontent.com/20240686/225360671-1c60c74e-1644-4018-9cbf-6ec69c6c5426.png)
 
+### 充值记录
+
+![payment_history](https://github.com/MasterHiei/arknights_analysis/assets/20240686/ae271784-12a4-443b-b5cc-8ef13f2033ee)
 
 ### 源石记录
 
 ![diamond_history](https://user-images.githubusercontent.com/20240686/225360853-8a0ae4ed-c6b7-4c80-bb8e-32373cba97f5.png)
+
+### 礼包兑换记录
+
+![exchange_history](https://github.com/MasterHiei/arknights_analysis/assets/20240686/098cd4c6-954c-45b1-9f9c-e3e2483c634f)
 
 
 *更多功能正在开发中，敬请期待...*
