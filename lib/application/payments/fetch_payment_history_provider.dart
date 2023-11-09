@@ -4,12 +4,12 @@ import '../../domain/payments/payment_record.dart';
 import '../../infrastructure/payments/payment_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
 
-part 'payment_history_provider.g.dart';
+part 'fetch_payment_history_provider.g.dart';
 
 @riverpod
-Future<List<PaymentRecord>> paymentHistory(PaymentHistoryRef ref) =>
+Future<List<PaymentRecord>> fetchPaymentHistory(FetchPaymentHistoryRef ref) =>
     ref.watch(userProvider).fold(
-      () async => <PaymentRecord>[],
+      () async => [],
       (user) async {
         final failureOrRecords =
             await ref.read(paymentRepositoryProvider).getHistory(user.uid);

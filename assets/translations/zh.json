@@ -76,6 +76,12 @@
       "stock": "存量",
       "operation": "操作",
       "ts": "获取时间"
+    },
+    "exchangeHistory": {
+      "title": "礼包兑换记录",
+      "exchangeTime": "兑换时间",
+      "name": "礼包",
+      "code": "使用兑换码"
     }
   },
   "gacha": {

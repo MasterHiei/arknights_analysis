@@ -5,15 +5,15 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/payments/fetch_payment_history_provider.dart';
+import '../../../application/gifts/fetch_exchange_history_provider.dart';
 import '../../../core/constants/constants.dart';
-import '../../../domain/payments/payment_record.dart';
+import '../../../domain/gifts/exchange_log.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/widgets/app_empty_view.dart';
 
-class PaymentHistoryTable extends StatelessWidget {
-  const PaymentHistoryTable({super.key});
+class ExchangeHistoryTable extends StatelessWidget {
+  const ExchangeHistoryTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class PaymentHistoryTable extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
             child: Text(
-              LocaleKeys.features_paymentHistory_title,
+              LocaleKeys.features_exchangeHistory_title,
               style: TextStyle(fontSize: 24.sp),
             ).tr(),
           ),
@@ -57,28 +57,18 @@ class PaymentHistoryTable extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(fetchPaymentHistoryProvider).when(
-              data: (records) => PaginatedDataTable2(
+        return ref.watch(fetchExchangeHistoryProvider).when(
+              data: (logs) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),
                   buildColumn(
-                    LocaleKeys.features_paymentHistory_orderId.tr(),
-                    size: ColumnSize.L,
+                    LocaleKeys.features_exchangeHistory_exchangeTime.tr(),
                   ),
                   buildColumn(
-                    LocaleKeys.features_paymentHistory_platform.tr(),
-                    size: ColumnSize.S,
+                    LocaleKeys.features_exchangeHistory_name.tr(),
                   ),
                   buildColumn(
-                    LocaleKeys.features_paymentHistory_amount.tr(),
-                    size: ColumnSize.S,
-                  ),
-                  buildColumn(
-                    LocaleKeys.features_paymentHistory_productName.tr(),
-                  ),
-                  buildColumn(
-                    LocaleKeys.features_paymentHistory_payTime.tr(),
-                    size: ColumnSize.L,
+                    LocaleKeys.features_exchangeHistory_code.tr(),
                   ),
                 ],
                 columnSpacing: 60.h,
@@ -91,7 +81,7 @@ class PaymentHistoryTable extends StatelessWidget {
                 ],
                 onRowsPerPageChanged: (_) {},
                 wrapInCard: false,
-                source: _DataTableSource(context, records),
+                source: _DataTableSource(context, logs),
                 empty: const AppEmptyView(),
               ),
               error: (_, __) => const SizedBox.shrink(),
@@ -103,23 +93,21 @@ class PaymentHistoryTable extends StatelessWidget {
 }
 
 class _DataTableSource extends material.DataTableSource {
-  _DataTableSource(this.context, this.records);
+  _DataTableSource(this.context, this.logs);
 
   final BuildContext context;
-  final List<PaymentRecord> records;
+  final List<ExchangeLog> logs;
 
   @override
   DataRow2? getRow(int index) {
-    final record = records[index];
+    final log = logs[index];
     return DataRow2.byIndex(
       index: index,
       cells: [
         _buildTextCell('${index + 1}'),
-        _buildTextCell(record.orderId),
-        _buildTextCell(record.platform.label),
-        _buildTextCell(record.amountWithUnit),
-        _buildTextCell(record.productName),
-        _buildTextCell(record.payTime.dateTime.yMMMdHmsString),
+        _buildTextCell(log.ts.dateTime.yMMMdHmsString),
+        _buildTextCell(log.giftName),
+        _buildTextCell(log.code),
       ],
     );
   }
@@ -128,7 +116,7 @@ class _DataTableSource extends material.DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => records.length;
+  int get rowCount => logs.length;
 
   @override
   int get selectedRowCount => 0;
