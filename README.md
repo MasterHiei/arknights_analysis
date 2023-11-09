@@ -78,10 +78,10 @@
 
 ![diamond_history](https://user-images.githubusercontent.com/20240686/225360853-8a0ae4ed-c6b7-4c80-bb8e-32373cba97f5.png)
 
-
 ### 礼包兑换记录
 
 ![exchange_history](https://github.com/MasterHiei/arknights_analysis/assets/20240686/098cd4c6-954c-45b1-9f9c-e3e2483c634f)
+
 
 *更多功能正在开发中，敬请期待...*
 
