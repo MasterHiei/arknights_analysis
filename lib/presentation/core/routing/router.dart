@@ -7,6 +7,8 @@ import '../../ak_login/ak_login_page.dart';
 import '../../portal/portal_page.dart';
 import '../../splash/splash_page.dart';
 import '../../webview/webview_page.dart';
+import 'params/route_extra_codec.dart';
+import 'params/route_params.dart';
 
 part 'router.g.dart';
 
@@ -52,16 +54,12 @@ class PortalRoute extends GoRouteData {
       );
 }
 
-@TypedGoRoute<WebviewRoute>(path: '/webview/:initialUrl')
+@TypedGoRoute<WebviewRoute>(path: '/webview')
 @immutable
 class WebviewRoute extends GoRouteData {
-  const WebviewRoute(
-    this.initialUrl, {
-    this.useNavigationBar = true,
-  });
+  const WebviewRoute(this.$extra);
 
-  final String initialUrl;
-  final bool useNavigationBar;
+  final WebviewParams $extra;
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
@@ -69,10 +67,7 @@ class WebviewRoute extends GoRouteData {
         context,
         state,
         fullscreenDialog: true,
-        child: WebviewPage(
-          initialUrl,
-          useNavigationBar: useNavigationBar,
-        ),
+        child: WebviewPage($extra),
       );
 }
 
@@ -95,6 +90,7 @@ final router = GoRouter(
   routes: $appRoutes,
   debugLogDiagnostics: kDebugMode,
   observers: [BotToastNavigatorObserver()],
+  extraCodec: const RouteExtraCodec(),
 );
 
 Page<void> _buildFadeTransitionPage(

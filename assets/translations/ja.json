@@ -76,6 +76,12 @@
       "stock": "残り",
       "operation": "操作",
       "ts": "取得日時"
+    },
+    "exchangeHistory": {
+      "title": "コード交換履歴",
+      "exchangeTime": "交換日時",
+      "name": "アイテム名",
+      "code": "シリアルコード"
     }
   },
   "gacha": {
@@ -85,8 +91,8 @@
       "limited": "リミテッド",
       "linkage": "コラボ",
       "attain": "スペシャル",
-      "classic": "中坚寻访",
-      "fesClassic": "中坚甄选"
+      "classic": "中堅スカウト",
+      "fesClassic": "中堅セレクト"
     },
     "rarity": "星{}"
   },
