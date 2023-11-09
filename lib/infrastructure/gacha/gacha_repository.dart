@@ -37,18 +37,18 @@ abstract class GachaRepository {
 
   Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-    bool includeNew2023 = true,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
+    bool includeClassics = true,
   });
 
   Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
 
   Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
-    String? pool,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    required List<String> pools,
+    required Iterable<GachaRuleType> includeRuleTypes,
+    required Iterable<GachaRuleType> excludeRuleTypes,
   });
 
   Future<Either<AppFailure, List<GachaChar>>> getHistory(
@@ -103,16 +103,16 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
   @override
   Future<Either<AppFailure, List<String>>> getRecordedPools({
     required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-    bool includeNew2023 = true,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
+    bool includeClassics = true,
   }) =>
       execute(
         () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
           excludeRuleTypes: excludeRuleTypes,
-          includeNew2023: includeNew2023,
+          includeClassics: includeClassics,
         ),
       );
 
@@ -127,17 +127,17 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
   @override
   Future<Either<AppFailure, GachaStats>> getStats(
     Uid uid, {
-    String? pool,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    required List<String> pools,
+    required Iterable<GachaRuleType> includeRuleTypes,
+    required Iterable<GachaRuleType> excludeRuleTypes,
   }) =>
       execute(
         () async {
-          final showAllPools = pool == null;
+          final showAllPools = pools.isEmpty;
           final dtos = await _localDataSource.getRecords(
             uid,
             showAllPools: showAllPools,
-            pools: showAllPools ? [] : [pool],
+            pools: showAllPools ? [] : pools,
             includeRuleTypes: includeRuleTypes,
             excludeRuleTypes: excludeRuleTypes,
           );

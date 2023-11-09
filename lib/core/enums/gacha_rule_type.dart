@@ -58,7 +58,12 @@ enum GachaRuleType {
         attain,
       ];
 
-  static List<String> get new2023 => [
+  static List<GachaRuleType> get classics => [
+        GachaRuleType.classic,
+        GachaRuleType.fesClassic,
+      ];
+
+  static List<String> get classicPools => [
         '中坚寻访',
         '中坚甄选',
       ];

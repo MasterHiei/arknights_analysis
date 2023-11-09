@@ -32,14 +32,8 @@ class GachaPoolSelector extends _$GachaPoolSelector {
                   );
           failureOrPools.fold(
             (_) {},
-            (pools) {
-              state = GachaPoolSelectorState.init(
-                source: [
-                  GachaRuleType.normal.label,
-                  ...pools,
-                ],
-              );
-            },
+            (pools) =>
+                state = state = GachaPoolSelectorState.init(source: pools),
           );
         },
       );

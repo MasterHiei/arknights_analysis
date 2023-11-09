@@ -23,6 +23,9 @@ class GetGachaStats extends _$GetGachaStats {
     } else if (pool == GachaRuleType.normal.label) {
       // 标准寻访
       _params = GetGachaStatsParams.normal();
+    } else if (pool == GachaRuleType.classic.label) {
+      // 中坚寻访
+      _params = GetGachaStatsParams.classics();
     } else {
       // 指定寻访
       _params = GetGachaStatsParams.specific(pool);
@@ -32,7 +35,7 @@ class GetGachaStats extends _$GetGachaStats {
       (user) async {
         final failureOrStats = await ref.read(gachaRepositoryProvider).getStats(
               user.uid,
-              pool: _params.pool,
+              pools: _params.pools,
               includeRuleTypes: _params.includeRuleTypes,
               excludeRuleTypes: _params.excludeRuleTypes,
             );

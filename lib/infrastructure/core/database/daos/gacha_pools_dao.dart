@@ -26,14 +26,14 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
 
   Future<List<String>> getRecorded({
     required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-    required bool includeNew2023,
+    required Iterable<GachaRuleType> includeRuleTypes,
+    required Iterable<GachaRuleType> excludeRuleTypes,
+    required bool includeClassics,
   }) async {
     final conditionQuery = select(gachaRecords)
       ..where((tbl) => tbl.uid.equals(uid.getOrCrash()))
       ..orderBy([(tbl) => OrderingTerm.desc(tbl.ts)]);
-    if (includeRuleTypes != null) {
+    if (includeRuleTypes.isNotEmpty) {
       final isInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(
@@ -45,14 +45,14 @@ class GachaPoolsDao extends DatabaseAccessor<AppDatabase>
         (tbl) {
           final expressions = [
             tbl.pool.isInQuery(isInQuery),
-            if (includeNew2023) tbl.pool.isIn(GachaRuleType.new2023),
+            if (includeClassics) tbl.pool.isIn(GachaRuleType.classicPools),
           ];
           return expressions.reduce((fst, snd) => fst | snd);
         },
       );
     }
 
-    if (excludeRuleTypes != null) {
+    if (excludeRuleTypes.isNotEmpty) {
       final isNotInQuery = selectOnly(gachaPools)
         ..addColumns([gachaPools.gachaPoolName])
         ..where(

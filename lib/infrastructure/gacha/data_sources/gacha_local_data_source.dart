@@ -19,9 +19,9 @@ abstract class GachaLocalDataSource {
 
   Future<List<String>> getRecordedPools({
     required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-    required bool includeNew2023,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
+    required bool includeClassics,
   });
 
   Future<GachaPoolDto?> getPoolByName(String name);
@@ -30,8 +30,8 @@ abstract class GachaLocalDataSource {
     Uid uid, {
     bool showAllPools = true,
     required List<String> pools,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
   });
 
   Future<GachaDto> paginate(
@@ -56,15 +56,15 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
   @override
   Future<List<String>> getRecordedPools({
     required Uid uid,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
-    required bool includeNew2023,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
+    required bool includeClassics,
   }) =>
       _db.gachaPoolsDao.getRecorded(
         uid: uid,
         includeRuleTypes: includeRuleTypes,
         excludeRuleTypes: excludeRuleTypes,
-        includeNew2023: includeNew2023,
+        includeClassics: includeClassics,
       );
 
   @override
@@ -76,8 +76,8 @@ class GachaLocalDataSourceImpl implements GachaLocalDataSource {
     Uid uid, {
     bool showAllPools = true,
     required List<String> pools,
-    List<GachaRuleType>? includeRuleTypes,
-    List<GachaRuleType>? excludeRuleTypes,
+    Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
+    Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
   }) =>
       _db.gachaRecordsDao.get(
         uid.getOrCrash(),
