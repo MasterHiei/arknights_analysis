@@ -36,9 +36,7 @@ class _MainApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.light,
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
+      routerConfig: router,
       builder: (_, child) {
         child = VirtualWindowFrameInit()(context, child);
         child = BotToastInit()(context, child);
