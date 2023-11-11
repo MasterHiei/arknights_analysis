@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'route_params.dart';
 
-class RouteExtraCodec extends Codec<Object?, Object?> {
-  const RouteExtraCodec();
+class RouteParamsCodec extends Codec<Object?, Object?> {
+  const RouteParamsCodec();
 
   @override
   Converter<Object?, Object?> get decoder => const _Decoder();

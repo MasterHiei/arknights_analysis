@@ -9,7 +9,7 @@ import '../../../application/settings/check_for_updates_provider.dart';
 import '../../../application/settings/download_new_version_provider.dart';
 import '../../../core/constants/constants.dart';
 import '../../../generated/locale_keys.g.dart';
-import '../../core/routing/router.dart';
+import '../../core/routing/routes.dart';
 import 'settings_action_button.dart';
 import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';

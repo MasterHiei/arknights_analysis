@@ -12,7 +12,7 @@ import '../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../core/common/widgets/app_badge.dart';
 import '../core/common/widgets/app_empty_view.dart';
 import '../core/routing/params/route_params.dart';
-import '../core/routing/router.dart';
+import '../core/routing/routes.dart';
 import 'widgets/index.dart';
 
 class GachaHistoryPage extends StatelessWidget {

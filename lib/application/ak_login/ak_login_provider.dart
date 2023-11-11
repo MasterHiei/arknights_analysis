@@ -10,7 +10,7 @@ import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
-import '../../presentation/core/routing/router.dart';
+import '../../presentation/core/routing/routes.dart';
 import '../user/logged_in_user_info_provider.dart';
 import '../webview/webview_provider.dart';
 import 'states/ak_login_state.dart';

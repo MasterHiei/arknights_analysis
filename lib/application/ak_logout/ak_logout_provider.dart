@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:webview_windows/webview_windows.dart';
 
-import '../../presentation/core/routing/router.dart';
+import '../../presentation/core/routing/routes.dart';
 import 'states/ak_logout_state.dart';
 
 part 'ak_logout_provider.g.dart';

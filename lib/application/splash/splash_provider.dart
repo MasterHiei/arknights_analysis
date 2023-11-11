@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 
-import '../../presentation/core/routing/router.dart';
+import '../../presentation/core/routing/routes.dart';
 import 'states/splash_state.dart';
 
 part 'splash_provider.g.dart';
