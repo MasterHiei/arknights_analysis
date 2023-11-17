@@ -1,8 +1,6 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:webview_windows/webview_windows.dart';
 
-import '../../presentation/core/routing/routes.dart';
 import 'states/ak_logout_state.dart';
 
 part 'ak_logout_provider.g.dart';
@@ -17,8 +15,6 @@ class AkLogout extends _$AkLogout {
     ref.onDispose(_controller.dispose);
     return const AkLogoutState.init();
   }
-
-  void go(BuildContext context) => const SplashRoute().go(context);
 
   Future<void> logout() async {
     await _controller.initialize();

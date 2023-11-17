@@ -8,6 +8,7 @@ import '../../application/splash/splash_provider.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
+import '../core/routing/routes.dart';
 import 'widgets/index.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -39,15 +40,15 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     _listenState();
+    _listenFetchState();
 
     return Mica(
       backgroundColor: Colors.grey,
       child: Center(
         child: AnimatedOpacity(
-          opacity: ref.watch(splashProvider).opacity,
+          opacity: ref.watch(splashProvider.select((state) => state.opacity)),
           duration: const Duration(milliseconds: 1300),
-          onEnd: () =>
-              ref.read(splashProvider.notifier).onAnimationEnd(context),
+          onEnd: ref.read(splashProvider.notifier).onAnimationEnd,
           child: const SplashLogo(),
         ),
       ),
@@ -55,9 +56,18 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
   }
 
   void _listenState() => ref.listen(
+        splashProvider,
+        (_, next) {
+          if (next.shouldGo) {
+            const AkLoginRoute().go(context);
+          }
+        },
+      );
+
+  void _listenFetchState() => ref.listen(
         fetchGachaPoolsProvider,
         (_, next) => next.maybeWhen(
-          data: (_) => ref.read(splashProvider.notifier).onFetched(context),
+          data: (_) => ref.read(splashProvider.notifier).onFetched(),
           error: (failure, _) {
             if (failure is AppFailure) {
               AppFlushBar.show(
@@ -73,7 +83,7 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
                 localizedError: (_) async {
                   await 3.seconds.delay;
                   if (mounted) {
-                    ref.read(splashProvider.notifier).onFetched(context);
+                    ref.read(splashProvider.notifier).onFetched();
                   }
                 },
                 orElse: () {},

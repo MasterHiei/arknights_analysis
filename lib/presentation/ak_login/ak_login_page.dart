@@ -10,6 +10,7 @@ import '../../core/constants/constants.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_error_view.dart';
 import '../core/common/widgets/app_flush_bar.dart';
+import '../core/routing/routes.dart';
 
 class AkLoginPage extends ConsumerStatefulWidget {
   const AkLoginPage({super.key});
@@ -62,7 +63,7 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
             context,
             message: failure.localizedMessage,
           ),
-          loggedIn: () => ref.read(akLoginProvider.notifier).go(context),
+          loggedIn: () => const PortalRoute().go(context),
           orElse: () {},
         ),
       );

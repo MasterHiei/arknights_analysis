@@ -21,6 +21,7 @@ import '../../generated/locale_keys.g.dart';
 import '../core/common/widgets/app_dialog.dart';
 import '../core/common/widgets/app_flush_bar.dart';
 import '../core/routing/router.dart';
+import '../core/routing/routes.dart';
 import '../diamond_history/diamond_history_page.dart';
 import '../exchange_history/exchange_history_page.dart';
 import '../gacha_history/gacha_history_page.dart';
@@ -302,7 +303,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
   void _listenLogoutState() => ref.listen(
         akLogoutProvider,
         (_, next) => next.maybeWhen<void>(
-          loggedOut: () => ref.read(akLogoutProvider.notifier).go(context),
+          loggedOut: () => const SplashRoute().go(context),
           orElse: () {},
         ),
       );

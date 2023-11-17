@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 import 'package:webview_windows/webview_windows.dart';
@@ -10,7 +9,6 @@ import '../../core/enums/ak_login_type.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../presentation/core/common/utils/app_loading_indicator.dart';
-import '../../presentation/core/routing/routes.dart';
 import '../user/logged_in_user_info_provider.dart';
 import '../webview/webview_provider.dart';
 import 'states/ak_login_state.dart';
@@ -26,8 +24,6 @@ class AkLogin extends _$AkLogin {
         .whenData(_startListening);
     return const AkLoginState.init();
   }
-
-  void go(BuildContext context) => const PortalRoute().go(context);
 
   void _startListening(WebviewController controller) {
     controller.url.listen((url) => _listenUrl(controller, url));

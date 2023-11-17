@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,9 @@ import '../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../application/gacha/get_gacha_stats_provider.dart';
 import '../../../application/persistence/persistence_provider.dart';
 import '../../../application/user/fetch_user_provider.dart';
+import '../../../core/constants/constants.dart';
 import '../../../core/enums/gacha_data_management_type.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../core/common/utils/app_loading_indicator.dart';
 import '../../core/common/widgets/app_flush_bar.dart';
@@ -33,8 +36,9 @@ class GachaStatsExtraPanel extends ConsumerWidget {
     return Consumer(
       builder: (_, ref, __) {
         final button = FilledButton(
-          onPressed: () =>
-              ref.read(fetchUserProvider.notifier).refresh(context),
+          onPressed: () => ref.read(fetchUserProvider.notifier).refresh(
+                onFailure: () => _showUpdateTooFrequentlyNotice(context),
+              ),
           child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
         );
         return ref.watch(fetchUserProvider).maybeWhen(
@@ -48,7 +52,10 @@ class GachaStatsExtraPanel extends ConsumerWidget {
                   useMousePosition: false,
                   child: FilledButton(
                     onPressed: () =>
-                        ref.read(fetchUserProvider.notifier).refresh(context),
+                        ref.read(fetchUserProvider.notifier).refresh(
+                              onFailure: () =>
+                                  _showUpdateTooFrequentlyNotice(context),
+                            ),
                     child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
                   ),
                 );
@@ -90,6 +97,16 @@ class GachaStatsExtraPanel extends ConsumerWidget {
             );
           }
         },
+      );
+
+  void _showUpdateTooFrequentlyNotice(BuildContext context) => AppFlushBar.show(
+        context,
+        message: LocaleKeys.features_gachaStats_updateTooFrequently.tr(
+          namedArgs: {
+            'minutes': '${Constants.minRequestInterval.inMinutes}',
+          },
+        ),
+        severity: FlushBarSeverity.warning,
       );
 }
 
