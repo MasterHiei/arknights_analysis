@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../core/validators/validate_token.dart';
 import '../../core/value_failure.dart';

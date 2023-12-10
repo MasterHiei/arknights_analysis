@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartx/dartx.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/ak_login_type.dart';
@@ -86,7 +85,7 @@ class DiamondRepositoryImpl
           return dtos
               .map((dto) => dto.toDomain())
               .map((record) => record.changes)
-              .flatten()
+              .flatten
               .toList();
         },
       );

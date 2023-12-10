@@ -21,13 +21,13 @@ class FetchGachaPools extends _$FetchGachaPools {
   Future<DateTime?> _getLastUpdateDateTime() async {
     final failureOrDateTime =
         await _apiRepository.getLastGachaTableUpdateDateTime();
-    return failureOrDateTime.fold((_) => null, (dateTime) => dateTime);
+    return failureOrDateTime.match((_) => null, (dateTime) => dateTime);
   }
 
   Future<bool> _isNewest() async {
     final failureOrCommitDate =
         await _apiRepository.fetchLastGachaTableCommitDateTime();
-    return failureOrCommitDate.fold(
+    return failureOrCommitDate.match(
       (f) => false,
       (commitDate) async {
         final lastUpdateDateTime = await _getLastUpdateDateTime();
@@ -52,7 +52,7 @@ class FetchGachaPools extends _$FetchGachaPools {
     }
 
     final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
-    await failureOrSuccess.fold(
+    await failureOrSuccess.match(
       (f) async {
         if (await _hasData()) {
           throw AppFailure.localizedError(

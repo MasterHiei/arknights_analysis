@@ -9,7 +9,7 @@ part 'fetch_gacha_history_provider.g.dart';
 
 @riverpod
 Future<List<GachaChar>> fetchGachaHistory(FetchGachaHistoryRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async => [],
       (user) async {
         final repository = ref.read(gachaRepositoryProvider);
@@ -20,7 +20,7 @@ Future<List<GachaChar>> fetchGachaHistory(FetchGachaHistoryRef ref) =>
           pools: filter.selectedPools,
           rarities: filter.selectedRarities,
         );
-        return failureOrChars.fold(
+        return failureOrChars.match(
           (failure) => throw failure,
           (chars) => chars,
         );

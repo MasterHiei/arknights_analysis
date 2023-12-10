@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../../../core/exceptions/app_failure.dart';
 import '../../../core/utils/logger.dart';

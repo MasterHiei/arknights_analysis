@@ -9,7 +9,7 @@ class PaneHeaderView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(userProvider).fold(
+    return ref.watch(userProvider).match(
           () => const SizedBox.shrink(),
           (user) => Padding(
             padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),

@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/exceptions/app_failure.dart';
@@ -25,26 +25,26 @@ class CheckForUpdatesState with _$CheckForUpdatesState {
 
   const CheckForUpdatesState._();
 
-  Option<AppFailure> get failureOption => failureOrLatestReleaseOption.fold(
+  Option<AppFailure> get failureOption => failureOrLatestReleaseOption.match(
         () => none(),
-        (failureOrLatest) => failureOrLatest.fold(
+        (failureOrLatest) => failureOrLatest.match(
           (failure) => optionOf(failure),
           (_) => none(),
         ),
       );
 
   Option<LatestRelease> get latestReleaseOption =>
-      failureOrLatestReleaseOption.fold(
+      failureOrLatestReleaseOption.match(
         () => none(),
-        (failureOrLatest) => failureOrLatest.fold(
+        (failureOrLatest) => failureOrLatest.match(
           (_) => none(),
           (latest) => optionOf(latest),
         ),
       );
 
-  bool get hasNewVersion => failureOrLatestReleaseOption.fold(
+  bool get hasNewVersion => failureOrLatestReleaseOption.match(
         () => false,
-        (failureOrLatest) => failureOrLatest.fold(
+        (failureOrLatest) => failureOrLatest.match(
           (_) => false,
           (latest) => latest.version != currentVersion,
         ),

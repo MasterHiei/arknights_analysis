@@ -23,7 +23,7 @@ class FetchUser extends _$FetchUser with DebounceMixin, RequestLimitMixin {
         onFailure: onFailure,
       );
 
-  Future<void> _fetchAndUpdate() => ref.read(tokenProvider).fold(
+  Future<void> _fetchAndUpdate() => ref.read(tokenProvider).match(
         () async {},
         (token) async {
           state = const AsyncValue.loading();
@@ -32,7 +32,7 @@ class FetchUser extends _$FetchUser with DebounceMixin, RequestLimitMixin {
             loginType: ref.read(loginTypeProvider),
           );
           state = await AsyncValue.guard(
-            () => failureOrSuccess.fold(
+            () => failureOrSuccess.match(
               (failure) => throw failure,
               (_) {
                 notifyRequestComplete();
@@ -45,7 +45,7 @@ class FetchUser extends _$FetchUser with DebounceMixin, RequestLimitMixin {
 
   Future<void> _get(Token token) async {
     final failureOrUser = await _repository.get(token);
-    return failureOrUser.fold(
+    return failureOrUser.match(
       (failure) => throw failure,
       ref.read(loggedInUserInfoProvider.notifier).updateUser,
     );

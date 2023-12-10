@@ -40,14 +40,14 @@ class GachaHistoryFilter extends _$GachaHistoryFilter {
     state = state.copyWith(selectedPools: oldPools..remove(value));
   }
 
-  Future<void> _getPools() => ref.watch(userProvider).fold(
+  Future<void> _getPools() => ref.watch(userProvider).match(
         () async {},
         (user) async {
           final uid = user.uid;
           final failureOrPools = await ref
               .read(gachaRepositoryProvider)
               .getRecordedPools(uid: uid);
-          failureOrPools.fold(
+          failureOrPools.match(
             (_) {},
             (pools) => state = state.copyWith(pools: pools),
           );

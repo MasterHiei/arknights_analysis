@@ -7,12 +7,12 @@ part 'fetch_payments_provider.g.dart';
 
 @riverpod
 Future<void> fetchPayments(FetchPaymentsRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async {},
       (user) async {
         final failureOrSuccess = await ref
             .read(paymentRepositoryProvider)
             .fetchAndSave(user.token, uid: user.uid);
-        return failureOrSuccess.fold((failure) => throw failure, (_) {});
+        return failureOrSuccess.match((failure) => throw failure, (_) {});
       },
     );

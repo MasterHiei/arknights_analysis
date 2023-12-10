@@ -8,12 +8,12 @@ part 'fetch_payment_history_provider.g.dart';
 
 @riverpod
 Future<List<PaymentRecord>> fetchPaymentHistory(FetchPaymentHistoryRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async => [],
       (user) async {
         final failureOrRecords =
             await ref.read(paymentRepositoryProvider).getHistory(user.uid);
-        return failureOrRecords.fold(
+        return failureOrRecords.match(
           (failure) => throw failure,
           (records) => records,
         );

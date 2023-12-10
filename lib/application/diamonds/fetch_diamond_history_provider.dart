@@ -8,12 +8,12 @@ part 'fetch_diamond_history_provider.g.dart';
 
 @riverpod
 Future<List<DiamondChange>> fetchDiamondHistory(FetchDiamondHistoryRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async => [],
       (user) async {
         final repository = ref.read(diamondRepositoryProvider);
         final failureOrChanges = await repository.getHistory(user.uid);
-        return failureOrChanges.fold(
+        return failureOrChanges.match(
           (failure) => throw failure,
           (changes) => changes,
         );

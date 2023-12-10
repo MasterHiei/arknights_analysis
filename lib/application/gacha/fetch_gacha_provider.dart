@@ -13,7 +13,7 @@ part 'fetch_gacha_provider.g.dart';
 class FetchGacha extends _$FetchGacha {
   @override
   FetchGachaState build() {
-    ref.watch(userProvider).fold(() {}, _fetchAndSave);
+    ref.watch(userProvider).match(() {}, _fetchAndSave);
     return const FetchGachaState.init();
   }
 
@@ -31,7 +31,7 @@ class FetchGacha extends _$FetchGacha {
               page: page,
               loginType: ref.read(loginTypeProvider),
             );
-    return failureOrPagination.fold(
+    return failureOrPagination.match(
       (failure) => state = FetchGachaState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {

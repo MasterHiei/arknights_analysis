@@ -24,7 +24,7 @@ final _latestVersion = Provider.autoDispose((ref) {
   final latestReleaseOption = ref.watch(
     checkForUpdatesProvider.select((state) => state.latestReleaseOption),
   );
-  return latestReleaseOption.fold(
+  return latestReleaseOption.match(
     () => '',
     (latest) => latest.version,
   );

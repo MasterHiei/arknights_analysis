@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartx/dartx.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/ak_login_type.dart';
@@ -144,7 +143,7 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
           final chars = dtos
               .map((dto) => dto.toDomain())
               .map((record) => record.chars)
-              .flatten()
+              .flatten
               .toList();
           return GachaStats(uid: uid, chars: chars);
         },
@@ -167,7 +166,7 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
           return dtos
               .map((dto) => dto.toDomain())
               .map((record) => record.chars)
-              .flatten()
+              .flatten
               .filter((char) => rarities.contains(char.rarity))
               .toList();
         },

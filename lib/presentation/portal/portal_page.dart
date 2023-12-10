@@ -40,7 +40,7 @@ final _browserDownloadUrl = Provider.autoDispose((ref) {
   final latestReleaseOption = ref.watch(
     checkForUpdatesProvider.select((state) => state.latestReleaseOption),
   );
-  return latestReleaseOption.fold(
+  return latestReleaseOption.match(
     () => '',
     (latest) => latest.browserDownloadUrl,
   );
@@ -50,7 +50,7 @@ final _assetName = Provider.autoDispose((ref) {
   final latestReleaseOption = ref.watch(
     checkForUpdatesProvider.select((state) => state.latestReleaseOption),
   );
-  return latestReleaseOption.fold(
+  return latestReleaseOption.match(
     () => '',
     (latest) => latest.assetName,
   );
@@ -253,7 +253,7 @@ class _PortalPageState extends ConsumerState<PortalPage> with WindowListener {
             return;
           }
 
-          next.failureOption.fold(
+          next.failureOption.match(
             () {},
             (failure) => AppFlushBar.show(
               context,

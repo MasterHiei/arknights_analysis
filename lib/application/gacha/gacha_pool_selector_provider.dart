@@ -22,7 +22,7 @@ class GachaPoolSelector extends _$GachaPoolSelector {
     state = state.copyWith(value: value);
   }
 
-  Future<void> _getAllPools() => ref.watch(userProvider).fold(
+  Future<void> _getAllPools() => ref.watch(userProvider).match(
         () async {},
         (user) async {
           final failureOrPools =
@@ -30,7 +30,7 @@ class GachaPoolSelector extends _$GachaPoolSelector {
                     uid: user.uid,
                     includeRuleTypes: GachaRuleType.independentGuarantee,
                   );
-          failureOrPools.fold(
+          failureOrPools.match(
             (_) {},
             (pools) =>
                 state = state = GachaPoolSelectorState.init(source: pools),

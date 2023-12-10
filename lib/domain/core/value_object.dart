@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 
 import 'exceptions/unexpected_value_error.dart';
 import 'value_failure.dart';
@@ -14,12 +14,12 @@ abstract class ValueObject<T> implements _Validatable {
 
   Either<ValueFailure<T>, T> get value;
 
-  T getOrCrash() => value.fold((f) => throw UnexpectedValueError(f), id);
+  T getOrCrash() => value.match((f) => throw UnexpectedValueError(f), (r) => r);
 
-  T? getOrElse(T? v) => value.fold((_) => v, (r) => r);
+  T? getOrElse(T? v) => value.match((_) => v, (r) => r);
 
   Either<ValueFailure<dynamic>, Unit> get failureOrUnit =>
-      value.fold(left, (r) => right(unit));
+      value.match(left, (r) => right(unit));
 
   @override
   bool isValid() => value.isRight();

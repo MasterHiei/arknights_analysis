@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 
@@ -26,7 +26,7 @@ class CheckForUpdates extends _$CheckForUpdates {
       failureOrLatestReleaseOption: none(),
     );
     final failureOrLatest = await _repository.fetchLatestRelease();
-    state = failureOrLatest.fold(
+    state = failureOrLatest.match(
       (failure) => state.copyWith(
         isChecking: false,
         failureOrLatestReleaseOption: some(left(failure)),

@@ -34,9 +34,9 @@ class SettingsPage extends ConsumerWidget {
             return;
           }
 
-          next.failureOrLatestReleaseOption.fold(
+          next.failureOrLatestReleaseOption.match(
             () {},
-            (failureOrLatest) => failureOrLatest.fold(
+            (failureOrLatest) => failureOrLatest.match(
               (failure) => AppFlushBar.show(
                 context,
                 message: failure.localizedMessage,

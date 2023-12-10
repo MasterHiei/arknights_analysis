@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -35,7 +35,7 @@ class Persistence extends _$Persistence with DebounceMixin {
   void import() => debounce(_import);
 
   Future<void> _export() async {
-    _userOption.fold(
+    _userOption.match(
       () {},
       (user) async {
         final uid = user.uid;
@@ -51,7 +51,7 @@ class Persistence extends _$Persistence with DebounceMixin {
 
         state = const PersistenceState.processing();
         final failureOrFile = await _repository.export(uid, path: path);
-        state = failureOrFile.fold(
+        state = failureOrFile.match(
           (failure) => PersistenceState.exportFailure(failure),
           (file) => PersistenceState.exportSuccess(file),
         );
@@ -60,7 +60,7 @@ class Persistence extends _$Persistence with DebounceMixin {
   }
 
   Future<void> _import() async {
-    _userOption.fold(
+    _userOption.match(
       () {},
       (user) async {
         final uid = user.uid;
@@ -83,7 +83,7 @@ class Persistence extends _$Persistence with DebounceMixin {
         }
 
         final failureOrFile = await _repository.import(uid, path: path);
-        state = failureOrFile.fold(
+        state = failureOrFile.match(
           (failure) => PersistenceState.importFailure(failure),
           (file) => const PersistenceState.importSuccess(),
         );

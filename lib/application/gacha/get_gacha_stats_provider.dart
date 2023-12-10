@@ -30,7 +30,7 @@ class GetGachaStats extends _$GetGachaStats {
       // 指定寻访
       _params = GetGachaStatsParams.specific(pool);
     }
-    return ref.watch(userProvider).fold(
+    return ref.watch(userProvider).match(
       () => throw const AppFailure.invalidToken(),
       (user) async {
         final failureOrStats = await ref.read(gachaRepositoryProvider).getStats(
@@ -39,7 +39,7 @@ class GetGachaStats extends _$GetGachaStats {
               includeRuleTypes: _params.includeRuleTypes,
               excludeRuleTypes: _params.excludeRuleTypes,
             );
-        return failureOrStats.fold(
+        return failureOrStats.match(
           (failure) => throw failure,
           (stats) => stats,
         );

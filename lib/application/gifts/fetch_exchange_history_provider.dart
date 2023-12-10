@@ -8,12 +8,12 @@ part 'fetch_exchange_history_provider.g.dart';
 
 @riverpod
 Future<List<ExchangeLog>> fetchExchangeHistory(FetchExchangeHistoryRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async => [],
       (user) async {
         final failureOrLogs =
             await ref.read(giftRepositoryProvider).getHistory(user.uid);
-        return failureOrLogs.fold(
+        return failureOrLogs.match(
           (failure) => throw failure,
           (logs) => logs,
         );

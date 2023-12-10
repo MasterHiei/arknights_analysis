@@ -7,7 +7,7 @@ part 'fetch_exchange_logs_provider.g.dart';
 
 @riverpod
 Future<void> fetchExchangeLogs(FetchExchangeLogsRef ref) =>
-    ref.watch(userProvider).fold(
+    ref.watch(userProvider).match(
       () async {},
       (user) async {
         final failureOrSuccess =
@@ -16,6 +16,6 @@ Future<void> fetchExchangeLogs(FetchExchangeLogsRef ref) =>
                   uid: user.uid,
                   loginType: ref.read(loginTypeProvider),
                 );
-        return failureOrSuccess.fold((failure) => throw failure, (_) {});
+        return failureOrSuccess.match((failure) => throw failure, (_) {});
       },
     );

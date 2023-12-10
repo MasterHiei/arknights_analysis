@@ -12,7 +12,7 @@ part 'fetch_diamonds_provider.g.dart';
 class FetchDiamonds extends _$FetchDiamonds {
   @override
   FetchDiamondsState build() {
-    ref.watch(userProvider).fold(() {}, _fetchAndSave);
+    ref.watch(userProvider).match(() {}, _fetchAndSave);
     return const FetchDiamondsState.init();
   }
 
@@ -30,7 +30,7 @@ class FetchDiamonds extends _$FetchDiamonds {
               page: page,
               loginType: ref.read(loginTypeProvider),
             );
-    return failureOrPagination.fold(
+    return failureOrPagination.match(
       (failure) => state = FetchDiamondsState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {
