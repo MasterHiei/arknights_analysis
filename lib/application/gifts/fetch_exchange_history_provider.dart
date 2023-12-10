@@ -11,9 +11,8 @@ Future<List<ExchangeLog>> fetchExchangeHistory(FetchExchangeHistoryRef ref) =>
     ref.watch(userProvider).match(
       () async => [],
       (user) async {
-        final failureOrLogs =
-            await ref.read(giftRepositoryProvider).getHistory(user.uid);
-        return failureOrLogs.match(
+        final task = ref.read(giftRepositoryProvider).getHistory(user.uid);
+        return (await task.run()).match(
           (failure) => throw failure,
           (logs) => logs,
         );

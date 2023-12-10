@@ -25,8 +25,8 @@ class CheckForUpdates extends _$CheckForUpdates {
       currentVersion: 'v${ref.read(packageInfoProvider).version}',
       failureOrLatestReleaseOption: none(),
     );
-    final failureOrLatest = await _repository.fetchLatestRelease();
-    state = failureOrLatest.match(
+    final task = _repository.fetchLatestRelease();
+    state = (await task.run()).match(
       (failure) => state.copyWith(
         isChecking: false,
         failureOrLatestReleaseOption: some(left(failure)),

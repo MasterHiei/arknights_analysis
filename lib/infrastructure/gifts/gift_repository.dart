@@ -8,7 +8,7 @@ import '../../core/providers/connectivity_provider.dart';
 import '../../domain/gifts/exchange_log.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/gift_local_data_source.dart';
 import 'data_sources/gift_remote_data_source.dart';
 
@@ -22,16 +22,18 @@ GiftRepository giftRepository(GiftRepositoryRef ref) => GiftRepositoryImpl(
     );
 
 abstract class GiftRepository {
-  Future<Either<AppFailure, Unit>> fetchAndSave(
+  TaskEither<AppFailure, Unit> fetchAndSave(
     Token token, {
     required Uid uid,
     required AkLoginType loginType,
   });
 
-  Future<Either<AppFailure, List<ExchangeLog>>> getHistory(Uid uid);
+  TaskEither<AppFailure, List<ExchangeLog>> getHistory(Uid uid);
 }
 
-class GiftRepositoryImpl with APIErrorHandlerMixin implements GiftRepository {
+class GiftRepositoryImpl
+    with RepositoryErrorHandlerMixin
+    implements GiftRepository {
   const GiftRepositoryImpl(
     this._connectivity,
     this._localDataSource,
@@ -43,12 +45,12 @@ class GiftRepositoryImpl with APIErrorHandlerMixin implements GiftRepository {
   final GiftRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Unit>> fetchAndSave(
+  TaskEither<AppFailure, Unit> fetchAndSave(
     Token token, {
     required Uid uid,
     required AkLoginType loginType,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final response = await _remoteDataSource.fetch(
             token: token.getOrCrash(),
@@ -56,8 +58,8 @@ class GiftRepositoryImpl with APIErrorHandlerMixin implements GiftRepository {
           );
           if (response.code != 0) {
             throw AppFailure.remoteServerError(
-              message: response.msg,
               code: response.code,
+              message: response.msg,
             );
           }
           final logs = response.data.map(
@@ -70,7 +72,7 @@ class GiftRepositoryImpl with APIErrorHandlerMixin implements GiftRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<ExchangeLog>>> getHistory(Uid uid) => execute(
+  TaskEither<AppFailure, List<ExchangeLog>> getHistory(Uid uid) => executeAsync(
         () async {
           final dtos = await _localDataSource.getLogs(uid);
           return dtos.map((dto) => dto.toDomain()).toList();

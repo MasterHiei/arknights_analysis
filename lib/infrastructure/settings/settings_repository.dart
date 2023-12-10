@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
 import '../../domain/settings/latest_release.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/settings_remote_data_source.dart';
 
 part 'settings_repository.g.dart';
@@ -18,11 +18,11 @@ SettingsRepository settingsRepository(SettingsRepositoryRef ref) =>
     );
 
 abstract class SettingsRepository {
-  Future<Either<AppFailure, LatestRelease>> fetchLatestRelease();
+  TaskEither<AppFailure, LatestRelease> fetchLatestRelease();
 }
 
 class SettingsRepositoryImpl
-    with APIErrorHandlerMixin
+    with RepositoryErrorHandlerMixin
     implements SettingsRepository {
   const SettingsRepositoryImpl(
     this._connectivity,
@@ -33,7 +33,7 @@ class SettingsRepositoryImpl
   final SettingsRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, LatestRelease>> fetchLatestRelease() => execute(
+  TaskEither<AppFailure, LatestRelease> fetchLatestRelease() => executeAsync(
         () async {
           final response = await _remoteDataSource.fetchLatestRelease();
           return response.toDomain();

@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
 import '../../core/types/types.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/game_data_raw_local_data_source.dart';
 import 'data_sources/game_data_raw_remote_data_source.dart';
 import 'dtos/gacha_table_dto.dart';
@@ -23,11 +23,11 @@ GameDataRawRepository gameDataRawRepository(GameDataRawRepositoryRef ref) =>
     );
 
 abstract class GameDataRawRepository {
-  Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable();
+  TaskEither<AppFailure, Unit> fetchAndSaveGachaTable();
 }
 
 class GameDataRawRepositoryImpl
-    with APIErrorHandlerMixin
+    with RepositoryErrorHandlerMixin
     implements GameDataRawRepository {
   const GameDataRawRepositoryImpl(
     this._connectivity,
@@ -40,7 +40,7 @@ class GameDataRawRepositoryImpl
   final GameDataRawRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Unit>> fetchAndSaveGachaTable() => execute(
+  TaskEither<AppFailure, Unit> fetchAndSaveGachaTable() => executeAsync(
         () async {
           final source = await _remoteDataSource.fetchGachaTable();
           final dto = GachaTableDto.fromJson(jsonDecode(source) as Json);

@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/exceptions/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/game_data_api_local_data_source.dart';
 import 'data_sources/game_data_api_remote_data_source.dart';
 
@@ -19,17 +19,17 @@ GameDataApiRepository gameDataApiRepository(GameDataApiRepositoryRef ref) =>
     );
 
 abstract class GameDataApiRepository {
-  Future<Either<AppFailure, DateTime>> getLastGachaTableUpdateDateTime();
+  TaskEither<AppFailure, DateTime> getLastGachaTableUpdateDateTime();
 
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime();
+  TaskEither<AppFailure, DateTime> fetchLastGachaTableCommitDateTime();
 
-  Future<Either<AppFailure, Unit>> setLastGachaTableUpdateDateTime(
+  TaskEither<AppFailure, Unit> setLastGachaTableUpdateDateTime(
     DateTime value,
   );
 }
 
 class GameDataApiRepositoryImpl
-    with APIErrorHandlerMixin
+    with RepositoryErrorHandlerMixin
     implements GameDataApiRepository {
   const GameDataApiRepositoryImpl(
     this._connectivity,
@@ -42,8 +42,8 @@ class GameDataApiRepositoryImpl
   final GameDataApiRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, DateTime>> getLastGachaTableUpdateDateTime() =>
-      execute(
+  TaskEither<AppFailure, DateTime> getLastGachaTableUpdateDateTime() =>
+      executeAsync(
         () async {
           final formattedString =
               _localDataSource.getLastGachaTableUpdateDateTime();
@@ -56,8 +56,8 @@ class GameDataApiRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, DateTime>> fetchLastGachaTableCommitDateTime() =>
-      execute(
+  TaskEither<AppFailure, DateTime> fetchLastGachaTableCommitDateTime() =>
+      executeAsync(
         () async {
           final dtos = await _remoteDataSource.fetchLastGachaTableCommit();
           return dtos.first.commit.committer.date;
@@ -66,10 +66,10 @@ class GameDataApiRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, Unit>> setLastGachaTableUpdateDateTime(
+  TaskEither<AppFailure, Unit> setLastGachaTableUpdateDateTime(
     DateTime dateTime,
   ) =>
-      execute(
+      executeAsync(
         () async {
           final value = dateTime.toIso8601String();
           await _localDataSource.setLastGachaTableUpdateDateTime(value);

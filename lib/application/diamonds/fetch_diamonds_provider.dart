@@ -23,14 +23,13 @@ class FetchDiamonds extends _$FetchDiamonds {
   }) async {
     state = FetchDiamondsState.fetching(current: page, total: total);
     await 500.milliseconds.delay;
-    final failureOrPagination =
-        await ref.read(diamondRepositoryProvider).fetchAndSave(
-              user.token,
-              uid: user.uid,
-              page: page,
-              loginType: ref.read(loginTypeProvider),
-            );
-    return failureOrPagination.match(
+    final task = ref.read(diamondRepositoryProvider).fetchAndSave(
+          user.token,
+          uid: user.uid,
+          page: page,
+          loginType: ref.read(loginTypeProvider),
+        );
+    return (await task.run()).match(
       (failure) => state = FetchDiamondsState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {

@@ -2,14 +2,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/user/value_objects/token.dart';
 import '../../infrastructure/core/mixins/debounce_mixin.dart';
-import '../../infrastructure/core/mixins/request_limit_mixin.dart';
+import '../../infrastructure/core/mixins/limited_request_mixin.dart';
 import '../../infrastructure/user/user_repository.dart';
 import 'logged_in_user_info_provider.dart';
 
 part 'fetch_user_provider.g.dart';
 
 @riverpod
-class FetchUser extends _$FetchUser with DebounceMixin, RequestLimitMixin {
+class FetchUser extends _$FetchUser with DebounceMixin, LimitedRequestMixin {
   UserRepository get _repository => ref.read(userRepositoryProvider);
 
   @override
@@ -27,27 +27,24 @@ class FetchUser extends _$FetchUser with DebounceMixin, RequestLimitMixin {
         () async {},
         (token) async {
           state = const AsyncValue.loading();
-          final failureOrSuccess = await _repository.fetchAndUpdate(
+          final task = _repository.fetchAndUpdate(
             token,
             loginType: ref.read(loginTypeProvider),
           );
-          state = await AsyncValue.guard(
-            () => failureOrSuccess.match(
-              (failure) => throw failure,
-              (_) {
-                notifyRequestComplete();
-                return _get(token);
-              },
-            ),
+          final success = (await task.run()).match(
+            (failure) => throw failure,
+            (_) {
+              markRequestCompleted();
+              return _get(token);
+            },
           );
+          state = AsyncValue.data(success);
         },
       );
 
-  Future<void> _get(Token token) async {
-    final failureOrUser = await _repository.get(token);
-    return failureOrUser.match(
-      (failure) => throw failure,
-      ref.read(loggedInUserInfoProvider.notifier).updateUser,
-    );
-  }
+  Future<void> _get(Token token) async =>
+      (await _repository.get(token).run()).match(
+        (failure) => throw failure,
+        ref.read(loggedInUserInfoProvider.notifier).updateUser,
+      );
 }

@@ -50,8 +50,8 @@ class Persistence extends _$Persistence with DebounceMixin {
         }
 
         state = const PersistenceState.processing();
-        final failureOrFile = await _repository.export(uid, path: path);
-        state = failureOrFile.match(
+        final task = _repository.export(uid, path: path);
+        state = (await task.run()).match(
           (failure) => PersistenceState.exportFailure(failure),
           (file) => PersistenceState.exportSuccess(file),
         );
@@ -82,8 +82,8 @@ class Persistence extends _$Persistence with DebounceMixin {
           return;
         }
 
-        final failureOrFile = await _repository.import(uid, path: path);
-        state = failureOrFile.match(
+        final task = _repository.import(uid, path: path);
+        state = (await task.run()).match(
           (failure) => PersistenceState.importFailure(failure),
           (file) => const PersistenceState.importSuccess(),
         );

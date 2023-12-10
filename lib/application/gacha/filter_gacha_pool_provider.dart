@@ -11,8 +11,7 @@ Future<GachaPool?> filterGachaPool(
   required String byName,
 }) async {
   final repository = ref.read(gachaRepositoryProvider);
-  final failureOrPool = await repository.getPoolByName(byName);
-  return failureOrPool.match(
+  return (await repository.getPoolByName(byName).run()).match(
     (failure) => throw failure,
     (pool) => pool,
   );

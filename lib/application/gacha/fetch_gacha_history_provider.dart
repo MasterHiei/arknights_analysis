@@ -14,13 +14,13 @@ Future<List<GachaChar>> fetchGachaHistory(FetchGachaHistoryRef ref) =>
       (user) async {
         final repository = ref.read(gachaRepositoryProvider);
         final filter = ref.watch(gachaHistoryFilterProvider);
-        final failureOrChars = await repository.getHistory(
+        final task = repository.getHistory(
           user.uid,
           showAllPools: filter.showAllPools,
           pools: filter.selectedPools,
           rarities: filter.selectedRarities,
         );
-        return failureOrChars.match(
+        return (await task.run()).match(
           (failure) => throw failure,
           (chars) => chars,
         );

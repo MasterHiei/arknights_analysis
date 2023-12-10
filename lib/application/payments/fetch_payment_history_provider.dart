@@ -11,9 +11,8 @@ Future<List<PaymentRecord>> fetchPaymentHistory(FetchPaymentHistoryRef ref) =>
     ref.watch(userProvider).match(
       () async => [],
       (user) async {
-        final failureOrRecords =
-            await ref.read(paymentRepositoryProvider).getHistory(user.uid);
-        return failureOrRecords.match(
+        final task = ref.read(paymentRepositoryProvider).getHistory(user.uid);
+        return (await task.run()).match(
           (failure) => throw failure,
           (records) => records,
         );

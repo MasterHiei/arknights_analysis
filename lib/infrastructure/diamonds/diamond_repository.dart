@@ -9,7 +9,7 @@ import '../../domain/core/common/pagination.dart';
 import '../../domain/diamonds/diamond_change.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/diamond_local_data_source.dart';
 import 'data_sources/diamond_remote_data_source.dart';
 
@@ -24,18 +24,18 @@ DiamondRepository diamondRepository(DiamondRepositoryRef ref) =>
     );
 
 abstract class DiamondRepository {
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  TaskEither<AppFailure, Pagination> fetchAndSave(
     Token token, {
     required Uid uid,
     int page = 1,
     required AkLoginType loginType,
   });
 
-  Future<Either<AppFailure, List<DiamondChange>>> getHistory(Uid uid);
+  TaskEither<AppFailure, List<DiamondChange>> getHistory(Uid uid);
 }
 
 class DiamondRepositoryImpl
-    with APIErrorHandlerMixin
+    with RepositoryErrorHandlerMixin
     implements DiamondRepository {
   const DiamondRepositoryImpl(
     this._connectivity,
@@ -48,13 +48,13 @@ class DiamondRepositoryImpl
   final DiamondRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  TaskEither<AppFailure, Pagination> fetchAndSave(
     Token token, {
     required Uid uid,
     int page = 1,
     required AkLoginType loginType,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final response = await _remoteDataSource.fetch(
             token: token.getOrCrash(),
@@ -64,8 +64,8 @@ class DiamondRepositoryImpl
           final dto = response.data;
           if (dto == null) {
             throw AppFailure.remoteServerError(
-              message: response.msg,
               code: response.code,
+              message: response.msg,
             );
           }
           final records = dto.records.map(
@@ -78,8 +78,8 @@ class DiamondRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, List<DiamondChange>>> getHistory(Uid uid) =>
-      execute(
+  TaskEither<AppFailure, List<DiamondChange>> getHistory(Uid uid) =>
+      executeAsync(
         () async {
           final dtos = await _localDataSource.getRecords(uid);
           return dtos

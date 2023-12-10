@@ -16,8 +16,8 @@ class AppFailure with _$AppFailure {
   const factory AppFailure.networkUnreachable() = _NetworkUnreachable;
 
   const factory AppFailure.remoteServerError({
-    String? message,
     int? code,
+    String? message,
   }) = _RemoteServerError;
 
   const factory AppFailure.localDataError(Object e) = _LocalDataError;
@@ -32,9 +32,9 @@ class AppFailure with _$AppFailure {
             '${LocaleKeys.error_unexpectedError.tr()}\n${f.e}',
         networkUnreachable: (_) => LocaleKeys.error_networkUnreachable.tr(),
         remoteServerError: (f) {
-          final status = f.code == null ? '' : '[${f.code}]';
+          final code = f.code == null ? '' : '[${f.code}]';
           final message = f.message ?? LocaleKeys.error_remoteServerError.tr();
-          return '$status$message';
+          return '$code$message';
         },
         localDataError: (f) =>
             '${LocaleKeys.error_localDataError.tr()}\n${f.e}',

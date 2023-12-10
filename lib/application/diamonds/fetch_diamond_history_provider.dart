@@ -12,8 +12,7 @@ Future<List<DiamondChange>> fetchDiamondHistory(FetchDiamondHistoryRef ref) =>
       () async => [],
       (user) async {
         final repository = ref.read(diamondRepositoryProvider);
-        final failureOrChanges = await repository.getHistory(user.uid);
-        return failureOrChanges.match(
+        return (await repository.getHistory(user.uid).run()).match(
           (failure) => throw failure,
           (changes) => changes,
         );

@@ -10,12 +10,11 @@ Future<void> fetchExchangeLogs(FetchExchangeLogsRef ref) =>
     ref.watch(userProvider).match(
       () async {},
       (user) async {
-        final failureOrSuccess =
-            await ref.read(giftRepositoryProvider).fetchAndSave(
-                  user.token,
-                  uid: user.uid,
-                  loginType: ref.read(loginTypeProvider),
-                );
-        return failureOrSuccess.match((failure) => throw failure, (_) {});
+        final task = ref.read(giftRepositoryProvider).fetchAndSave(
+              user.token,
+              uid: user.uid,
+              loginType: ref.read(loginTypeProvider),
+            );
+        return (await task.run()).match((failure) => throw failure, (_) {});
       },
     );

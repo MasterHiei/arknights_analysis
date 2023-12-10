@@ -24,14 +24,13 @@ class FetchGacha extends _$FetchGacha {
   }) async {
     await 500.milliseconds.delay;
     state = FetchGachaState.fetching(current: page, total: total);
-    final failureOrPagination =
-        await ref.read(gachaRepositoryProvider).fetchAndSave(
-              user.token,
-              uid: user.uid,
-              page: page,
-              loginType: ref.read(loginTypeProvider),
-            );
-    return failureOrPagination.match(
+    final task = ref.read(gachaRepositoryProvider).fetchAndSave(
+          user.token,
+          uid: user.uid,
+          page: page,
+          loginType: ref.read(loginTypeProvider),
+        );
+    return (await task.run()).match(
       (failure) => state = FetchGachaState.failure(failure),
       (pagination) async {
         if (pagination.isLastPage) {

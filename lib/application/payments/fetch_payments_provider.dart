@@ -10,9 +10,9 @@ Future<void> fetchPayments(FetchPaymentsRef ref) =>
     ref.watch(userProvider).match(
       () async {},
       (user) async {
-        final failureOrSuccess = await ref
+        final task = ref
             .read(paymentRepositoryProvider)
             .fetchAndSave(user.token, uid: user.uid);
-        return failureOrSuccess.match((failure) => throw failure, (_) {});
+        return (await task.run()).match((failure) => throw failure, (_) {});
       },
     );

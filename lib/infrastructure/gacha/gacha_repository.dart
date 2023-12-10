@@ -13,7 +13,7 @@ import '../../domain/gacha/gacha_pool.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/gacha_local_data_source.dart';
 import 'data_sources/gacha_remote_data_source.dart';
 
@@ -27,30 +27,30 @@ GachaRepository gachaRepository(GachaRepositoryRef ref) => GachaRepositoryImpl(
     );
 
 abstract class GachaRepository {
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  TaskEither<AppFailure, Pagination> fetchAndSave(
     Token token, {
     required Uid uid,
     int page = 1,
     required AkLoginType loginType,
   });
 
-  Future<Either<AppFailure, List<String>>> getRecordedPools({
+  TaskEither<AppFailure, List<String>> getRecordedPools({
     required Uid uid,
     Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
     Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
     bool includeClassics = true,
   });
 
-  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name);
+  TaskEither<AppFailure, GachaPool?> getPoolByName(String name);
 
-  Future<Either<AppFailure, GachaStats>> getStats(
+  TaskEither<AppFailure, GachaStats> getStats(
     Uid uid, {
     required List<String> pools,
     required Iterable<GachaRuleType> includeRuleTypes,
     required Iterable<GachaRuleType> excludeRuleTypes,
   });
 
-  Future<Either<AppFailure, List<GachaChar>>> getHistory(
+  TaskEither<AppFailure, List<GachaChar>> getHistory(
     Uid uid, {
     required bool showAllPools,
     required List<String> pools,
@@ -58,7 +58,9 @@ abstract class GachaRepository {
   });
 }
 
-class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
+class GachaRepositoryImpl
+    with RepositoryErrorHandlerMixin
+    implements GachaRepository {
   const GachaRepositoryImpl(
     this._connectivity,
     this._localDataSource,
@@ -70,13 +72,13 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
   final GachaRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Pagination>> fetchAndSave(
+  TaskEither<AppFailure, Pagination> fetchAndSave(
     Token token, {
     required Uid uid,
     int page = 1,
     required AkLoginType loginType,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final response = await _remoteDataSource.fetch(
             token: token.getOrCrash(),
@@ -86,8 +88,8 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
           final dto = response.data;
           if (dto == null) {
             throw AppFailure.remoteServerError(
-              message: response.msg,
               code: response.code,
+              message: response.msg,
             );
           }
           final records = dto.records.map(
@@ -100,13 +102,13 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<String>>> getRecordedPools({
+  TaskEither<AppFailure, List<String>> getRecordedPools({
     required Uid uid,
     Iterable<GachaRuleType> includeRuleTypes = const Iterable.empty(),
     Iterable<GachaRuleType> excludeRuleTypes = const Iterable.empty(),
     bool includeClassics = true,
   }) =>
-      execute(
+      executeAsync(
         () => _localDataSource.getRecordedPools(
           uid: uid,
           includeRuleTypes: includeRuleTypes,
@@ -116,7 +118,7 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, GachaPool?>> getPoolByName(String name) => execute(
+  TaskEither<AppFailure, GachaPool?> getPoolByName(String name) => executeAsync(
         () async {
           final dto = await _localDataSource.getPoolByName(name);
           return dto?.toDomain();
@@ -124,13 +126,13 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, GachaStats>> getStats(
+  TaskEither<AppFailure, GachaStats> getStats(
     Uid uid, {
     required List<String> pools,
     required Iterable<GachaRuleType> includeRuleTypes,
     required Iterable<GachaRuleType> excludeRuleTypes,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final showAllPools = pools.isEmpty;
           final dtos = await _localDataSource.getRecords(
@@ -150,13 +152,13 @@ class GachaRepositoryImpl with APIErrorHandlerMixin implements GachaRepository {
       );
 
   @override
-  Future<Either<AppFailure, List<GachaChar>>> getHistory(
+  TaskEither<AppFailure, List<GachaChar>> getHistory(
     Uid uid, {
     required bool showAllPools,
     required List<String> pools,
     required List<Rarity> rarities,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final dtos = await _localDataSource.getRecords(
             uid,

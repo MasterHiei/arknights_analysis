@@ -43,11 +43,10 @@ class GachaHistoryFilter extends _$GachaHistoryFilter {
   Future<void> _getPools() => ref.watch(userProvider).match(
         () async {},
         (user) async {
-          final uid = user.uid;
-          final failureOrPools = await ref
-              .read(gachaRepositoryProvider)
-              .getRecordedPools(uid: uid);
-          failureOrPools.match(
+          final task = ref.read(gachaRepositoryProvider).getRecordedPools(
+                uid: user.uid,
+              );
+          (await task.run()).match(
             (_) {},
             (pools) => state = state.copyWith(pools: pools),
           );

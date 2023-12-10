@@ -8,7 +8,7 @@ import '../../domain/payments/payment_record.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../../domain/user/value_objects/uid.dart';
 import '../core/common/dtos/token_body_official_dto.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/payment_local_data_source.dart';
 import 'data_sources/payment_remote_data_source.dart';
 
@@ -23,16 +23,16 @@ PaymentRepository paymentRepository(PaymentRepositoryRef ref) =>
     );
 
 abstract class PaymentRepository {
-  Future<Either<AppFailure, Unit>> fetchAndSave(
+  TaskEither<AppFailure, Unit> fetchAndSave(
     Token token, {
     required Uid uid,
   });
 
-  Future<Either<AppFailure, List<PaymentRecord>>> getHistory(Uid uid);
+  TaskEither<AppFailure, List<PaymentRecord>> getHistory(Uid uid);
 }
 
 class PaymentRepositoryImpl
-    with APIErrorHandlerMixin
+    with RepositoryErrorHandlerMixin
     implements PaymentRepository {
   const PaymentRepositoryImpl(
     this._connectivity,
@@ -45,18 +45,18 @@ class PaymentRepositoryImpl
   final PaymentRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, Unit>> fetchAndSave(
+  TaskEither<AppFailure, Unit> fetchAndSave(
     Token token, {
     required Uid uid,
   }) =>
-      execute(
+      executeAsync(
         () async {
           final body = TokenBodyOfficialDto(token: token.getOrCrash());
           final response = await _remoteDataSource.request(body);
           if (response.code != 0) {
             throw AppFailure.remoteServerError(
-              message: response.msg,
               code: response.code,
+              message: response.msg,
             );
           }
           final records = response.data.map(
@@ -69,8 +69,8 @@ class PaymentRepositoryImpl
       );
 
   @override
-  Future<Either<AppFailure, List<PaymentRecord>>> getHistory(Uid uid) =>
-      execute(
+  TaskEither<AppFailure, List<PaymentRecord>> getHistory(Uid uid) =>
+      executeAsync(
         () async {
           final dtos = await _localDataSource.getRecords(uid);
           return dtos.map((dto) => dto.toDomain()).toList();

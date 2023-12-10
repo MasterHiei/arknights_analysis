@@ -33,13 +33,13 @@ class GetGachaStats extends _$GetGachaStats {
     return ref.watch(userProvider).match(
       () => throw const AppFailure.invalidToken(),
       (user) async {
-        final failureOrStats = await ref.read(gachaRepositoryProvider).getStats(
+        final task = ref.read(gachaRepositoryProvider).getStats(
               user.uid,
               pools: _params.pools,
               includeRuleTypes: _params.includeRuleTypes,
               excludeRuleTypes: _params.excludeRuleTypes,
             );
-        return failureOrStats.match(
+        return (await task.run()).match(
           (failure) => throw failure,
           (stats) => stats,
         );

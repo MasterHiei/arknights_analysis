@@ -25,15 +25,13 @@ class GachaPoolSelector extends _$GachaPoolSelector {
   Future<void> _getAllPools() => ref.watch(userProvider).match(
         () async {},
         (user) async {
-          final failureOrPools =
-              await ref.read(gachaRepositoryProvider).getRecordedPools(
-                    uid: user.uid,
-                    includeRuleTypes: GachaRuleType.independentGuarantee,
-                  );
-          failureOrPools.match(
+          final task = ref.read(gachaRepositoryProvider).getRecordedPools(
+                uid: user.uid,
+                includeRuleTypes: GachaRuleType.independentGuarantee,
+              );
+          (await task.run()).match(
             (_) {},
-            (pools) =>
-                state = state = GachaPoolSelectorState.init(source: pools),
+            (pools) => state = GachaPoolSelectorState.init(source: pools),
           );
         },
       );

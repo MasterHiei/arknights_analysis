@@ -9,7 +9,7 @@ import '../../domain/user/user.dart';
 import '../../domain/user/value_objects/token.dart';
 import '../core/common/dtos/token_body_bilibili_dto.dart';
 import '../core/common/dtos/token_body_official_dto.dart';
-import '../core/mixins/api_error_handler_mixin.dart';
+import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/user_local_data_source.dart';
 import 'data_sources/user_remote_data_source.dart';
 import 'dtos/user_response_dto.dart';
@@ -24,15 +24,17 @@ UserRepository userRepository(UserRepositoryRef ref) => UserRepositoryImpl(
     );
 
 abstract class UserRepository {
-  Future<Either<AppFailure, User>> get(Token token);
+  TaskEither<AppFailure, User> get(Token token);
 
-  Future<Either<AppFailure, Unit>> fetchAndUpdate(
+  TaskEither<AppFailure, Unit> fetchAndUpdate(
     Token token, {
     required AkLoginType loginType,
   });
 }
 
-class UserRepositoryImpl with APIErrorHandlerMixin implements UserRepository {
+class UserRepositoryImpl
+    with RepositoryErrorHandlerMixin
+    implements UserRepository {
   const UserRepositoryImpl(
     this._connectivity,
     this._localDataSource,
@@ -44,7 +46,7 @@ class UserRepositoryImpl with APIErrorHandlerMixin implements UserRepository {
   final UserRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppFailure, User>> get(Token token) => execute(
+  TaskEither<AppFailure, User> get(Token token) => executeAsync(
         () async {
           final dto = await _localDataSource.get(token);
           return dto.toDomain();
@@ -52,11 +54,11 @@ class UserRepositoryImpl with APIErrorHandlerMixin implements UserRepository {
       );
 
   @override
-  Future<Either<AppFailure, Unit>> fetchAndUpdate(
+  TaskEither<AppFailure, Unit> fetchAndUpdate(
     Token token, {
     required AkLoginType loginType,
   }) =>
-      execute(
+      executeAsync(
         () async {
           late final UserResponseDto response;
           switch (loginType) {

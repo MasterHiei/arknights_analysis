@@ -43,12 +43,15 @@ class GachaStatsExtraPanel extends ConsumerWidget {
         );
         return ref.watch(fetchUserProvider).maybeWhen(
               data: (_) {
-                final lastFetchTime = ref
+                final tipMessage = ref
                     .read(fetchUserProvider.notifier)
-                    .lastRequestDateTime!
-                    .yMMMdHmsString;
+                    .lastRequestDateTime
+                    .match(
+                      () => '',
+                      (dateTime) => '上次更新于: ${dateTime.yMMMdHmsString}',
+                    );
                 return Tooltip(
-                  message: '上次更新于: $lastFetchTime',
+                  message: tipMessage,
                   useMousePosition: false,
                   child: FilledButton(
                     onPressed: () =>

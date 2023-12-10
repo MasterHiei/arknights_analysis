@@ -1,3 +1,4 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 
@@ -18,32 +19,6 @@ class FetchGachaPools extends _$FetchGachaPools {
   @override
   Future<void> build() => _fetchAndSave();
 
-  Future<DateTime?> _getLastUpdateDateTime() async {
-    final failureOrDateTime =
-        await _apiRepository.getLastGachaTableUpdateDateTime();
-    return failureOrDateTime.match((_) => null, (dateTime) => dateTime);
-  }
-
-  Future<bool> _isNewest() async {
-    final failureOrCommitDate =
-        await _apiRepository.fetchLastGachaTableCommitDateTime();
-    return failureOrCommitDate.match(
-      (f) => false,
-      (commitDate) async {
-        final lastUpdateDateTime = await _getLastUpdateDateTime();
-        if (lastUpdateDateTime == null) {
-          return false;
-        }
-        return commitDate.isBefore(lastUpdateDateTime);
-      },
-    );
-  }
-
-  Future<bool> _hasData() async {
-    final lastUpdateDateTime = await _getLastUpdateDateTime();
-    return lastUpdateDateTime != null;
-  }
-
   Future<void> _fetchAndSave() async {
     await 1200.milliseconds.delay;
 
@@ -51,8 +26,8 @@ class FetchGachaPools extends _$FetchGachaPools {
       return;
     }
 
-    final failureOrSuccess = await _repository.fetchAndSaveGachaTable();
-    await failureOrSuccess.match(
+    final task = _repository.fetchAndSaveGachaTable();
+    (await task.run()).match(
       (f) async {
         if (await _hasData()) {
           throw AppFailure.localizedError(
@@ -66,8 +41,32 @@ class FetchGachaPools extends _$FetchGachaPools {
         }
       },
       (_) async {
-        await _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());
+        _apiRepository.setLastGachaTableUpdateDateTime(DateTime.now());
       },
     );
+  }
+
+  Future<Option<DateTime>> _getLastUpdateDateTime() async {
+    final task = _apiRepository.getLastGachaTableUpdateDateTime();
+    return (await task.run()).match((_) => none(), some);
+  }
+
+  Future<bool> _isNewest() async {
+    final task = _apiRepository.fetchLastGachaTableCommitDateTime();
+    return (await task.run()).match(
+      (f) => false,
+      (commitDate) async {
+        final dateTimeOption = await _getLastUpdateDateTime();
+        return dateTimeOption.match(
+          () => false,
+          (lastUpdateDateTime) => commitDate.isBefore(lastUpdateDateTime),
+        );
+      },
+    );
+  }
+
+  Future<bool> _hasData() async {
+    final dateTimeOption = await _getLastUpdateDateTime();
+    return dateTimeOption.isSome();
   }
 }
