@@ -9,7 +9,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   }) = _InvalidUid<T>;
 
   const factory ValueFailure.invalidToken({
-    required T failedValue,
+    required T? failedValue,
   }) = _InvalidToken<T>;
 
   const factory ValueFailure.invalidTs({

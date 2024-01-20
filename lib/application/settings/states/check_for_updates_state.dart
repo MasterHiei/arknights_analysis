@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/exceptions/app_failure.dart';
+import '../../../core/errors/app_failure.dart';
 import '../../../domain/settings/latest_release.dart';
 
 part 'check_for_updates_state.freezed.dart';
@@ -16,28 +16,28 @@ class CheckForUpdatesState with _$CheckForUpdatesState {
         failureOrLatestReleaseOption,
   }) = _CheckForUpdatesState;
 
-  factory CheckForUpdatesState.init() => CheckForUpdatesState(
+  factory CheckForUpdatesState.init() => const CheckForUpdatesState(
         isChecking: false,
         isManually: false,
         currentVersion: '',
-        failureOrLatestReleaseOption: none(),
+        failureOrLatestReleaseOption: None(),
       );
 
   const CheckForUpdatesState._();
 
   Option<AppFailure> get failureOption => failureOrLatestReleaseOption.match(
-        () => none(),
+        () => const None(),
         (failureOrLatest) => failureOrLatest.match(
           (failure) => optionOf(failure),
-          (_) => none(),
+          (_) => const None(),
         ),
       );
 
   Option<LatestRelease> get latestReleaseOption =>
       failureOrLatestReleaseOption.match(
-        () => none(),
+        () => const None(),
         (failureOrLatest) => failureOrLatest.match(
-          (_) => none(),
+          (_) => const None(),
           (latest) => optionOf(latest),
         ),
       );

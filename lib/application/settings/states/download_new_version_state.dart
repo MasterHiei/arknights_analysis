@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/exceptions/app_failure.dart';
+import '../../../core/errors/app_failure.dart';
 import '../../../generated/locale_keys.g.dart';
 
 part 'download_new_version_state.freezed.dart';

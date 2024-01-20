@@ -23,7 +23,7 @@ class CheckForUpdates extends _$CheckForUpdates {
       isChecking: true,
       isManually: isManually,
       currentVersion: 'v${ref.read(packageInfoProvider).version}',
-      failureOrLatestReleaseOption: none(),
+      failureOrLatestReleaseOption: const None(),
     );
     final task = _repository.fetchLatestRelease();
     state = (await task.run()).match(

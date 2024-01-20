@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:webview_windows/webview_windows.dart';
 
-import '../../core/exceptions/app_failure.dart';
+import '../../core/errors/app_failure.dart';
 import '../../core/utils/logger.dart';
 
 part 'webview_provider.g.dart';

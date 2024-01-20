@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../exceptions/app_failure.dart';
+import '../errors/app_failure.dart';
 import '../types/types.dart';
 import '../utils/logger.dart';
 

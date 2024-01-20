@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../application/persistence/persistence_provider.dart';
-import '../../presentation/core/routing/router.dart';
+import '../routing/router.dart';
 
 enum GachaDataManagementType {
   import,

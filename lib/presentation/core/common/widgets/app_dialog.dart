@@ -5,14 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../../../application/ak_logout/ak_logout_provider.dart';
+import '../../../../core/routing/router.dart';
+import '../../../../features/auth/presentation/providers/ak_logout_provider.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../routing/router.dart';
 
 class AppDialog extends StatelessWidget {
-  const AppDialog({
-    super.key,
-    this.title,
+  const AppDialog._({
+    required this.title,
     required this.content,
     required this.confirmButtonText,
     required this.confirmButtonColor,
@@ -102,7 +101,7 @@ class AppDialog extends StatelessWidget {
   }) =>
       showDialog(
         context: context,
-        builder: (_) => AppDialog(
+        builder: (_) => AppDialog._(
           title: title ?? const Text(LocaleKeys.dialog_title).tr(),
           content: content,
           confirmButtonText:
@@ -167,5 +166,24 @@ class AppDialog extends StatelessWidget {
         ),
         confirmButtonText: LocaleKeys.app_update_dialog_confirm.tr(),
         onConfirmButtonTap: onDownloadButtonTap,
+      );
+
+  static Future<void> retry(
+    BuildContext context, {
+    required Widget title,
+    required Widget content,
+    required void Function() onRetry,
+    String? closeButtonText,
+    void Function()? onCancel,
+  }) =>
+      AppDialog.show(
+        context,
+        title: title,
+        content: content,
+        confirmButtonText: LocaleKeys.dialog_retry.tr(),
+        confirmButtonColor: Colors.red,
+        onConfirmButtonTap: onRetry,
+        closeButtonText: closeButtonText,
+        onCloseButtonTap: onCancel,
       );
 }

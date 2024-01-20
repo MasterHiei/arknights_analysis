@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../core/enums/ak_login_type.dart';
 import '../../core/enums/gacha_rule_type.dart';
 import '../../core/enums/rarity.dart';
-import '../../core/exceptions/app_failure.dart';
+import '../../core/errors/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
 import '../../domain/core/common/pagination.dart';
 import '../../domain/gacha/gacha_char.dart';
@@ -46,6 +46,7 @@ abstract class GachaRepository {
   TaskEither<AppFailure, GachaStats> getStats(
     Uid uid, {
     required List<String> pools,
+    required List<String> excludePools,
     required Iterable<GachaRuleType> includeRuleTypes,
     required Iterable<GachaRuleType> excludeRuleTypes,
   });
@@ -129,6 +130,7 @@ class GachaRepositoryImpl
   TaskEither<AppFailure, GachaStats> getStats(
     Uid uid, {
     required List<String> pools,
+    required List<String> excludePools,
     required Iterable<GachaRuleType> includeRuleTypes,
     required Iterable<GachaRuleType> excludeRuleTypes,
   }) =>
@@ -139,6 +141,7 @@ class GachaRepositoryImpl
             uid,
             showAllPools: showAllPools,
             pools: showAllPools ? [] : pools,
+            excludePools: excludePools,
             includeRuleTypes: includeRuleTypes,
             excludeRuleTypes: excludeRuleTypes,
           );

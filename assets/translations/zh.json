@@ -11,7 +11,8 @@
   "dialog": {
     "title": "确认",
     "confirm": "确定",
-    "cancel": "取消"
+    "cancel": "取消",
+    "retry": "重试"
   },
   "app": {
     "close": {
@@ -44,6 +45,17 @@
     }
   },
   "features": {
+    "user": {
+      "retryAlert": {
+        "title": "玩家信息获取失败"
+      }
+    },
+    "gameData": {
+      "retryAlert": {
+        "title": "提示",
+        "content": "游戏数据异常\n建议检查网络设置后重试"
+      }
+    },
     "gachaStats": {
       "title": "寻访统计",
       "updated": "数据已更新。",

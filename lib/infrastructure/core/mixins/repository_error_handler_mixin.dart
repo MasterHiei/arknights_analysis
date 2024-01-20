@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../core/exceptions/app_failure.dart';
+import '../../../core/errors/app_failure.dart';
 import '../../../core/utils/logger.dart';
 
 mixin RepositoryErrorHandlerMixin {

@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/enums/gacha_rule_type.dart';
-import '../../core/exceptions/app_failure.dart';
+import '../../core/errors/app_failure.dart';
 import '../../domain/gacha/gacha_stats.dart';
 import '../../infrastructure/gacha/gacha_repository.dart';
 import '../user/logged_in_user_info_provider.dart';
@@ -36,6 +36,7 @@ class GetGachaStats extends _$GetGachaStats {
         final task = ref.read(gachaRepositoryProvider).getStats(
               user.uid,
               pools: _params.pools,
+              excludePools: _params.excludePools,
               includeRuleTypes: _params.includeRuleTypes,
               excludeRuleTypes: _params.excludeRuleTypes,
             );

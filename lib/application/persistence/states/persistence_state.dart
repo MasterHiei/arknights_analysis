@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/exceptions/app_failure.dart';
+import '../../../core/errors/app_failure.dart';
 
 part 'persistence_state.freezed.dart';
 
