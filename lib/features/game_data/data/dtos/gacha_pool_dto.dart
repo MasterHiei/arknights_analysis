@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/enums/gacha_rule_type.dart';
 import '../../../../core/types/types.dart';
-import '../../../../domain/gacha/gacha_pool.dart';
+import '../../../gacha/domain/entities/gacha_pool.dart';
 
 part 'gacha_pool_dto.freezed.dart';
 part 'gacha_pool_dto.g.dart';

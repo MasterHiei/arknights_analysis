@@ -10,11 +10,12 @@ class RefreshDiamondHistoryState with _$RefreshDiamondHistoryState {
 
   const factory RefreshDiamondHistoryState.fetching({
     required int current,
-    int? total,
+    required int total,
   }) = _Fetching;
 
   const factory RefreshDiamondHistoryState.success() = _Success;
 
-  const factory RefreshDiamondHistoryState.failure(AppFailure failure) =
-      _Failure;
+  const factory RefreshDiamondHistoryState.failure(
+    AppFailure failure,
+  ) = _Failure;
 }

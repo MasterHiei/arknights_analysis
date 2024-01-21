@@ -15,8 +15,6 @@ class GetCurrentUser extends _$GetCurrentUser {
   }
 
   Future<void> _get() async {
-    state = const AsyncValue.loading();
-
     const params = NoParams();
     state = await ref
         .read(getCachedUserProvider)

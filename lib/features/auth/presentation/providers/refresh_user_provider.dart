@@ -11,7 +11,7 @@ part 'refresh_user_provider.g.dart';
 @riverpod
 class RefreshUser extends _$RefreshUser {
   @override
-  AsyncValue<Unit> build() => const AsyncValue.loading();
+  AsyncValue<Unit> build() => const AsyncValue.data(unit);
 
   Future<void> call() async {
     state = const AsyncValue.loading();

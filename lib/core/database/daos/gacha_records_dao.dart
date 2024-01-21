@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
-import '../../../infrastructure/gacha/dtos/gacha_dto.dart';
-import '../../../infrastructure/gacha/dtos/gacha_record_dto.dart';
+import '../../../features/gacha/data/dtos/gacha_dto.dart';
+import '../../../features/gacha/data/dtos/gacha_record_dto.dart';
 import '../../common/dtos/pagination_dto.dart';
 import '../../enums/gacha_rule_type.dart';
 import '../app_database.dart';

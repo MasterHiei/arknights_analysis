@@ -11,9 +11,12 @@ part 'get_diamond_history_provider.g.dart';
 @riverpod
 class GetDiamondHistory extends _$GetDiamondHistory {
   @override
-  AsyncValue<List<DiamondChange>> build() => const AsyncValue.loading();
+  AsyncValue<List<DiamondChange>> build() {
+    _get();
+    return const AsyncValue.loading();
+  }
 
-  Future<void> call() async {
+  Future<void> _get() async {
     const noParams = NoParams();
     final getHistoryTask = ref
         .read(getCachedUserProvider)
