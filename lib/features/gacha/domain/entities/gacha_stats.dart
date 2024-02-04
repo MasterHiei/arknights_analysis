@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/common/value_objects/uid.dart';
 import '../../../../core/enums/rarity.dart';
-import '../../../../infrastructure/core/extensions/date_time_formatter.dart';
+import '../../../../core/extensions/date_time_formatter.dart';
 import 'gacha_char.dart';
 
 part 'gacha_stats.freezed.dart';

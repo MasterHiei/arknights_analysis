@@ -39,7 +39,7 @@ class GachaHistoryFilter extends StatefulWidget {
   const GachaHistoryFilter({super.key});
 
   @override
-  State<GachaHistoryFilter> createState() => _GachaHistoryFilterState();
+  _GachaHistoryFilterState createState() => _GachaHistoryFilterState();
 }
 
 class _GachaHistoryFilterState extends State<GachaHistoryFilter> {

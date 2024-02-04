@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/validators/validate_token.dart';
-import '../../../../domain/core/value_failure.dart';
-import '../../../../domain/core/value_object.dart';
+import '../../errors/value_failure.dart';
+import 'value_object.dart';
 
 class Token extends ValueObject<String> {
   factory Token(String? value) {

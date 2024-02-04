@@ -65,7 +65,7 @@ class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  ConsumerState<DashboardPage> createState() => _DashboardPageState();
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends ConsumerState<DashboardPage>

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 
-import 'exceptions/unexpected_value_error.dart';
-import 'value_failure.dart';
+import '../../errors/value_failure.dart';
 
 abstract class _Validatable {
   bool isValid();
@@ -14,7 +13,7 @@ abstract class ValueObject<T> implements _Validatable {
 
   Either<ValueFailure<T>, T> get value;
 
-  T getOrCrash() => value.match((f) => throw UnexpectedValueError(f), (r) => r);
+  T getOrCrash() => value.match((f) => throw f, (r) => r);
 
   T? getOrElse(T? v) => value.match((_) => v, (r) => r);
 

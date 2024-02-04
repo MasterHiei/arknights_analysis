@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../../../core/extensions/date_time_formatter.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../../../presentation/core/common/widgets/app_empty_view.dart';
 import '../../domain/entities/diamond_change.dart';
 import '../providers/get_diamond_history_provider.dart';

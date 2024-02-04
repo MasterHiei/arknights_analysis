@@ -13,7 +13,7 @@ class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  ConsumerState<SplashPage> createState() => _SplashPageState();
+  _SplashPageState createState() => _SplashPageState();
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {

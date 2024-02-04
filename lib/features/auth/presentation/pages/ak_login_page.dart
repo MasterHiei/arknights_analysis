@@ -23,7 +23,7 @@ class AkLoginPage extends ConsumerStatefulWidget {
   const AkLoginPage({super.key});
 
   @override
-  ConsumerState<AkLoginPage> createState() => _AkLoginPageState();
+  _AkLoginPageState createState() => _AkLoginPageState();
 }
 
 class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {

@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 
-import '../../domain/core/value_failure.dart';
+import '../errors/value_failure.dart';
 
 Either<ValueFailure<int>, int> validateTs(int value) {
   final dateTime = DateTime.fromMillisecondsSinceEpoch(value * 1000);

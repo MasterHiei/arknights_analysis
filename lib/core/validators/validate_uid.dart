@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 
-import '../../domain/core/value_failure.dart';
+import '../errors/value_failure.dart';
 
 Either<ValueFailure<String>, String> validateUid(String value) =>
     switch (value.isEmpty) {
