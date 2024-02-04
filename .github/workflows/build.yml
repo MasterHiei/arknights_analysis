@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  flutter_version: 3.16.8
+  flutter_version: 3.16.9
   release_file_name: arknights-analysis
 
 jobs:
