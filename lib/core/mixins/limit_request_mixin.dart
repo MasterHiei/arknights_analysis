@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import '../../../core/constants/constants.dart';
 
 mixin LimitRequestMixin {
-  var _lastRequestDateTime = none<DateTime>();
+  Option<DateTime> _lastRequestDateTime = const None();
   Option<DateTime> get lastRequestDateTime => _lastRequestDateTime;
 
   void limit(

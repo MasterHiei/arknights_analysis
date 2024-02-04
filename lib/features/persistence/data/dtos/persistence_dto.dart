@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
-import '../../diamonds/dtos/diamond_dto.dart';
-import '../../gacha/dtos/gacha_dto.dart';
+import '../../../../core/types/types.dart';
+import '../../../diamond/data/dtos/diamond_dto.dart';
+import '../../../gacha/data/dtos/gacha_dto.dart';
 
 part 'persistence_dto.freezed.dart';
 part 'persistence_dto.g.dart';

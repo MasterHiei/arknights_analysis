@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../core/exceptions/app_failure.dart';
+import '../../core/errors/app_failure.dart';
 import '../../core/providers/connectivity_provider.dart';
 import '../core/mixins/repository_error_handler_mixin.dart';
 import 'data_sources/game_data_api_local_data_source.dart';

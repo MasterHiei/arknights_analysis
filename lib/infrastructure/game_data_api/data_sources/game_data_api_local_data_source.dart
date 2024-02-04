@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/enums/prefs_key.dart';
+import '../../../core/enums/prefs_keys.dart';
 import '../../../core/providers/prefs_provider.dart';
 
 part 'game_data_api_local_data_source.g.dart';

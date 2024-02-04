@@ -39,7 +39,7 @@ class NavigationPaneHeader extends ConsumerWidget {
         (_, next) => next.maybeWhen(
           error: (e, _) {
             final failure = switch (e) {
-              final AppFailure f => f,
+              final AppFailure failure => failure,
               _ => AppFailure.unexpectedError(e),
             };
             AppAlert.show(

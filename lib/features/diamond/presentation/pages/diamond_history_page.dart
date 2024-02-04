@@ -14,7 +14,7 @@ class DiamondHistoryPage extends ConsumerWidget {
     return ref.watch(refreshDiamondHistoryProvider).map(
           init: (_) => _buildProgressBar(),
           fetching: (state) {
-            final total = state.total ?? 0;
+            final total = state.total;
             final value = switch (total) {
               0 => 100.0,
               _ => (state.current / total) * 100,

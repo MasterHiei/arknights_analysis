@@ -4,13 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../application/persistence/persistence_provider.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/enums/gacha_data_management_type.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../infrastructure/core/extensions/date_time_formatter.dart';
 import '../../../../presentation/core/common/widgets/app_flush_bar.dart';
+import '../../../persistence/presentation/providers/persistence_manager_provider.dart';
 import '../../../persistence/presentation/providers/refresh_persistence_data_provider.dart';
 import '../providers/filter_gacha_stats_provider.dart';
 import '../providers/gacha_stats_filter_provider.dart';
@@ -58,7 +58,7 @@ class GachaStatsFilterPanel extends ConsumerWidget {
 
   void _listenPersistenceState(BuildContext context, WidgetRef ref) =>
       ref.listen(
-        persistenceProvider,
+        persistenceManagerProvider,
         (_, next) {
           next.maybeWhen(
             processing: AppLoadingIndicator.show,

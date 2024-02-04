@@ -72,4 +72,14 @@ class UsecaseParams with _$UsecaseParams {
   const factory UsecaseParams.getCachedDiamondHistory(
     Uid uid,
   ) = GetCachedDiamondHistoryParams;
+
+  const factory UsecaseParams.importPersistenceData({
+    required Uid uid,
+    required String path,
+  }) = ImportPersistenceDataParams;
+
+  const factory UsecaseParams.exportPersistenceData({
+    required Uid uid,
+    required String path,
+  }) = ExportPersistenceDataParams;
 }

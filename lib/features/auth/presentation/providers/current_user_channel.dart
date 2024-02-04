@@ -12,7 +12,7 @@ class CurrentUserChannel extends _$CurrentUserChannel {
   @override
   Option<UserChannel> build() {
     _get();
-    return none();
+    return const None();
   }
 
   Future<void> _get() async {
@@ -21,7 +21,7 @@ class CurrentUserChannel extends _$CurrentUserChannel {
         .read(getCachedUserChannelProvider)
         .call(params)
         .match(
-          (_) => none<UserChannel>(),
+          (_) => const None(),
           some,
         )
         .run();

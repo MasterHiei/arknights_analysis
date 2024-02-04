@@ -5,8 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../../../application/gacha/fetch_gacha_provider.dart';
-import '../../../../application/gacha/gacha_pool_selector_provider.dart';
 import '../../../../application/gifts/fetch_exchange_logs_provider.dart';
 import '../../../../application/payments/fetch_payments_provider.dart';
 import '../../../../application/portal/portal_pane_provider.dart';
@@ -19,14 +17,16 @@ import '../../../../generated/locale_keys.g.dart';
 import '../../../../presentation/core/common/widgets/app_dialog.dart';
 import '../../../../presentation/core/common/widgets/app_flush_bar.dart';
 import '../../../../presentation/exchange_history/exchange_history_page.dart';
-import '../../../../presentation/gacha_history/gacha_history_page.dart';
-import '../../../../presentation/gacha_stats/gacha_stats_page.dart';
 import '../../../../presentation/payment_history/payment_history_page.dart';
 import '../../../../presentation/settings/settings_page.dart';
 import '../../../auth/presentation/providers/ak_logout_provider.dart';
 import '../../../auth/presentation/providers/current_user_channel.dart';
 import '../../../diamond/presentation/pages/diamond_history_page.dart';
 import '../../../diamond/presentation/providers/refresh_diamond_history_provider.dart';
+import '../../../gacha/presentation/pages/gacha_history_page.dart';
+import '../../../gacha/presentation/pages/gacha_stats_page.dart';
+import '../../../gacha/presentation/providers/gacha_stats_filter_provider.dart';
+import '../../../gacha/presentation/providers/refresh_gacha_history_provider.dart';
 import '../widgets/index.dart';
 
 final _hasNewVersion = Provider.autoDispose(
@@ -164,9 +164,9 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
   }
 
   void _listenGachaStates() {
-    ref.listen(gachaPoolSelectorProvider, (_, __) {});
+    ref.listen(gachaStatsFilterProvider, (_, __) {});
     ref.listen(
-      fetchGachaProvider,
+      refreshGachaHistoryProvider,
       (_, next) => next.maybeWhen<void>(
         success: () => AppFlushBar.show(
           context,
