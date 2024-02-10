@@ -2,13 +2,15 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../core/exceptions/app_failure.dart';
-import '../../core/providers/connectivity_provider.dart';
-import '../../domain/settings/latest_release.dart';
-import '../core/mixins/repository_error_handler_mixin.dart';
-import 'data_sources/settings_remote_data_source.dart';
+import '../../../../core/errors/app_failure.dart';
+import '../../../../core/mixins/repository_error_handler_mixin.dart';
+import '../../../../core/providers/connectivity_provider.dart';
+import '../../../../core/usecase/params/usecase_params.dart';
+import '../../domain/entities/latest_release.dart';
+import '../../domain/repositories/settings_repository.dart';
+import '../data_sources/settings_remote_data_source.dart';
 
-part 'settings_repository.g.dart';
+part 'settings_repository_impl.g.dart';
 
 @riverpod
 SettingsRepository settingsRepository(SettingsRepositoryRef ref) =>
@@ -16,10 +18,6 @@ SettingsRepository settingsRepository(SettingsRepositoryRef ref) =>
       ref.watch(connectivityProvider),
       ref.watch(settingsRemoteDataSourceProvider),
     );
-
-abstract class SettingsRepository {
-  TaskEither<AppFailure, LatestRelease> fetchLatestRelease();
-}
 
 class SettingsRepositoryImpl
     with RepositoryErrorHandlerMixin
@@ -33,7 +31,8 @@ class SettingsRepositoryImpl
   final SettingsRemoteDataSource _remoteDataSource;
 
   @override
-  TaskEither<AppFailure, LatestRelease> fetchLatestRelease() => executeAsync(
+  TaskEither<AppFailure, LatestRelease> fetchLatestRelease(NoParams params) =>
+      asyncHandler(
         () async {
           final response = await _remoteDataSource.fetchLatestRelease();
           return response.toDomain();

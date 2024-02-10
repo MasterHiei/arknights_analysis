@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../application/settings/check_for_updates_provider.dart';
-import '../../../application/settings/download_new_version_provider.dart';
-import '../../../core/constants/constants.dart';
-import '../../../core/routing/routes.dart';
-import '../../../generated/locale_keys.g.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../providers/check_for_updates_provider.dart';
+import '../providers/download_new_version_provider.dart';
 import 'settings_action_button.dart';
 import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';

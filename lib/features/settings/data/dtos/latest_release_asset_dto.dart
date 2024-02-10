@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
-import '../../../domain/settings/latest_release_asset.dart';
+import '../../../../core/types/types.dart';
+import '../../domain/entities/latest_release_asset.dart';
 
 part 'latest_release_asset_dto.freezed.dart';
 part 'latest_release_asset_dto.g.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/errors/app_failure.dart';
-import '../../../../presentation/core/common/widgets/app_alert.dart';
+import '../../../../core/widgets/app_alert.dart';
 import '../../../auth/presentation/providers/get_current_user_provider.dart';
 
 class NavigationPaneHeader extends ConsumerWidget {

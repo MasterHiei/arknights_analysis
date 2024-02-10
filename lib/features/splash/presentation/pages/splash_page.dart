@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../../../core/routing/routes.dart';
+import '../../../../core/widgets/app_dialog.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../presentation/core/common/widgets/app_dialog.dart';
 import '../providers/splash_provider.dart';
 import '../widgets/index.dart';
 

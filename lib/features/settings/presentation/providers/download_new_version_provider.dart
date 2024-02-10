@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../core/errors/app_failure.dart';
-import '../../core/providers/dio_provider.dart';
-import '../../core/providers/file_picker_provider.dart';
+import '../../../../core/errors/app_failure.dart';
+import '../../../../core/providers/dio_provider.dart';
+import '../../../../core/providers/file_picker_provider.dart';
 import 'states/download_new_version_state.dart';
 
 part 'download_new_version_provider.g.dart';
@@ -29,6 +29,7 @@ class DownloadNewVersion extends _$DownloadNewVersion {
     }
 
     state = const DownloadNewVersionState.preparing();
+
     try {
       await ref.read(dioProvider()).download(
         url,

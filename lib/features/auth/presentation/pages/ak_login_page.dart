@@ -11,11 +11,11 @@ import 'package:window_manager/window_manager.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/errors/app_failure.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/widgets/app_alert.dart';
+import '../../../../core/widgets/app_dialog.dart';
 import '../../../../core/widgets/app_error_view.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../presentation/core/common/widgets/app_alert.dart';
-import '../../../../presentation/core/common/widgets/app_dialog.dart';
 import '../providers/ak_login_provider.dart';
 import '../providers/refresh_user_provider.dart';
 

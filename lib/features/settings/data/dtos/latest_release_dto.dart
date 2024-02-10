@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
-import '../../../domain/settings/latest_release.dart';
+import '../../../../core/types/types.dart';
+import '../../domain/entities/latest_release.dart';
 import 'latest_release_asset_dto.dart';
 
 part 'latest_release_dto.freezed.dart';
@@ -19,7 +19,7 @@ class LatestReleaseDto with _$LatestReleaseDto {
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'published_at') required DateTime publishedAt,
     @JsonKey(defaultValue: <LatestReleaseAssetDto>[])
-        required List<LatestReleaseAssetDto> assets,
+    required List<LatestReleaseAssetDto> assets,
   }) = _LatestReleaseDto;
 
   factory LatestReleaseDto.fromJson(Json json) =>

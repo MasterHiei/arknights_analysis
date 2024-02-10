@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/errors/app_failure.dart';
-import '../../../domain/settings/latest_release.dart';
+import '../../../../../core/errors/app_failure.dart';
+import '../../../domain/entities/latest_release.dart';
 
 part 'check_for_updates_state.freezed.dart';
 

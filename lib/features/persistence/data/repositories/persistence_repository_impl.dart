@@ -4,8 +4,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/errors/app_failure.dart';
+import '../../../../core/mixins/repository_error_handler_mixin.dart';
 import '../../../../core/usecase/params/usecase_params.dart';
-import '../../../../infrastructure/core/mixins/repository_error_handler_mixin.dart';
 import '../../domain/repositories/persistence_repository.dart';
 import '../data_sources/persistence_local_data_source.dart';
 
@@ -24,7 +24,7 @@ class PersistenceRepositoryImpl
 
   @override
   TaskEither<AppFailure, Unit> import(ImportPersistenceDataParams params) =>
-      executeAsync(
+      asyncHandler(
         () async {
           await _localDataSource.import(
             params.uid,
@@ -36,7 +36,7 @@ class PersistenceRepositoryImpl
 
   @override
   TaskEither<AppFailure, File> export(ExportPersistenceDataParams params) =>
-      executeAsync(
+      asyncHandler(
         () => _localDataSource.export(
           params.uid,
           path: params.path,

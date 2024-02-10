@@ -3,9 +3,9 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/enums/i18n.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../../core/common/widgets/app_flush_bar.dart';
+import '../../../../core/enums/i18n.dart';
+import '../../../../core/widgets/app_flush_bar.dart';
+import '../../../../generated/locale_keys.g.dart';
 import 'settings_section_item_view.dart';
 import 'settings_section_view.dart';
 

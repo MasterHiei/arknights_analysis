@@ -3,10 +3,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../application/settings/check_for_updates_provider.dart';
-import '../../generated/locale_keys.g.dart';
-import '../core/common/widgets/app_flush_bar.dart';
-import 'widgets/index.dart';
+import '../../../../core/widgets/app_flush_bar.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../providers/check_for_updates_provider.dart';
+import '../widgets/index.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});

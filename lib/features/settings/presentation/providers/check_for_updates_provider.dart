@@ -2,16 +2,15 @@ import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:time/time.dart';
 
-import '../../core/providers/package_info_provider.dart';
-import '../../infrastructure/settings/settings_repository.dart';
+import '../../../../core/providers/package_info_provider.dart';
+import '../../../../core/usecase/params/usecase_params.dart';
+import '../../domain/usecases/fetch_latest_release.dart';
 import 'states/check_for_updates_state.dart';
 
 part 'check_for_updates_provider.g.dart';
 
 @riverpod
 class CheckForUpdates extends _$CheckForUpdates {
-  SettingsRepository get _repository => ref.read(settingsRepositoryProvider);
-
   @override
   CheckForUpdatesState build() {
     2.seconds.delay.then((_) => checkForUpdates());
@@ -25,16 +24,20 @@ class CheckForUpdates extends _$CheckForUpdates {
       currentVersion: 'v${ref.read(packageInfoProvider).version}',
       failureOrLatestReleaseOption: const None(),
     );
-    final task = _repository.fetchLatestRelease();
-    state = (await task.run()).match(
-      (failure) => state.copyWith(
-        isChecking: false,
-        failureOrLatestReleaseOption: some(left(failure)),
-      ),
-      (latest) => state.copyWith(
-        isChecking: false,
-        failureOrLatestReleaseOption: some(right(latest)),
-      ),
-    );
+
+    state = await ref
+        .read(fetchLatestReleaseProvider)
+        .call(const NoParams())
+        .match(
+          (failure) => state.copyWith(
+            isChecking: false,
+            failureOrLatestReleaseOption: some(left(failure)),
+          ),
+          (latest) => state.copyWith(
+            isChecking: false,
+            failureOrLatestReleaseOption: some(right(latest)),
+          ),
+        )
+        .run();
   }
 }
