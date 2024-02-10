@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
-import '../../../domain/core/common/value_objects/ts.dart';
-import '../../../domain/gifts/exchange_log.dart';
-import '../../../domain/user/value_objects/uid.dart';
+import '../../../../core/common/value_objects/ts.dart';
+import '../../../../core/common/value_objects/uid.dart';
+import '../../../../core/types/types.dart';
+import '../../domain/entities/exchange_log.dart';
 
 part 'exchange_log_dto.freezed.dart';
 part 'exchange_log_dto.g.dart';

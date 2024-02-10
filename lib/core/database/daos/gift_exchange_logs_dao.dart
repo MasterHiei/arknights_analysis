@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-import '../../../infrastructure/gifts/dtos/exchange_log_dto.dart';
+import '../../../features/gift/data/dtos/exchange_log_dto.dart';
 import '../app_database.dart';
 import '../tables/gift_exchange_logs.dart';
 

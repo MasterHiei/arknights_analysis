@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../core/common/value_objects/ts.dart';
-import '../../core/common/value_objects/uid.dart';
+import '../../../../core/common/value_objects/ts.dart';
+import '../../../../core/common/value_objects/uid.dart';
 
 part 'exchange_log.freezed.dart';
 

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers/dio_provider.dart';
+import '../../../../core/providers/dio_provider.dart';
 import '../dtos/exchange_log_response_dto.dart';
 
 part 'gift_remote_data_source.g.dart';

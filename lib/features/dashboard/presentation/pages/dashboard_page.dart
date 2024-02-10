@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../../../application/gifts/fetch_exchange_logs_provider.dart';
 import '../../../../application/payments/fetch_payments_provider.dart';
 import '../../../../core/errors/app_failure.dart';
 import '../../../../core/routing/router.dart';
@@ -23,6 +22,7 @@ import '../../../gacha/presentation/pages/gacha_history_page.dart';
 import '../../../gacha/presentation/pages/gacha_stats_page.dart';
 import '../../../gacha/presentation/providers/gacha_stats_filter_provider.dart';
 import '../../../gacha/presentation/providers/refresh_gacha_history_provider.dart';
+import '../../../gift/presentation/providers/refresh_gift_history_provider.dart';
 import '../../../settings/presentation/pages/settings_page.dart';
 import '../../../settings/presentation/providers/check_for_updates_provider.dart';
 import '../../../settings/presentation/providers/download_new_version_provider.dart';
@@ -212,7 +212,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
       );
 
   void _listenGiftsState() => ref.listen(
-        fetchExchangeLogsProvider,
+        refreshGiftHistoryProvider,
         (_, next) => next.maybeWhen<void>(
           error: (failure, _) async {
             if (failure is AppFailure) {

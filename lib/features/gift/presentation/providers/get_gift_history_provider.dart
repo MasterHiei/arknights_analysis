@@ -3,15 +3,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/usecase/params/usecase_params.dart';
 import '../../../auth/domain/usecases/get_cached_user.dart';
-import '../../domain/entities/diamond_change.dart';
-import '../../domain/usecases/get_cached_diamond_history.dart';
+import '../../domain/entities/exchange_log.dart';
+import '../../domain/usecases/get_cached_gift_history.dart';
 
-part 'get_diamond_history_provider.g.dart';
+part 'get_gift_history_provider.g.dart';
 
 @riverpod
-class GetDiamondHistory extends _$GetDiamondHistory {
+class GetGiftHistory extends _$GetGiftHistory {
   @override
-  AsyncValue<List<DiamondChange>> build() {
+  AsyncValue<List<ExchangeLog>> build() {
     _get();
     return const AsyncValue.loading();
   }
@@ -21,12 +21,12 @@ class GetDiamondHistory extends _$GetDiamondHistory {
     final getHistoryTask = ref
         .read(getCachedUserProvider)
         .call(noParams)
-        .map((user) => GetCachedDiamondHistoryParams(uid: user.uid))
-        .map(ref.read(getCachedDiamondHistoryProvider).call);
+        .map((user) => GetCachedGiftHistoryParams(uid: user.uid))
+        .map(ref.read(getCachedGiftHistoryProvider).call);
 
     state = await TaskEither.flatten(getHistoryTask)
         .match(
-          (failure) => failure.toAsyncError<List<DiamondChange>>(),
+          (failure) => failure.toAsyncError<List<ExchangeLog>>(),
           AsyncValue.data,
         )
         .run();

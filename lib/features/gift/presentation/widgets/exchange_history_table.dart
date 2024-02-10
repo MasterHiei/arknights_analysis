@@ -5,12 +5,12 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/gifts/fetch_exchange_history_provider.dart';
-import '../../../core/constants/constants.dart';
-import '../../../domain/gifts/exchange_log.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../../../infrastructure/core/extensions/date_time_formatter.dart';
-import '../../core/common/widgets/app_empty_view.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/extensions/date_time_formatter.dart';
+import '../../../../core/widgets/app_empty_view.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../../domain/entities/exchange_log.dart';
+import '../providers/get_gift_history_provider.dart';
 
 class ExchangeHistoryTable extends StatelessWidget {
   const ExchangeHistoryTable({super.key});
@@ -57,7 +57,7 @@ class ExchangeHistoryTable extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(fetchExchangeHistoryProvider).when(
+        return ref.watch(getGiftHistoryProvider).when(
               data: (logs) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),

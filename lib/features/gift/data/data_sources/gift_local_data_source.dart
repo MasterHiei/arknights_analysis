@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/providers/database_provider.dart';
-import '../../../domain/user/value_objects/uid.dart';
-import '../../core/database/app_database.dart';
+import '../../../../core/common/value_objects/uid.dart';
+import '../../../../core/database/app_database.dart';
+import '../../../../core/providers/database_provider.dart';
 import '../dtos/exchange_log_dto.dart';
 
 part 'gift_local_data_source.g.dart';

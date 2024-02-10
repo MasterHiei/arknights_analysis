@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
+import '../../../../core/types/types.dart';
 import 'exchange_log_dto.dart';
 
 part 'exchange_log_response_dto.freezed.dart';

@@ -69,9 +69,19 @@ class UsecaseParams with _$UsecaseParams {
     required UserChannel channel,
   }) = FetchDiamondHistoryParams;
 
-  const factory UsecaseParams.getCachedDiamondHistory(
-    Uid uid,
-  ) = GetCachedDiamondHistoryParams;
+  const factory UsecaseParams.getCachedDiamondHistory({
+    required Uid uid,
+  }) = GetCachedDiamondHistoryParams;
+
+  const factory UsecaseParams.fetchGiftHistory({
+    required Uid uid,
+    required Token token,
+    required UserChannel channel,
+  }) = FetchGiftHistoryParams;
+
+  const factory UsecaseParams.getCachedGiftHistory({
+    required Uid uid,
+  }) = GetCachedGiftHistoryParams;
 
   const factory UsecaseParams.importPersistenceData({
     required Uid uid,
