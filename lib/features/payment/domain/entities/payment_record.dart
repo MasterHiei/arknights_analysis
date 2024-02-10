@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../core/enums/platform.dart';
-import '../core/common/value_objects/ts.dart';
-import '../user/value_objects/uid.dart';
+import '../../../../core/common/value_objects/ts.dart';
+import '../../../../core/common/value_objects/uid.dart';
+import '../../../../core/enums/platform.dart';
 
 part 'payment_record.freezed.dart';
 

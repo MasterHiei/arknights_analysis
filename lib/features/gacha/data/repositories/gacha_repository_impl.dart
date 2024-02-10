@@ -82,7 +82,7 @@ class GachaRepositoryImpl
   ) =>
       asyncHandler(
         () async {
-          final dto = await _localDataSource.getPoolByName(params.name);
+          final dto = await _localDataSource.getPoolByName(params.poolName);
           return switch (dto) {
             null => throw const AppFailure.emptyLocalData(),
             _ => dto.toDomain(),

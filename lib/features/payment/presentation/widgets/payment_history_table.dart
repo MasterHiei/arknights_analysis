@@ -5,12 +5,12 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../application/payments/fetch_payment_history_provider.dart';
-import '../../../core/constants/constants.dart';
-import '../../../domain/payments/payment_record.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../../../infrastructure/core/extensions/date_time_formatter.dart';
-import '../../core/common/widgets/app_empty_view.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/extensions/date_time_formatter.dart';
+import '../../../../core/widgets/app_empty_view.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../../domain/entities/payment_record.dart';
+import '../providers/get_payment_history_provider.dart';
 
 class PaymentHistoryTable extends StatelessWidget {
   const PaymentHistoryTable({super.key});
@@ -57,7 +57,7 @@ class PaymentHistoryTable extends StatelessWidget {
         );
     return Consumer(
       builder: (_, ref, __) {
-        return ref.watch(fetchPaymentHistoryProvider).when(
+        return ref.watch(getPaymentHistoryProvider).when(
               data: (records) => PaginatedDataTable2(
                 columns: [
                   const DataColumn2(label: SizedBox(), size: ColumnSize.S),

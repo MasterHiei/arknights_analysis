@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../core/common/pagination.dart';
+import '../../../../core/common/pagination.dart';
 import 'payment_record.dart';
 
 part 'payment.freezed.dart';

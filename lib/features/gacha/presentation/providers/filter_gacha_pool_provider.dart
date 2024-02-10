@@ -9,9 +9,9 @@ part 'filter_gacha_pool_provider.g.dart';
 @riverpod
 Future<GachaPool> filterGachaPool(
   FilterGachaPoolRef ref, {
-  required String name,
+  required String poolName,
 }) async {
-  final params = GetGachaPoolParams(name: name);
+  final params = GetGachaPoolParams(poolName: poolName);
   return ref
       .read(getGachaPoolProvider)
       .call(params)

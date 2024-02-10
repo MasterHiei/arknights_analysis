@@ -101,33 +101,34 @@ class _StatsView extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Consumer(
-            builder: (_, ref, __) =>
-                ref.watch(filterGachaPoolProvider(name: poolName)).maybeWhen(
-                      data: (pool) => Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            pool.name,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 2.w),
-                            child: Text(
-                              '※${pool.ruleType.label}',
-                              style: TextStyle(
-                                color: Colors.purple.lightest,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      orElse: () => Text(
-                        poolName,
+            builder: (_, ref, __) => ref
+                .watch(filterGachaPoolProvider(poolName: poolName))
+                .maybeWhen(
+                  data: (pool) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        pool.name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 2.w),
+                        child: Text(
+                          '※${pool.ruleType.label}',
+                          style: TextStyle(
+                            color: Colors.purple.lightest,
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  orElse: () => Text(
+                    poolName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
           ),
           SizedBox(height: 2.h),
           Row(

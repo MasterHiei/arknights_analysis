@@ -51,7 +51,7 @@ class UsecaseParams with _$UsecaseParams {
   }) = GetRecordedGachaPoolsParams;
 
   const factory UsecaseParams.getGachaPool({
-    required String name,
+    required String poolName,
   }) = GetGachaPoolParams;
 
   const factory UsecaseParams.getGachaStats({
@@ -61,6 +61,15 @@ class UsecaseParams with _$UsecaseParams {
     @Default([]) List<GachaRuleType> includeRuleTypes,
     @Default([]) List<GachaRuleType> excludeRuleTypes,
   }) = GetGachaStatsParams;
+
+  const factory UsecaseParams.fetchPaymentHistory({
+    required Uid uid,
+    required Token token,
+  }) = FetchPaymentHistoryParams;
+
+  const factory UsecaseParams.getCachedPaymentHistory({
+    required Uid uid,
+  }) = GetCachedPaymentHistoryParams;
 
   const factory UsecaseParams.fetchDiamondHistory({
     required Uid uid,

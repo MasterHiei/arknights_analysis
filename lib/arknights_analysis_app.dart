@@ -4,10 +4,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../core/constants/constants.dart';
-import '../core/enums/i18n.dart';
-import '../core/routing/router.dart';
-import '../core/theme/app_theme.dart';
+import 'core/constants/constants.dart';
+import 'core/enums/i18n.dart';
+import 'core/routing/router.dart';
+import 'core/theme/app_theme.dart';
 
 class ArknightsAnalysisApp extends StatelessWidget {
   const ArknightsAnalysisApp({super.key});

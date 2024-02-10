@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/types/types.dart';
+import '../../../../core/types/types.dart';
 import 'payment_record_dto.dart';
 
 part 'payment_response_dto.freezed.dart';

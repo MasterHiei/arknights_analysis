@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-import '../../../infrastructure/payments/dtos/payment_record_dto.dart';
+import '../../../features/payment/data/dtos/payment_record_dto.dart';
 import '../app_database.dart';
 import '../tables/payment_records.dart';
 
@@ -22,7 +22,7 @@ class PaymentRecordsDao extends DatabaseAccessor<AppDatabase>
         .toList();
   }
 
-  Future<List<int>> replaceInto(Iterable<PaymentRecordDto> records) async {
+  Future<List<int>> replaceInto(List<PaymentRecordDto> records) async {
     final futures = records.map((record) {
       final entity = PaymentRecord.fromJson(record.toJson());
       return into(paymentRecords).insertOnConflictUpdate(entity);
