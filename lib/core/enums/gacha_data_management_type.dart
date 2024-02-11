@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../application/persistence/persistence_provider.dart';
-import '../../presentation/core/routing/router.dart';
+import '../../features/persistence/presentation/providers/persistence_manager_provider.dart';
+import '../routing/router.dart';
 
 enum GachaDataManagementType {
   import,
@@ -21,11 +21,11 @@ enum GachaDataManagementType {
     switch (this) {
       case GachaDataManagementType.import:
         router.pop();
-        ref.read(persistenceProvider.notifier).import();
+        ref.read(persistenceManagerProvider.notifier).import();
 
       case GachaDataManagementType.export:
         router.pop();
-        ref.read(persistenceProvider.notifier).export();
+        ref.read(persistenceManagerProvider.notifier).export();
     }
   }
 }
