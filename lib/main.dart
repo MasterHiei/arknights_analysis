@@ -8,10 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'arknights_analysis_app.dart';
 import 'core/constants/constants.dart';
 import 'core/gen/assets.gen.dart';
 import 'core/providers/eager_initialization.dart';
-import 'presentation/arknights_analysis_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

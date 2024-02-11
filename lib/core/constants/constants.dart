@@ -4,11 +4,12 @@ class Constants {
   const Constants._();
 
   //* System Settings
+
   static const appName = 'Arknights Analysis';
 
   static const dbName = 'arknights_analysis.db';
 
-  static const dbVersion = 4;
+  static const dbVersion = 5;
 
   static const defaultWindowSize = Size(1920, 1080);
 
@@ -25,6 +26,7 @@ class Constants {
   static const persistenceFileName = 'arknights_analysis_data.json';
 
   //* URLs
+
   static const projectUrl = 'https://github.com/MasterHiei/arknights_analysis';
 
   static const licenseUrl =

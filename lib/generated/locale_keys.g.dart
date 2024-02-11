@@ -12,6 +12,7 @@ abstract class  LocaleKeys {
   static const dialog_title = 'dialog.title';
   static const dialog_confirm = 'dialog.confirm';
   static const dialog_cancel = 'dialog.cancel';
+  static const dialog_retry = 'dialog.retry';
   static const dialog = 'dialog';
   static const app_close_dialog_content = 'app.close.dialog.content';
   static const app_close_dialog_confirm = 'app.close.dialog.confirm';
@@ -36,6 +37,13 @@ abstract class  LocaleKeys {
   static const app_logout_dialog = 'app.logout.dialog';
   static const app_logout = 'app.logout';
   static const app = 'app';
+  static const features_user_retryAlert_title = 'features.user.retryAlert.title';
+  static const features_user_retryAlert = 'features.user.retryAlert';
+  static const features_user = 'features.user';
+  static const features_gameData_retryAlert_title = 'features.gameData.retryAlert.title';
+  static const features_gameData_retryAlert_content = 'features.gameData.retryAlert.content';
+  static const features_gameData_retryAlert = 'features.gameData.retryAlert';
+  static const features_gameData = 'features.gameData';
   static const features_gachaStats_title = 'features.gachaStats.title';
   static const features_gachaStats_updated = 'features.gachaStats.updated';
   static const features_gachaStats_updateTooFrequently = 'features.gachaStats.updateTooFrequently';

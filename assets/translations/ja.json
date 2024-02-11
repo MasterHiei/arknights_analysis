@@ -11,7 +11,8 @@
   "dialog": {
     "title": "確認",
     "confirm": "はい",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "retry": "リトライ"
   },
   "app": {
     "close": {
@@ -44,6 +45,17 @@
     }
   },
   "features": {
+    "user": {
+      "retryAlert": {
+        "title": "ユーザー情報の取得に失敗"
+      }
+    },
+    "gameData": {
+      "retryAlert": {
+        "title": "ダウンロードエラー",
+        "content": "ゲームデータのダウンロードに失敗しました。\nネットワークの状態を確認して再度お試しください。"
+      }
+    },
     "gachaStats": {
       "title": "ガチャ統計",
       "updated": "データが更新されました。",
