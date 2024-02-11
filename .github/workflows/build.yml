@@ -18,7 +18,7 @@ jobs:
   analyze-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install flutter
         uses: subosito/flutter-action@v2
@@ -30,7 +30,7 @@ jobs:
 
       - name: Cache pubspec
         id: cache-pubspec
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.FLUTTER_HOME }}/.pub-cache
@@ -46,7 +46,7 @@ jobs:
 
       - name: Cache build_runner
         id: cache-build-runner
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             **/.dart_tool/build
@@ -77,7 +77,7 @@ jobs:
     needs: analyze-and-test
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install flutter
         uses: subosito/flutter-action@v2
@@ -89,7 +89,7 @@ jobs:
 
       - name: Cache pubspec
         id: cache-pubspec
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.FLUTTER_HOME }}/.pub-cache
@@ -105,7 +105,7 @@ jobs:
 
       - name: Cache build_runner
         id: cache-build-runner
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             **/.dart_tool/build
