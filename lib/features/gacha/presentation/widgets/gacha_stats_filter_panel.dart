@@ -10,8 +10,9 @@ import '../../../../core/extensions/date_time_formatter.dart';
 import '../../../../core/widgets/app_flush_bar.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../persistence/presentation/providers/last_player_data_update_date_time.dart';
 import '../../../persistence/presentation/providers/persistence_manager_provider.dart';
-import '../../../persistence/presentation/providers/refresh_persistence_data_provider.dart';
+import '../../../persistence/presentation/providers/refresh_player_data_provider.dart';
 import '../providers/filter_gacha_stats_provider.dart';
 import '../providers/gacha_stats_filter_provider.dart';
 
@@ -34,21 +35,18 @@ class GachaStatsFilterPanel extends ConsumerWidget {
   Widget _buildRefreshButton(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        final tipMessage = ref
-            .read(refreshPersistenceDataProvider.notifier)
-            .lastRequestDateTime
-            .match(
-              () => '',
-              (dateTime) => '上次更新于: ${dateTime.yMMMdHmsString}',
-            );
+        final tipMessage =
+            ref.watch(lastPlayerDataUpdateDateTimeProvider).match(
+                  () => '',
+                  (dateTime) => '上次更新于: ${dateTime.yMMMdHmsString}',
+                );
         return Tooltip(
           message: tipMessage,
           useMousePosition: false,
           child: FilledButton(
-            onPressed: () =>
-                ref.read(refreshPersistenceDataProvider.notifier).call(
-                      onFailure: () => _showUpdateTooFrequentlyNotice(context),
-                    ),
+            onPressed: () => ref.read(refreshPlayerDataProvider.notifier).call(
+                  onFailure: () => _showUpdateTooFrequentlyNotice(context),
+                ),
             child: Text('更新数据', style: TextStyle(fontSize: 16.sp)),
           ),
         );
@@ -56,37 +54,39 @@ class GachaStatsFilterPanel extends ConsumerWidget {
     );
   }
 
-  void _listenPersistenceState(BuildContext context, WidgetRef ref) =>
-      ref.listen(
-        persistenceManagerProvider,
-        (_, next) {
-          next.maybeWhen(
-            processing: AppLoadingIndicator.show,
-            orElse: AppLoadingIndicator.dismiss,
+  void _listenPersistenceState(BuildContext context, WidgetRef ref) {
+    ref.listen(refreshPlayerDataProvider, (_, __) {});
+    ref.listen(
+      persistenceManagerProvider,
+      (_, next) {
+        next.maybeWhen(
+          processing: AppLoadingIndicator.show,
+          orElse: AppLoadingIndicator.dismiss,
+        );
+        final message = next.maybeMap(
+          importSuccess: (_) {
+            ref.invalidate(gachaStatsFilterProvider);
+            ref.invalidate(filterGachaStatsProvider());
+            return '导入成功。';
+          },
+          importFailure: (state) => state.failure.localizedMessage,
+          exportSuccess: (state) {
+            launchUrl(state.file.absolute.parent.uri);
+            return '导出成功。';
+          },
+          exportFailure: (state) => state.failure.localizedMessage,
+          orElse: () {},
+        );
+        if (message != null) {
+          AppFlushBar.show(
+            context,
+            message: message,
+            severity: FlushBarSeverity.success,
           );
-          final message = next.maybeMap(
-            importSuccess: (_) {
-              ref.invalidate(gachaStatsFilterProvider);
-              ref.invalidate(filterGachaStatsProvider());
-              return '导入成功。';
-            },
-            importFailure: (state) => state.failure.localizedMessage,
-            exportSuccess: (state) {
-              launchUrl(state.file.absolute.parent.uri);
-              return '导出成功。';
-            },
-            exportFailure: (state) => state.failure.localizedMessage,
-            orElse: () {},
-          );
-          if (message != null) {
-            AppFlushBar.show(
-              context,
-              message: message,
-              severity: FlushBarSeverity.success,
-            );
-          }
-        },
-      );
+        }
+      },
+    );
+  }
 
   void _showUpdateTooFrequentlyNotice(BuildContext context) => AppFlushBar.show(
         context,

@@ -1,5 +1,5 @@
 enum PrefsKeys {
   userChannel,
   token,
-  lastGachaTableUpdateDateTime;
+  lastPlayerDataUpdateDateTime;
 }
