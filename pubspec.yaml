@@ -19,7 +19,7 @@ dependencies:
   data_table_2: 2.5.10
   dio: 5.4.0
   drift: 2.15.0
-  easy_localization: 3.0.3
+  easy_localization: 3.0.4
   ffi: 2.1.0
   file_picker: 6.1.1
   fluent_ui: 4.8.6
