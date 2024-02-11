@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 import '../../../../core/routing/params/route_params.dart';
@@ -38,6 +39,15 @@ class _WebviewPageState extends ConsumerState<WebviewPage> {
         final children = switch (snapshot.hasData) {
           true => [
               Positioned.fill(child: Webview(_controller)),
+            ],
+          false => const [
+              Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
+            ],
+        };
+        return NavigationView(
+          content: Stack(
+            children: [
+              ...children,
               if (widget.params.useNavigationBar)
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -47,21 +57,19 @@ class _WebviewPageState extends ConsumerState<WebviewPage> {
                   ),
                 ),
             ],
-          false => const [
-              Positioned(left: 0, top: 0, right: 0, child: ProgressBar()),
-            ],
-        };
-        return NavigationView(content: Stack(children: children));
+          ),
+        );
       },
     );
   }
 
-  Future<void> _initWebview() async {
+  Future<Unit> _initWebview() async {
     await _controller.initialize();
     await Future.wait([
       _controller.setBackgroundColor(Colors.transparent),
       _controller.setPopupWindowPolicy(WebviewPopupWindowPolicy.deny),
     ]);
     await _controller.loadUrl(widget.params.initialUrl);
+    return unit;
   }
 }

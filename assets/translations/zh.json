@@ -25,7 +25,7 @@
       "check": "检查更新",
       "isNewest": "您的软件是最新版本。",
       "begin": "开始下载新版本。",
-      "prepare": "准备开始下载...",
+      "preparing": "准备开始下载...",
       "done": "新版本下载完成。",
       "dialog": {
         "title": "更新",

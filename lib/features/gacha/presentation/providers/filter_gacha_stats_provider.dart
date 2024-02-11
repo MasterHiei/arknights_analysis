@@ -55,7 +55,7 @@ class FilterGachaStats extends _$FilterGachaStats {
         .call(noParams)
         .map((user) => createParams(user, pool))
         .map(ref.read(getGachaStatsProvider).call);
-    await TaskEither.flatten(getStatsTask)
+    state = await TaskEither.flatten(getStatsTask)
         .match(
           (failure) => failure.toAsyncError<GachaStats>(),
           AsyncValue.data,

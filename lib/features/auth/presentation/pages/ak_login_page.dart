@@ -5,11 +5,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/errors/app_failure.dart';
+import '../../../../core/routing/router.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/widgets/app_alert.dart';
 import '../../../../core/widgets/app_dialog.dart';
@@ -76,7 +78,7 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
     );
   }
 
-  Future<void> _initWebview() async {
+  Future<Unit> _initWebview() async {
     await _controller.initialize();
     await Future.wait([
       _controller.setBackgroundColor(Colors.transparent),
@@ -94,7 +96,8 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
     ]);
 
     // Load URL
-    _controller.loadUrl(Constants.akLoginPage);
+    await _controller.loadUrl(Constants.akLoginPage);
+    return unit;
   }
 
   void _listenState() => ref.listen(
@@ -139,7 +142,10 @@ class _AkLoginPageState extends ConsumerState<AkLoginPage> with WindowListener {
                 LocaleKeys.features_user_retryAlert_title,
               ).tr(),
               content: Text(failure.localizedMessage),
-              onRetry: ref.read(refreshUserProvider.notifier).call,
+              onRetry: () {
+                ref.read(refreshUserProvider.notifier).call();
+                router.pop();
+              },
               onCancel: windowManager.destroy,
             );
           },

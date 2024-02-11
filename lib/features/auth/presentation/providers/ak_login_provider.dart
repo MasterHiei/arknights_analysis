@@ -25,7 +25,7 @@ class AkLogin extends _$AkLogin {
       state = const AkLoginState.loggingIn();
       await controller.loadUrl(Constants.asGetTokenOfficial);
       const params = CacheUserChannelParams(channel: UserChannel.official);
-      ref.read(cacheUserChannelProvider).call(params);
+      await ref.read(cacheUserChannelProvider).call(params).run();
     }
 
     // For bilibili account
@@ -38,7 +38,7 @@ class AkLogin extends _$AkLogin {
       await 1.seconds.delay;
       await controller.loadUrl(Constants.asGetTokenBilibili);
       const params = CacheUserChannelParams(channel: UserChannel.bilibili);
-      ref.read(cacheUserChannelProvider).call(params);
+      await ref.read(cacheUserChannelProvider).call(params).run();
     }
 
     // Post token after login

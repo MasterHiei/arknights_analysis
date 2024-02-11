@@ -13,7 +13,7 @@ part 'refresh_gacha_history_provider.g.dart';
 @riverpod
 class RefreshGachaHistory extends _$RefreshGachaHistory {
   @override
-  RefreshGachaHistoryState build() => const RefreshGachaHistoryState.init();
+  RefreshGachaHistoryState build() => const RefreshGachaHistoryState.success();
 
   Future<void> call({
     int page = 1,

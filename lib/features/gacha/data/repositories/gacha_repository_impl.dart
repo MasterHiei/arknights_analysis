@@ -77,15 +77,15 @@ class GachaRepositoryImpl
       );
 
   @override
-  TaskEither<AppFailure, GachaPool> getPool(
+  TaskEither<AppFailure, Option<GachaPool>> getPool(
     GetGachaPoolParams params,
   ) =>
       asyncHandler(
         () async {
           final dto = await _localDataSource.getPoolByName(params.poolName);
           return switch (dto) {
-            null => throw const AppFailure.emptyLocalData(),
-            _ => dto.toDomain(),
+            null => const None(),
+            _ => some(dto.toDomain()),
           };
         },
       );

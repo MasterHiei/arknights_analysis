@@ -15,13 +15,14 @@ GetGachaPool getGachaPool(GetGachaPoolRef ref) => GetGachaPool(
       ref.watch(gachaRepositoryProvider),
     );
 
-final class GetGachaPool implements TaskUseCase<GachaPool, GetGachaPoolParams> {
+final class GetGachaPool
+    implements TaskUseCase<Option<GachaPool>, GetGachaPoolParams> {
   const GetGachaPool(this.gachaRepository);
 
   final GachaRepository gachaRepository;
 
   @override
-  TaskEither<AppFailure, GachaPool> call(
+  TaskEither<AppFailure, Option<GachaPool>> call(
     GetGachaPoolParams params,
   ) =>
       gachaRepository.getPool(params);

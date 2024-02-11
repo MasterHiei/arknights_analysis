@@ -13,7 +13,7 @@ part 'check_for_updates_provider.g.dart';
 class CheckForUpdates extends _$CheckForUpdates {
   @override
   CheckForUpdatesState build() {
-    2.seconds.delay.then((_) => checkForUpdates());
+    3.seconds.delay.then((_) => checkForUpdates());
     return CheckForUpdatesState.init();
   }
 

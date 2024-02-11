@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide LicensePage;
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/pages/ak_login_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
+import '../../features/license/presentation/pages/license_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/webview/presentation/pages/webview_page.dart';
 import 'params/route_params.dart';

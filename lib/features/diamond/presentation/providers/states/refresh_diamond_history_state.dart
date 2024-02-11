@@ -6,8 +6,6 @@ part 'refresh_diamond_history_state.freezed.dart';
 
 @freezed
 class RefreshDiamondHistoryState with _$RefreshDiamondHistoryState {
-  const factory RefreshDiamondHistoryState.init() = _Init;
-
   const factory RefreshDiamondHistoryState.fetching({
     required int current,
     required int total,

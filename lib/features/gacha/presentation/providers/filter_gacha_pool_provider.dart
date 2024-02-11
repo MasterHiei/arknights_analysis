@@ -1,3 +1,4 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/usecase/params/usecase_params.dart';
@@ -7,7 +8,7 @@ import '../../domain/usecases/get_gacha_pool.dart';
 part 'filter_gacha_pool_provider.g.dart';
 
 @riverpod
-Future<GachaPool> filterGachaPool(
+Future<Option<GachaPool>> filterGachaPool(
   FilterGachaPoolRef ref, {
   required String poolName,
 }) async {

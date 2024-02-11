@@ -13,7 +13,8 @@ part 'refresh_diamond_history_provider.g.dart';
 @riverpod
 class RefreshDiamondHistory extends _$RefreshDiamondHistory {
   @override
-  RefreshDiamondHistoryState build() => const RefreshDiamondHistoryState.init();
+  RefreshDiamondHistoryState build() =>
+      const RefreshDiamondHistoryState.success();
 
   Future<void> call({
     int page = 1,

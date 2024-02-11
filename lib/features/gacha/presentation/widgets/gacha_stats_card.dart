@@ -28,7 +28,6 @@ class GachaStatsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(refreshGachaHistoryProvider).map(
-          init: (_) => _buildProgressBar(),
           fetching: (state) {
             late final double? value;
             final total = state.total;
@@ -104,25 +103,31 @@ class _StatsView extends ConsumerWidget {
             builder: (_, ref, __) => ref
                 .watch(filterGachaPoolProvider(poolName: poolName))
                 .maybeWhen(
-                  data: (pool) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        pool.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 2.w),
-                        child: Text(
-                          '※${pool.ruleType.label}',
-                          style: TextStyle(
-                            color: Colors.purple.lightest,
-                            fontSize: 12.sp,
+                  data: (poolOption) => poolOption.match(
+                    () => Text(
+                      poolName,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    (pool) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          pool.name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 2.w),
+                          child: Text(
+                            '※${pool.ruleType.label}',
+                            style: TextStyle(
+                              color: Colors.purple.lightest,
+                              fontSize: 12.sp,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   orElse: () => Text(
                     poolName,

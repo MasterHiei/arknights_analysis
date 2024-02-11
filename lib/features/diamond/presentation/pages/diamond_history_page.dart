@@ -12,7 +12,6 @@ class DiamondHistoryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(refreshDiamondHistoryProvider).map(
-          init: (_) => _buildProgressBar(),
           fetching: (state) {
             final total = state.total;
             final value = switch (total) {

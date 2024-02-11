@@ -16,7 +16,7 @@ abstract class GachaRepository {
     GetRecordedGachaPoolsParams params,
   );
 
-  TaskEither<AppFailure, GachaPool> getPool(
+  TaskEither<AppFailure, Option<GachaPool>> getPool(
     GetGachaPoolParams params,
   );
 
