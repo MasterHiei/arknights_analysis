@@ -23,6 +23,26 @@ class PersistenceRepositoryImpl
   final PersistenceLocalDataSource _localDataSource;
 
   @override
+  IOEither<AppFailure, Option<DateTime>> getLastUpdateDateTime(
+    NoParams params,
+  ) =>
+      syncHandler(
+        () {
+          final dateTime = _localDataSource.getLastUpdateDateTime();
+          return Option.fromNullable(dateTime);
+        },
+      );
+
+  @override
+  TaskEither<AppFailure, Unit> cacheLastUpdateDateTime(NoParams params) =>
+      asyncHandler(
+        () async {
+          await _localDataSource.saveLastUpdateDateTime();
+          return unit;
+        },
+      );
+
+  @override
   TaskEither<AppFailure, Unit> import(ImportPersistenceDataParams params) =>
       asyncHandler(
         () async {
