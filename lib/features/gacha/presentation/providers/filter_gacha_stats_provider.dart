@@ -18,7 +18,7 @@ class FilterGachaStats extends _$FilterGachaStats {
     return const AsyncValue.loading();
   }
 
-  GetGachaStatsParams createParams(User user, String? pool) {
+  GetGachaStatsParams _createParams(User user, String? pool) {
     // 全部寻访
     if (pool == null) {
       return GetGachaStatsParams(uid: user.uid);
@@ -53,7 +53,7 @@ class FilterGachaStats extends _$FilterGachaStats {
     final getStatsTask = ref
         .read(getCachedUserProvider)
         .call(noParams)
-        .map((user) => createParams(user, pool))
+        .map((user) => _createParams(user, pool))
         .map(ref.read(getGachaStatsProvider).call);
     state = await TaskEither.flatten(getStatsTask)
         .match(

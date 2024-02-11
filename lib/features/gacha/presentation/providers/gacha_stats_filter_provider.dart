@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../core/enums/gacha_rule_type.dart';
 import '../../../../core/usecase/params/usecase_params.dart';
 import '../../../auth/domain/usecases/get_cached_user.dart';
 import '../../domain/usecases/get_recorded_gacha_pools.dart';
@@ -31,6 +32,7 @@ class GachaStatsFilter extends _$GachaStatsFilter {
         .map(
           (user) => GetRecordedGachaPoolsParams(
             uid: user.uid,
+            includeRuleTypes: GachaRuleType.independentGuarantee,
           ),
         )
         .map(ref.read(getRecordedGachaPoolsProvider).call);
