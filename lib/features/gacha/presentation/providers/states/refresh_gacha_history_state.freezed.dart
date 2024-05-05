@@ -82,8 +82,8 @@ as int,
 /// @nodoc
 
 
-class _$FetchingImpl  implements _Fetching {
-  const _$FetchingImpl({required this.current, required this.total});
+class _$FetchingImpl extends _Fetching  {
+  const _$FetchingImpl({required this.current, required this.total}): super._();
 
   
 
@@ -144,9 +144,9 @@ _$$FetchingImplCopyWith<_$FetchingImpl> get copyWith => __$$FetchingImplCopyWith
 }
 
 
-abstract class _Fetching implements RefreshGachaHistoryState {
+abstract class _Fetching extends RefreshGachaHistoryState {
   const factory _Fetching({required final  int current, required final  int total}) = _$FetchingImpl;
-  
+  const _Fetching._(): super._();
 
   
 
@@ -178,8 +178,8 @@ class __$$SuccessImplCopyWithImpl<$Res> extends _$RefreshGachaHistoryStateCopyWi
 /// @nodoc
 
 
-class _$SuccessImpl  implements _Success {
-  const _$SuccessImpl();
+class _$SuccessImpl extends _Success  {
+  const _$SuccessImpl(): super._();
 
   
 
@@ -235,9 +235,9 @@ int get hashCode => runtimeType.hashCode;
 }
 
 
-abstract class _Success implements RefreshGachaHistoryState {
+abstract class _Success extends RefreshGachaHistoryState {
   const factory _Success() = _$SuccessImpl;
-  
+  const _Success._(): super._();
 
   
 
@@ -283,8 +283,8 @@ $AppFailureCopyWith<$Res> get failure {
 /// @nodoc
 
 
-class _$FailureImpl  implements _Failure {
-  const _$FailureImpl(this.failure);
+class _$FailureImpl extends _Failure  {
+  const _$FailureImpl(this.failure): super._();
 
   
 
@@ -344,9 +344,9 @@ _$$FailureImplCopyWith<_$FailureImpl> get copyWith => __$$FailureImplCopyWithImp
 }
 
 
-abstract class _Failure implements RefreshGachaHistoryState {
+abstract class _Failure extends RefreshGachaHistoryState {
   const factory _Failure(final  AppFailure failure) = _$FailureImpl;
-  
+  const _Failure._(): super._();
 
   
 

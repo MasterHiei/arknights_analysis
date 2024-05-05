@@ -14,6 +14,4 @@ class Pagination with _$Pagination {
   const Pagination._();
 
   int get totalPage => (total / Constants.pageSize).ceil();
-
-  bool get isLastPage => current >= totalPage;
 }

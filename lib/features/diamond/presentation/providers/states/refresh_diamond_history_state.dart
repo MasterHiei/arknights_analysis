@@ -16,4 +16,14 @@ class RefreshDiamondHistoryState with _$RefreshDiamondHistoryState {
   const factory RefreshDiamondHistoryState.failure(
     AppFailure failure,
   ) = _Failure;
+
+  const RefreshDiamondHistoryState._();
+
+  bool get isLastPage {
+    if (this is _Fetching) {
+      final state = this as _Fetching;
+      return state.current >= state.total;
+    }
+    return false;
+  }
 }

@@ -16,4 +16,14 @@ class RefreshGachaHistoryState with _$RefreshGachaHistoryState {
   const factory RefreshGachaHistoryState.failure(
     AppFailure failure,
   ) = _Failure;
+
+  const RefreshGachaHistoryState._();
+
+  bool get isLastPage {
+    if (this is _Fetching) {
+      final state = this as _Fetching;
+      return state.current >= state.total;
+    }
+    return false;
+  }
 }

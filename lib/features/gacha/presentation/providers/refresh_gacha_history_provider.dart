@@ -41,12 +41,10 @@ class RefreshGachaHistory extends _$RefreshGachaHistory {
     final combinedFetchHistoryTask = TaskEither.flatten(combinedGetParamsIO)
         .map(ref.read(fetchGachaHistoryProvider).call);
 
-    final failureOrPagination =
-        await TaskEither.flatten(combinedFetchHistoryTask).run();
-    await failureOrPagination.match(
-      (failure) async => state = RefreshGachaHistoryState.failure(failure),
+    await TaskEither.flatten(combinedFetchHistoryTask).match(
+      (failure) => state = RefreshGachaHistoryState.failure(failure),
       (pagination) async {
-        if (pagination.isLastPage) {
+        if (state.isLastPage) {
           state = const RefreshGachaHistoryState.success();
           return;
         }
@@ -55,6 +53,6 @@ class RefreshGachaHistory extends _$RefreshGachaHistory {
         final total = pagination.totalPage;
         await call(page: next, total: total);
       },
-    );
+    ).run();
   }
 }
