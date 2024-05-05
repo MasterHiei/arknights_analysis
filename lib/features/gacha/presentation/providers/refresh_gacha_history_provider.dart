@@ -51,7 +51,7 @@ class RefreshGachaHistory extends _$RefreshGachaHistory {
 
         final next = pagination.current + 1;
         final total = pagination.totalPage;
-        call(page: next, total: total);
+        return call(page: next, total: total);
       },
     ).run();
   }
