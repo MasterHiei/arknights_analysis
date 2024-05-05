@@ -33,6 +33,7 @@ class RefreshGachaHistory extends _$RefreshGachaHistory {
               uid: user.uid,
               token: user.token,
               channel: channel,
+              page: page,
             ),
           )
           .toTaskEither(),
@@ -44,7 +45,7 @@ class RefreshGachaHistory extends _$RefreshGachaHistory {
     await TaskEither.flatten(combinedFetchHistoryTask).match(
       (failure) => state = RefreshGachaHistoryState.failure(failure),
       (pagination) async {
-        if (state.isLastPage) {
+        if (state.isLastPage(pagination.totalPage)) {
           state = const RefreshGachaHistoryState.success();
           return;
         }

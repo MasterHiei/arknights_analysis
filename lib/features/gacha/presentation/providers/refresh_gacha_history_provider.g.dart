@@ -7,7 +7,7 @@ part of 'refresh_gacha_history_provider.dart';
 // **************************************************************************
 
 String _$refreshGachaHistoryHash() =>
-    r'cd7eb3444ddb169c1811348a2aacbe2679a48790';
+    r'db36ccf746a30b0ecdd60e3356ffc6a4bbe00eb0';
 
 /// See also [RefreshGachaHistory].
 @ProviderFor(RefreshGachaHistory)

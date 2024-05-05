@@ -39,7 +39,7 @@ class UsecaseParams with _$UsecaseParams {
   const factory UsecaseParams.fetchGachaHistory({
     required Uid uid,
     required Token token,
-    @Default(1) int page,
+    required int page,
     required UserChannel channel,
   }) = FetchGachaHistoryParams;
 
@@ -74,7 +74,7 @@ class UsecaseParams with _$UsecaseParams {
   const factory UsecaseParams.fetchDiamondHistory({
     required Uid uid,
     required Token token,
-    @Default(1) int page,
+    required int page,
     required UserChannel channel,
   }) = FetchDiamondHistoryParams;
 

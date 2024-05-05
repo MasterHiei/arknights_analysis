@@ -19,10 +19,10 @@ class RefreshDiamondHistoryState with _$RefreshDiamondHistoryState {
 
   const RefreshDiamondHistoryState._();
 
-  bool get isLastPage {
+  bool isLastPage(int total) {
     if (this is _Fetching) {
       final state = this as _Fetching;
-      return state.current >= state.total;
+      return state.current >= total;
     }
     return false;
   }

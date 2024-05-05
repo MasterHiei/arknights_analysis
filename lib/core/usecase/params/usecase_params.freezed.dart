@@ -714,13 +714,13 @@ as UserChannel,
 
 
 class _$FetchGachaHistoryParamsImpl  implements FetchGachaHistoryParams {
-  const _$FetchGachaHistoryParamsImpl({required this.uid, required this.token, this.page = 1, required this.channel});
+  const _$FetchGachaHistoryParamsImpl({required this.uid, required this.token, required this.page, required this.channel});
 
   
 
 @override final  Uid uid;
 @override final  Token token;
-@override@JsonKey() final  int page;
+@override final  int page;
 @override final  UserChannel channel;
 
 @override
@@ -778,7 +778,7 @@ _$$FetchGachaHistoryParamsImplCopyWith<_$FetchGachaHistoryParamsImpl> get copyWi
 
 
 abstract class FetchGachaHistoryParams implements UsecaseParams {
-  const factory FetchGachaHistoryParams({required final  Uid uid, required final  Token token, final  int page, required final  UserChannel channel}) = _$FetchGachaHistoryParamsImpl;
+  const factory FetchGachaHistoryParams({required final  Uid uid, required final  Token token, required final  int page, required final  UserChannel channel}) = _$FetchGachaHistoryParamsImpl;
   
 
   
@@ -1396,13 +1396,13 @@ as UserChannel,
 
 
 class _$FetchDiamondHistoryParamsImpl  implements FetchDiamondHistoryParams {
-  const _$FetchDiamondHistoryParamsImpl({required this.uid, required this.token, this.page = 1, required this.channel});
+  const _$FetchDiamondHistoryParamsImpl({required this.uid, required this.token, required this.page, required this.channel});
 
   
 
 @override final  Uid uid;
 @override final  Token token;
-@override@JsonKey() final  int page;
+@override final  int page;
 @override final  UserChannel channel;
 
 @override
@@ -1460,7 +1460,7 @@ _$$FetchDiamondHistoryParamsImplCopyWith<_$FetchDiamondHistoryParamsImpl> get co
 
 
 abstract class FetchDiamondHistoryParams implements UsecaseParams {
-  const factory FetchDiamondHistoryParams({required final  Uid uid, required final  Token token, final  int page, required final  UserChannel channel}) = _$FetchDiamondHistoryParamsImpl;
+  const factory FetchDiamondHistoryParams({required final  Uid uid, required final  Token token, required final  int page, required final  UserChannel channel}) = _$FetchDiamondHistoryParamsImpl;
   
 
   

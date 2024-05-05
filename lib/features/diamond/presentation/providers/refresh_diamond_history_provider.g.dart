@@ -7,7 +7,7 @@ part of 'refresh_diamond_history_provider.dart';
 // **************************************************************************
 
 String _$refreshDiamondHistoryHash() =>
-    r'e6ca41d0c4fd259f9f550ac115ff418b805b7192';
+    r'39b9ea178b39b50cd208ed98d4b49977e61b02a8';
 
 /// See also [RefreshDiamondHistory].
 @ProviderFor(RefreshDiamondHistory)

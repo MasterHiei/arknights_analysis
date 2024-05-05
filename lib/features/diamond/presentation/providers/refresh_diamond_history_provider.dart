@@ -34,6 +34,7 @@ class RefreshDiamondHistory extends _$RefreshDiamondHistory {
               uid: user.uid,
               token: user.token,
               channel: channel,
+              page: page,
             ),
           )
           .toTaskEither(),
@@ -45,7 +46,7 @@ class RefreshDiamondHistory extends _$RefreshDiamondHistory {
     await TaskEither.flatten(combinedFetchHistoryTask).match(
       (failure) => state = RefreshDiamondHistoryState.failure(failure),
       (pagination) async {
-        if (state.isLastPage) {
+        if (state.isLastPage(pagination.totalPage)) {
           state = const RefreshDiamondHistoryState.success();
           return;
         }
