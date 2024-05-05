@@ -37,7 +37,7 @@ Future<ProviderScope> _initializeApp() async {
 
   await EasyLocalization.ensureInitialized();
 
-  if (Platform.isWindows && !await _isWebView2Avaliable()) {
+  if (Platform.isWindows && !await _isWebView2Available()) {
     await Process.run(
       Assets.dependencies.microsoftEdgeWebview2Setup,
       ['/install'],
@@ -50,7 +50,7 @@ Future<ProviderScope> _initializeApp() async {
   );
 }
 
-Future<bool> _isWebView2Avaliable() async {
+Future<bool> _isWebView2Available() async {
   final phKey = calloc<HANDLE>();
   final webView2RuntimeRegKey =
       r'SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'
@@ -64,16 +64,16 @@ Future<bool> _isWebView2Avaliable() async {
         HKEY_LOCAL_MACHINE,
         regKey,
         0,
-        KEY_READ,
+        REG_SAM_FLAGS.KEY_READ,
         phKey,
       ) ==
-      ERROR_SUCCESS;
-  final isAvaliable =
+      WIN32_ERROR.ERROR_SUCCESS;
+  final isAvailable =
       hasRegKey(webView2RuntimeRegKey) || hasRegKey(webView2RuntimeReg64Key);
 
   free(phKey);
   free(webView2RuntimeRegKey);
   free(webView2RuntimeReg64Key);
 
-  return isAvaliable;
+  return isAvailable;
 }
