@@ -84,6 +84,7 @@ abstract class  LocaleKeys {
   static const gacha_type_attain = 'gacha.type.attain';
   static const gacha_type_classic = 'gacha.type.classic';
   static const gacha_type_fesClassic = 'gacha.type.fesClassic';
+  static const gacha_type_classicAttain = 'gacha.type.classicAttain';
   static const gacha_type = 'gacha.type';
   static const gacha_rarity = 'gacha.rarity';
   static const gacha = 'gacha';

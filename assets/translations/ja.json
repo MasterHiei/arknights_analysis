@@ -104,7 +104,8 @@
       "linkage": "コラボ",
       "attain": "スペシャル",
       "classic": "中堅スカウト",
-      "fesClassic": "中堅セレクト"
+      "fesClassic": "中堅セレクト",
+      "classicAttain": "スペシャル中堅"
     },
     "rarity": "星{}"
   },

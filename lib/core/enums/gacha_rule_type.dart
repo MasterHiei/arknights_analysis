@@ -23,7 +23,10 @@ enum GachaRuleType {
   classic('CLASSIC'),
 
   @JsonValue('FESCLASSIC')
-  fesClassic('FESCLASSIC');
+  fesClassic('FESCLASSIC'),
+
+  @JsonValue('CLASSIC_ATTAIN')
+  classicAttain('CLASSIC_ATTAIN');
 
   const GachaRuleType(this.value);
 
@@ -49,6 +52,9 @@ enum GachaRuleType {
 
       case GachaRuleType.fesClassic:
         return LocaleKeys.gacha_type_fesClassic.tr();
+
+      case GachaRuleType.classicAttain:
+        return LocaleKeys.gacha_type_classicAttain.tr();
     }
   }
 
@@ -56,11 +62,7 @@ enum GachaRuleType {
         limited,
         linkage,
         attain,
-      ];
-
-  static List<GachaRuleType> get classics => [
-        GachaRuleType.classic,
-        GachaRuleType.fesClassic,
+        classicAttain,
       ];
 
   static List<String> get classicPools => [
