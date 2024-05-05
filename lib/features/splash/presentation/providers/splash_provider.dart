@@ -22,7 +22,7 @@ class Splash extends _$Splash {
       failureOption: const None(),
     );
 
-    const params = FetchGameDataParams();
+    const params = FetchGameDataParams(force: true);
     final task = ref.read(fetchGameDataProvider).call(params).match(
           (failure) => state = state.copyWith(
             failureOption: some(failure),
