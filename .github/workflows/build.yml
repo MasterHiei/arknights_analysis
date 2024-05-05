@@ -44,19 +44,6 @@ jobs:
       - name: Run pub get
         run: flutter pub get
 
-      - name: Cache build_runner
-        id: cache-build-runner
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/.dart_tool/build
-          key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            build-runner-
-
-      - name: Run build_runner
-        run: dart run build_runner build -d
-
       - name: Run analyze
         run: flutter analyze --fatal-infos
 
@@ -102,19 +89,6 @@ jobs:
 
       - name: Run pub get
         run: flutter pub get
-
-      - name: Cache build_runner
-        id: cache-build-runner
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/.dart_tool/build
-          key: build-runner-${{ hashFiles('**/asset_graph.json') }}-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            build-runner-
-
-      - name: Run build_runner
-        run: dart run build_runner build -d
 
       - name: Bump build number
         run: |
