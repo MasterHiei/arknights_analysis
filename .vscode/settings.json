@@ -2,6 +2,11 @@
   // Causes the debug view to automatically appear when a breakpoint is hit. This
   // setting is global and not configurable per-language.
   "debug.openDebug": "openOnDebugBreak",
+  // By default, VS Code will only switch to the Debug Console when you start
+  // debugging the first time in a session. This setting tells VS Code to always
+  // switch to the Debug Console when starting a session, so you can see the
+  // programs output.
+  "debug.internalConsoleOptions": "openOnSessionStart",
   "[dart]": {
     // Automatically format code on save and during typing of certain characters
     // (like `;` and `}`).
@@ -15,11 +20,6 @@
     // this, all instances of the selected text will be highlighted, interfering
     // with Dart's ability to highlight only exact references to the selected variable.
     "editor.selectionHighlight": false,
-    // By default, VS Code prevents code completion from popping open when in
-    // "snippet mode" (editing placeholders in inserted code). Setting this option
-    // to `false` stops that and allows completion to open as normal, as if you
-    // weren't in a snippet placeholder.
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
     // By default, VS Code will pre-select the most recently used item from code
     // completion. This is usually not the most relevant item.
     //
@@ -31,21 +31,38 @@
     // completion list is not visible.
     "editor.tabCompletion": "onlySnippets",
     // By default, VS Code will populate code completion with words found in the
-    // current file when a language service does not provide its own completions.
+    // matching documents when a language service does not provide its own completions.
     // This results in code completion suggesting words when editing comments and
     // strings. This setting will prevent that.
     "editor.wordBasedSuggestions": false,
+    "files.trimTrailingWhitespace": true
   },
-  // Remove .fvm files from search
+  // Remove generated files from search
   "search.exclude": {
     "**/.fvm": true,
     "*.freezed.dart": true,
     "*.g.dart": true,
+    "*.gr.dart": true,
     "*.gen.dart": true,
     "*.json": true
   },
-  // Remove from file watching
-  "files.watcherExclude": {
-    "**/.fvm": true
-  }
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "${capture}.freezed.dart, ${capture}.g.dart, ${capture}.gr.dart"
+  },
+  "cSpell.words": [
+    "arknights",
+    "calloc",
+    "cupertino",
+    "dartx",
+    "fpdart",
+    "Gacha",
+    "Gryph",
+    "HKEY",
+    "LTRB",
+    "prefs",
+    "pubspec",
+    "riverpod",
+    "screenutil"
+  ]
 }

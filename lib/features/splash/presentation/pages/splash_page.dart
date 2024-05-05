@@ -61,7 +61,7 @@ class _SplashPageState extends ConsumerState<SplashPage> with WindowListener {
 
           next.failureOption.match(
             () {},
-            (failure) => AppDialog.retry(
+            (_) => AppDialog.retry(
               context,
               title: const Text(
                 LocaleKeys.features_gameData_retryAlert_title,

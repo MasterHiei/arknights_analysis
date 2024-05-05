@@ -2,3 +2,9 @@ global_options:
   drift_dev:
     runs_before:
       - riverpod_generator
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          format: false

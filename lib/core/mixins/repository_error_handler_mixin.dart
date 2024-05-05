@@ -60,7 +60,7 @@ mixin RepositoryErrorHandlerMixin {
 
   Future<void> _checkConnectivity(Connectivity connectivity) async {
     final result = await connectivity.checkConnectivity();
-    if (result == ConnectivityResult.none) {
+    if (result.contains(ConnectivityResult.none)) {
       throw const AppFailure.networkUnreachable();
     }
   }
