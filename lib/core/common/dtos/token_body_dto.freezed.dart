@@ -28,8 +28,11 @@ mixin _$TokenBodyDto {
 
 
 
+/// Serializes this TokenBodyDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of TokenBodyDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $TokenBodyDtoCopyWith<TokenBodyDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$TokenBodyDtoCopyWithImpl<$Res,$Val extends TokenBodyDto> implements $Tok
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of TokenBodyDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? appId = freezed,Object? channelMasterId = freezed,Object? token = null,}) {
   return _then(_value.copyWith(
 appId: freezed == appId ? _value.appId : appId // ignore: cast_nullable_to_non_nullable
@@ -85,6 +90,8 @@ class __$$TokenBodyDtoImplCopyWithImpl<$Res> extends _$TokenBodyDtoCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of TokenBodyDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? appId = freezed,Object? channelMasterId = freezed,Object? token = null,}) {
   return _then(_$TokenBodyDtoImpl(
 appId: freezed == appId ? _value.appId : appId // ignore: cast_nullable_to_non_nullable
@@ -120,11 +127,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$TokenBodyDtoImpl&&(identical(other.appId, appId) || other.appId == appId)&&(identical(other.channelMasterId, channelMasterId) || other.channelMasterId == channelMasterId)&&(identical(other.token, token) || other.token == token));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,appId,channelMasterId,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of TokenBodyDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$TokenBodyDtoImplCopyWith<_$TokenBodyDtoImpl> get copyWith => __$$TokenBodyDtoImplCopyWithImpl<_$TokenBodyDtoImpl>(this, _$identity);
@@ -148,8 +157,10 @@ abstract class _TokenBodyDto implements TokenBodyDto {
 
   factory _TokenBodyDto.fromJson(Map<String, dynamic> json) = _$TokenBodyDtoImpl.fromJson;
 
-@override @JsonKey(includeIfNull: false) int? get appId;@override @JsonKey(includeIfNull: false) int? get channelMasterId;@override @JsonKey(name: 'channelToken', fromJson: _tokenFromJson, toJson: _tokenToJson) String get token;
-@override @JsonKey(ignore: true)
+@override@JsonKey(includeIfNull: false) int? get appId;@override@JsonKey(includeIfNull: false) int? get channelMasterId;@override@JsonKey(name: 'channelToken', fromJson: _tokenFromJson, toJson: _tokenToJson) String get token;
+/// Create a copy of TokenBodyDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$TokenBodyDtoImplCopyWith<_$TokenBodyDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -18,7 +18,7 @@ class SettingsActionButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          padding: ButtonState.resolveWith(
+          padding: WidgetStateProperty.resolveWith(
             (states) => EdgeInsets.symmetric(
               vertical: 8.h,
               horizontal: 12.w,

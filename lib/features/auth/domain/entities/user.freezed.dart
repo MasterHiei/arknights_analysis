@@ -25,7 +25,9 @@ mixin _$User {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$UserCopyWithImpl<$Res,$Val extends User> implements $UserCopyWith<$Res> 
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? nickName = null,Object? token = null,}) {
   return _then(_value.copyWith(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -81,6 +85,8 @@ class __$$UserImplCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$UserImpl
       : super(_value, _then);
 
 
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? nickName = null,Object? token = null,}) {
   return _then(_$UserImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -120,7 +126,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,nickName,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$UserImplCopyWith<_$UserImpl> get copyWith => __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
@@ -141,8 +149,10 @@ abstract class _User implements User {
 
   
 
-@override  Uid get uid;@override  String get nickName;@override  Token get token;
-@override @JsonKey(ignore: true)
+@override Uid get uid;@override String get nickName;@override Token get token;
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$UserImplCopyWith<_$UserImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

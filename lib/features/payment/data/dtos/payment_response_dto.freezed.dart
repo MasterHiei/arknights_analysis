@@ -28,8 +28,11 @@ mixin _$PaymentResponseDto {
 
 
 
+/// Serializes this PaymentResponseDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of PaymentResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PaymentResponseDtoCopyWith<PaymentResponseDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$PaymentResponseDtoCopyWithImpl<$Res,$Val extends PaymentResponseDto> imp
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PaymentResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = freezed,Object? msg = null,Object? data = null,}) {
   return _then(_value.copyWith(
 code: freezed == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -85,6 +90,8 @@ class __$$PaymentResponseDtoImplCopyWithImpl<$Res> extends _$PaymentResponseDtoC
       : super(_value, _then);
 
 
+/// Create a copy of PaymentResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = freezed,Object? msg = null,Object? data = null,}) {
   return _then(_$PaymentResponseDtoImpl(
 code: freezed == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -126,11 +133,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PaymentResponseDtoImpl&&(identical(other.code, code) || other.code == code)&&(identical(other.msg, msg) || other.msg == msg)&&const DeepCollectionEquality().equals(other._data, _data));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,code,msg,const DeepCollectionEquality().hash(_data));
 
-@JsonKey(ignore: true)
+/// Create a copy of PaymentResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PaymentResponseDtoImplCopyWith<_$PaymentResponseDtoImpl> get copyWith => __$$PaymentResponseDtoImplCopyWithImpl<_$PaymentResponseDtoImpl>(this, _$identity);
@@ -154,8 +163,10 @@ abstract class _PaymentResponseDto implements PaymentResponseDto {
 
   factory _PaymentResponseDto.fromJson(Map<String, dynamic> json) = _$PaymentResponseDtoImpl.fromJson;
 
-@override @JsonKey(name: 'status') int? get code;@override @JsonKey(defaultValue: '') String get msg;@override @JsonKey(defaultValue: []) List<PaymentRecordDto> get data;
-@override @JsonKey(ignore: true)
+@override@JsonKey(name: 'status') int? get code;@override@JsonKey(defaultValue: '') String get msg;@override@JsonKey(defaultValue: []) List<PaymentRecordDto> get data;
+/// Create a copy of PaymentResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PaymentResponseDtoImplCopyWith<_$PaymentResponseDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

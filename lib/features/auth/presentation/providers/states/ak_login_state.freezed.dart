@@ -45,6 +45,8 @@ class _$AkLoginStateCopyWithImpl<$Res,$Val extends AkLoginState> implements $AkL
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -64,6 +66,8 @@ class __$$InitImplCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res, _$
       : super(_value, _then);
 
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -141,6 +145,8 @@ class __$$LoggingInImplCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Re
       : super(_value, _then);
 
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -218,6 +224,8 @@ class __$$LoggedInImplCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res
       : super(_value, _then);
 
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -299,6 +307,8 @@ class __$$FailedImplCopyWithImpl<$Res> extends _$AkLoginStateCopyWithImpl<$Res, 
       : super(_value, _then);
 
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failure = null,}) {
   return _then(_$FailedImpl(
 null == failure ? _value.failure : failure // ignore: cast_nullable_to_non_nullable
@@ -306,6 +316,8 @@ as AppFailure,
   ));
 }
 
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $AppFailureCopyWith<$Res> get failure {
@@ -341,7 +353,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,failure);
 
-@JsonKey(ignore: true)
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FailedImplCopyWith<_$FailedImpl> get copyWith => __$$FailedImplCopyWithImpl<_$FailedImpl>(this, _$identity);
@@ -375,7 +389,9 @@ abstract class _Failed implements AkLoginState {
   
 
  AppFailure get failure;
-@JsonKey(ignore: true)
+/// Create a copy of AkLoginState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FailedImplCopyWith<_$FailedImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

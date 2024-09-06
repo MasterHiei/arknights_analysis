@@ -28,8 +28,11 @@ mixin _$LatestReleaseAssetDto {
 
 
 
+/// Serializes this LatestReleaseAssetDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseAssetDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $LatestReleaseAssetDtoCopyWith<LatestReleaseAssetDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$LatestReleaseAssetDtoCopyWithImpl<$Res,$Val extends LatestReleaseAssetDt
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of LatestReleaseAssetDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? size = null,Object? createdAt = null,Object? updatedAt = null,Object? browserDownloadUrl = null,}) {
   return _then(_value.copyWith(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -89,6 +94,8 @@ class __$$LatestReleaseAssetDtoImplCopyWithImpl<$Res> extends _$LatestReleaseAss
       : super(_value, _then);
 
 
+/// Create a copy of LatestReleaseAssetDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? size = null,Object? createdAt = null,Object? updatedAt = null,Object? browserDownloadUrl = null,}) {
   return _then(_$LatestReleaseAssetDtoImpl(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -132,11 +139,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$LatestReleaseAssetDtoImpl&&(identical(other.id, id) || other.id == id)&&(identical(other.nodeId, nodeId) || other.nodeId == nodeId)&&(identical(other.name, name) || other.name == name)&&(identical(other.size, size) || other.size == size)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.browserDownloadUrl, browserDownloadUrl) || other.browserDownloadUrl == browserDownloadUrl));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,nodeId,name,size,createdAt,updatedAt,browserDownloadUrl);
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseAssetDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$LatestReleaseAssetDtoImplCopyWith<_$LatestReleaseAssetDtoImpl> get copyWith => __$$LatestReleaseAssetDtoImplCopyWithImpl<_$LatestReleaseAssetDtoImpl>(this, _$identity);
@@ -160,8 +169,10 @@ abstract class _LatestReleaseAssetDto extends LatestReleaseAssetDto {
 
   factory _LatestReleaseAssetDto.fromJson(Map<String, dynamic> json) = _$LatestReleaseAssetDtoImpl.fromJson;
 
-@override  int get id;@override @JsonKey(name: 'node_id') String get nodeId;@override  String get name;@override  int get size;@override @JsonKey(name: 'created_at') DateTime get createdAt;@override @JsonKey(name: 'updated_at') DateTime get updatedAt;@override @JsonKey(name: 'browser_download_url') String get browserDownloadUrl;
-@override @JsonKey(ignore: true)
+@override int get id;@override@JsonKey(name: 'node_id') String get nodeId;@override String get name;@override int get size;@override@JsonKey(name: 'created_at') DateTime get createdAt;@override@JsonKey(name: 'updated_at') DateTime get updatedAt;@override@JsonKey(name: 'browser_download_url') String get browserDownloadUrl;
+/// Create a copy of LatestReleaseAssetDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$LatestReleaseAssetDtoImplCopyWith<_$LatestReleaseAssetDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

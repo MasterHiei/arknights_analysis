@@ -25,7 +25,9 @@ mixin _$GachaStats {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaStats
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaStatsCopyWith<GachaStats> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaStatsCopyWithImpl<$Res,$Val extends GachaStats> implements $GachaSt
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaStats
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? chars = null,}) {
   return _then(_value.copyWith(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -80,6 +84,8 @@ class __$$GachaStatsImplCopyWithImpl<$Res> extends _$GachaStatsCopyWithImpl<$Res
       : super(_value, _then);
 
 
+/// Create a copy of GachaStats
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? chars = null,}) {
   return _then(_$GachaStatsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -123,7 +129,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,const DeepCollectionEquality().hash(_chars));
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaStats
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaStatsImplCopyWith<_$GachaStatsImpl> get copyWith => __$$GachaStatsImplCopyWithImpl<_$GachaStatsImpl>(this, _$identity);
@@ -144,8 +152,10 @@ abstract class _GachaStats extends GachaStats {
 
   
 
-@override  Uid get uid;@override  List<GachaChar> get chars;
-@override @JsonKey(ignore: true)
+@override Uid get uid;@override List<GachaChar> get chars;
+/// Create a copy of GachaStats
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaStatsImplCopyWith<_$GachaStatsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

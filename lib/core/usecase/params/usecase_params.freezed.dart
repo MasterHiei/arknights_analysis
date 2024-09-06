@@ -45,6 +45,8 @@ class _$UsecaseParamsCopyWithImpl<$Res,$Val extends UsecaseParams> implements $U
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -64,6 +66,8 @@ class __$$NoParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyWithImpl<$Re
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -157,6 +161,8 @@ class __$$FetchGameDataParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyW
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? force = null,}) {
   return _then(_$FetchGameDataParamsImpl(
 force: null == force ? _value.force : force // ignore: cast_nullable_to_non_nullable
@@ -192,7 +198,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,force);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchGameDataParamsImplCopyWith<_$FetchGameDataParamsImpl> get copyWith => __$$FetchGameDataParamsImplCopyWithImpl<_$FetchGameDataParamsImpl>(this, _$identity);
@@ -238,7 +246,9 @@ abstract class FetchGameDataParams implements UsecaseParams {
   
 
  bool get force;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchGameDataParamsImplCopyWith<_$FetchGameDataParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -261,6 +271,8 @@ class __$$CacheUserChannelParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCo
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? channel = null,}) {
   return _then(_$CacheUserChannelParamsImpl(
 channel: null == channel ? _value.channel : channel // ignore: cast_nullable_to_non_nullable
@@ -296,7 +308,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,channel);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$CacheUserChannelParamsImplCopyWith<_$CacheUserChannelParamsImpl> get copyWith => __$$CacheUserChannelParamsImplCopyWithImpl<_$CacheUserChannelParamsImpl>(this, _$identity);
@@ -342,7 +356,9 @@ abstract class CacheUserChannelParams implements UsecaseParams {
   
 
  UserChannel get channel;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$CacheUserChannelParamsImplCopyWith<_$CacheUserChannelParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -365,6 +381,8 @@ class __$$CacheTokenParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyWith
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? token = null,}) {
   return _then(_$CacheTokenParamsImpl(
 token: null == token ? _value.token : token // ignore: cast_nullable_to_non_nullable
@@ -400,7 +418,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$CacheTokenParamsImplCopyWith<_$CacheTokenParamsImpl> get copyWith => __$$CacheTokenParamsImplCopyWithImpl<_$CacheTokenParamsImpl>(this, _$identity);
@@ -446,7 +466,9 @@ abstract class CacheTokenParams implements UsecaseParams {
   
 
  Token get token;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$CacheTokenParamsImplCopyWith<_$CacheTokenParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -469,6 +491,8 @@ class __$$FetchUserParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyWithI
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? channel = null,Object? token = null,}) {
   return _then(_$FetchUserParamsImpl(
 channel: null == channel ? _value.channel : channel // ignore: cast_nullable_to_non_nullable
@@ -506,7 +530,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,channel,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchUserParamsImplCopyWith<_$FetchUserParamsImpl> get copyWith => __$$FetchUserParamsImplCopyWithImpl<_$FetchUserParamsImpl>(this, _$identity);
@@ -552,7 +578,9 @@ abstract class FetchUserParams implements UsecaseParams {
   
 
  UserChannel get channel; Token get token;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchUserParamsImplCopyWith<_$FetchUserParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -575,6 +603,8 @@ class __$$GetCachedGachaHistoryParamsImplCopyWithImpl<$Res> extends _$UsecasePar
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? showAllPools = null,Object? pools = null,Object? rarities = null,}) {
   return _then(_$GetCachedGachaHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -628,7 +658,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,showAllPools,const DeepCollectionEquality().hash(_pools),const DeepCollectionEquality().hash(_rarities));
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetCachedGachaHistoryParamsImplCopyWith<_$GetCachedGachaHistoryParamsImpl> get copyWith => __$$GetCachedGachaHistoryParamsImplCopyWithImpl<_$GetCachedGachaHistoryParamsImpl>(this, _$identity);
@@ -674,7 +706,9 @@ abstract class GetCachedGachaHistoryParams implements UsecaseParams {
   
 
  Uid get uid; bool get showAllPools; List<String> get pools; List<Rarity> get rarities;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetCachedGachaHistoryParamsImplCopyWith<_$GetCachedGachaHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -697,6 +731,8 @@ class __$$FetchGachaHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsC
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? token = null,Object? page = null,Object? channel = null,}) {
   return _then(_$FetchGachaHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -738,7 +774,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,token,page,channel);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchGachaHistoryParamsImplCopyWith<_$FetchGachaHistoryParamsImpl> get copyWith => __$$FetchGachaHistoryParamsImplCopyWithImpl<_$FetchGachaHistoryParamsImpl>(this, _$identity);
@@ -784,7 +822,9 @@ abstract class FetchGachaHistoryParams implements UsecaseParams {
   
 
  Uid get uid; Token get token; int get page; UserChannel get channel;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchGachaHistoryParamsImplCopyWith<_$FetchGachaHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -807,6 +847,8 @@ class __$$GetRecordedGachaPoolsParamsImplCopyWithImpl<$Res> extends _$UsecasePar
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? includeRuleTypes = null,Object? excludeRuleTypes = null,Object? includeClassics = null,}) {
   return _then(_$GetRecordedGachaPoolsParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -860,7 +902,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,const DeepCollectionEquality().hash(_includeRuleTypes),const DeepCollectionEquality().hash(_excludeRuleTypes),includeClassics);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetRecordedGachaPoolsParamsImplCopyWith<_$GetRecordedGachaPoolsParamsImpl> get copyWith => __$$GetRecordedGachaPoolsParamsImplCopyWithImpl<_$GetRecordedGachaPoolsParamsImpl>(this, _$identity);
@@ -906,7 +950,9 @@ abstract class GetRecordedGachaPoolsParams implements UsecaseParams {
   
 
  Uid get uid; List<GachaRuleType> get includeRuleTypes; List<GachaRuleType> get excludeRuleTypes; bool get includeClassics;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetRecordedGachaPoolsParamsImplCopyWith<_$GetRecordedGachaPoolsParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -929,6 +975,8 @@ class __$$GetGachaPoolParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyWi
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? poolName = null,}) {
   return _then(_$GetGachaPoolParamsImpl(
 poolName: null == poolName ? _value.poolName : poolName // ignore: cast_nullable_to_non_nullable
@@ -964,7 +1012,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,poolName);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetGachaPoolParamsImplCopyWith<_$GetGachaPoolParamsImpl> get copyWith => __$$GetGachaPoolParamsImplCopyWithImpl<_$GetGachaPoolParamsImpl>(this, _$identity);
@@ -1010,7 +1060,9 @@ abstract class GetGachaPoolParams implements UsecaseParams {
   
 
  String get poolName;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetGachaPoolParamsImplCopyWith<_$GetGachaPoolParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1033,6 +1085,8 @@ class __$$GetGachaStatsParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCopyW
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? pools = null,Object? excludePools = null,Object? includeRuleTypes = null,Object? excludeRuleTypes = null,}) {
   return _then(_$GetGachaStatsParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1100,7 +1154,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,const DeepCollectionEquality().hash(_pools),const DeepCollectionEquality().hash(_excludePools),const DeepCollectionEquality().hash(_includeRuleTypes),const DeepCollectionEquality().hash(_excludeRuleTypes));
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetGachaStatsParamsImplCopyWith<_$GetGachaStatsParamsImpl> get copyWith => __$$GetGachaStatsParamsImplCopyWithImpl<_$GetGachaStatsParamsImpl>(this, _$identity);
@@ -1146,7 +1202,9 @@ abstract class GetGachaStatsParams implements UsecaseParams {
   
 
  Uid get uid; List<String> get pools; List<String> get excludePools; List<GachaRuleType> get includeRuleTypes; List<GachaRuleType> get excludeRuleTypes;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetGachaStatsParamsImplCopyWith<_$GetGachaStatsParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1169,6 +1227,8 @@ class __$$FetchPaymentHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseParam
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? token = null,}) {
   return _then(_$FetchPaymentHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1206,7 +1266,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchPaymentHistoryParamsImplCopyWith<_$FetchPaymentHistoryParamsImpl> get copyWith => __$$FetchPaymentHistoryParamsImplCopyWithImpl<_$FetchPaymentHistoryParamsImpl>(this, _$identity);
@@ -1252,7 +1314,9 @@ abstract class FetchPaymentHistoryParams implements UsecaseParams {
   
 
  Uid get uid; Token get token;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchPaymentHistoryParamsImplCopyWith<_$FetchPaymentHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1275,6 +1339,8 @@ class __$$GetCachedPaymentHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseP
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,}) {
   return _then(_$GetCachedPaymentHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1310,7 +1376,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetCachedPaymentHistoryParamsImplCopyWith<_$GetCachedPaymentHistoryParamsImpl> get copyWith => __$$GetCachedPaymentHistoryParamsImplCopyWithImpl<_$GetCachedPaymentHistoryParamsImpl>(this, _$identity);
@@ -1356,7 +1424,9 @@ abstract class GetCachedPaymentHistoryParams implements UsecaseParams {
   
 
  Uid get uid;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetCachedPaymentHistoryParamsImplCopyWith<_$GetCachedPaymentHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1379,6 +1449,8 @@ class __$$FetchDiamondHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseParam
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? token = null,Object? page = null,Object? channel = null,}) {
   return _then(_$FetchDiamondHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1420,7 +1492,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,token,page,channel);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchDiamondHistoryParamsImplCopyWith<_$FetchDiamondHistoryParamsImpl> get copyWith => __$$FetchDiamondHistoryParamsImplCopyWithImpl<_$FetchDiamondHistoryParamsImpl>(this, _$identity);
@@ -1466,7 +1540,9 @@ abstract class FetchDiamondHistoryParams implements UsecaseParams {
   
 
  Uid get uid; Token get token; int get page; UserChannel get channel;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchDiamondHistoryParamsImplCopyWith<_$FetchDiamondHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1489,6 +1565,8 @@ class __$$GetCachedDiamondHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseP
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,}) {
   return _then(_$GetCachedDiamondHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1524,7 +1602,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetCachedDiamondHistoryParamsImplCopyWith<_$GetCachedDiamondHistoryParamsImpl> get copyWith => __$$GetCachedDiamondHistoryParamsImplCopyWithImpl<_$GetCachedDiamondHistoryParamsImpl>(this, _$identity);
@@ -1570,7 +1650,9 @@ abstract class GetCachedDiamondHistoryParams implements UsecaseParams {
   
 
  Uid get uid;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetCachedDiamondHistoryParamsImplCopyWith<_$GetCachedDiamondHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1593,6 +1675,8 @@ class __$$FetchGiftHistoryParamsImplCopyWithImpl<$Res> extends _$UsecaseParamsCo
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? token = null,Object? channel = null,}) {
   return _then(_$FetchGiftHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1632,7 +1716,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,token,channel);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchGiftHistoryParamsImplCopyWith<_$FetchGiftHistoryParamsImpl> get copyWith => __$$FetchGiftHistoryParamsImplCopyWithImpl<_$FetchGiftHistoryParamsImpl>(this, _$identity);
@@ -1678,7 +1764,9 @@ abstract class FetchGiftHistoryParams implements UsecaseParams {
   
 
  Uid get uid; Token get token; UserChannel get channel;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchGiftHistoryParamsImplCopyWith<_$FetchGiftHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1701,6 +1789,8 @@ class __$$GetCachedGiftHistoryParamsImplCopyWithImpl<$Res> extends _$UsecasePara
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,}) {
   return _then(_$GetCachedGiftHistoryParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1736,7 +1826,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GetCachedGiftHistoryParamsImplCopyWith<_$GetCachedGiftHistoryParamsImpl> get copyWith => __$$GetCachedGiftHistoryParamsImplCopyWithImpl<_$GetCachedGiftHistoryParamsImpl>(this, _$identity);
@@ -1782,7 +1874,9 @@ abstract class GetCachedGiftHistoryParams implements UsecaseParams {
   
 
  Uid get uid;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$GetCachedGiftHistoryParamsImplCopyWith<_$GetCachedGiftHistoryParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1805,6 +1899,8 @@ class __$$ImportPersistenceDataParamsImplCopyWithImpl<$Res> extends _$UsecasePar
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? path = null,}) {
   return _then(_$ImportPersistenceDataParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1842,7 +1938,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,path);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ImportPersistenceDataParamsImplCopyWith<_$ImportPersistenceDataParamsImpl> get copyWith => __$$ImportPersistenceDataParamsImplCopyWithImpl<_$ImportPersistenceDataParamsImpl>(this, _$identity);
@@ -1888,7 +1986,9 @@ abstract class ImportPersistenceDataParams implements UsecaseParams {
   
 
  Uid get uid; String get path;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$ImportPersistenceDataParamsImplCopyWith<_$ImportPersistenceDataParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -1911,6 +2011,8 @@ class __$$ExportPersistenceDataParamsImplCopyWithImpl<$Res> extends _$UsecasePar
       : super(_value, _then);
 
 
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? path = null,}) {
   return _then(_$ExportPersistenceDataParamsImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -1948,7 +2050,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,uid,path);
 
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ExportPersistenceDataParamsImplCopyWith<_$ExportPersistenceDataParamsImpl> get copyWith => __$$ExportPersistenceDataParamsImplCopyWithImpl<_$ExportPersistenceDataParamsImpl>(this, _$identity);
@@ -1994,7 +2098,9 @@ abstract class ExportPersistenceDataParams implements UsecaseParams {
   
 
  Uid get uid; String get path;
-@JsonKey(ignore: true)
+/// Create a copy of UsecaseParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$ExportPersistenceDataParamsImplCopyWith<_$ExportPersistenceDataParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

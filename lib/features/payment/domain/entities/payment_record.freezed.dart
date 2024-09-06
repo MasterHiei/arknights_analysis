@@ -25,7 +25,9 @@ mixin _$PaymentRecord {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of PaymentRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PaymentRecordCopyWith<PaymentRecord> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$PaymentRecordCopyWithImpl<$Res,$Val extends PaymentRecord> implements $P
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PaymentRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? orderId = null,Object? platform = null,Object? amount = null,Object? productName = null,Object? payTime = null,Object? uid = null,}) {
   return _then(_value.copyWith(
 orderId: null == orderId ? _value.orderId : orderId // ignore: cast_nullable_to_non_nullable
@@ -84,6 +88,8 @@ class __$$PaymentRecordImplCopyWithImpl<$Res> extends _$PaymentRecordCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of PaymentRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? orderId = null,Object? platform = null,Object? amount = null,Object? productName = null,Object? payTime = null,Object? uid = null,}) {
   return _then(_$PaymentRecordImpl(
 orderId: null == orderId ? _value.orderId : orderId // ignore: cast_nullable_to_non_nullable
@@ -129,7 +135,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,orderId,platform,amount,productName,payTime,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of PaymentRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PaymentRecordImplCopyWith<_$PaymentRecordImpl> get copyWith => __$$PaymentRecordImplCopyWithImpl<_$PaymentRecordImpl>(this, _$identity);
@@ -150,8 +158,10 @@ abstract class _PaymentRecord extends PaymentRecord {
 
   
 
-@override  String get orderId;@override  Platform get platform;@override  int get amount;@override  String get productName;@override  Ts get payTime;@override  Uid get uid;
-@override @JsonKey(ignore: true)
+@override String get orderId;@override Platform get platform;@override int get amount;@override String get productName;@override Ts get payTime;@override Uid get uid;
+/// Create a copy of PaymentRecord
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PaymentRecordImplCopyWith<_$PaymentRecordImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

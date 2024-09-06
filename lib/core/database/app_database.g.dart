@@ -126,6 +126,14 @@ class User extends DataClass implements Insertable<User> {
         nickName: nickName ?? this.nickName,
         token: token ?? this.token,
       );
+  User copyWithCompanion(UsersCompanion data) {
+    return User(
+      uid: data.uid.present ? data.uid.value : this.uid,
+      nickName: data.nickName.present ? data.nickName.value : this.nickName,
+      token: data.token.present ? data.token.value : this.token,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('User(')
@@ -435,6 +443,23 @@ class GachaPool extends DataClass implements Insertable<GachaPool> {
         gachaPoolName: gachaPoolName ?? this.gachaPoolName,
         gachaRuleType: gachaRuleType ?? this.gachaRuleType,
       );
+  GachaPool copyWithCompanion(GachaPoolsCompanion data) {
+    return GachaPool(
+      gachaPoolId:
+          data.gachaPoolId.present ? data.gachaPoolId.value : this.gachaPoolId,
+      gachaIndex:
+          data.gachaIndex.present ? data.gachaIndex.value : this.gachaIndex,
+      openTime: data.openTime.present ? data.openTime.value : this.openTime,
+      endTime: data.endTime.present ? data.endTime.value : this.endTime,
+      gachaPoolName: data.gachaPoolName.present
+          ? data.gachaPoolName.value
+          : this.gachaPoolName,
+      gachaRuleType: data.gachaRuleType.present
+          ? data.gachaRuleType.value
+          : this.gachaRuleType,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('GachaPool(')
@@ -723,6 +748,15 @@ class GachaRecord extends DataClass implements Insertable<GachaRecord> {
         chars: chars ?? this.chars,
         uid: uid ?? this.uid,
       );
+  GachaRecord copyWithCompanion(GachaRecordsCompanion data) {
+    return GachaRecord(
+      ts: data.ts.present ? data.ts.value : this.ts,
+      pool: data.pool.present ? data.pool.value : this.pool,
+      chars: data.chars.present ? data.chars.value : this.chars,
+      uid: data.uid.present ? data.uid.value : this.uid,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('GachaRecord(')
@@ -985,6 +1019,15 @@ class DiamondRecord extends DataClass implements Insertable<DiamondRecord> {
         changes: changes ?? this.changes,
         uid: uid ?? this.uid,
       );
+  DiamondRecord copyWithCompanion(DiamondRecordsCompanion data) {
+    return DiamondRecord(
+      ts: data.ts.present ? data.ts.value : this.ts,
+      operation: data.operation.present ? data.operation.value : this.operation,
+      changes: data.changes.present ? data.changes.value : this.changes,
+      uid: data.uid.present ? data.uid.value : this.uid,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DiamondRecord(')
@@ -1295,6 +1338,18 @@ class PaymentRecord extends DataClass implements Insertable<PaymentRecord> {
         payTime: payTime ?? this.payTime,
         uid: uid ?? this.uid,
       );
+  PaymentRecord copyWithCompanion(PaymentRecordsCompanion data) {
+    return PaymentRecord(
+      orderId: data.orderId.present ? data.orderId.value : this.orderId,
+      platform: data.platform.present ? data.platform.value : this.platform,
+      amount: data.amount.present ? data.amount.value : this.amount,
+      productName:
+          data.productName.present ? data.productName.value : this.productName,
+      payTime: data.payTime.present ? data.payTime.value : this.payTime,
+      uid: data.uid.present ? data.uid.value : this.uid,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('PaymentRecord(')
@@ -1581,6 +1636,15 @@ class GiftExchangeLog extends DataClass implements Insertable<GiftExchangeLog> {
         ts: ts ?? this.ts,
         uid: uid ?? this.uid,
       );
+  GiftExchangeLog copyWithCompanion(GiftExchangeLogsCompanion data) {
+    return GiftExchangeLog(
+      giftName: data.giftName.present ? data.giftName.value : this.giftName,
+      code: data.code.present ? data.code.value : this.code,
+      ts: data.ts.present ? data.ts.value : this.ts,
+      uid: data.uid.present ? data.uid.value : this.uid,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('GiftExchangeLog(')
@@ -1694,7 +1758,7 @@ class GiftExchangeLogsCompanion extends UpdateCompanion<GiftExchangeLog> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $UsersTable users = $UsersTable(this);
   late final $GachaPoolsTable gachaPools = $GachaPoolsTable(this);
   late final $GachaRecordsTable gachaRecords = $GachaRecordsTable(this);
@@ -1726,7 +1790,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       ];
 }
 
-typedef $$UsersTableInsertCompanionBuilder = UsersCompanion Function({
+typedef $$UsersTableCreateCompanionBuilder = UsersCompanion Function({
   required String uid,
   required String nickName,
   required String token,
@@ -1738,63 +1802,6 @@ typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<String> token,
   Value<int> rowid,
 });
-
-class $$UsersTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $UsersTable,
-    User,
-    $$UsersTableFilterComposer,
-    $$UsersTableOrderingComposer,
-    $$UsersTableProcessedTableManager,
-    $$UsersTableInsertCompanionBuilder,
-    $$UsersTableUpdateCompanionBuilder> {
-  $$UsersTableTableManager(_$AppDatabase db, $UsersTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$UsersTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$UsersTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) => $$UsersTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<String> uid = const Value.absent(),
-            Value<String> nickName = const Value.absent(),
-            Value<String> token = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              UsersCompanion(
-            uid: uid,
-            nickName: nickName,
-            token: token,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required String uid,
-            required String nickName,
-            required String token,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              UsersCompanion.insert(
-            uid: uid,
-            nickName: nickName,
-            token: token,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$UsersTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $UsersTable,
-    User,
-    $$UsersTableFilterComposer,
-    $$UsersTableOrderingComposer,
-    $$UsersTableProcessedTableManager,
-    $$UsersTableInsertCompanionBuilder,
-    $$UsersTableUpdateCompanionBuilder> {
-  $$UsersTableProcessedTableManager(super.$state);
-}
 
 class $$UsersTableFilterComposer
     extends FilterComposer<_$AppDatabase, $UsersTable> {
@@ -1834,7 +1841,68 @@ class $$UsersTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$GachaPoolsTableInsertCompanionBuilder = GachaPoolsCompanion Function({
+class $$UsersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $UsersTable,
+    User,
+    $$UsersTableFilterComposer,
+    $$UsersTableOrderingComposer,
+    $$UsersTableCreateCompanionBuilder,
+    $$UsersTableUpdateCompanionBuilder,
+    (User, BaseReferences<_$AppDatabase, $UsersTable, User>),
+    User,
+    PrefetchHooks Function()> {
+  $$UsersTableTableManager(_$AppDatabase db, $UsersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$UsersTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$UsersTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uid = const Value.absent(),
+            Value<String> nickName = const Value.absent(),
+            Value<String> token = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              UsersCompanion(
+            uid: uid,
+            nickName: nickName,
+            token: token,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uid,
+            required String nickName,
+            required String token,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              UsersCompanion.insert(
+            uid: uid,
+            nickName: nickName,
+            token: token,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$UsersTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $UsersTable,
+    User,
+    $$UsersTableFilterComposer,
+    $$UsersTableOrderingComposer,
+    $$UsersTableCreateCompanionBuilder,
+    $$UsersTableUpdateCompanionBuilder,
+    (User, BaseReferences<_$AppDatabase, $UsersTable, User>),
+    User,
+    PrefetchHooks Function()>;
+typedef $$GachaPoolsTableCreateCompanionBuilder = GachaPoolsCompanion Function({
   required String gachaPoolId,
   required int gachaIndex,
   required int openTime,
@@ -1852,76 +1920,6 @@ typedef $$GachaPoolsTableUpdateCompanionBuilder = GachaPoolsCompanion Function({
   Value<String> gachaRuleType,
   Value<int> rowid,
 });
-
-class $$GachaPoolsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GachaPoolsTable,
-    GachaPool,
-    $$GachaPoolsTableFilterComposer,
-    $$GachaPoolsTableOrderingComposer,
-    $$GachaPoolsTableProcessedTableManager,
-    $$GachaPoolsTableInsertCompanionBuilder,
-    $$GachaPoolsTableUpdateCompanionBuilder> {
-  $$GachaPoolsTableTableManager(_$AppDatabase db, $GachaPoolsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$GachaPoolsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$GachaPoolsTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$GachaPoolsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<String> gachaPoolId = const Value.absent(),
-            Value<int> gachaIndex = const Value.absent(),
-            Value<int> openTime = const Value.absent(),
-            Value<int> endTime = const Value.absent(),
-            Value<String> gachaPoolName = const Value.absent(),
-            Value<String> gachaRuleType = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GachaPoolsCompanion(
-            gachaPoolId: gachaPoolId,
-            gachaIndex: gachaIndex,
-            openTime: openTime,
-            endTime: endTime,
-            gachaPoolName: gachaPoolName,
-            gachaRuleType: gachaRuleType,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required String gachaPoolId,
-            required int gachaIndex,
-            required int openTime,
-            required int endTime,
-            required String gachaPoolName,
-            required String gachaRuleType,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GachaPoolsCompanion.insert(
-            gachaPoolId: gachaPoolId,
-            gachaIndex: gachaIndex,
-            openTime: openTime,
-            endTime: endTime,
-            gachaPoolName: gachaPoolName,
-            gachaRuleType: gachaRuleType,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$GachaPoolsTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $GachaPoolsTable,
-    GachaPool,
-    $$GachaPoolsTableFilterComposer,
-    $$GachaPoolsTableOrderingComposer,
-    $$GachaPoolsTableProcessedTableManager,
-    $$GachaPoolsTableInsertCompanionBuilder,
-    $$GachaPoolsTableUpdateCompanionBuilder> {
-  $$GachaPoolsTableProcessedTableManager(super.$state);
-}
 
 class $$GachaPoolsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $GachaPoolsTable> {
@@ -1991,7 +1989,80 @@ class $$GachaPoolsTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$GachaRecordsTableInsertCompanionBuilder = GachaRecordsCompanion
+class $$GachaPoolsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GachaPoolsTable,
+    GachaPool,
+    $$GachaPoolsTableFilterComposer,
+    $$GachaPoolsTableOrderingComposer,
+    $$GachaPoolsTableCreateCompanionBuilder,
+    $$GachaPoolsTableUpdateCompanionBuilder,
+    (GachaPool, BaseReferences<_$AppDatabase, $GachaPoolsTable, GachaPool>),
+    GachaPool,
+    PrefetchHooks Function()> {
+  $$GachaPoolsTableTableManager(_$AppDatabase db, $GachaPoolsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$GachaPoolsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$GachaPoolsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> gachaPoolId = const Value.absent(),
+            Value<int> gachaIndex = const Value.absent(),
+            Value<int> openTime = const Value.absent(),
+            Value<int> endTime = const Value.absent(),
+            Value<String> gachaPoolName = const Value.absent(),
+            Value<String> gachaRuleType = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GachaPoolsCompanion(
+            gachaPoolId: gachaPoolId,
+            gachaIndex: gachaIndex,
+            openTime: openTime,
+            endTime: endTime,
+            gachaPoolName: gachaPoolName,
+            gachaRuleType: gachaRuleType,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String gachaPoolId,
+            required int gachaIndex,
+            required int openTime,
+            required int endTime,
+            required String gachaPoolName,
+            required String gachaRuleType,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GachaPoolsCompanion.insert(
+            gachaPoolId: gachaPoolId,
+            gachaIndex: gachaIndex,
+            openTime: openTime,
+            endTime: endTime,
+            gachaPoolName: gachaPoolName,
+            gachaRuleType: gachaRuleType,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GachaPoolsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GachaPoolsTable,
+    GachaPool,
+    $$GachaPoolsTableFilterComposer,
+    $$GachaPoolsTableOrderingComposer,
+    $$GachaPoolsTableCreateCompanionBuilder,
+    $$GachaPoolsTableUpdateCompanionBuilder,
+    (GachaPool, BaseReferences<_$AppDatabase, $GachaPoolsTable, GachaPool>),
+    GachaPool,
+    PrefetchHooks Function()>;
+typedef $$GachaRecordsTableCreateCompanionBuilder = GachaRecordsCompanion
     Function({
   required int ts,
   required String pool,
@@ -2007,68 +2078,6 @@ typedef $$GachaRecordsTableUpdateCompanionBuilder = GachaRecordsCompanion
   Value<String> uid,
   Value<int> rowid,
 });
-
-class $$GachaRecordsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GachaRecordsTable,
-    GachaRecord,
-    $$GachaRecordsTableFilterComposer,
-    $$GachaRecordsTableOrderingComposer,
-    $$GachaRecordsTableProcessedTableManager,
-    $$GachaRecordsTableInsertCompanionBuilder,
-    $$GachaRecordsTableUpdateCompanionBuilder> {
-  $$GachaRecordsTableTableManager(_$AppDatabase db, $GachaRecordsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$GachaRecordsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$GachaRecordsTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$GachaRecordsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> ts = const Value.absent(),
-            Value<String> pool = const Value.absent(),
-            Value<List<dynamic>> chars = const Value.absent(),
-            Value<String> uid = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GachaRecordsCompanion(
-            ts: ts,
-            pool: pool,
-            chars: chars,
-            uid: uid,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required int ts,
-            required String pool,
-            required List<dynamic> chars,
-            required String uid,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GachaRecordsCompanion.insert(
-            ts: ts,
-            pool: pool,
-            chars: chars,
-            uid: uid,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$GachaRecordsTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $GachaRecordsTable,
-    GachaRecord,
-    $$GachaRecordsTableFilterComposer,
-    $$GachaRecordsTableOrderingComposer,
-    $$GachaRecordsTableProcessedTableManager,
-    $$GachaRecordsTableInsertCompanionBuilder,
-    $$GachaRecordsTableUpdateCompanionBuilder> {
-  $$GachaRecordsTableProcessedTableManager(super.$state);
-}
 
 class $$GachaRecordsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $GachaRecordsTable> {
@@ -2120,7 +2129,78 @@ class $$GachaRecordsTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$DiamondRecordsTableInsertCompanionBuilder = DiamondRecordsCompanion
+class $$GachaRecordsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GachaRecordsTable,
+    GachaRecord,
+    $$GachaRecordsTableFilterComposer,
+    $$GachaRecordsTableOrderingComposer,
+    $$GachaRecordsTableCreateCompanionBuilder,
+    $$GachaRecordsTableUpdateCompanionBuilder,
+    (
+      GachaRecord,
+      BaseReferences<_$AppDatabase, $GachaRecordsTable, GachaRecord>
+    ),
+    GachaRecord,
+    PrefetchHooks Function()> {
+  $$GachaRecordsTableTableManager(_$AppDatabase db, $GachaRecordsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$GachaRecordsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$GachaRecordsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> ts = const Value.absent(),
+            Value<String> pool = const Value.absent(),
+            Value<List<dynamic>> chars = const Value.absent(),
+            Value<String> uid = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GachaRecordsCompanion(
+            ts: ts,
+            pool: pool,
+            chars: chars,
+            uid: uid,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required int ts,
+            required String pool,
+            required List<dynamic> chars,
+            required String uid,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GachaRecordsCompanion.insert(
+            ts: ts,
+            pool: pool,
+            chars: chars,
+            uid: uid,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GachaRecordsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GachaRecordsTable,
+    GachaRecord,
+    $$GachaRecordsTableFilterComposer,
+    $$GachaRecordsTableOrderingComposer,
+    $$GachaRecordsTableCreateCompanionBuilder,
+    $$GachaRecordsTableUpdateCompanionBuilder,
+    (
+      GachaRecord,
+      BaseReferences<_$AppDatabase, $GachaRecordsTable, GachaRecord>
+    ),
+    GachaRecord,
+    PrefetchHooks Function()>;
+typedef $$DiamondRecordsTableCreateCompanionBuilder = DiamondRecordsCompanion
     Function({
   required int ts,
   required String operation,
@@ -2136,69 +2216,6 @@ typedef $$DiamondRecordsTableUpdateCompanionBuilder = DiamondRecordsCompanion
   Value<String> uid,
   Value<int> rowid,
 });
-
-class $$DiamondRecordsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DiamondRecordsTable,
-    DiamondRecord,
-    $$DiamondRecordsTableFilterComposer,
-    $$DiamondRecordsTableOrderingComposer,
-    $$DiamondRecordsTableProcessedTableManager,
-    $$DiamondRecordsTableInsertCompanionBuilder,
-    $$DiamondRecordsTableUpdateCompanionBuilder> {
-  $$DiamondRecordsTableTableManager(
-      _$AppDatabase db, $DiamondRecordsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DiamondRecordsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DiamondRecordsTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DiamondRecordsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> ts = const Value.absent(),
-            Value<String> operation = const Value.absent(),
-            Value<List<dynamic>> changes = const Value.absent(),
-            Value<String> uid = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DiamondRecordsCompanion(
-            ts: ts,
-            operation: operation,
-            changes: changes,
-            uid: uid,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required int ts,
-            required String operation,
-            required List<dynamic> changes,
-            required String uid,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DiamondRecordsCompanion.insert(
-            ts: ts,
-            operation: operation,
-            changes: changes,
-            uid: uid,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$DiamondRecordsTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $DiamondRecordsTable,
-    DiamondRecord,
-    $$DiamondRecordsTableFilterComposer,
-    $$DiamondRecordsTableOrderingComposer,
-    $$DiamondRecordsTableProcessedTableManager,
-    $$DiamondRecordsTableInsertCompanionBuilder,
-    $$DiamondRecordsTableUpdateCompanionBuilder> {
-  $$DiamondRecordsTableProcessedTableManager(super.$state);
-}
 
 class $$DiamondRecordsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DiamondRecordsTable> {
@@ -2250,7 +2267,79 @@ class $$DiamondRecordsTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$PaymentRecordsTableInsertCompanionBuilder = PaymentRecordsCompanion
+class $$DiamondRecordsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DiamondRecordsTable,
+    DiamondRecord,
+    $$DiamondRecordsTableFilterComposer,
+    $$DiamondRecordsTableOrderingComposer,
+    $$DiamondRecordsTableCreateCompanionBuilder,
+    $$DiamondRecordsTableUpdateCompanionBuilder,
+    (
+      DiamondRecord,
+      BaseReferences<_$AppDatabase, $DiamondRecordsTable, DiamondRecord>
+    ),
+    DiamondRecord,
+    PrefetchHooks Function()> {
+  $$DiamondRecordsTableTableManager(
+      _$AppDatabase db, $DiamondRecordsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DiamondRecordsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DiamondRecordsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> ts = const Value.absent(),
+            Value<String> operation = const Value.absent(),
+            Value<List<dynamic>> changes = const Value.absent(),
+            Value<String> uid = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DiamondRecordsCompanion(
+            ts: ts,
+            operation: operation,
+            changes: changes,
+            uid: uid,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required int ts,
+            required String operation,
+            required List<dynamic> changes,
+            required String uid,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DiamondRecordsCompanion.insert(
+            ts: ts,
+            operation: operation,
+            changes: changes,
+            uid: uid,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DiamondRecordsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DiamondRecordsTable,
+    DiamondRecord,
+    $$DiamondRecordsTableFilterComposer,
+    $$DiamondRecordsTableOrderingComposer,
+    $$DiamondRecordsTableCreateCompanionBuilder,
+    $$DiamondRecordsTableUpdateCompanionBuilder,
+    (
+      DiamondRecord,
+      BaseReferences<_$AppDatabase, $DiamondRecordsTable, DiamondRecord>
+    ),
+    DiamondRecord,
+    PrefetchHooks Function()>;
+typedef $$PaymentRecordsTableCreateCompanionBuilder = PaymentRecordsCompanion
     Function({
   required String orderId,
   required int platform,
@@ -2270,77 +2359,6 @@ typedef $$PaymentRecordsTableUpdateCompanionBuilder = PaymentRecordsCompanion
   Value<String> uid,
   Value<int> rowid,
 });
-
-class $$PaymentRecordsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $PaymentRecordsTable,
-    PaymentRecord,
-    $$PaymentRecordsTableFilterComposer,
-    $$PaymentRecordsTableOrderingComposer,
-    $$PaymentRecordsTableProcessedTableManager,
-    $$PaymentRecordsTableInsertCompanionBuilder,
-    $$PaymentRecordsTableUpdateCompanionBuilder> {
-  $$PaymentRecordsTableTableManager(
-      _$AppDatabase db, $PaymentRecordsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$PaymentRecordsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$PaymentRecordsTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$PaymentRecordsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<String> orderId = const Value.absent(),
-            Value<int> platform = const Value.absent(),
-            Value<int> amount = const Value.absent(),
-            Value<String> productName = const Value.absent(),
-            Value<int> payTime = const Value.absent(),
-            Value<String> uid = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              PaymentRecordsCompanion(
-            orderId: orderId,
-            platform: platform,
-            amount: amount,
-            productName: productName,
-            payTime: payTime,
-            uid: uid,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required String orderId,
-            required int platform,
-            required int amount,
-            required String productName,
-            required int payTime,
-            required String uid,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              PaymentRecordsCompanion.insert(
-            orderId: orderId,
-            platform: platform,
-            amount: amount,
-            productName: productName,
-            payTime: payTime,
-            uid: uid,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$PaymentRecordsTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $PaymentRecordsTable,
-    PaymentRecord,
-    $$PaymentRecordsTableFilterComposer,
-    $$PaymentRecordsTableOrderingComposer,
-    $$PaymentRecordsTableProcessedTableManager,
-    $$PaymentRecordsTableInsertCompanionBuilder,
-    $$PaymentRecordsTableUpdateCompanionBuilder> {
-  $$PaymentRecordsTableProcessedTableManager(super.$state);
-}
 
 class $$PaymentRecordsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $PaymentRecordsTable> {
@@ -2410,7 +2428,87 @@ class $$PaymentRecordsTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$GiftExchangeLogsTableInsertCompanionBuilder
+class $$PaymentRecordsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PaymentRecordsTable,
+    PaymentRecord,
+    $$PaymentRecordsTableFilterComposer,
+    $$PaymentRecordsTableOrderingComposer,
+    $$PaymentRecordsTableCreateCompanionBuilder,
+    $$PaymentRecordsTableUpdateCompanionBuilder,
+    (
+      PaymentRecord,
+      BaseReferences<_$AppDatabase, $PaymentRecordsTable, PaymentRecord>
+    ),
+    PaymentRecord,
+    PrefetchHooks Function()> {
+  $$PaymentRecordsTableTableManager(
+      _$AppDatabase db, $PaymentRecordsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$PaymentRecordsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$PaymentRecordsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> orderId = const Value.absent(),
+            Value<int> platform = const Value.absent(),
+            Value<int> amount = const Value.absent(),
+            Value<String> productName = const Value.absent(),
+            Value<int> payTime = const Value.absent(),
+            Value<String> uid = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PaymentRecordsCompanion(
+            orderId: orderId,
+            platform: platform,
+            amount: amount,
+            productName: productName,
+            payTime: payTime,
+            uid: uid,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String orderId,
+            required int platform,
+            required int amount,
+            required String productName,
+            required int payTime,
+            required String uid,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PaymentRecordsCompanion.insert(
+            orderId: orderId,
+            platform: platform,
+            amount: amount,
+            productName: productName,
+            payTime: payTime,
+            uid: uid,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$PaymentRecordsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $PaymentRecordsTable,
+    PaymentRecord,
+    $$PaymentRecordsTableFilterComposer,
+    $$PaymentRecordsTableOrderingComposer,
+    $$PaymentRecordsTableCreateCompanionBuilder,
+    $$PaymentRecordsTableUpdateCompanionBuilder,
+    (
+      PaymentRecord,
+      BaseReferences<_$AppDatabase, $PaymentRecordsTable, PaymentRecord>
+    ),
+    PaymentRecord,
+    PrefetchHooks Function()>;
+typedef $$GiftExchangeLogsTableCreateCompanionBuilder
     = GiftExchangeLogsCompanion Function({
   required String giftName,
   required String code,
@@ -2426,70 +2524,6 @@ typedef $$GiftExchangeLogsTableUpdateCompanionBuilder
   Value<String> uid,
   Value<int> rowid,
 });
-
-class $$GiftExchangeLogsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GiftExchangeLogsTable,
-    GiftExchangeLog,
-    $$GiftExchangeLogsTableFilterComposer,
-    $$GiftExchangeLogsTableOrderingComposer,
-    $$GiftExchangeLogsTableProcessedTableManager,
-    $$GiftExchangeLogsTableInsertCompanionBuilder,
-    $$GiftExchangeLogsTableUpdateCompanionBuilder> {
-  $$GiftExchangeLogsTableTableManager(
-      _$AppDatabase db, $GiftExchangeLogsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$GiftExchangeLogsTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$GiftExchangeLogsTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$GiftExchangeLogsTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<String> giftName = const Value.absent(),
-            Value<String> code = const Value.absent(),
-            Value<int> ts = const Value.absent(),
-            Value<String> uid = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GiftExchangeLogsCompanion(
-            giftName: giftName,
-            code: code,
-            ts: ts,
-            uid: uid,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required String giftName,
-            required String code,
-            required int ts,
-            required String uid,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GiftExchangeLogsCompanion.insert(
-            giftName: giftName,
-            code: code,
-            ts: ts,
-            uid: uid,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$GiftExchangeLogsTableProcessedTableManager
-    extends ProcessedTableManager<
-        _$AppDatabase,
-        $GiftExchangeLogsTable,
-        GiftExchangeLog,
-        $$GiftExchangeLogsTableFilterComposer,
-        $$GiftExchangeLogsTableOrderingComposer,
-        $$GiftExchangeLogsTableProcessedTableManager,
-        $$GiftExchangeLogsTableInsertCompanionBuilder,
-        $$GiftExchangeLogsTableUpdateCompanionBuilder> {
-  $$GiftExchangeLogsTableProcessedTableManager(super.$state);
-}
 
 class $$GiftExchangeLogsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $GiftExchangeLogsTable> {
@@ -2539,9 +2573,82 @@ class $$GiftExchangeLogsTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-class _$AppDatabaseManager {
+class $$GiftExchangeLogsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GiftExchangeLogsTable,
+    GiftExchangeLog,
+    $$GiftExchangeLogsTableFilterComposer,
+    $$GiftExchangeLogsTableOrderingComposer,
+    $$GiftExchangeLogsTableCreateCompanionBuilder,
+    $$GiftExchangeLogsTableUpdateCompanionBuilder,
+    (
+      GiftExchangeLog,
+      BaseReferences<_$AppDatabase, $GiftExchangeLogsTable, GiftExchangeLog>
+    ),
+    GiftExchangeLog,
+    PrefetchHooks Function()> {
+  $$GiftExchangeLogsTableTableManager(
+      _$AppDatabase db, $GiftExchangeLogsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$GiftExchangeLogsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$GiftExchangeLogsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> giftName = const Value.absent(),
+            Value<String> code = const Value.absent(),
+            Value<int> ts = const Value.absent(),
+            Value<String> uid = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GiftExchangeLogsCompanion(
+            giftName: giftName,
+            code: code,
+            ts: ts,
+            uid: uid,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String giftName,
+            required String code,
+            required int ts,
+            required String uid,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GiftExchangeLogsCompanion.insert(
+            giftName: giftName,
+            code: code,
+            ts: ts,
+            uid: uid,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GiftExchangeLogsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GiftExchangeLogsTable,
+    GiftExchangeLog,
+    $$GiftExchangeLogsTableFilterComposer,
+    $$GiftExchangeLogsTableOrderingComposer,
+    $$GiftExchangeLogsTableCreateCompanionBuilder,
+    $$GiftExchangeLogsTableUpdateCompanionBuilder,
+    (
+      GiftExchangeLog,
+      BaseReferences<_$AppDatabase, $GiftExchangeLogsTable, GiftExchangeLog>
+    ),
+    GiftExchangeLog,
+    PrefetchHooks Function()>;
+
+class $AppDatabaseManager {
   final _$AppDatabase _db;
-  _$AppDatabaseManager(this._db);
+  $AppDatabaseManager(this._db);
   $$UsersTableTableManager get users =>
       $$UsersTableTableManager(_db, _db.users);
   $$GachaPoolsTableTableManager get gachaPools =>

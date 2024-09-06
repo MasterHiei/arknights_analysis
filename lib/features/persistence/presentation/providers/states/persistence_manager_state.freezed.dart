@@ -45,6 +45,8 @@ class _$PersistenceManagerStateCopyWithImpl<$Res,$Val extends PersistenceManager
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -64,6 +66,8 @@ class __$$IdleImplCopyWithImpl<$Res> extends _$PersistenceManagerStateCopyWithIm
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -153,6 +157,8 @@ class __$$ProcessingImplCopyWithImpl<$Res> extends _$PersistenceManagerStateCopy
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -242,6 +248,8 @@ class __$$ImportSuccessImplCopyWithImpl<$Res> extends _$PersistenceManagerStateC
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -335,6 +343,8 @@ class __$$ImportFailureImplCopyWithImpl<$Res> extends _$PersistenceManagerStateC
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failure = null,}) {
   return _then(_$ImportFailureImpl(
 null == failure ? _value.failure : failure // ignore: cast_nullable_to_non_nullable
@@ -342,6 +352,8 @@ as AppFailure,
   ));
 }
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $AppFailureCopyWith<$Res> get failure {
@@ -377,7 +389,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,failure);
 
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ImportFailureImplCopyWith<_$ImportFailureImpl> get copyWith => __$$ImportFailureImplCopyWithImpl<_$ImportFailureImpl>(this, _$identity);
@@ -423,7 +437,9 @@ abstract class _ImportFailure implements PersistenceManagerState {
   
 
  AppFailure get failure;
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$ImportFailureImplCopyWith<_$ImportFailureImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -446,6 +462,8 @@ class __$$ExportSuccessImplCopyWithImpl<$Res> extends _$PersistenceManagerStateC
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? file = null,}) {
   return _then(_$ExportSuccessImpl(
 null == file ? _value.file : file // ignore: cast_nullable_to_non_nullable
@@ -481,7 +499,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,file);
 
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ExportSuccessImplCopyWith<_$ExportSuccessImpl> get copyWith => __$$ExportSuccessImplCopyWithImpl<_$ExportSuccessImpl>(this, _$identity);
@@ -527,7 +547,9 @@ abstract class _ExportSuccess implements PersistenceManagerState {
   
 
  File get file;
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$ExportSuccessImplCopyWith<_$ExportSuccessImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -550,6 +572,8 @@ class __$$ExportFailureImplCopyWithImpl<$Res> extends _$PersistenceManagerStateC
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failure = null,}) {
   return _then(_$ExportFailureImpl(
 null == failure ? _value.failure : failure // ignore: cast_nullable_to_non_nullable
@@ -557,6 +581,8 @@ as AppFailure,
   ));
 }
 
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $AppFailureCopyWith<$Res> get failure {
@@ -592,7 +618,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,failure);
 
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ExportFailureImplCopyWith<_$ExportFailureImpl> get copyWith => __$$ExportFailureImplCopyWithImpl<_$ExportFailureImpl>(this, _$identity);
@@ -638,7 +666,9 @@ abstract class _ExportFailure implements PersistenceManagerState {
   
 
  AppFailure get failure;
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceManagerState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$ExportFailureImplCopyWith<_$ExportFailureImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -25,7 +25,9 @@ mixin _$CheckForUpdatesState {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of CheckForUpdatesState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $CheckForUpdatesStateCopyWith<CheckForUpdatesState> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$CheckForUpdatesStateCopyWithImpl<$Res,$Val extends CheckForUpdatesState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of CheckForUpdatesState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isChecking = null,Object? isManually = null,Object? currentVersion = null,Object? failureOrLatestReleaseOption = null,}) {
   return _then(_value.copyWith(
 isChecking: null == isChecking ? _value.isChecking : isChecking // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$CheckForUpdatesStateImplCopyWithImpl<$Res> extends _$CheckForUpdatesSt
       : super(_value, _then);
 
 
+/// Create a copy of CheckForUpdatesState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isChecking = null,Object? isManually = null,Object? currentVersion = null,Object? failureOrLatestReleaseOption = null,}) {
   return _then(_$CheckForUpdatesStateImpl(
 isChecking: null == isChecking ? _value.isChecking : isChecking // ignore: cast_nullable_to_non_nullable
@@ -123,7 +129,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,isChecking,isManually,currentVersion,failureOrLatestReleaseOption);
 
-@JsonKey(ignore: true)
+/// Create a copy of CheckForUpdatesState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$CheckForUpdatesStateImplCopyWith<_$CheckForUpdatesStateImpl> get copyWith => __$$CheckForUpdatesStateImplCopyWithImpl<_$CheckForUpdatesStateImpl>(this, _$identity);
@@ -144,8 +152,10 @@ abstract class _CheckForUpdatesState extends CheckForUpdatesState {
 
   
 
-@override  bool get isChecking;@override  bool get isManually;@override  String get currentVersion;@override  Option<Either<AppFailure, LatestRelease>> get failureOrLatestReleaseOption;
-@override @JsonKey(ignore: true)
+@override bool get isChecking;@override bool get isManually;@override String get currentVersion;@override Option<Either<AppFailure, LatestRelease>> get failureOrLatestReleaseOption;
+/// Create a copy of CheckForUpdatesState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$CheckForUpdatesStateImplCopyWith<_$CheckForUpdatesStateImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

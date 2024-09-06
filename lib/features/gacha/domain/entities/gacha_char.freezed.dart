@@ -25,7 +25,9 @@ mixin _$GachaChar {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaChar
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaCharCopyWith<GachaChar> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaCharCopyWithImpl<$Res,$Val extends GachaChar> implements $GachaChar
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaChar
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? rarity = null,Object? isNew = null,Object? pool = null,Object? ts = null,}) {
   return _then(_value.copyWith(
 name: null == name ? _value.name : name // ignore: cast_nullable_to_non_nullable
@@ -83,6 +87,8 @@ class __$$GachaCharImplCopyWithImpl<$Res> extends _$GachaCharCopyWithImpl<$Res, 
       : super(_value, _then);
 
 
+/// Create a copy of GachaChar
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? rarity = null,Object? isNew = null,Object? pool = null,Object? ts = null,}) {
   return _then(_$GachaCharImpl(
 name: null == name ? _value.name : name // ignore: cast_nullable_to_non_nullable
@@ -126,7 +132,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,name,rarity,isNew,pool,ts);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaChar
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaCharImplCopyWith<_$GachaCharImpl> get copyWith => __$$GachaCharImplCopyWithImpl<_$GachaCharImpl>(this, _$identity);
@@ -147,8 +155,10 @@ abstract class _GachaChar extends GachaChar {
 
   
 
-@override  String get name;@override  Rarity get rarity;@override  bool get isNew;@override  String get pool;@override  Ts get ts;
-@override @JsonKey(ignore: true)
+@override String get name;@override Rarity get rarity;@override bool get isNew;@override String get pool;@override Ts get ts;
+/// Create a copy of GachaChar
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaCharImplCopyWith<_$GachaCharImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

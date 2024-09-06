@@ -25,7 +25,9 @@ mixin _$DiamondChange {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of DiamondChange
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $DiamondChangeCopyWith<DiamondChange> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$DiamondChangeCopyWithImpl<$Res,$Val extends DiamondChange> implements $D
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of DiamondChange
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? operation = null,Object? type = null,Object? before = null,Object? after = null,Object? ts = null,}) {
   return _then(_value.copyWith(
 operation: null == operation ? _value.operation : operation // ignore: cast_nullable_to_non_nullable
@@ -83,6 +87,8 @@ class __$$DiamondChangeImplCopyWithImpl<$Res> extends _$DiamondChangeCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of DiamondChange
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? operation = null,Object? type = null,Object? before = null,Object? after = null,Object? ts = null,}) {
   return _then(_$DiamondChangeImpl(
 operation: null == operation ? _value.operation : operation // ignore: cast_nullable_to_non_nullable
@@ -126,7 +132,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,operation,type,before,after,ts);
 
-@JsonKey(ignore: true)
+/// Create a copy of DiamondChange
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DiamondChangeImplCopyWith<_$DiamondChangeImpl> get copyWith => __$$DiamondChangeImplCopyWithImpl<_$DiamondChangeImpl>(this, _$identity);
@@ -147,8 +155,10 @@ abstract class _DiamondChange extends DiamondChange {
 
   
 
-@override  String get operation;@override  String get type;@override  int get before;@override  int get after;@override  Ts get ts;
-@override @JsonKey(ignore: true)
+@override String get operation;@override String get type;@override int get before;@override int get after;@override Ts get ts;
+/// Create a copy of DiamondChange
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$DiamondChangeImplCopyWith<_$DiamondChangeImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

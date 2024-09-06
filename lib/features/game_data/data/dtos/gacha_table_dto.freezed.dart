@@ -28,8 +28,11 @@ mixin _$GachaTableDto {
 
 
 
+/// Serializes this GachaTableDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of GachaTableDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaTableDtoCopyWith<GachaTableDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$GachaTableDtoCopyWithImpl<$Res,$Val extends GachaTableDto> implements $G
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaTableDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gachaPoolClient = null,}) {
   return _then(_value.copyWith(
 gachaPoolClient: null == gachaPoolClient ? _value.gachaPoolClient : gachaPoolClient // ignore: cast_nullable_to_non_nullable
@@ -83,6 +88,8 @@ class __$$GachaTableDtoImplCopyWithImpl<$Res> extends _$GachaTableDtoCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of GachaTableDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gachaPoolClient = null,}) {
   return _then(_$GachaTableDtoImpl(
 gachaPoolClient: null == gachaPoolClient ? _value._gachaPoolClient : gachaPoolClient // ignore: cast_nullable_to_non_nullable
@@ -120,11 +127,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$GachaTableDtoImpl&&const DeepCollectionEquality().equals(other._gachaPoolClient, _gachaPoolClient));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_gachaPoolClient));
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaTableDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaTableDtoImplCopyWith<_$GachaTableDtoImpl> get copyWith => __$$GachaTableDtoImplCopyWithImpl<_$GachaTableDtoImpl>(this, _$identity);
@@ -148,8 +157,10 @@ abstract class _GachaTableDto implements GachaTableDto {
 
   factory _GachaTableDto.fromJson(Map<String, dynamic> json) = _$GachaTableDtoImpl.fromJson;
 
-@override  List<GachaPoolDto> get gachaPoolClient;
-@override @JsonKey(ignore: true)
+@override List<GachaPoolDto> get gachaPoolClient;
+/// Create a copy of GachaTableDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaTableDtoImplCopyWith<_$GachaTableDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

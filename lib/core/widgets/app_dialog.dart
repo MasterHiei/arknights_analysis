@@ -39,17 +39,17 @@ class AppDialog extends StatelessWidget {
         FilledButton(
           onPressed: onConfirmButtonTap,
           style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
+            backgroundColor: WidgetStateProperty.resolveWith(
               (states) {
                 final color = confirmButtonColor;
                 if (color is AccentColor) {
                   if (states.isNone) {
                     return color.normal;
                   }
-                  if (states.isPressing) {
+                  if (states.isPressed) {
                     return color.lighter;
                   }
-                  if (states.isHovering) {
+                  if (states.isHovered) {
                     return color.light;
                   }
                   return null;
@@ -63,17 +63,17 @@ class AppDialog extends StatelessWidget {
         FilledButton(
           onPressed: onCloseButtonTap,
           style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
+            backgroundColor: WidgetStateProperty.resolveWith(
               (states) {
                 final color = closeButtonColor;
                 if (color is AccentColor) {
                   if (states.isNone) {
                     return color.normal;
                   }
-                  if (states.isPressing) {
+                  if (states.isPressed) {
                     return color.lighter;
                   }
-                  if (states.isHovering) {
+                  if (states.isHovered) {
                     return color.light;
                   }
                   return null;

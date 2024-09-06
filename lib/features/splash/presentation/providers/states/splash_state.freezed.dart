@@ -25,7 +25,9 @@ mixin _$SplashState {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of SplashState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $SplashStateCopyWith<SplashState> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$SplashStateCopyWithImpl<$Res,$Val extends SplashState> implements $Splas
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of SplashState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? startAnimation = null,Object? isFetching = null,Object? shouldTransition = null,Object? failureOption = null,}) {
   return _then(_value.copyWith(
 startAnimation: null == startAnimation ? _value.startAnimation : startAnimation // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$SplashStateImplCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$R
       : super(_value, _then);
 
 
+/// Create a copy of SplashState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? startAnimation = null,Object? isFetching = null,Object? shouldTransition = null,Object? failureOption = null,}) {
   return _then(_$SplashStateImpl(
 startAnimation: null == startAnimation ? _value.startAnimation : startAnimation // ignore: cast_nullable_to_non_nullable
@@ -123,7 +129,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,startAnimation,isFetching,shouldTransition,failureOption);
 
-@JsonKey(ignore: true)
+/// Create a copy of SplashState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$SplashStateImplCopyWith<_$SplashStateImpl> get copyWith => __$$SplashStateImplCopyWithImpl<_$SplashStateImpl>(this, _$identity);
@@ -144,8 +152,10 @@ abstract class _SplashState extends SplashState {
 
   
 
-@override  bool get startAnimation;@override  bool get isFetching;@override  bool get shouldTransition;@override  Option<AppFailure> get failureOption;
-@override @JsonKey(ignore: true)
+@override bool get startAnimation;@override bool get isFetching;@override bool get shouldTransition;@override Option<AppFailure> get failureOption;
+/// Create a copy of SplashState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$SplashStateImplCopyWith<_$SplashStateImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

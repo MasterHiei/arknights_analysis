@@ -28,8 +28,11 @@ mixin _$PaginationDto {
 
 
 
+/// Serializes this PaginationDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of PaginationDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PaginationDtoCopyWith<PaginationDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$PaginationDtoCopyWithImpl<$Res,$Val extends PaginationDto> implements $P
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PaginationDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? current = null,Object? total = null,}) {
   return _then(_value.copyWith(
 current: null == current ? _value.current : current // ignore: cast_nullable_to_non_nullable
@@ -84,6 +89,8 @@ class __$$PaginationDtoImplCopyWithImpl<$Res> extends _$PaginationDtoCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of PaginationDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? current = null,Object? total = null,}) {
   return _then(_$PaginationDtoImpl(
 current: null == current ? _value.current : current // ignore: cast_nullable_to_non_nullable
@@ -117,11 +124,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PaginationDtoImpl&&(identical(other.current, current) || other.current == current)&&(identical(other.total, total) || other.total == total));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,current,total);
 
-@JsonKey(ignore: true)
+/// Create a copy of PaginationDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PaginationDtoImplCopyWith<_$PaginationDtoImpl> get copyWith => __$$PaginationDtoImplCopyWithImpl<_$PaginationDtoImpl>(this, _$identity);
@@ -145,8 +154,10 @@ abstract class _PaginationDto extends PaginationDto {
 
   factory _PaginationDto.fromJson(Map<String, dynamic> json) = _$PaginationDtoImpl.fromJson;
 
-@override  int get current;@override  int get total;
-@override @JsonKey(ignore: true)
+@override int get current;@override int get total;
+/// Create a copy of PaginationDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PaginationDtoImplCopyWith<_$PaginationDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

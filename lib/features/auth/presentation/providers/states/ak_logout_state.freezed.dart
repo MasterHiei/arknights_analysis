@@ -45,6 +45,8 @@ class _$AkLogoutStateCopyWithImpl<$Res,$Val extends AkLogoutState> implements $A
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of AkLogoutState
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -64,6 +66,8 @@ class __$$InitImplCopyWithImpl<$Res> extends _$AkLogoutStateCopyWithImpl<$Res, _
       : super(_value, _then);
 
 
+/// Create a copy of AkLogoutState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -141,6 +145,8 @@ class __$$LoggingOutImplCopyWithImpl<$Res> extends _$AkLogoutStateCopyWithImpl<$
       : super(_value, _then);
 
 
+/// Create a copy of AkLogoutState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -218,6 +224,8 @@ class __$$LoggedOutImplCopyWithImpl<$Res> extends _$AkLogoutStateCopyWithImpl<$R
       : super(_value, _then);
 
 
+/// Create a copy of AkLogoutState
+/// with the given fields replaced by the non-null parameter values.
 
 
 

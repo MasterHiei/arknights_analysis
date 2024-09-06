@@ -45,6 +45,8 @@ class _$RefreshDiamondHistoryStateCopyWithImpl<$Res,$Val extends RefreshDiamondH
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -68,6 +70,8 @@ class __$$FetchingImplCopyWithImpl<$Res> extends _$RefreshDiamondHistoryStateCop
       : super(_value, _then);
 
 
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? current = null,Object? total = null,}) {
   return _then(_$FetchingImpl(
 current: null == current ? _value.current : current // ignore: cast_nullable_to_non_nullable
@@ -105,7 +109,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,current,total);
 
-@JsonKey(ignore: true)
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FetchingImplCopyWith<_$FetchingImpl> get copyWith => __$$FetchingImplCopyWithImpl<_$FetchingImpl>(this, _$identity);
@@ -151,7 +157,9 @@ abstract class _Fetching extends RefreshDiamondHistoryState {
   
 
  int get current; int get total;
-@JsonKey(ignore: true)
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FetchingImplCopyWith<_$FetchingImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -170,6 +178,8 @@ class __$$SuccessImplCopyWithImpl<$Res> extends _$RefreshDiamondHistoryStateCopy
       : super(_value, _then);
 
 
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -263,6 +273,8 @@ class __$$FailureImplCopyWithImpl<$Res> extends _$RefreshDiamondHistoryStateCopy
       : super(_value, _then);
 
 
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failure = null,}) {
   return _then(_$FailureImpl(
 null == failure ? _value.failure : failure // ignore: cast_nullable_to_non_nullable
@@ -270,6 +282,8 @@ as AppFailure,
   ));
 }
 
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $AppFailureCopyWith<$Res> get failure {
@@ -305,7 +319,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,failure);
 
-@JsonKey(ignore: true)
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$FailureImplCopyWith<_$FailureImpl> get copyWith => __$$FailureImplCopyWithImpl<_$FailureImpl>(this, _$identity);
@@ -351,7 +367,9 @@ abstract class _Failure extends RefreshDiamondHistoryState {
   
 
  AppFailure get failure;
-@JsonKey(ignore: true)
+/// Create a copy of RefreshDiamondHistoryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$FailureImplCopyWith<_$FailureImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -25,7 +25,9 @@ mixin _$LatestRelease {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestRelease
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $LatestReleaseCopyWith<LatestRelease> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$LatestReleaseCopyWithImpl<$Res,$Val extends LatestRelease> implements $L
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of LatestRelease
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? tagName = null,Object? draft = null,Object? prerelease = null,Object? createdAt = null,Object? publishedAt = null,Object? assets = null,}) {
   return _then(_value.copyWith(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -87,6 +91,8 @@ class __$$LatestReleaseImplCopyWithImpl<$Res> extends _$LatestReleaseCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of LatestRelease
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? tagName = null,Object? draft = null,Object? prerelease = null,Object? createdAt = null,Object? publishedAt = null,Object? assets = null,}) {
   return _then(_$LatestReleaseImpl(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -144,7 +150,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,id,nodeId,name,tagName,draft,prerelease,createdAt,publishedAt,const DeepCollectionEquality().hash(_assets));
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestRelease
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$LatestReleaseImplCopyWith<_$LatestReleaseImpl> get copyWith => __$$LatestReleaseImplCopyWithImpl<_$LatestReleaseImpl>(this, _$identity);
@@ -165,8 +173,10 @@ abstract class _LatestRelease extends LatestRelease {
 
   
 
-@override  int get id;@override  String get nodeId;@override  String get name;@override  String get tagName;@override  bool get draft;@override  bool get prerelease;@override  DateTime get createdAt;@override  DateTime get publishedAt;@override  List<LatestReleaseAsset> get assets;
-@override @JsonKey(ignore: true)
+@override int get id;@override String get nodeId;@override String get name;@override String get tagName;@override bool get draft;@override bool get prerelease;@override DateTime get createdAt;@override DateTime get publishedAt;@override List<LatestReleaseAsset> get assets;
+/// Create a copy of LatestRelease
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$LatestReleaseImplCopyWith<_$LatestReleaseImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

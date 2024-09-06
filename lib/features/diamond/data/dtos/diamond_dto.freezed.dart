@@ -28,8 +28,11 @@ mixin _$DiamondDto {
 
 
 
+/// Serializes this DiamondDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $DiamondDtoCopyWith<DiamondDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$DiamondDtoCopyWithImpl<$Res,$Val extends DiamondDto> implements $Diamond
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? records = null,Object? pagination = null,}) {
   return _then(_value.copyWith(
 records: null == records ? _value.records : records // ignore: cast_nullable_to_non_nullable
@@ -62,6 +67,8 @@ as List<DiamondRecordDto>,pagination: null == pagination ? _value.pagination : p
 as PaginationDto,
   )as $Val);
 }
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $PaginationDtoCopyWith<$Res> get pagination {
@@ -91,6 +98,8 @@ class __$$DiamondDtoImplCopyWithImpl<$Res> extends _$DiamondDtoCopyWithImpl<$Res
       : super(_value, _then);
 
 
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? records = null,Object? pagination = null,}) {
   return _then(_$DiamondDtoImpl(
 records: null == records ? _value._records : records // ignore: cast_nullable_to_non_nullable
@@ -130,11 +139,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$DiamondDtoImpl&&const DeepCollectionEquality().equals(other._records, _records)&&(identical(other.pagination, pagination) || other.pagination == pagination));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_records),pagination);
 
-@JsonKey(ignore: true)
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DiamondDtoImplCopyWith<_$DiamondDtoImpl> get copyWith => __$$DiamondDtoImplCopyWithImpl<_$DiamondDtoImpl>(this, _$identity);
@@ -158,8 +169,10 @@ abstract class _DiamondDto extends DiamondDto {
 
   factory _DiamondDto.fromJson(Map<String, dynamic> json) = _$DiamondDtoImpl.fromJson;
 
-@override @JsonKey(name: 'list') List<DiamondRecordDto> get records;@override  PaginationDto get pagination;
-@override @JsonKey(ignore: true)
+@override@JsonKey(name: 'list') List<DiamondRecordDto> get records;@override PaginationDto get pagination;
+/// Create a copy of DiamondDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$DiamondDtoImplCopyWith<_$DiamondDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

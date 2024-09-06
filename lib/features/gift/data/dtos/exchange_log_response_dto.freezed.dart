@@ -28,8 +28,11 @@ mixin _$ExchangeLogResponseDto {
 
 
 
+/// Serializes this ExchangeLogResponseDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of ExchangeLogResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $ExchangeLogResponseDtoCopyWith<ExchangeLogResponseDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$ExchangeLogResponseDtoCopyWithImpl<$Res,$Val extends ExchangeLogResponse
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of ExchangeLogResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = null,Object? data = null,Object? msg = null,}) {
   return _then(_value.copyWith(
 code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -85,6 +90,8 @@ class __$$ExchangeLogResponseDtoImplCopyWithImpl<$Res> extends _$ExchangeLogResp
       : super(_value, _then);
 
 
+/// Create a copy of ExchangeLogResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = null,Object? data = null,Object? msg = null,}) {
   return _then(_$ExchangeLogResponseDtoImpl(
 code: null == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -126,11 +133,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$ExchangeLogResponseDtoImpl&&(identical(other.code, code) || other.code == code)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.msg, msg) || other.msg == msg));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,code,const DeepCollectionEquality().hash(_data),msg);
 
-@JsonKey(ignore: true)
+/// Create a copy of ExchangeLogResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ExchangeLogResponseDtoImplCopyWith<_$ExchangeLogResponseDtoImpl> get copyWith => __$$ExchangeLogResponseDtoImplCopyWithImpl<_$ExchangeLogResponseDtoImpl>(this, _$identity);
@@ -154,8 +163,10 @@ abstract class _ExchangeLogResponseDto implements ExchangeLogResponseDto {
 
   factory _ExchangeLogResponseDto.fromJson(Map<String, dynamic> json) = _$ExchangeLogResponseDtoImpl.fromJson;
 
-@override  int get code;@override  List<ExchangeLogDto> get data;@override  String get msg;
-@override @JsonKey(ignore: true)
+@override int get code;@override List<ExchangeLogDto> get data;@override String get msg;
+/// Create a copy of ExchangeLogResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$ExchangeLogResponseDtoImplCopyWith<_$ExchangeLogResponseDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

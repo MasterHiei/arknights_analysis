@@ -25,7 +25,9 @@ mixin _$ExchangeLog {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of ExchangeLog
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $ExchangeLogCopyWith<ExchangeLog> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$ExchangeLogCopyWithImpl<$Res,$Val extends ExchangeLog> implements $Excha
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of ExchangeLog
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? giftName = null,Object? code = null,Object? ts = null,Object? uid = null,}) {
   return _then(_value.copyWith(
 giftName: null == giftName ? _value.giftName : giftName // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$ExchangeLogImplCopyWithImpl<$Res> extends _$ExchangeLogCopyWithImpl<$R
       : super(_value, _then);
 
 
+/// Create a copy of ExchangeLog
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? giftName = null,Object? code = null,Object? ts = null,Object? uid = null,}) {
   return _then(_$ExchangeLogImpl(
 giftName: null == giftName ? _value.giftName : giftName // ignore: cast_nullable_to_non_nullable
@@ -123,7 +129,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,giftName,code,ts,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of ExchangeLog
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$ExchangeLogImplCopyWith<_$ExchangeLogImpl> get copyWith => __$$ExchangeLogImplCopyWithImpl<_$ExchangeLogImpl>(this, _$identity);
@@ -144,8 +152,10 @@ abstract class _ExchangeLog implements ExchangeLog {
 
   
 
-@override  String get giftName;@override  String get code;@override  Ts get ts;@override  Uid get uid;
-@override @JsonKey(ignore: true)
+@override String get giftName;@override String get code;@override Ts get ts;@override Uid get uid;
+/// Create a copy of ExchangeLog
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$ExchangeLogImplCopyWith<_$ExchangeLogImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

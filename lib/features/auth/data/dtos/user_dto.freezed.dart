@@ -28,8 +28,11 @@ mixin _$UserDto {
 
 
 
+/// Serializes this UserDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of UserDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $UserDtoCopyWith<UserDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$UserDtoCopyWithImpl<$Res,$Val extends UserDto> implements $UserDtoCopyWi
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of UserDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? nickName = null,Object? token = null,}) {
   return _then(_value.copyWith(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -85,6 +90,8 @@ class __$$UserDtoImplCopyWithImpl<$Res> extends _$UserDtoCopyWithImpl<$Res, _$Us
       : super(_value, _then);
 
 
+/// Create a copy of UserDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? nickName = null,Object? token = null,}) {
   return _then(_$UserDtoImpl(
 uid: null == uid ? _value.uid : uid // ignore: cast_nullable_to_non_nullable
@@ -120,11 +127,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UserDtoImpl&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.nickName, nickName) || other.nickName == nickName)&&(identical(other.token, token) || other.token == token));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,uid,nickName,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of UserDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith => __$$UserDtoImplCopyWithImpl<_$UserDtoImpl>(this, _$identity);
@@ -148,8 +157,10 @@ abstract class _UserDto extends UserDto {
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
 
-@override  String get uid;@override  String get nickName;@override @JsonKey(defaultValue: '') String get token;
-@override @JsonKey(ignore: true)
+@override String get uid;@override String get nickName;@override@JsonKey(defaultValue: '') String get token;
+/// Create a copy of UserDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

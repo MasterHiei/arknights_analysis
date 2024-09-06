@@ -25,7 +25,9 @@ mixin _$RouteParams {
 @optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( WebviewParams value)?  webview,}) => throw _privateConstructorUsedError;
 @optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( WebviewParams value)?  webview,required TResult orElse(),}) => throw _privateConstructorUsedError;
 
-@JsonKey(ignore: true)
+/// Create a copy of RouteParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $RouteParamsCopyWith<RouteParams> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$RouteParamsCopyWithImpl<$Res,$Val extends RouteParams> implements $Route
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of RouteParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? initialUrl = null,Object? useNavigationBar = null,}) {
   return _then(_value.copyWith(
 initialUrl: null == initialUrl ? _value.initialUrl : initialUrl // ignore: cast_nullable_to_non_nullable
@@ -80,6 +84,8 @@ class __$$WebviewParamsImplCopyWithImpl<$Res> extends _$RouteParamsCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of RouteParams
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? initialUrl = null,Object? useNavigationBar = null,}) {
   return _then(_$WebviewParamsImpl(
 initialUrl: null == initialUrl ? _value.initialUrl : initialUrl // ignore: cast_nullable_to_non_nullable
@@ -117,7 +123,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,initialUrl,useNavigationBar);
 
-@JsonKey(ignore: true)
+/// Create a copy of RouteParams
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$WebviewParamsImplCopyWith<_$WebviewParamsImpl> get copyWith => __$$WebviewParamsImplCopyWithImpl<_$WebviewParamsImpl>(this, _$identity);
@@ -162,8 +170,10 @@ abstract class WebviewParams implements RouteParams {
 
   
 
-@override  String get initialUrl;@override  bool get useNavigationBar;
-@override @JsonKey(ignore: true)
+@override String get initialUrl;@override bool get useNavigationBar;
+/// Create a copy of RouteParams
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$WebviewParamsImplCopyWith<_$WebviewParamsImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

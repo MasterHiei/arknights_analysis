@@ -25,7 +25,9 @@ mixin _$GachaHistoryFilterState {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaHistoryFilterState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaHistoryFilterStateCopyWith<GachaHistoryFilterState> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaHistoryFilterStateCopyWithImpl<$Res,$Val extends GachaHistoryFilter
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaHistoryFilterState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? pools = null,Object? showAllPools = null,Object? selectedPools = null,Object? selectedRarities = null,}) {
   return _then(_value.copyWith(
 pools: null == pools ? _value.pools : pools // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$GachaHistoryFilterStateImplCopyWithImpl<$Res> extends _$GachaHistoryFi
       : super(_value, _then);
 
 
+/// Create a copy of GachaHistoryFilterState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? pools = null,Object? showAllPools = null,Object? selectedPools = null,Object? selectedRarities = null,}) {
   return _then(_$GachaHistoryFilterStateImpl(
 pools: null == pools ? _value._pools : pools // ignore: cast_nullable_to_non_nullable
@@ -141,7 +147,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pools),showAllPools,const DeepCollectionEquality().hash(_selectedPools),const DeepCollectionEquality().hash(_selectedRarities));
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaHistoryFilterState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaHistoryFilterStateImplCopyWith<_$GachaHistoryFilterStateImpl> get copyWith => __$$GachaHistoryFilterStateImplCopyWithImpl<_$GachaHistoryFilterStateImpl>(this, _$identity);
@@ -162,8 +170,10 @@ abstract class _GachaHistoryFilterState implements GachaHistoryFilterState {
 
   
 
-@override  List<String> get pools;@override  bool get showAllPools;@override  List<String> get selectedPools;@override  List<Rarity> get selectedRarities;
-@override @JsonKey(ignore: true)
+@override List<String> get pools;@override bool get showAllPools;@override List<String> get selectedPools;@override List<Rarity> get selectedRarities;
+/// Create a copy of GachaHistoryFilterState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaHistoryFilterStateImplCopyWith<_$GachaHistoryFilterStateImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -28,8 +28,11 @@ mixin _$UserResponseDto {
 
 
 
+/// Serializes this UserResponseDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $UserResponseDtoCopyWith<UserResponseDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$UserResponseDtoCopyWithImpl<$Res,$Val extends UserResponseDto> implement
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? status = freezed,Object? msg = null,Object? data = freezed,}) {
   return _then(_value.copyWith(
 status: freezed == status ? _value.status : status // ignore: cast_nullable_to_non_nullable
@@ -63,6 +68,8 @@ as String,data: freezed == data ? _value.data : data // ignore: cast_nullable_to
 as UserDto?,
   )as $Val);
 }
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $UserDtoCopyWith<$Res>? get data {
@@ -95,6 +102,8 @@ class __$$UserResponseDtoImplCopyWithImpl<$Res> extends _$UserResponseDtoCopyWit
       : super(_value, _then);
 
 
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? status = freezed,Object? msg = null,Object? data = freezed,}) {
   return _then(_$UserResponseDtoImpl(
 status: freezed == status ? _value.status : status // ignore: cast_nullable_to_non_nullable
@@ -130,11 +139,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$UserResponseDtoImpl&&(identical(other.status, status) || other.status == status)&&(identical(other.msg, msg) || other.msg == msg)&&(identical(other.data, data) || other.data == data));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,status,msg,data);
 
-@JsonKey(ignore: true)
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$UserResponseDtoImplCopyWith<_$UserResponseDtoImpl> get copyWith => __$$UserResponseDtoImplCopyWithImpl<_$UserResponseDtoImpl>(this, _$identity);
@@ -158,8 +169,10 @@ abstract class _UserResponseDto implements UserResponseDto {
 
   factory _UserResponseDto.fromJson(Map<String, dynamic> json) = _$UserResponseDtoImpl.fromJson;
 
-@override  int? get status;@override @JsonKey(defaultValue: '') String get msg;@override  UserDto? get data;
-@override @JsonKey(ignore: true)
+@override int? get status;@override@JsonKey(defaultValue: '') String get msg;@override UserDto? get data;
+/// Create a copy of UserResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$UserResponseDtoImplCopyWith<_$UserResponseDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -28,8 +28,11 @@ mixin _$PaymentRecordDto {
 
 
 
+/// Serializes this PaymentRecordDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of PaymentRecordDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PaymentRecordDtoCopyWith<PaymentRecordDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$PaymentRecordDtoCopyWithImpl<$Res,$Val extends PaymentRecordDto> impleme
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PaymentRecordDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? orderId = null,Object? platform = null,Object? amount = null,Object? productName = null,Object? payTime = null,Object? uid = null,}) {
   return _then(_value.copyWith(
 orderId: null == orderId ? _value.orderId : orderId // ignore: cast_nullable_to_non_nullable
@@ -88,6 +93,8 @@ class __$$PaymentRecordDtoImplCopyWithImpl<$Res> extends _$PaymentRecordDtoCopyW
       : super(_value, _then);
 
 
+/// Create a copy of PaymentRecordDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? orderId = null,Object? platform = null,Object? amount = null,Object? productName = null,Object? payTime = null,Object? uid = null,}) {
   return _then(_$PaymentRecordDtoImpl(
 orderId: null == orderId ? _value.orderId : orderId // ignore: cast_nullable_to_non_nullable
@@ -129,11 +136,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PaymentRecordDtoImpl&&(identical(other.orderId, orderId) || other.orderId == orderId)&&(identical(other.platform, platform) || other.platform == platform)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.payTime, payTime) || other.payTime == payTime)&&(identical(other.uid, uid) || other.uid == uid));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,orderId,platform,amount,productName,payTime,uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of PaymentRecordDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PaymentRecordDtoImplCopyWith<_$PaymentRecordDtoImpl> get copyWith => __$$PaymentRecordDtoImplCopyWithImpl<_$PaymentRecordDtoImpl>(this, _$identity);
@@ -157,8 +166,10 @@ abstract class _PaymentRecordDto extends PaymentRecordDto {
 
   factory _PaymentRecordDto.fromJson(Map<String, dynamic> json) = _$PaymentRecordDtoImpl.fromJson;
 
-@override  String get orderId;@override  Platform get platform;@override  int get amount;@override  String get productName;@override  int get payTime;@override @JsonKey(defaultValue: '') String get uid;
-@override @JsonKey(ignore: true)
+@override String get orderId;@override Platform get platform;@override int get amount;@override String get productName;@override int get payTime;@override@JsonKey(defaultValue: '') String get uid;
+/// Create a copy of PaymentRecordDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PaymentRecordDtoImplCopyWith<_$PaymentRecordDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

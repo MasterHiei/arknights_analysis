@@ -28,8 +28,11 @@ mixin _$GachaPoolDto {
 
 
 
+/// Serializes this GachaPoolDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of GachaPoolDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaPoolDtoCopyWith<GachaPoolDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$GachaPoolDtoCopyWithImpl<$Res,$Val extends GachaPoolDto> implements $Gac
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaPoolDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gachaPoolId = null,Object? gachaIndex = null,Object? openTime = null,Object? endTime = null,Object? gachaPoolName = null,Object? gachaRuleType = null,}) {
   return _then(_value.copyWith(
 gachaPoolId: null == gachaPoolId ? _value.gachaPoolId : gachaPoolId // ignore: cast_nullable_to_non_nullable
@@ -88,6 +93,8 @@ class __$$GachaPoolDtoImplCopyWithImpl<$Res> extends _$GachaPoolDtoCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of GachaPoolDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gachaPoolId = null,Object? gachaIndex = null,Object? openTime = null,Object? endTime = null,Object? gachaPoolName = null,Object? gachaRuleType = null,}) {
   return _then(_$GachaPoolDtoImpl(
 gachaPoolId: null == gachaPoolId ? _value.gachaPoolId : gachaPoolId // ignore: cast_nullable_to_non_nullable
@@ -129,11 +136,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$GachaPoolDtoImpl&&(identical(other.gachaPoolId, gachaPoolId) || other.gachaPoolId == gachaPoolId)&&(identical(other.gachaIndex, gachaIndex) || other.gachaIndex == gachaIndex)&&(identical(other.openTime, openTime) || other.openTime == openTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.gachaPoolName, gachaPoolName) || other.gachaPoolName == gachaPoolName)&&(identical(other.gachaRuleType, gachaRuleType) || other.gachaRuleType == gachaRuleType));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,gachaPoolId,gachaIndex,openTime,endTime,gachaPoolName,gachaRuleType);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaPoolDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaPoolDtoImplCopyWith<_$GachaPoolDtoImpl> get copyWith => __$$GachaPoolDtoImplCopyWithImpl<_$GachaPoolDtoImpl>(this, _$identity);
@@ -157,8 +166,10 @@ abstract class _GachaPoolDto extends GachaPoolDto {
 
   factory _GachaPoolDto.fromJson(Map<String, dynamic> json) = _$GachaPoolDtoImpl.fromJson;
 
-@override  String get gachaPoolId;@override  int get gachaIndex;@override  int get openTime;@override  int get endTime;@override  String get gachaPoolName;@override  GachaRuleType get gachaRuleType;
-@override @JsonKey(ignore: true)
+@override String get gachaPoolId;@override int get gachaIndex;@override int get openTime;@override int get endTime;@override String get gachaPoolName;@override GachaRuleType get gachaRuleType;
+/// Create a copy of GachaPoolDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaPoolDtoImplCopyWith<_$GachaPoolDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

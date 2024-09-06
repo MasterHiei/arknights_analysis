@@ -45,6 +45,8 @@ class _$DownloadNewVersionStateCopyWithImpl<$Res,$Val extends DownloadNewVersion
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -64,6 +66,8 @@ class __$$InitImplCopyWithImpl<$Res> extends _$DownloadNewVersionStateCopyWithIm
       : super(_value, _then);
 
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -153,6 +157,8 @@ class __$$PreparingImplCopyWithImpl<$Res> extends _$DownloadNewVersionStateCopyW
       : super(_value, _then);
 
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -246,6 +252,8 @@ class __$$DownloadingImplCopyWithImpl<$Res> extends _$DownloadNewVersionStateCop
       : super(_value, _then);
 
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? progress = null,}) {
   return _then(_$DownloadingImpl(
 null == progress ? _value.progress : progress // ignore: cast_nullable_to_non_nullable
@@ -281,7 +289,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,progress);
 
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DownloadingImplCopyWith<_$DownloadingImpl> get copyWith => __$$DownloadingImplCopyWithImpl<_$DownloadingImpl>(this, _$identity);
@@ -327,7 +337,9 @@ abstract class _Downloading extends DownloadNewVersionState {
   
 
  String get progress;
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$DownloadingImplCopyWith<_$DownloadingImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -350,6 +362,8 @@ class __$$DownloadSuccessImplCopyWithImpl<$Res> extends _$DownloadNewVersionStat
       : super(_value, _then);
 
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? file = null,}) {
   return _then(_$DownloadSuccessImpl(
 null == file ? _value.file : file // ignore: cast_nullable_to_non_nullable
@@ -385,7 +399,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,file);
 
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DownloadSuccessImplCopyWith<_$DownloadSuccessImpl> get copyWith => __$$DownloadSuccessImplCopyWithImpl<_$DownloadSuccessImpl>(this, _$identity);
@@ -431,7 +447,9 @@ abstract class _DownloadSuccess extends DownloadNewVersionState {
   
 
  File get file;
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$DownloadSuccessImplCopyWith<_$DownloadSuccessImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -454,6 +472,8 @@ class __$$DownloadFailureImplCopyWithImpl<$Res> extends _$DownloadNewVersionStat
       : super(_value, _then);
 
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failure = null,}) {
   return _then(_$DownloadFailureImpl(
 null == failure ? _value.failure : failure // ignore: cast_nullable_to_non_nullable
@@ -461,6 +481,8 @@ as AppFailure,
   ));
 }
 
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $AppFailureCopyWith<$Res> get failure {
@@ -496,7 +518,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,failure);
 
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DownloadFailureImplCopyWith<_$DownloadFailureImpl> get copyWith => __$$DownloadFailureImplCopyWithImpl<_$DownloadFailureImpl>(this, _$identity);
@@ -542,7 +566,9 @@ abstract class _DownloadFailure extends DownloadNewVersionState {
   
 
  AppFailure get failure;
-@JsonKey(ignore: true)
+/// Create a copy of DownloadNewVersionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$DownloadFailureImplCopyWith<_$DownloadFailureImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

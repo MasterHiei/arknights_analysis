@@ -28,8 +28,11 @@ mixin _$TokenBodyBilibiliDto {
 
 
 
+/// Serializes this TokenBodyBilibiliDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of TokenBodyBilibiliDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $TokenBodyBilibiliDtoCopyWith<TokenBodyBilibiliDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$TokenBodyBilibiliDtoCopyWithImpl<$Res,$Val extends TokenBodyBilibiliDto>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of TokenBodyBilibiliDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? token = null,}) {
   return _then(_value.copyWith(
 token: null == token ? _value.token : token // ignore: cast_nullable_to_non_nullable
@@ -83,6 +88,8 @@ class __$$TokenBodyBilibiliDtoImplCopyWithImpl<$Res> extends _$TokenBodyBilibili
       : super(_value, _then);
 
 
+/// Create a copy of TokenBodyBilibiliDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? token = null,}) {
   return _then(_$TokenBodyBilibiliDtoImpl(
 token: null == token ? _value.token : token // ignore: cast_nullable_to_non_nullable
@@ -114,11 +121,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$TokenBodyBilibiliDtoImpl&&(identical(other.token, token) || other.token == token));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,token);
 
-@JsonKey(ignore: true)
+/// Create a copy of TokenBodyBilibiliDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$TokenBodyBilibiliDtoImplCopyWith<_$TokenBodyBilibiliDtoImpl> get copyWith => __$$TokenBodyBilibiliDtoImplCopyWithImpl<_$TokenBodyBilibiliDtoImpl>(this, _$identity);
@@ -142,8 +151,10 @@ abstract class _TokenBodyBilibiliDto implements TokenBodyBilibiliDto {
 
   factory _TokenBodyBilibiliDto.fromJson(Map<String, dynamic> json) = _$TokenBodyBilibiliDtoImpl.fromJson;
 
-@override  String get token;
-@override @JsonKey(ignore: true)
+@override String get token;
+/// Create a copy of TokenBodyBilibiliDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$TokenBodyBilibiliDtoImplCopyWith<_$TokenBodyBilibiliDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

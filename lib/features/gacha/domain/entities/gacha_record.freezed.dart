@@ -25,7 +25,9 @@ mixin _$GachaRecord {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaRecordCopyWith<GachaRecord> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaRecordCopyWithImpl<$Res,$Val extends GachaRecord> implements $Gacha
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ts = null,Object? pool = null,Object? chars = null,Object? uid = null,}) {
   return _then(_value.copyWith(
 ts: null == ts ? _value.ts : ts // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$GachaRecordImplCopyWithImpl<$Res> extends _$GachaRecordCopyWithImpl<$R
       : super(_value, _then);
 
 
+/// Create a copy of GachaRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ts = null,Object? pool = null,Object? chars = null,Object? uid = null,}) {
   return _then(_$GachaRecordImpl(
 ts: null == ts ? _value.ts : ts // ignore: cast_nullable_to_non_nullable
@@ -129,7 +135,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,ts,pool,const DeepCollectionEquality().hash(_chars),uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaRecordImplCopyWith<_$GachaRecordImpl> get copyWith => __$$GachaRecordImplCopyWithImpl<_$GachaRecordImpl>(this, _$identity);
@@ -150,8 +158,10 @@ abstract class _GachaRecord implements GachaRecord {
 
   
 
-@override  Ts get ts;@override  String get pool;@override  List<GachaChar> get chars;@override  Uid get uid;
-@override @JsonKey(ignore: true)
+@override Ts get ts;@override String get pool;@override List<GachaChar> get chars;@override Uid get uid;
+/// Create a copy of GachaRecord
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaRecordImplCopyWith<_$GachaRecordImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

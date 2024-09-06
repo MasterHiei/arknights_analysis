@@ -25,7 +25,9 @@ mixin _$DiamondRecord {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of DiamondRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $DiamondRecordCopyWith<DiamondRecord> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$DiamondRecordCopyWithImpl<$Res,$Val extends DiamondRecord> implements $D
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of DiamondRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ts = null,Object? operation = null,Object? changes = null,Object? uid = null,}) {
   return _then(_value.copyWith(
 ts: null == ts ? _value.ts : ts // ignore: cast_nullable_to_non_nullable
@@ -82,6 +86,8 @@ class __$$DiamondRecordImplCopyWithImpl<$Res> extends _$DiamondRecordCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of DiamondRecord
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ts = null,Object? operation = null,Object? changes = null,Object? uid = null,}) {
   return _then(_$DiamondRecordImpl(
 ts: null == ts ? _value.ts : ts // ignore: cast_nullable_to_non_nullable
@@ -129,7 +135,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,ts,operation,const DeepCollectionEquality().hash(_changes),uid);
 
-@JsonKey(ignore: true)
+/// Create a copy of DiamondRecord
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$DiamondRecordImplCopyWith<_$DiamondRecordImpl> get copyWith => __$$DiamondRecordImplCopyWithImpl<_$DiamondRecordImpl>(this, _$identity);
@@ -150,8 +158,10 @@ abstract class _DiamondRecord implements DiamondRecord {
 
   
 
-@override  Ts get ts;@override  String get operation;@override  List<DiamondChange> get changes;@override  Uid get uid;
-@override @JsonKey(ignore: true)
+@override Ts get ts;@override String get operation;@override List<DiamondChange> get changes;@override Uid get uid;
+/// Create a copy of DiamondRecord
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$DiamondRecordImplCopyWith<_$DiamondRecordImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

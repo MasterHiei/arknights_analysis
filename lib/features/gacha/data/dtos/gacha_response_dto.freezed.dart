@@ -28,8 +28,11 @@ mixin _$GachaResponseDto {
 
 
 
+/// Serializes this GachaResponseDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaResponseDtoCopyWith<GachaResponseDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$GachaResponseDtoCopyWithImpl<$Res,$Val extends GachaResponseDto> impleme
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = freezed,Object? msg = null,Object? data = freezed,}) {
   return _then(_value.copyWith(
 code: freezed == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -63,6 +68,8 @@ as String,data: freezed == data ? _value.data : data // ignore: cast_nullable_to
 as GachaDto?,
   )as $Val);
 }
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $GachaDtoCopyWith<$Res>? get data {
@@ -95,6 +102,8 @@ class __$$GachaResponseDtoImplCopyWithImpl<$Res> extends _$GachaResponseDtoCopyW
       : super(_value, _then);
 
 
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = freezed,Object? msg = null,Object? data = freezed,}) {
   return _then(_$GachaResponseDtoImpl(
 code: freezed == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -130,11 +139,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$GachaResponseDtoImpl&&(identical(other.code, code) || other.code == code)&&(identical(other.msg, msg) || other.msg == msg)&&(identical(other.data, data) || other.data == data));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,code,msg,data);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaResponseDtoImplCopyWith<_$GachaResponseDtoImpl> get copyWith => __$$GachaResponseDtoImplCopyWithImpl<_$GachaResponseDtoImpl>(this, _$identity);
@@ -158,8 +169,10 @@ abstract class _GachaResponseDto implements GachaResponseDto {
 
   factory _GachaResponseDto.fromJson(Map<String, dynamic> json) = _$GachaResponseDtoImpl.fromJson;
 
-@override  int? get code;@override @JsonKey(defaultValue: '') String get msg;@override @JsonKey(fromJson: _dataFromJson) GachaDto? get data;
-@override @JsonKey(ignore: true)
+@override int? get code;@override@JsonKey(defaultValue: '') String get msg;@override@JsonKey(fromJson: _dataFromJson) GachaDto? get data;
+/// Create a copy of GachaResponseDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaResponseDtoImplCopyWith<_$GachaResponseDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

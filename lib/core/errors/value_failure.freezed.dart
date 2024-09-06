@@ -45,6 +45,8 @@ class _$ValueFailureCopyWithImpl<T,$Res,$Val extends ValueFailure<T>> implements
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -68,6 +70,8 @@ class __$$InvalidUidImplCopyWithImpl<T,$Res> extends _$ValueFailureCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failedValue = freezed,}) {
   return _then(_$InvalidUidImpl<T>(
 failedValue: freezed == failedValue ? _value.failedValue : failedValue // ignore: cast_nullable_to_non_nullable
@@ -103,7 +107,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(failedValue));
 
-@JsonKey(ignore: true)
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$InvalidUidImplCopyWith<T, _$InvalidUidImpl<T>> get copyWith => __$$InvalidUidImplCopyWithImpl<T, _$InvalidUidImpl<T>>(this, _$identity);
@@ -148,8 +154,10 @@ abstract class _InvalidUid<T> implements ValueFailure<T> {
 
   
 
-@override  T get failedValue;
-@JsonKey(ignore: true)
+@override T get failedValue;
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$InvalidUidImplCopyWith<T, _$InvalidUidImpl<T>> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -172,6 +180,8 @@ class __$$InvalidTokenImplCopyWithImpl<T,$Res> extends _$ValueFailureCopyWithImp
       : super(_value, _then);
 
 
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failedValue = freezed,}) {
   return _then(_$InvalidTokenImpl<T>(
 failedValue: freezed == failedValue ? _value.failedValue : failedValue // ignore: cast_nullable_to_non_nullable
@@ -207,7 +217,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(failedValue));
 
-@JsonKey(ignore: true)
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$InvalidTokenImplCopyWith<T, _$InvalidTokenImpl<T>> get copyWith => __$$InvalidTokenImplCopyWithImpl<T, _$InvalidTokenImpl<T>>(this, _$identity);
@@ -252,8 +264,10 @@ abstract class _InvalidToken<T> implements ValueFailure<T> {
 
   
 
-@override  T? get failedValue;
-@JsonKey(ignore: true)
+@override T? get failedValue;
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$InvalidTokenImplCopyWith<T, _$InvalidTokenImpl<T>> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -276,6 +290,8 @@ class __$$InvalidTsImplCopyWithImpl<T,$Res> extends _$ValueFailureCopyWithImpl<T
       : super(_value, _then);
 
 
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failedValue = freezed,}) {
   return _then(_$InvalidTsImpl<T>(
 failedValue: freezed == failedValue ? _value.failedValue : failedValue // ignore: cast_nullable_to_non_nullable
@@ -311,7 +327,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(failedValue));
 
-@JsonKey(ignore: true)
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$InvalidTsImplCopyWith<T, _$InvalidTsImpl<T>> get copyWith => __$$InvalidTsImplCopyWithImpl<T, _$InvalidTsImpl<T>>(this, _$identity);
@@ -356,8 +374,10 @@ abstract class _InvalidTs<T> implements ValueFailure<T> {
 
   
 
-@override  T get failedValue;
-@JsonKey(ignore: true)
+@override T get failedValue;
+/// Create a copy of ValueFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$InvalidTsImplCopyWith<T, _$InvalidTsImpl<T>> get copyWith => throw _privateConstructorUsedError;
 
 }

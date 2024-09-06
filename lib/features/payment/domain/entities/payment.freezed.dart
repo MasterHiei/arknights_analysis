@@ -25,7 +25,9 @@ mixin _$Payment {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PaymentCopyWith<Payment> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$PaymentCopyWithImpl<$Res,$Val extends Payment> implements $PaymentCopyWi
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? records = null,Object? pagination = null,}) {
   return _then(_value.copyWith(
 records: null == records ? _value.records : records // ignore: cast_nullable_to_non_nullable
@@ -58,6 +62,8 @@ as List<PaymentRecord>,pagination: null == pagination ? _value.pagination : pagi
 as Pagination,
   )as $Val);
 }
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $PaginationCopyWith<$Res> get pagination {
@@ -87,6 +93,8 @@ class __$$PaymentImplCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res, _$Pa
       : super(_value, _then);
 
 
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? records = null,Object? pagination = null,}) {
   return _then(_$PaymentImpl(
 records: null == records ? _value._records : records // ignore: cast_nullable_to_non_nullable
@@ -130,7 +138,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_records),pagination);
 
-@JsonKey(ignore: true)
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PaymentImplCopyWith<_$PaymentImpl> get copyWith => __$$PaymentImplCopyWithImpl<_$PaymentImpl>(this, _$identity);
@@ -151,8 +161,10 @@ abstract class _Payment implements Payment {
 
   
 
-@override  List<PaymentRecord> get records;@override  Pagination get pagination;
-@override @JsonKey(ignore: true)
+@override List<PaymentRecord> get records;@override Pagination get pagination;
+/// Create a copy of Payment
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PaymentImplCopyWith<_$PaymentImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

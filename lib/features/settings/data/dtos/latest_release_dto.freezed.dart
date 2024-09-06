@@ -28,8 +28,11 @@ mixin _$LatestReleaseDto {
 
 
 
+/// Serializes this LatestReleaseDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $LatestReleaseDtoCopyWith<LatestReleaseDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$LatestReleaseDtoCopyWithImpl<$Res,$Val extends LatestReleaseDto> impleme
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of LatestReleaseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? tagName = null,Object? draft = null,Object? prerelease = null,Object? createdAt = null,Object? publishedAt = null,Object? assets = null,}) {
   return _then(_value.copyWith(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -91,6 +96,8 @@ class __$$LatestReleaseDtoImplCopyWithImpl<$Res> extends _$LatestReleaseDtoCopyW
       : super(_value, _then);
 
 
+/// Create a copy of LatestReleaseDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? tagName = null,Object? draft = null,Object? prerelease = null,Object? createdAt = null,Object? publishedAt = null,Object? assets = null,}) {
   return _then(_$LatestReleaseDtoImpl(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -144,11 +151,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$LatestReleaseDtoImpl&&(identical(other.id, id) || other.id == id)&&(identical(other.nodeId, nodeId) || other.nodeId == nodeId)&&(identical(other.name, name) || other.name == name)&&(identical(other.tagName, tagName) || other.tagName == tagName)&&(identical(other.draft, draft) || other.draft == draft)&&(identical(other.prerelease, prerelease) || other.prerelease == prerelease)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&const DeepCollectionEquality().equals(other._assets, _assets));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,nodeId,name,tagName,draft,prerelease,createdAt,publishedAt,const DeepCollectionEquality().hash(_assets));
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$LatestReleaseDtoImplCopyWith<_$LatestReleaseDtoImpl> get copyWith => __$$LatestReleaseDtoImplCopyWithImpl<_$LatestReleaseDtoImpl>(this, _$identity);
@@ -172,8 +181,10 @@ abstract class _LatestReleaseDto extends LatestReleaseDto {
 
   factory _LatestReleaseDto.fromJson(Map<String, dynamic> json) = _$LatestReleaseDtoImpl.fromJson;
 
-@override  int get id;@override @JsonKey(name: 'node_id') String get nodeId;@override  String get name;@override @JsonKey(name: 'tag_name') String get tagName;@override  bool get draft;@override  bool get prerelease;@override @JsonKey(name: 'created_at') DateTime get createdAt;@override @JsonKey(name: 'published_at') DateTime get publishedAt;@override @JsonKey(defaultValue: <LatestReleaseAssetDto>[]) List<LatestReleaseAssetDto> get assets;
-@override @JsonKey(ignore: true)
+@override int get id;@override@JsonKey(name: 'node_id') String get nodeId;@override String get name;@override@JsonKey(name: 'tag_name') String get tagName;@override bool get draft;@override bool get prerelease;@override@JsonKey(name: 'created_at') DateTime get createdAt;@override@JsonKey(name: 'published_at') DateTime get publishedAt;@override@JsonKey(defaultValue: <LatestReleaseAssetDto>[]) List<LatestReleaseAssetDto> get assets;
+/// Create a copy of LatestReleaseDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$LatestReleaseDtoImplCopyWith<_$LatestReleaseDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

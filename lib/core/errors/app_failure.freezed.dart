@@ -45,6 +45,8 @@ class _$AppFailureCopyWithImpl<$Res,$Val extends AppFailure> implements $AppFail
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 
 
 }
@@ -68,6 +70,8 @@ class __$$LocalizedErrorImplCopyWithImpl<$Res> extends _$AppFailureCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
   return _then(_$LocalizedErrorImpl(
 null == message ? _value.message : message // ignore: cast_nullable_to_non_nullable
@@ -103,7 +107,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,message);
 
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$LocalizedErrorImplCopyWith<_$LocalizedErrorImpl> get copyWith => __$$LocalizedErrorImplCopyWithImpl<_$LocalizedErrorImpl>(this, _$identity);
@@ -149,7 +155,9 @@ abstract class _LocalizedError extends AppFailure {
   
 
  String get message;
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$LocalizedErrorImplCopyWith<_$LocalizedErrorImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -172,6 +180,8 @@ class __$$UnexpectedErrorImplCopyWithImpl<$Res> extends _$AppFailureCopyWithImpl
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? e = null,}) {
   return _then(_$UnexpectedErrorImpl(
 null == e ? _value.e : e ,
@@ -206,7 +216,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(e));
 
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$UnexpectedErrorImplCopyWith<_$UnexpectedErrorImpl> get copyWith => __$$UnexpectedErrorImplCopyWithImpl<_$UnexpectedErrorImpl>(this, _$identity);
@@ -252,7 +264,9 @@ abstract class _UnexpectedError extends AppFailure {
   
 
  Object get e;
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$UnexpectedErrorImplCopyWith<_$UnexpectedErrorImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -271,6 +285,8 @@ class __$$NetworkUnreachableImplCopyWithImpl<$Res> extends _$AppFailureCopyWithI
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -364,6 +380,8 @@ class __$$RemoteServerErrorImplCopyWithImpl<$Res> extends _$AppFailureCopyWithIm
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? code = freezed,Object? message = freezed,}) {
   return _then(_$RemoteServerErrorImpl(
 code: freezed == code ? _value.code : code // ignore: cast_nullable_to_non_nullable
@@ -401,7 +419,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,code,message);
 
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$RemoteServerErrorImplCopyWith<_$RemoteServerErrorImpl> get copyWith => __$$RemoteServerErrorImplCopyWithImpl<_$RemoteServerErrorImpl>(this, _$identity);
@@ -447,7 +467,9 @@ abstract class _RemoteServerError extends AppFailure {
   
 
  int? get code; String? get message;
-@JsonKey(ignore: true)
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 _$$RemoteServerErrorImplCopyWith<_$RemoteServerErrorImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -466,6 +488,8 @@ class __$$EmptyLocalDataImplCopyWithImpl<$Res> extends _$AppFailureCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 
 
 
@@ -555,6 +579,8 @@ class __$$InvalidTokenImplCopyWithImpl<$Res> extends _$AppFailureCopyWithImpl<$R
       : super(_value, _then);
 
 
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
 
 
 

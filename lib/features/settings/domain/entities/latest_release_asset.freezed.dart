@@ -25,7 +25,9 @@ mixin _$LatestReleaseAsset {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseAsset
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $LatestReleaseAssetCopyWith<LatestReleaseAsset> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$LatestReleaseAssetCopyWithImpl<$Res,$Val extends LatestReleaseAsset> imp
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of LatestReleaseAsset
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? size = null,Object? createdAt = null,Object? updatedAt = null,Object? browserDownloadUrl = null,}) {
   return _then(_value.copyWith(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -85,6 +89,8 @@ class __$$LatestReleaseAssetImplCopyWithImpl<$Res> extends _$LatestReleaseAssetC
       : super(_value, _then);
 
 
+/// Create a copy of LatestReleaseAsset
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nodeId = null,Object? name = null,Object? size = null,Object? createdAt = null,Object? updatedAt = null,Object? browserDownloadUrl = null,}) {
   return _then(_$LatestReleaseAssetImpl(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -132,7 +138,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,id,nodeId,name,size,createdAt,updatedAt,browserDownloadUrl);
 
-@JsonKey(ignore: true)
+/// Create a copy of LatestReleaseAsset
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$LatestReleaseAssetImplCopyWith<_$LatestReleaseAssetImpl> get copyWith => __$$LatestReleaseAssetImplCopyWithImpl<_$LatestReleaseAssetImpl>(this, _$identity);
@@ -153,8 +161,10 @@ abstract class _LatestReleaseAsset implements LatestReleaseAsset {
 
   
 
-@override  int get id;@override  String get nodeId;@override  String get name;@override  int get size;@override  DateTime get createdAt;@override  DateTime get updatedAt;@override  String get browserDownloadUrl;
-@override @JsonKey(ignore: true)
+@override int get id;@override String get nodeId;@override String get name;@override int get size;@override DateTime get createdAt;@override DateTime get updatedAt;@override String get browserDownloadUrl;
+/// Create a copy of LatestReleaseAsset
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$LatestReleaseAssetImplCopyWith<_$LatestReleaseAssetImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

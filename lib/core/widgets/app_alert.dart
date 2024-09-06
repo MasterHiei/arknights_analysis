@@ -28,17 +28,17 @@ class AppAlert extends StatelessWidget {
         FilledButton(
           onPressed: onTap,
           style: ButtonStyle(
-            backgroundColor: ButtonState.resolveWith(
+            backgroundColor: WidgetStateProperty.resolveWith(
               (states) {
                 final color = buttonColor;
                 if (color is AccentColor) {
                   if (states.isNone) {
                     return color.normal;
                   }
-                  if (states.isPressing) {
+                  if (states.isPressed) {
                     return color.lighter;
                   }
-                  if (states.isHovering) {
+                  if (states.isHovered) {
                     return color.light;
                   }
                   return null;

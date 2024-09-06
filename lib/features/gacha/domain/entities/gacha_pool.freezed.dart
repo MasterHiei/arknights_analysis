@@ -25,7 +25,9 @@ mixin _$GachaPool {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaPool
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaPoolCopyWith<GachaPool> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaPoolCopyWithImpl<$Res,$Val extends GachaPool> implements $GachaPool
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaPool
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? index = null,Object? openTime = null,Object? endTime = null,Object? name = null,Object? ruleType = null,}) {
   return _then(_value.copyWith(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -84,6 +88,8 @@ class __$$GachaPoolImplCopyWithImpl<$Res> extends _$GachaPoolCopyWithImpl<$Res, 
       : super(_value, _then);
 
 
+/// Create a copy of GachaPool
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? index = null,Object? openTime = null,Object? endTime = null,Object? name = null,Object? ruleType = null,}) {
   return _then(_$GachaPoolImpl(
 id: null == id ? _value.id : id // ignore: cast_nullable_to_non_nullable
@@ -129,7 +135,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,id,index,openTime,endTime,name,ruleType);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaPool
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaPoolImplCopyWith<_$GachaPoolImpl> get copyWith => __$$GachaPoolImplCopyWithImpl<_$GachaPoolImpl>(this, _$identity);
@@ -150,8 +158,10 @@ abstract class _GachaPool implements GachaPool {
 
   
 
-@override  String get id;@override  int get index;@override  int get openTime;@override  int get endTime;@override  String get name;@override  GachaRuleType get ruleType;
-@override @JsonKey(ignore: true)
+@override String get id;@override int get index;@override int get openTime;@override int get endTime;@override String get name;@override GachaRuleType get ruleType;
+/// Create a copy of GachaPool
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaPoolImplCopyWith<_$GachaPoolImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

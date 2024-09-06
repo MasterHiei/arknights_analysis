@@ -28,8 +28,11 @@ mixin _$PersistenceDto {
 
 
 
+/// Serializes this PersistenceDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $PersistenceDtoCopyWith<PersistenceDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$PersistenceDtoCopyWithImpl<$Res,$Val extends PersistenceDto> implements 
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gacha = null,Object? diamond = null,}) {
   return _then(_value.copyWith(
 gacha: null == gacha ? _value.gacha : gacha // ignore: cast_nullable_to_non_nullable
@@ -62,6 +67,8 @@ as GachaDto,diamond: null == diamond ? _value.diamond : diamond // ignore: cast_
 as DiamondDto,
   )as $Val);
 }
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
 $GachaDtoCopyWith<$Res> get gacha {
@@ -69,7 +76,9 @@ $GachaDtoCopyWith<$Res> get gacha {
   return $GachaDtoCopyWith<$Res>(_value.gacha, (value) {
     return _then(_value.copyWith(gacha: value) as $Val);
   });
-}@override
+}/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
+@override
 @pragma('vm:prefer-inline')
 $DiamondDtoCopyWith<$Res> get diamond {
   
@@ -98,6 +107,8 @@ class __$$PersistenceDtoImplCopyWithImpl<$Res> extends _$PersistenceDtoCopyWithI
       : super(_value, _then);
 
 
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gacha = null,Object? diamond = null,}) {
   return _then(_$PersistenceDtoImpl(
 gacha: null == gacha ? _value.gacha : gacha // ignore: cast_nullable_to_non_nullable
@@ -131,11 +142,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$PersistenceDtoImpl&&(identical(other.gacha, gacha) || other.gacha == gacha)&&(identical(other.diamond, diamond) || other.diamond == diamond));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,gacha,diamond);
 
-@JsonKey(ignore: true)
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$PersistenceDtoImplCopyWith<_$PersistenceDtoImpl> get copyWith => __$$PersistenceDtoImplCopyWithImpl<_$PersistenceDtoImpl>(this, _$identity);
@@ -159,8 +172,10 @@ abstract class _PersistenceDto implements PersistenceDto {
 
   factory _PersistenceDto.fromJson(Map<String, dynamic> json) = _$PersistenceDtoImpl.fromJson;
 
-@override  GachaDto get gacha;@override  DiamondDto get diamond;
-@override @JsonKey(ignore: true)
+@override GachaDto get gacha;@override DiamondDto get diamond;
+/// Create a copy of PersistenceDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$PersistenceDtoImplCopyWith<_$PersistenceDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

@@ -25,7 +25,9 @@ mixin _$GachaStatsFilterState {
 
 
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaStatsFilterState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaStatsFilterStateCopyWith<GachaStatsFilterState> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -51,6 +53,8 @@ class _$GachaStatsFilterStateCopyWithImpl<$Res,$Val extends GachaStatsFilterStat
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaStatsFilterState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? source = null,Object? value = freezed,}) {
   return _then(_value.copyWith(
 source: null == source ? _value.source : source // ignore: cast_nullable_to_non_nullable
@@ -80,6 +84,8 @@ class __$$GachaStatsFilterStateImplCopyWithImpl<$Res> extends _$GachaStatsFilter
       : super(_value, _then);
 
 
+/// Create a copy of GachaStatsFilterState
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? source = null,Object? value = freezed,}) {
   return _then(_$GachaStatsFilterStateImpl(
 source: null == source ? _value._source : source // ignore: cast_nullable_to_non_nullable
@@ -123,7 +129,9 @@ bool operator ==(Object other) {
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_source),value);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaStatsFilterState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaStatsFilterStateImplCopyWith<_$GachaStatsFilterStateImpl> get copyWith => __$$GachaStatsFilterStateImplCopyWithImpl<_$GachaStatsFilterStateImpl>(this, _$identity);
@@ -144,8 +152,10 @@ abstract class _GachaStatsFilterState extends GachaStatsFilterState {
 
   
 
-@override  List<String> get source;@override  String? get value;
-@override @JsonKey(ignore: true)
+@override List<String> get source;@override String? get value;
+/// Create a copy of GachaStatsFilterState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaStatsFilterStateImplCopyWith<_$GachaStatsFilterStateImpl> get copyWith => throw _privateConstructorUsedError;
 
 }

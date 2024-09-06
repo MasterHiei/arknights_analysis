@@ -28,8 +28,11 @@ mixin _$GachaCharDto {
 
 
 
+/// Serializes this GachaCharDto to a JSON map.
 Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-@JsonKey(ignore: true)
+/// Create a copy of GachaCharDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 $GachaCharDtoCopyWith<GachaCharDto> get copyWith => throw _privateConstructorUsedError;
 
 }
@@ -55,6 +58,8 @@ class _$GachaCharDtoCopyWithImpl<$Res,$Val extends GachaCharDto> implements $Gac
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+/// Create a copy of GachaCharDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? rarity = null,Object? isNew = null,}) {
   return _then(_value.copyWith(
 name: null == name ? _value.name : name // ignore: cast_nullable_to_non_nullable
@@ -85,6 +90,8 @@ class __$$GachaCharDtoImplCopyWithImpl<$Res> extends _$GachaCharDtoCopyWithImpl<
       : super(_value, _then);
 
 
+/// Create a copy of GachaCharDto
+/// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? rarity = null,Object? isNew = null,}) {
   return _then(_$GachaCharDtoImpl(
 name: null == name ? _value.name : name // ignore: cast_nullable_to_non_nullable
@@ -120,11 +127,13 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _$GachaCharDtoImpl&&(identical(other.name, name) || other.name == name)&&(identical(other.rarity, rarity) || other.rarity == rarity)&&(identical(other.isNew, isNew) || other.isNew == isNew));
 }
 
-@JsonKey(ignore: true)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,name,rarity,isNew);
 
-@JsonKey(ignore: true)
+/// Create a copy of GachaCharDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 @pragma('vm:prefer-inline')
 _$$GachaCharDtoImplCopyWith<_$GachaCharDtoImpl> get copyWith => __$$GachaCharDtoImplCopyWithImpl<_$GachaCharDtoImpl>(this, _$identity);
@@ -148,8 +157,10 @@ abstract class _GachaCharDto extends GachaCharDto {
 
   factory _GachaCharDto.fromJson(Map<String, dynamic> json) = _$GachaCharDtoImpl.fromJson;
 
-@override  String get name;@override  Rarity get rarity;@override  bool get isNew;
-@override @JsonKey(ignore: true)
+@override String get name;@override Rarity get rarity;@override bool get isNew;
+/// Create a copy of GachaCharDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 _$$GachaCharDtoImplCopyWith<_$GachaCharDtoImpl> get copyWith => throw _privateConstructorUsedError;
 
 }
